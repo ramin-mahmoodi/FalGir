@@ -120,7 +120,7 @@ button { font-family: inherit; }
 }
 
 /* On hover, move the book slightly to center the spread */
-.book:hover {
+.book.is-open {
   transform: translateX(60px);
 }
 
@@ -171,12 +171,12 @@ button { font-family: inherit; }
 }
 
 /* HOVER TRIGGERS THE OPENING */
-.book:hover > .hardcover_front { transform: rotateY(-145deg) translateZ(0); z-index: 0; }
-.book:hover > .page li:nth-child(1) { transform: rotateY(-30deg); transition-duration: 1.5s; }
-.book:hover > .page li:nth-child(2) { transform: rotateY(-35deg); transition-duration: 1.8s; }
-.book:hover > .page li:nth-child(3) { transform: rotateY(-118deg); transition-duration: 1.6s; }
-.book:hover > .page li:nth-child(4) { transform: rotateY(-130deg); transition-duration: 1.4s; }
-.book:hover > .page li:nth-child(5) { transform: rotateY(-140deg); transition-duration: 1.2s; }
+.book.is-open > .hardcover_front { transform: rotateY(-145deg) translateZ(0); z-index: 0; }
+.book.is-open > .page li:nth-child(1) { transform: rotateY(-30deg); transition-duration: 1.5s; }
+.book.is-open > .page li:nth-child(2) { transform: rotateY(-35deg); transition-duration: 1.8s; }
+.book.is-open > .page li:nth-child(3) { transform: rotateY(-118deg); transition-duration: 1.6s; }
+.book.is-open > .page li:nth-child(4) { transform: rotateY(-130deg); transition-duration: 1.4s; }
+.book.is-open > .page li:nth-child(5) { transform: rotateY(-140deg); transition-duration: 1.2s; }
 
 /* Book Covers and Spine Colors */
 .hardcover_front li:first-child,
@@ -387,7 +387,7 @@ button { font-family: inherit; }
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .book-wrapper { transform: scale(0.8); }
-  .book:hover { transform: translateX(30px) scale(0.8); }
+  .book.is-open { transform: translateX(30px) scale(0.8); }
   .bayt { display: flex; flex-direction: column; gap: 0.5rem; text-align: center; }
   .mesra-first, .mesra-second { text-align: center; }
   .bayt-divider { display: none; }

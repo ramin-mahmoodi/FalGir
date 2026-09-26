@@ -140,7 +140,7 @@
 
     updateUI() {
       if (DOM.soundIconWrap) {
-        DOM.soundIconWrap.innerHTML = STATE.soundEnabled ? SVG_ICONS.soundOn : SVG_ICONS.soundOff;
+        if(DOM.soundIconWrap) DOM.soundIconWrap.innerHTML = STATE.soundEnabled ? SVG_ICONS.soundOn : SVG_ICONS.soundOff;
         DOM.btnSoundToggle.title = STATE.soundEnabled ? 'صدا: فعال' : 'صدا: خاموش';
       }
     }
@@ -558,7 +558,7 @@ https://ramin-mahmoodi.github.io/FalGir/`;
   // =========================================================================
   function setupEvents() {
     // شروع تفأل با دکمه یا کتاب سه‌بعدی
-    DOM.btnDivinate.addEventListener('click', () => startDivination());
+    if(DOM.btnDivinate) DOM.btnDivinate.addEventListener('click', () => startDivination());
     DOM.book3D.addEventListener('click', () => {
       if (DOM.niyyatStage.classList.contains('active')) {
         startDivination();
@@ -566,27 +566,27 @@ https://ramin-mahmoodi.github.io/FalGir/`;
     });
 
     // دکمه‌های صفحه نتایج
-    DOM.btnTryAgain.addEventListener('click', tryAgain);
-    DOM.btnCopyFal.addEventListener('click', copyFalText);
-    DOM.btnShareFal.addEventListener('click', shareFal);
-    DOM.btnPrintFal.addEventListener('click', () => window.print());
+    if(DOM.btnTryAgain) DOM.btnTryAgain.addEventListener('click', tryAgain);
+    if(DOM.btnCopyFal) DOM.btnCopyFal.addEventListener('click', copyFalText);
+    if(DOM.btnShareFal) DOM.btnShareFal.addEventListener('click', shareFal);
+    if(DOM.btnPrintFal) DOM.btnPrintFal.addEventListener('click', () => window.print());
 
 
     // دکمه صدا
-    DOM.btnSoundToggle.addEventListener('click', () => sound.toggle());
+    if(DOM.btnSoundToggle) DOM.btnSoundToggle.addEventListener('click', () => sound.toggle());
 
     // مودال جستجو
-    DOM.btnSearchModal.addEventListener('click', () => {
+    if(DOM.btnSearchModal) DOM.btnSearchModal.addEventListener('click', () => {
       openModal(DOM.searchModal);
       renderSearchResults('');
       if (DOM.ghazalNumberInput) DOM.ghazalNumberInput.focus();
     });
-    DOM.btnCloseSearchModal.addEventListener('click', () => closeModal(DOM.searchModal));
+    if(DOM.btnCloseSearchModal) DOM.btnCloseSearchModal.addEventListener('click', () => closeModal(DOM.searchModal));
     DOM.searchModal.addEventListener('click', (e) => {
       if (e.target === DOM.searchModal) closeModal(DOM.searchModal);
     });
 
-    DOM.btnJumpToNumber.addEventListener('click', () => {
+    if(DOM.btnJumpToNumber) DOM.btnJumpToNumber.addEventListener('click', () => {
       const num = parseInt(DOM.ghazalNumberInput.value, 10);
       if (num >= 1 && num <= STATE.faals.length) {
         closeModal(DOM.searchModal);
@@ -606,8 +606,8 @@ https://ramin-mahmoodi.github.io/FalGir/`;
     });
 
     // مودال آداب
-    DOM.btnAboutModal.addEventListener('click', () => openModal(DOM.aboutModal));
-    DOM.btnCloseAboutModal.addEventListener('click', () => closeModal(DOM.aboutModal));
+    if(DOM.btnAboutModal) DOM.btnAboutModal.addEventListener('click', () => openModal(DOM.aboutModal));
+    if(DOM.btnCloseAboutModal) DOM.btnCloseAboutModal.addEventListener('click', () => closeModal(DOM.aboutModal));
     DOM.aboutModal.addEventListener('click', (e) => {
       if (e.target === DOM.aboutModal) closeModal(DOM.aboutModal);
     });
