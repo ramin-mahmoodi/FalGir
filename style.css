@@ -895,7 +895,15 @@ body {
 /* ==========================================================================
    جلد بیرونی کتاب (cover-outer) و لایه‌های تذهیب و عنوان
    ========================================================================== */
-.cover-outer, .cover-outer * {\n  backface-visibility: hidden !important;\n  -webkit-backface-visibility: hidden !important;\n}\n.cover-outer {
+.hc-front-outer {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background-color: #5d121d;
+  border-radius: 3px;
+}
+
+.cover-outer {
+  background-color: #5d121d;
   position: absolute;
   inset: 0;
   padding: 0;
@@ -918,6 +926,8 @@ body {
 .leather-skin {
   position: absolute;
   inset: 0;
+  background: linear-gradient(140deg, #9c2233 0%, #7a1f28 30%, #5d121d 62%, #460b15 100%);
+  opacity: 0.95;
   pointer-events: none;
   border-radius: 2px;
 }
