@@ -81,6 +81,10 @@
     ritualStatus: document.getElementById('ritualStatus'),
     ritualMsg: document.getElementById('ritualMsg'),
     
+    // Revealed Page inside 3D Book
+    bookRevealedTitle: document.getElementById('bookRevealedTitle'),
+    bookRevealedBody: document.getElementById('bookRevealedBody'),
+    
     // Manuscript Result Elements
     manuscriptCard: document.getElementById('manuscriptCard'),
     ghazalTitle: document.getElementById('ghazalTitle'),
@@ -140,7 +144,7 @@
 
     updateUI() {
       if (DOM.soundIconWrap) {
-        if(DOM.soundIconWrap) DOM.soundIconWrap.innerHTML = STATE.soundEnabled ? SVG_ICONS.soundOn : SVG_ICONS.soundOff;
+        DOM.soundIconWrap.innerHTML = STATE.soundEnabled ? SVG_ICONS.soundOn : SVG_ICONS.soundOff;
         DOM.btnSoundToggle.title = STATE.soundEnabled ? 'صدا: فعال' : 'صدا: خاموش';
       }
     }
@@ -318,6 +322,58 @@
     return couplets;
   }
 
+  // بروزرسانی برگه‌های متحرک و همچنین صفحه ثابت زیرین کتاب با غزل نهایی
+  function populateFlippingLeaves(finalIndex) {
+    if (!STATE.faals || STATE.faals.length === 0) return;
+
+    // ۱. صفحه ثابت زیرین (که در انتهای ورق‌زدن باز می‌ماند) دقیقاً همان غزل انتخاب‌شده فال می‌شود
+    const chosenFaal = STATE.faals[finalIndex] || STATE.faals[0];
+    if (DOM.bookRevealedTitle) {
+      DOM.bookRevealedTitle.textContent = `غزل ${toPersianDigits(finalIndex + 1)}`;
+    }
+    if (DOM.bookRevealedBody && chosenFaal) {
+      const chosenLines = chosenFaal.poem
+        .split(/\r?\n/)
+        .map(l => l.trim())
+        .filter(l => l.length > 0)
+        .slice(0, 4);
+      DOM.bookRevealedBody.innerHTML = chosenLines
+        .map(line => `<p class="leaf-verse">${line}</p>`)
+        .join('');
+    }
+
+    // ۲. هر برگ دو رو دارد (رو + پشت)؛ روی هر وجه چند بیت از یک غزل تازه دیوان
+    //    نوشته میشود تا حین ورق خوردن، دیوان زنده و پرمحتوا دیده شود.
+    const leaves = document.querySelectorAll('#bookPageStack .leaf');
+    if (!leaves || leaves.length === 0) return;
+
+    const total = STATE.faals.length;
+    leaves.forEach((leaf) => {
+      const faces = leaf.querySelectorAll('.leaf-face');
+      faces.forEach((face) => {
+        const sampleIndex = Math.floor(Math.random() * total);
+        const faal = STATE.faals[sampleIndex];
+        if (!faal) return;
+
+        const headerEl = face.querySelector('.leaf-header');
+        if (headerEl) {
+          headerEl.textContent = `غزل ${toPersianDigits(sampleIndex + 1)}`;
+        }
+
+        const lines = faal.poem
+          .split(/\r?\n/)
+          .map(l => l.trim())
+          .filter(l => l.length > 0)
+          .slice(0, 4);
+
+        const bodyEl = face.querySelector('.leaf-body');
+        if (bodyEl && lines.length > 0) {
+          bodyEl.innerHTML = lines.map(line => `<p class="leaf-verse">${line}</p>`).join('');
+        }
+      });
+    });
+  }
+
   // =========================================================================
   // 6. HIGH-PERFORMANCE 3D DIVINATION SEQUENCE
   // =========================================================================
@@ -330,24 +386,33 @@
     STATE.currentFaalIndex = chosenIndex;
     STATE.currentFaal = STATE.faals[chosenIndex] || STATE.faals[0];
 
+    // پر کردن برگه‌های ورق‌زن با ابیات و شماره غزل‌های واقعی دیوان
+    populateFlippingLeaves(chosenIndex);
+
     // وضعیت UI
     DOM.btnDivinate.disabled = true;
     DOM.ritualStatus.classList.add('active');
     DOM.ritualMsg.textContent = 'در حال نیت و تفأل به دیوان لسان‌الغیب...';
 
-    // فاز ۱: اوج‌گیری و نوای عرفانی
+    // فاز ۱: اوج‌گیری دیوان و نوای کاسه تبتی
     DOM.bookScene.classList.add('is-divinating');
+    DOM.ritualMsg.textContent = 'در حال نیت و تفأل به دیوان لسان‌الغیب...';
     sound.playSingingBowl(432, 2.0);
 
-    // فاز ۲: گشودن جلد سه‌بعدی کتاب (در ۸۵۰ میلی‌ثانیه)
+    // فاز ۲: جلد کتاب ۱۸۰ درجه باز میشود و برگها یکی پس از دیگری کامل ورق میخورند
     setTimeout(() => {
-      DOM.ritualMsg.textContent = 'دیوان گشوده شد... راز فال آشکار می‌گردد';
+      DOM.ritualMsg.textContent = 'دیوان گشوده شد... در حال ورق زدن به سوی فال شما';
       DOM.bookScene.classList.remove('is-divinating');
       DOM.bookScene.classList.add('is-opening');
-      sound.playPageTurn();
-    }, 850);
 
-    // فاز ۳: ورود به کتیبه غزل (در ۲.۱۵ ثانیه)
+      // صدای باز شدن جلد و سپس صدای ورق خوردن هر برگ (همزمان با تأخیرهای CSS)
+      sound.playPageTurn();
+      [550, 720, 890, 1060, 1230].forEach(delay => {
+        setTimeout(() => sound.playPageTurn(), delay);
+      });
+    }, 450);
+
+    // فاز ۳: ورود به کتیبه غزل (پس از پایان کامل تورق: ۴۵۰ + ۲۴۰۰ میلیثانیه)
     setTimeout(() => {
       renderGhazalResult(STATE.currentFaal, STATE.currentFaalIndex);
       DOM.niyyatStage.classList.remove('active');
@@ -362,7 +427,7 @@
       DOM.ritualStatus.classList.remove('active');
       DOM.btnDivinate.disabled = false;
       STATE.isDivinating = false;
-    }, 2150);
+    }, 2850);
   }
 
   // =========================================================================
@@ -558,7 +623,7 @@ https://ramin-mahmoodi.github.io/FalGir/`;
   // =========================================================================
   function setupEvents() {
     // شروع تفأل با دکمه یا کتاب سه‌بعدی
-    if(DOM.btnDivinate) DOM.btnDivinate.addEventListener('click', () => startDivination());
+    DOM.btnDivinate.addEventListener('click', () => startDivination());
     DOM.book3D.addEventListener('click', () => {
       if (DOM.niyyatStage.classList.contains('active')) {
         startDivination();
@@ -566,27 +631,27 @@ https://ramin-mahmoodi.github.io/FalGir/`;
     });
 
     // دکمه‌های صفحه نتایج
-    if(DOM.btnTryAgain) DOM.btnTryAgain.addEventListener('click', tryAgain);
-    if(DOM.btnCopyFal) DOM.btnCopyFal.addEventListener('click', copyFalText);
-    if(DOM.btnShareFal) DOM.btnShareFal.addEventListener('click', shareFal);
-    if(DOM.btnPrintFal) DOM.btnPrintFal.addEventListener('click', () => window.print());
+    DOM.btnTryAgain.addEventListener('click', tryAgain);
+    DOM.btnCopyFal.addEventListener('click', copyFalText);
+    DOM.btnShareFal.addEventListener('click', shareFal);
+    DOM.btnPrintFal.addEventListener('click', () => window.print());
 
 
     // دکمه صدا
-    if(DOM.btnSoundToggle) DOM.btnSoundToggle.addEventListener('click', () => sound.toggle());
+    DOM.btnSoundToggle.addEventListener('click', () => sound.toggle());
 
     // مودال جستجو
-    if(DOM.btnSearchModal) DOM.btnSearchModal.addEventListener('click', () => {
+    DOM.btnSearchModal.addEventListener('click', () => {
       openModal(DOM.searchModal);
       renderSearchResults('');
       if (DOM.ghazalNumberInput) DOM.ghazalNumberInput.focus();
     });
-    if(DOM.btnCloseSearchModal) DOM.btnCloseSearchModal.addEventListener('click', () => closeModal(DOM.searchModal));
+    DOM.btnCloseSearchModal.addEventListener('click', () => closeModal(DOM.searchModal));
     DOM.searchModal.addEventListener('click', (e) => {
       if (e.target === DOM.searchModal) closeModal(DOM.searchModal);
     });
 
-    if(DOM.btnJumpToNumber) DOM.btnJumpToNumber.addEventListener('click', () => {
+    DOM.btnJumpToNumber.addEventListener('click', () => {
       const num = parseInt(DOM.ghazalNumberInput.value, 10);
       if (num >= 1 && num <= STATE.faals.length) {
         closeModal(DOM.searchModal);
@@ -606,8 +671,8 @@ https://ramin-mahmoodi.github.io/FalGir/`;
     });
 
     // مودال آداب
-    if(DOM.btnAboutModal) DOM.btnAboutModal.addEventListener('click', () => openModal(DOM.aboutModal));
-    if(DOM.btnCloseAboutModal) DOM.btnCloseAboutModal.addEventListener('click', () => closeModal(DOM.aboutModal));
+    DOM.btnAboutModal.addEventListener('click', () => openModal(DOM.aboutModal));
+    DOM.btnCloseAboutModal.addEventListener('click', () => closeModal(DOM.aboutModal));
     DOM.aboutModal.addEventListener('click', (e) => {
       if (e.target === DOM.aboutModal) closeModal(DOM.aboutModal);
     });

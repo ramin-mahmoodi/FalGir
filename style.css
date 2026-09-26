@@ -1,498 +1,308 @@
-﻿@font-face {
+/* ==========================================================================
+   FalGir - فال‌گیر | دیوان لسان‌الغیب خواجه حافظ شیرازی
+   High-Performance CSS - Realistic 3D Book & Authentic Persian Calligraphy
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. FONT FACES & TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+@font-face {
   font-family: 'IranNastaliq';
-  src: url('assets/fonts/IranNastaliq.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/npm/@raha.group/persian-fonts/IranNastaliq.regular.woff2') format('woff2');
-  font-weight: normal; font-style: normal; font-display: swap;
+  src: url('assets/fonts/IranNastaliq-v304-Regular.ttf') format('truetype'),
+       url('assets/fonts/IranNastaliq.ttf') format('truetype'),
+       url('assets/fonts/IranNastaliq.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
+
 @font-face {
   font-family: 'Vazirmatn';
   src: url('assets/fonts/Vazirmatn-Regular.woff2') format('woff2'),
        url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
-  font-weight: 400; font-style: normal; font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
+
 @font-face {
   font-family: 'Vazirmatn';
   src: url('assets/fonts/Vazirmatn-Bold.woff2') format('woff2'),
        url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
-  font-weight: 700; font-style: normal; font-display: swap;
-}
-
-:root {
-  --bg-deep: #85877c;
-  --bg-card: #fdfaf6;
-  --bg-card-hover: #f5eedf;
-  --ink-primary: #2b2b2b;
-  --ink-secondary: #5a5a5a;
-  --border-color: #2b2b2b;
-  --accent-color: #b03a2e; /* A classic vintage red */
-  
-  --font-poetry: 'IranNastaliq', serif;
-  --font-ui: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
-  --font-serif: 'Vazirmatn', 'Georgia', serif;
-  --trans-fast: 0.3s ease;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; scroll-behavior: smooth; }
-body {
-  background-color: var(--bg-deep);
-  color: var(--ink-primary);
-  font-family: var(--font-ui);
-  line-height: 1.8;
-  direction: rtl;
-  text-align: right;
-  overflow-x: hidden;
-  padding: 1rem;
-}
-
-a { text-decoration: none; color: inherit; }
-button { font-family: inherit; }
-
-/* --------------------------------------------------------------------------
-   LAYOUT & MASTHEAD
-   -------------------------------------------------------------------------- */
-.vintage-container {
-  max-width: 900px;
-  margin: 0 auto;
-  background: var(--bg-card);
-  padding: 2rem;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-  border: 1px solid var(--border-color);
-}
-
-.masthead {
-  border-bottom: 3px double var(--border-color);
-  margin-bottom: 2.5rem;
-  padding-bottom: 1rem;
-  text-align: center;
-}
-
-.newspaper-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 700;
-  color: var(--ink-primary);
-  letter-spacing: -1px;
-}
-
-.news-nav {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 1rem;
-  border-top: 1px solid var(--border-color);
-  padding-top: 1rem;
-}
-
-.nav-item {
-  font-size: 1rem;
-  font-weight: bold;
-  transition: color var(--trans-fast);
-}
-.nav-item:hover { color: var(--accent-color); }
-.nav-item.active { border-bottom: 2px solid var(--border-color); }
-
-.intro-text {
-  text-align: center;
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto 3rem auto;
-  color: var(--ink-secondary);
+  font-style: normal;
+  font-display: swap;
 }
 
 /* --------------------------------------------------------------------------
-   NEW ANIMATED BOOK (Adapted from Codrops)
+   2. SYSTEM VARIABLES
    -------------------------------------------------------------------------- */
-.book-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 4rem 0;
-  perspective: 1000px;
-}
-
-.book { list-style: none;
-  position: relative;
-  width: 240px;
-  height: 340px;
-  transform-style: preserve-3d;
-  transition: transform 0.5s;
-}
-
-/* On hover, move the book slightly to center the spread */
-.book.is-open {
-  transform: translateX(60px);
-}
-
-.hardcover_front,
-.hardcover_back,
-.book_spine,
-.hardcover_front li,
-.hardcover_back li,
-.book_spine li {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-}
-
-.hardcover_front,
-.hardcover_back {
-  transform-origin: 0% 100%;
-}
-
-.hardcover_front { transition: all 0.8s ease, z-index 0.6s; z-index: 100; }
-.hardcover_back { transform: rotateY(-15deg) translateZ(-8px); }
-
-/* Pages */
-.page { list-style: none;
-  position: absolute;
-  top: 2%;
-  left: 2%;
-  width: 96%;
-  height: 96%;
-  transform-origin: 0% 100%;
-  transform-style: preserve-3d;
-  transition: all 0.5s ease;
-  z-index: 10;
-}
-
-.page > li {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: var(--bg-card);
-  box-shadow: inset 1px 0 3px rgba(0,0,0,0.1);
-  transform-origin: left center;
-  transition-property: transform;
-  border-radius: 2px 4px 4px 2px;
-}
-
-/* HOVER TRIGGERS THE OPENING */
-.book.is-open > .hardcover_front { transform: rotateY(-145deg) translateZ(0); z-index: 0; }
-.book.is-open > .page li:nth-child(1) { transform: rotateY(-30deg); transition-duration: 1.5s; }
-.book.is-open > .page li:nth-child(2) { transform: rotateY(-35deg); transition-duration: 1.8s; }
-.book.is-open > .page li:nth-child(3) { transform: rotateY(-118deg); transition-duration: 1.6s; }
-.book.is-open > .page li:nth-child(4) { transform: rotateY(-130deg); transition-duration: 1.4s; }
-.book.is-open > .page li:nth-child(5) { transform: rotateY(-140deg); transition-duration: 1.2s; }
-
-/* Book Covers and Spine Colors */
-.hardcover_front li:first-child,
-.hardcover_back li:first-child,
-.book_spine li:first-child {
-  background: var(--ink-primary);
-  border: 1px solid #111;
-}
-
-.hardcover_front li:last-child,
-.hardcover_back li:last-child,
-.book_spine li:last-child {
-  background: #eee;
-}
-
-/* Thickness */
-.hardcover_front li:first-child:after,
-.hardcover_front li:first-child:before,
-.hardcover_front li:last-child:after,
-.hardcover_front li:last-child:before,
-.hardcover_back li:first-child:after,
-.hardcover_back li:first-child:before,
-.hardcover_back li:last-child:after,
-.hardcover_back li:last-child:before,
-.book_spine li:first-child:after,
-.book_spine li:first-child:before,
-.book_spine li:last-child:after,
-.book_spine li:last-child:before {
-  position: absolute;
-  top: 0; left: 0;
-}
-
-.hardcover_front li:first-child:after,
-.hardcover_front li:first-child:before {
-  width: 4px; height: 100%;
-}
-.hardcover_front li:first-child:after {
-  transform: rotateY(90deg) translateZ(-2px) translateX(2px);
-}
-.hardcover_front li:first-child:before {
-  transform: rotateY(90deg) translateZ(238px) translateX(2px);
-}
-
-.book_spine {
-  transform: rotateY(60deg) translateX(-5px) translateZ(-12px);
-  width: 16px;
-  z-index: 0;
-}
-.book_spine li:first-child { transform: translateZ(2px); }
-.book_spine li:last-child { transform: translateZ(-2px); }
-
-/* Front Cover Design */
-.coverDesign {
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
-  border: 3px double var(--bg-card);
-  margin: 10px;
-  color: var(--bg-card);
-}
-.cover-title {
-  font-family: var(--font-poetry);
-  font-size: 2.5rem;
-  text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
-}
-.cover-subtitle {
-  font-family: var(--font-ui);
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  margin-top: 10px;
-}
-
-/* Inside Page Button */
-.page li:nth-child(2) {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  background: var(--bg-card-hover);
-}
-
-.btn-inside-book {
-  background: transparent;
-  color: var(--ink-primary);
-  border: 2px solid var(--ink-primary);
-  padding: 0.8rem 2rem;
-  font-family: var(--font-ui);
-  font-weight: bold;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.btn-inside-book:hover {
-  background: var(--ink-primary);
-  color: var(--bg-card);
-}
-
-.divination-ritual-status { margin-top: 1rem; font-size: 0.9rem; color: var(--accent-color); font-weight: bold; display: none; }
-.divination-ritual-status.active { display: block; }
-
-/* --------------------------------------------------------------------------
-   RESULT STAGE
-   -------------------------------------------------------------------------- */
-.stage { display: none; }
-.stage.active { display: block; animation: fadeIn 0.5s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-.result-card {
-  text-align: center;
-  border-top: 2px solid var(--border-color);
-  padding-top: 2rem;
-}
-
-.ghazal-headline {
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
-
-.poem-body {
-  font-family: var(--font-poetry);
-  margin-bottom: 3rem;
-  max-width: 600px;
-  margin: 0 auto 3rem auto;
-}
-
-.bayt {
-  display: grid;
-  grid-template-columns: 1fr 40px 1fr;
-  align-items: center;
-  padding: 0.8rem 0;
-  border-bottom: 1px dashed #ccc;
-  font-size: 1.6rem;
-}
-.bayt:last-child { border-bottom: none; }
-.mesra-first { text-align: right; }
-.mesra-second { text-align: left; }
-.bayt-divider {
-  width: 8px; height: 8px;
-  background: var(--accent-color);
-  transform: rotate(45deg);
-  margin: 0 auto;
-}
-
-.interpretation-box {
-  background: var(--bg-card-hover);
-  border: 1px solid var(--border-color);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  text-align: justify;
-}
-.interp-title {
-  font-family: var(--font-serif);
-  color: var(--accent-color);
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
-  display: inline-block;
-}
-
-.action-btn-row {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.newspaper-btn {
-  background: transparent;
-  color: var(--ink-primary);
-  border: 1px solid var(--border-color);
-  padding: 0.6rem 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.newspaper-btn:hover {
-  background: var(--ink-primary);
-  color: var(--bg-card);
+:root {
+  /* پالت سنتی ایرانی روشن: عاجی، فیروزه‌ای، لاجوردی، عنابی، طلایی */
+  --bg-deep: #f6efe0;
+  --bg-midnight: #efe3cb;
+  --bg-card: #fffdf4;
+  --bg-card-hover: #fbf2dc;
+  
+  /* Traditional Gold (طلایی زنده) */
+  --gold-primary: #e8c366;
+  --gold-light: #fbe69e;
+  --gold-highlight: #fffdf5;
+  --gold-dark: #b59242;
+  --gold-border: rgba(232, 195, 102, 0.4);
+  
+  /* Book cover now Ruby / Persian Red (عنابی) */
+  --leather-base: #7a1f28;
+  --leather-dark: #4d1017;
+  
+  --parchment-base: #fdfaf2;
+  --parchment-shade: #f3e9d2;
+  --ink-primary: #2b1d11;
+  --ink-secondary: #5c4431;
+  
+  --font-poetry: 'IranNastaliq', 'IranNastaliq Web', 'Urdu Typesetting', 'Scheherazade New', 'Amiri', serif;
+  --font-ui: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Tahoma, Arial, sans-serif;
+  
+  --ease-mystic: cubic-bezier(0.25, 1, 0.5, 1);
+  --trans-fast: 0.2s ease;
 }
 
 /* --------------------------------------------------------------------------
-   MODALS & TOAST
+   3. BASE & RESET
    -------------------------------------------------------------------------- */
-.modal-overlay {
-  display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: 1000;
-  justify-content: center; align-items: center;
-}
-.modal-overlay.active { display: flex; }
-.modal-container {
-  background: var(--bg-card); border: 2px solid var(--border-color);
-  width: 90%; max-width: 500px; padding: 1.5rem;
-}
-.modal-header { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); margin-bottom: 1rem; padding-bottom: 0.5rem; }
-.icon-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
-
-.search-input-group { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
-.newspaper-input { flex: 1; padding: 0.5rem; border: 1px solid var(--border-color); background: transparent; font-family: inherit; }
-
-.toast-notification {
-  position: fixed; bottom: -100px; left: 20px;
-  background: var(--ink-primary); color: var(--bg-card);
-  padding: 1rem 2rem; transition: bottom 0.3s ease; z-index: 2000;
-}
-.toast-notification.active { bottom: 20px; }
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .book-wrapper { transform: scale(0.8); }
-  .book.is-open { transform: translateX(30px) scale(0.8); }
-  .bayt { display: flex; flex-direction: column; gap: 0.5rem; text-align: center; }
-  .mesra-first, .mesra-second { text-align: center; }
-  .bayt-divider { display: none; }
-}
-/* Vintage Cover Styles */
-.vintage-cover {
-  background-color: var(--ink-primary);
-  border: 4px double var(--bg-card);
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-}
-.vintage-cover h2 {
-  color: var(--bg-card);
-  font-family: var(--font-poetry);
-  font-size: 2.8rem;
-  margin: 0;
-}
-.vintage-cover p {
-  color: #ccc;
-  font-family: var(--font-ui);
-  letter-spacing: 2px;
-  font-size: 0.8rem;
-}
-.book ul, .book li {
-  list-style: none;
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-.leather-front {
-  width: 100%;
-  height: 100%;
-  border-radius: 3px 8px 8px 3px;
-  background: 
-    radial-gradient(circle at 50% 45%, rgba(212, 175, 55, 0.15) 0%, transparent 65%),
-    linear-gradient(135deg, var(--leather-base) 0%, #3e1236 50%, var(--leather-dark) 100%);
-  border: 2px solid var(--gold-primary);
-  box-shadow: 
-    inset 0 0 14px rgba(0, 0, 0, 0.7),
-    0 8px 24px rgba(0, 0, 0, 0.5);
-  padding: 9px;
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
-.gold-frame {
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(1100px 480px at 50% -120px, #fffdf4 0%, rgba(255,253,244,0) 60%),
+    repeating-linear-gradient(45deg, rgba(22,64,124,.05) 0 2px, transparent 2px 16px),
+    repeating-linear-gradient(-45deg, rgba(14,143,148,.055) 0 2px, transparent 2px 16px);
+  color: #3a2a18;
+  font-family: var(--font-ui);
+  line-height: 1.7;
+  direction: rtl;
+  text-align: right;
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   4. LIGHTWEIGHT BACKGROUND
+   -------------------------------------------------------------------------- */
+.stars-backdrop {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 20%, #fffdf4 0%, var(--bg-deep) 100%);
+  background-image: radial-gradient(circle at 50% 20%, #fffdf4 0%, var(--bg-deep) 100%), url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0L45 35L80 40L45 45L40 80L35 45L0 40L35 35Z' fill='none' stroke='%23b8862f' stroke-opacity='0.10' stroke-width='1'/%3E%3Ccircle cx='40' cy='40' r='20' fill='none' stroke='%23b8862f' stroke-opacity='0.10' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 160px 160px;
+  animation: bgDrift 120s linear infinite;
+}
+
+@keyframes bgDrift {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 0 0, 160px 160px; }
+}
+
+.watermark-pattern {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 120vw);
+  height: min(900px, 120vw);
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M100 0 L115 35 L150 15 L140 50 L185 50 L155 75 L185 110 L145 105 L150 145 L115 125 L100 160 L85 125 L50 145 L55 105 L15 110 L45 75 L15 50 L60 50 L50 15 L85 35 Z' fill='none' stroke='%23e8c366' stroke-opacity='0.08' stroke-width='2'/%3E%3Ccircle cx='100' cy='100' r='55' fill='none' stroke='%23e8c366' stroke-opacity='0.05' stroke-width='1'/%3E%3Ccircle cx='100' cy='100' r='30' fill='none' stroke='%23e8c366' stroke-opacity='0.05' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: spinShamseh 180s linear infinite;
+}
+
+@keyframes spinShamseh {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   5. HEADER & ICONS
+   -------------------------------------------------------------------------- */
+.app-header {
+  position: relative;
+  z-index: 20;
+  padding: 1rem 1.4rem;
+  background: linear-gradient(180deg, #fffdf4, #faf0da);
+  border-bottom: 3px double #b8862f;
+  box-shadow: 0 6px 22px rgba(62,42,16,.12);
+}
+
+.app-header::after {
+  content: '';
+  display: block;
+  height: 8px;
+  margin: 0.7rem -1.4rem -1rem;
+  background: repeating-linear-gradient(90deg, #0e8f94 0 18px, #16407c 18px 36px, #b8862f 36px 54px, #92182a 54px 72px);
+  opacity: .9;
+}
+
+.header-container {
+  max-width: 1020px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-emblem {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emblem-svg {
   width: 100%;
   height: 100%;
-  border: 1px solid var(--gold-primary);
-  border-radius: 3px;
+}
+
+.brand-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #6d0f1f;
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 0.76rem;
+  color: #16407c;
+  font-weight: 500;
+  display: block;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon-btn {
+  background: linear-gradient(180deg, #fffdf4, #f3e6c6);
+  border: 1.5px solid #b8862f;
+  color: #0e2a55;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--trans-fast);
   position: relative;
+}
+
+.icon-btn:hover {
+  background: #d9f0ee;
+  border-color: #0e8f94;
+  color: #0a6d71;
+  transform: translateY(-2px);
+}
+
+.icon-btn:active {
+  transform: translateY(0);
+}
+
+.icon-svg-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.svg-icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+  stroke: currentColor;
+  fill: none;
+}
+
+.mini-svg {
+  width: 13px;
+  height: 13px;
+  vertical-align: middle;
+}
+
+.btn-tooltip {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0f192e;
+  border: 1px solid var(--gold-primary);
+  color: #fff;
+  font-size: 0.72rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 50;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.icon-btn:hover .btn-tooltip {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   6. MAIN STAGE
+   -------------------------------------------------------------------------- */
+.main-content {
+  position: relative;
+  z-index: 10;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 6px rgba(212, 175, 55, 0.3);
-}
-
-.corner-brass {
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  border: 2px solid var(--gold-light);
-}
-
-.c-top-left { top: 2px; left: 2px; border-right: none; border-bottom: none; }
-
-.c-top-right { top: 2px; right: 2px; border-left: none; border-bottom: none; }
-
-.c-bottom-left { bottom: 2px; left: 2px; border-right: none; border-top: none; }
-
-.c-bottom-right { bottom: 2px; right: 2px; border-left: none; border-top: none; }
-
-.toranj-svg {
+  padding: 1.5rem 1rem 2.5rem;
+  max-width: 960px;
   width: 100%;
-  height: 100%;
+  margin: 0 auto;
 }
 
-.spine-ribs {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+.stage {
+  width: 100%;
+  display: none;
 }
 
-.rib {
+.stage.active {
   display: block;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, #876214, var(--gold-light), #876214);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-}
-
-:root {
-  --leather-base: #1f0b1a;
-  --leather-dark: #0e040c;
-  --gold-primary: #d4af37;
-  --gold-light: #f6e29d;
-  --gold-border: #735212;
 }
 
 /* --------------------------------------------------------------------------
@@ -507,18 +317,18 @@ button { font-family: inherit; }
   flex-direction: column;
   align-items: center;
   gap: 1.6rem;
-  max-width: 620px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
 .whisper-banner {
-  background: rgba(18, 29, 52, 0.85);
-  border: 1px solid var(--gold-border);
+  background: linear-gradient(180deg, #fffdf4, #f8ecd0);
+  border: 1.5px solid #b8862f;
   border-radius: 12px;
   padding: 1.1rem 1.6rem;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(62,42,16,.16);
 }
 
 .whisper-banner::before {
@@ -535,9 +345,9 @@ button { font-family: inherit; }
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--gold-light);
-  background: rgba(212, 175, 55, 0.12);
-  border: 1px solid var(--gold-border);
+  color: #6d0f1f;
+  background: rgba(184, 134, 47, 0.14);
+  border: 1px solid #b8862f;
   padding: 0.15rem 0.75rem;
   border-radius: 999px;
   margin-bottom: 0.5rem;
@@ -545,308 +355,589 @@ button { font-family: inherit; }
 
 .whisper-quote {
   font-size: clamp(1.05rem, 3.2vw, 1.25rem);
-  font-weight: 600;
-  color: var(--gold-highlight);
+  font-weight: 700;
+  color: #3a2a18;
   line-height: 1.6;
   margin-bottom: 0.35rem;
 }
 
 .whisper-desc {
   font-size: 0.86rem;
-  color: #b7c7e5;
+  color: #6b543a;
   line-height: 1.6;
 }
 
 /* ==========================================================================
-   THE AUTHENTIC 3D BOOK (6 REALISTIC 3D FACES WITH REAL DEPTH)
+   AUTHENTIC 3D BOOK GEOMETRY (DIRECTION: LTR FOR PURE 3D MATHS)
    ========================================================================== */
+.book-scene {
+  position: relative;
+  width: 280px;
+  height: 330px;
+  margin: 1.2rem auto 0.6rem;
+  perspective: 1200px;
+  perspective-origin: 50% 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr !important; /* Forces uniform coordinate system for 3D faces */
+  animation: floatScene 4s infinite alternate ease-in-out;
+}
 
-/* â”˜Ã§â•ªÂºâ”˜Ã¤â”˜Ã§ â”˜Ã â”˜Ã¤â•ªÂºâ–ˆÃ®â”˜Ã  â”˜â•›â•ªâ”‚Î“Ã‡Ã®â•ªâ–“â”˜Ã â–ˆÃ®â”˜Ã¥â”˜Ã§ â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ */
+@keyframes floatScene {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+/* هاله ملایم پس‌زمینه کتاب */
 .mystic-aura {
   position: absolute;
   width: 260px;
   height: 260px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, transparent 65%);
-  transform: translateZ(-100px);
+  background: radial-gradient(circle, var(--gold-border) 0%, transparent 65%);
+  transform: translateZ(-80px);
   pointer-events: none;
-  transition: transform 0.6s ease, opacity 0.6s ease;
+  transition: transform 0.6s ease;
+  animation: auraPulse 4s infinite alternate ease-in-out;
 }
 
-/* â•ªÃ³â•ªÂ¿â•ªÂ¼â”ŒâŒâ•ªÂ¬ â•ªâ”‚â”˜Ã§Î“Ã‡Ã®â•ªÂ¿â•ªâ•£â•ªÂ»â–ˆÃ® â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ (Book Container) */
+@keyframes auraPulse {
+  0% { transform: translateZ(-80px) scale(0.95); opacity: 0.7; }
+  100% { transform: translateZ(-80px) scale(1.05); opacity: 1; }
+}
+
+/* Float animation for the book */
+@keyframes bookFloat {
+  0% { transform: rotateY(-24deg) rotateX(14deg) translateY(0); }
+  100% { transform: rotateY(-24deg) rotateX(14deg) translateY(-8px); }
+}
+
+/* آبجکت سه‌بعدی کتاب */
+.book-3d {
+  position: relative;
+  width: 200px;
+  height: 280px;
+  transform-style: preserve-3d;
+  /* زاویه سه‌بعدی طبیعی و چشم‌نواز */
+  transform: rotateY(-24deg) rotateX(14deg);
+  transition: transform 0.85s var(--ease-mystic);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.book-scene:not(.is-divinating) .book-3d:hover {
+  transform: rotateY(-16deg) rotateX(8deg) translateY(-8px);
+}
+
+/* فاز ۱ تفأل: کتاب روبه‌رو شده و بالا می‌رود */
+.book-scene.is-divinating .book-3d {
+  transform: rotateY(0deg) rotateX(4deg) translateY(-22px) scale(1.04);
+}
+
+.book-scene.is-divinating .mystic-aura {
+  transform: translateZ(-80px) scale(1.35);
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, transparent 70%);
+}
+
+/* پرتو نور زرین هنگام باز شدن کتاب */
+.book-light-beam {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 246, 217, 0.85) 0%, rgba(212, 175, 55, 0.45) 45%, transparent 70%);
+  opacity: 0;
+  transform: translateZ(25px) scale(0.5);
+  transition: all 0.7s var(--ease-mystic);
+  pointer-events: none;
+  z-index: 20;
+}
 
 
-/* â”˜Ã¼â•ªÂºâ•ªâ–“ â–ˆâ–’ â•ªÂ¬â”˜Ã¼â•ªÃºâ”˜Ã¤: â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ â•ªâ–’â”˜Ãªâ•ªÂ¿â”˜Ã§Î“Ã‡Ã®â•ªâ–’â”˜Ãª â•ªâ”¤â•ªÂ»â”˜Ã§ â”˜Ãª â•ªÂ¿â•ªÂºâ”˜Ã¤â•ªÂº â”˜Ã â–ˆÃ®Î“Ã‡Ã®â•ªâ–’â”˜Ãªâ•ªÂ» */
 
+/* وجه‌های سه‌بعدی */
+.book-face {
+  position: absolute;
+  box-sizing: border-box;
+}
 
-/* â”˜Ã¼â•ªÂºâ•ªâ–“ â–ˆâ–“ â•ªÂ¬â”˜Ã¼â•ªÃºâ”˜Ã¤: â”ŒÃ¥â•ªâ–’â•ªÂ«â•ªâ”¤ â–ˆâ”‚â–ˆâ•¢â–ˆâ–‘ â•ªÂ»â•ªâ–’â•ªÂ¼â”˜Ã§Î“Ã‡Ã®â•ªÂºâ–ˆÃ® â”˜Ãª â”ŒÂ»â•ªâ”¤â”˜Ãªâ•ªÂ»â”˜Ã§ â•ªâ”¤â•ªÂ»â”˜Ã¥ â•ªÂ¼â”˜Ã¤â•ªÂ» â•ªâ”‚â”˜Ã§Î“Ã‡Ã®â•ªÂ¿â•ªâ•£â•ªÂ»â–ˆÃ® â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ */
+/* 1. جلد پشتی — hardcover_back با دو وجه: چرم بیرونی و آستر داخلی */
+.hardcover_back {
+  position: absolute;
+  inset: 0;
+  list-style: none;
+  transform: translateZ(-20px);
+  transform-style: preserve-3d;
+}
 
-/* â•ªÂºâ•ªâ”‚â•ªÂ¬â•ªÂºâ–ˆÃ®â”˜Ã¤ â•ªâ•£â”˜Ã â”˜Ãªâ”˜Ã â–ˆÃ® â”˜Ãªâ•ªÂ¼â”˜Ã§Î“Ã‡Ã®â”˜Ã§â•ªÂºâ–ˆÃ® â•ªâ”‚â”˜Ã§Î“Ã‡Ã®â•ªÂ¿â•ªâ•£â•ªÂ»â–ˆÃ® â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ */
+.hardcover_back > li {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
 
-/* 1. â•ªâ•£â•ªâ•–â”˜Ã¼ â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ (Spine Face) - â•ªâ”‚â”˜Ã â•ªÂ¬ â•ªâ–’â•ªÂºâ•ªâ”‚â•ªÂ¬ â•ªÂ»â•ªâ–’ â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿Î“Ã‡Ã®â”˜Ã§â•ªÂºâ–ˆÃ® â”˜Ã¼â•ªÂºâ•ªâ–’â•ªâ”‚â–ˆÃ® â•ªÂ¿â•ªÂº â•ªâ•¢â•ªÂ«â•ªÂºâ”˜Ã â•ªÂ¬ 34px */
-.face-spine {
-  top: 0;
-  right: 0;
-  width: var(--book-depth);
+/* وجه بیرونیِ پشت کتاب (پشت به بیننده) */
+.hardcover_back > li:first-child {
+  transform: rotateY(180deg) translateZ(1px);
+  background: linear-gradient(135deg, var(--leather-dark) 0%, var(--leather-base) 50%, var(--leather-dark) 100%);
+  border: 1px solid #8e6d19;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+/* آستر داخلی جلد پشت (رو به ورق‌ها) */
+.hardcover_back > li:last-child {
+  transform: translateZ(1px);
+  background-color: var(--leather-base);
+  background-image:
+    url("assets/paper.jpg"),
+    radial-gradient(circle at center, rgba(122, 31, 40, 0.88) 0%, rgba(77, 16, 23, 0.96) 100%);
+  background-size: cover, auto;
+  background-blend-mode: multiply;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.leather-back {
+  width: 100%;
   height: 100%;
-  transform-origin: right center;
-  transform: rotateY(-90deg);
-  background: linear-gradient(90deg, #180517 0%, #350c30 50%, #1a0619 100%);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 3px;
+}
+
+/* 2. عطف کتاب (Spine) در سمت راست */
+.book-spine {
+  right: -20px;
+  top: 0;
+  width: 40px;
+  height: 280px;
+  transform-origin: center center;
+  transform: rotateY(90deg);
+  background: linear-gradient(90deg, var(--leather-dark) 0%, var(--leather-base) 50%, var(--leather-dark) 100%);
   border-top: 1px solid var(--gold-primary);
   border-bottom: 1px solid var(--gold-primary);
-  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.9);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.9);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 12px 0;
+  direction: rtl !important;
   z-index: 5;
 }
 
-/* â•ªÂ¬â–ˆÃ®â•ªâ•‘â”˜Ã§Î“Ã‡Ã®â”˜Ã§â•ªÂºâ–ˆÃ® â•ªÂ¿â•ªâ–’â•ªÂ¼â•ªâ”‚â•ªÂ¬â”˜Ã§ â•ªâ•–â”˜Ã¤â•ªÂºâ”ŒâŒâ”˜Ãªâ•ªÂ¿ â•ªâ–’â”˜Ãªâ–ˆÃ® â•ªâ•£â•ªâ•–â”˜Ã¼ â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ */
 .spine-ribs {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 100%;
-  position: absolute;
-  inset: 0;
   pointer-events: none;
 }
 
 .spine-ribs .rib {
-  display: block;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, #876214, var(--gold-light), #876214);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  background: linear-gradient(90deg, #6c4e0f, var(--gold-light), #6c4e0f);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
 }
 
-.spine-title {
+.spine-text {
   writing-mode: vertical-rl;
   color: var(--gold-light);
-  font-size: 0.74rem;
-  letter-spacing: 2px;
+  font-size: 0.76rem;
   font-weight: 700;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
-  position: relative;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
   z-index: 2;
   margin: auto 0;
 }
 
-.spine-bottom-rosette {
-  width: 12px;
-  height: 12px;
-  border: 1px solid var(--gold-primary);
-  border-radius: 50%;
-  position: relative;
+.spine-motif {
+  color: var(--gold-primary);
+  font-size: 0.8rem;
   z-index: 2;
 }
 
-/* 2. â”˜Ã¤â•ªÂ¿â”˜Ã§ â•ªÂ¼â”˜Ã¤â”˜Ãªâ–ˆÃ®â–ˆÃ® â”˜Ãªâ•ªâ–’â”˜Ã©Î“Ã‡Ã®â”˜Ã§â•ªÂº (Left Fore-edge Face) - â”˜Ãªâ•ªâ–’â”˜Ã©Î“Ã‡Ã®â”˜Ã§â•ªÂºâ–ˆÃ® â”˜Ã¤â•ªÂ¿â”˜Ã§Î“Ã‡Ã®â•ªâ•–â”˜Ã¤â•ªÂºâ–ˆÃ®â–ˆÃ® â•ªâ–’â”˜Ãª â•ªÂ¿â”˜Ã§ â•ªÂ¿â–ˆÃ®â•ªâ–’â”˜Ãªâ”˜Ã¥ */
-.face-fore-edge {
+/* 3. لبه‌های ورق‌های کاغذ (Paper Edges) */
+.book-pages-left {
+  left: -20px;
   top: 3px;
-  left: 0;
-  width: var(--book-depth);
-  height: calc(100% - 6px);
-  transform-origin: left center;
-  transform: rotateY(90deg);
+  width: 40px;
+  height: 274px;
+  transform-origin: center center;
+  transform: rotateY(-90deg);
   background: repeating-linear-gradient(
     90deg,
-    #deb865 0px,
+    #cfab53 0px,
     #fff3d1 1px,
-    #aa8323 2px,
-    #cf9e38 3px
+    #98721c 2px,
+    #b99030 3px
   );
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
   border-radius: 2px;
 }
 
-/* 3. â”˜Ã¤â•ªÂ¿â”˜Ã§ â•ªÂ¿â•ªÂºâ”˜Ã¤â•ªÂºâ–ˆÃ®â–ˆÃ® â”˜Ãªâ•ªâ–’â”˜Ã©Î“Ã‡Ã®â”˜Ã§â•ªÂº (Top Edge Face) */
-.face-top-edge {
-  top: 0;
+.book-pages-top {
   left: 3px;
-  width: calc(100% - 6px);
-  height: var(--book-depth);
-  transform-origin: top center;
+  top: -20px;
+  width: 194px;
+  height: 40px;
+  transform-origin: center center;
   transform: rotateX(90deg);
   background: repeating-linear-gradient(
     0deg,
-    #deb865 0px,
+    #cfab53 0px,
     #fff3d1 1px,
-    #aa8323 2px,
-    #cf9e38 3px
+    #98721c 2px,
+    #b99030 3px
   );
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
 }
 
-/* 4. â”˜Ã¤â•ªÂ¿â”˜Ã§ â”˜â•›â•ªÂºâ–ˆÃ®â–ˆÃ®â”˜Ã¥â–ˆÃ® â”˜Ãªâ•ªâ–’â”˜Ã©Î“Ã‡Ã®â”˜Ã§â•ªÂº (Bottom Edge Face) */
-.face-bottom-edge {
-  bottom: 0;
+.book-pages-bottom {
   left: 3px;
-  width: calc(100% - 6px);
-  height: var(--book-depth);
-  transform-origin: bottom center;
+  bottom: -20px;
+  width: 194px;
+  height: 40px;
+  transform-origin: center center;
   transform: rotateX(-90deg);
   background: repeating-linear-gradient(
     0deg,
-    #deb865 0px,
+    #cfab53 0px,
     #fff3d1 1px,
-    #aa8323 2px,
-    #cf9e38 3px
+    #98721c 2px,
+    #b99030 3px
   );
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
 }
 
-/* 5. â•ªÂ¼â”˜Ã¤â•ªÂ» â•ªâ–“â–ˆÃ®â•ªâ–’â–ˆÃ®â”˜Ã¥ â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ (Back Cover Face) */
-.face-back {
-  inset: 0;
-  transform: translateZ(calc(-1 * var(--book-depth)));
-  background: linear-gradient(135deg, #180415 0%, #290824 50%, #150313 100%);
-  border-radius: 3px 8px 8px 3px;
-  border: 1px solid var(--gold-dark);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+/* 4. صفحه نهایی داخل کتاب (Final Revealed Ghazal Page) */
+.book-first-page {
+  left: 3px;
+  top: 3px;
+  width: 194px;
+  height: 274px;
+  transform: translateZ(15.5px);
+  background-color: #fffdf6;
+  background-image: 
+    url("assets/paper.jpg"),
+    radial-gradient(circle at 50% 30%, #fffef8 0%, #f6edd9 80%, #ebd7ad 100%);
+  background-size: cover, auto;
+  background-blend-mode: multiply;
+  border-radius: 2px;
+  box-shadow:
+    inset 0 0 12px rgba(110, 80, 20, 0.22),
+    0 2px 6px rgba(62, 42, 16, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 8px;
-}
-
-.back-cover-emboss {
-  width: 100%;
-  height: 100%;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 3px;
-}
-
-/* 6. â•ªâ•¡â”˜Ã¼â•ªÂ¡â”˜Ã§ â•ªÂ»â•ªÂºâ•ªÂ«â”˜Ã¤â–ˆÃ® â”˜Ã¥â•ªâ”‚â•ªÂ«â”˜Ã§ â•ªÂ«â•ªâ•–â–ˆÃ® (Inner Page Face) - â•ªâ–“â–ˆÃ®â•ªâ–’ â•ªÂ¼â”˜Ã¤â•ªÂ» â”˜Ã©â•ªâ–’â•ªÂºâ•ªâ–’ â•ªÂ»â•ªÂºâ•ªâ–’â•ªÂ» â”˜Ãª â•ªÂ¿â•ªÂº â•ªÂ¿â•ªÂºâ•ªâ–“ â•ªâ”¤â•ªÂ»â”˜Ã¥ â”˜Ã¥â”˜Ã â•ªÂºâ–ˆÃ®â•ªÂºâ”˜Ã¥ â”˜Ã â–ˆÃ®Î“Ã‡Ã®â•ªâ”¤â”˜Ãªâ•ªÂ» */
-.face-inner {
-  inset: 4px;
-  transform: translateZ(-2px);
-  background: radial-gradient(circle at center, #fdf9ee 0%, #f4edd8 80%, #ebdcb8 100%);
-  border-radius: 3px;
-  box-shadow: inset 0 0 15px rgba(138, 104, 30, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-}
-
-.inner-page-content {
-  width: 100%;
-  height: 100%;
-  border: 1px solid var(--gold-primary);
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  direction: rtl !important;
   text-align: center;
-  padding: 1rem 0.5rem;
+  overflow: hidden;
 }
 
-.inner-tadhhib-arch {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
+.first-page-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
 }
 
-.inner-shamseh {
+.first-page-shamseh {
   width: 44px;
   height: 44px;
 }
 
-.inner-svg {
+.shamseh-svg-small {
   width: 100%;
   height: 100%;
 }
 
-.inner-calligraphy {
+.first-page-title {
   font-family: var(--font-poetry);
-  font-size: 1.25rem;
-  color: var(--ink-primary);
-  line-height: 1.4;
+  font-size: 1.3rem;
+  color: #1a0f05;
+  line-height: 1.3;
 }
 
-.inner-couplet {
+.first-page-subtitle {
+  font-size: 0.68rem;
+  color: #8c6a1b;
+  font-weight: 600;
+}
+
+.first-page-couplet {
   font-family: var(--font-poetry);
-  font-size: 0.88rem;
-  color: var(--ink-secondary);
+  font-size: 0.82rem;
+  color: #3b2816;
   line-height: 1.8;
-  margin-top: 0.4rem;
+  margin-top: 0.3rem;
+  display: flex;
+  flex-direction: column;
 }
 
-/* 7. â•ªÂ¼â”˜Ã¤â•ªÂ» â•ªâ–’â”˜Ãªâ–ˆÃ®â–ˆÃ® â•ªâ–“â•ªâ–’â”ŒâŒâ”˜Ãªâ•ªÂ¿ â”˜Ãª â•ªâ”‚â”˜Ã§Î“Ã‡Ã®â•ªÂ¿â•ªâ•£â•ªÂ»â–ˆÃ® (Front Cover Face) */
-.face-front {
+/* 5. جلد رویی کتاب (hardcover_front) — چرم عنابی با قاب دوبل طلایی */
+.hardcover_front {
+  position: absolute;
   inset: 0;
+  list-style: none;
+  /* لولای گردش روی عطفِ سمت راست (سنت کتاب‌های فارسی و قرآنی) */
   transform-origin: right center;
   transform-style: preserve-3d;
-  transition: transform 0.9s cubic-bezier(0.35, 0, 0.25, 1);
-  transform: translateZ(0);
-  z-index: 10;
+  transform: translateZ(20px) rotateY(0deg);
+  transition: transform 0.95s cubic-bezier(0.3, 0, 0.2, 1);
 }
 
-.leather-front {
+/* دو وجه جلد: بیرونِ چرم و آستر داخلی (۱۸۰ درجه چرخیده) */
+.hardcover_front > li {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.hardcover_front > li:first-child { transform: translateZ(1px); }
+.hardcover_front > li:last-child { transform: rotateY(180deg) translateZ(1px); }
+
+/* وضعیت باز شدن کامل دیوان */
+.book-scene.is-opening .book-3d {
+  /* کتابِ گشوده دو برابر پهن‌تر است؛ برای حفظ مرکزیت صحنه جبران می‌شود */
+  transform: translateX(-78px) rotateY(-14deg) rotateX(9deg) scale(0.82);
+}
+
+/* جلد ۱۸۲ درجه می‌چرخد تا کاملاً روی ورق‌های ورق‌خورده بخوابد */
+.book-scene.is-opening .hardcover_front {
+  transform: translateZ(20px) rotateY(182deg);
+}
+
+.book-scene.is-opening .book-light-beam {
+  opacity: 1;
+  transform: translateZ(35px) scale(1.3);
+}
+
+/* --------------------------------------------------------------------------
+   ورق‌های دیوان (page) — هر برگ دو رو دارد و حول عطفِ سمت راست می‌چرخد
+   -------------------------------------------------------------------------- */
+.page {
+  position: absolute;
+  left: 3px;
+  top: 4px;
+  width: 194px;
+  height: 272px;
+  list-style: none;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.page > li.leaf {
+  position: absolute;
+  inset: 0;
+  list-style: none;
+  /* عطف کتاب فارسی در سمت راست است؛ برگ‌ها از چپ به راستِ عطف ورق می‌خورند */
+  transform-origin: right center;
+  transform-style: preserve-3d;
+  /* در حالت بسته، هر برگ روی برگِ بعدی می‌نشیند */
+  transform: translateZ(calc(19.6px - var(--leaf-index, 0) * 0.8px)) rotateY(0deg);
+  transition: transform 0.8s cubic-bezier(0.34, 0.02, 0.2, 1);
+}
+
+/* روی برگ (recto) و پشت برگ (verso)؛ پشت از پیش ۱۸۰ درجه چرخیده
+   تا پس از ورق خوردن، متن به‌صورت صحیح و بدون آینه‌شدگی دیده شود */
+.leaf-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 1px 6px 6px 1px;
+  background-color: #fffdf6;
+  background-image: 
+    url("assets/paper.jpg"),
+    radial-gradient(circle at 50% 30%, #fffef8 0%, #f6edd9 80%, #ebd7ad 100%);
+  background-size: cover, auto;
+  background-blend-mode: multiply;
+  border: 1px solid #c9a75d;
+  box-shadow:
+    inset -3px 0 8px rgba(90, 60, 10, 0.18),
+    inset 0 0 10px rgba(110, 80, 20, 0.18),
+    0 2px 6px rgba(62, 42, 16, 0.28);
+  overflow: hidden;
+  direction: rtl !important;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* روی برگ (recto) رو به بیننده است و پشت برگ (verso) ۱۸۰ درجه چرخیده */
+.leaf-front { transform: rotateY(0deg) translateZ(0.7px); }
+.leaf-back { transform: rotateY(180deg) translateZ(0.7px); }
+
+/* ساختار کهن و تذهیب داخلی هر برگه ورق‌خورنده */
+.leaf-manuscript {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 8px 8px;
+  text-align: center;
+  outline: 1px solid rgba(184, 134, 47, 0.35);
+  outline-offset: -4px;
+}
+
+.leaf-header {
+  font-family: var(--font-poetry);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #7b1d24; /* لعل عنابی سنتی */
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.leaf-tazhib-line {
+  width: 75%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c9a75d 20%, #d4af37 50%, #c9a75d 80%, transparent);
+  margin: 3px 0 6px;
+  position: relative;
+}
+
+.leaf-tazhib-line::after {
+  content: "♦";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.55rem;
+  color: #b8862f;
+}
+
+.leaf-body {
   width: 100%;
-  height: 100%;
-  border-radius: 3px 8px 8px 3px;
-  background: 
-    radial-gradient(circle at 50% 45%, rgba(212, 175, 55, 0.15) 0%, transparent 65%),
-    linear-gradient(135deg, var(--leather-base) 0%, #3e1236 50%, var(--leather-dark) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: auto 0;
+}
+
+.leaf-verse {
+  font-family: var(--font-poetry);
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: #2b1704;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  text-shadow: 0 0 1px rgba(0,0,0,0.1);
+}
+
+.leaf-verse:nth-child(even) {
+  color: #4a2808;
+  margin-bottom: 2px;
+}
+
+.leaf-footer {
+  font-family: var(--font-poetry);
+  font-size: 0.62rem;
+  color: #8c6a1b;
+  opacity: 0.85;
+  margin-bottom: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   ورق خوردنِ کامل: هر برگ ۱۸۰ درجه حول عطفِ سمت راست می‌چرخد، روی جلدِ
+   بازشده می‌خوابد و برگِ بعدی با تأخیرِ کوتاه روی آن می‌نشیند.
+   -------------------------------------------------------------------------- */
+.book-scene.is-opening .page > li.leaf {
+  transform: translateZ(calc(20.9px + var(--leaf-index, 0) * 1.6px))
+             rotateY(calc(177deg + var(--leaf-index, 0) * 0.35deg));
+}
+
+.book-scene.is-opening .page > li.leaf:nth-child(1) { transition-delay: 0.55s; }
+.book-scene.is-opening .page > li.leaf:nth-child(2) { transition-delay: 0.72s; }
+.book-scene.is-opening .page > li.leaf:nth-child(3) { transition-delay: 0.89s; }
+.book-scene.is-opening .page > li.leaf:nth-child(4) { transition-delay: 1.06s; }
+.book-scene.is-opening .page > li.leaf:nth-child(5) { transition-delay: 1.23s; }
+
+.cover-side {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* وجه بیرونی چرم — بافت چرم عنابی + قاب دوبل طلایی */
+.cover-outer {
+  background:
+    radial-gradient(circle at 50% 38%, rgba(233,196,106,.30) 0%, transparent 55%),
+    radial-gradient(circle at 18% 12%, rgba(255,240,200,.14) 0%, transparent 40%),
+    url("data:image/svg+xml,%3Csvg width='90' height='90' viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23000000' stroke-opacity='0.10'%3E%3Cpath d='M0 30 Q22 26 45 30 T90 30'/%3E%3Cpath d='M0 60 Q22 56 45 60 T90 60'/%3E%3Cpath d='M30 0 Q26 22 30 45 T30 90'/%3E%3Cpath d='M60 0 Q56 22 60 45 T60 90'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(140deg, #9c2233 0%, #7a1f28 30%, #5d121d 62%, #460b15 100%);
   border: 2px solid var(--gold-primary);
-  box-shadow: 
-    inset 0 0 14px rgba(0, 0, 0, 0.7),
-    0 8px 24px rgba(0, 0, 0, 0.5);
-  padding: 9px;
+  box-shadow:
+    inset 0 0 0 3px rgba(20, 5, 8, 0.55),
+    inset 0 0 22px rgba(0, 0, 0, 0.7),
+    0 8px 24px rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  direction: rtl !important;
 }
 
 .gold-frame {
   width: 100%;
   height: 100%;
   border: 1px solid var(--gold-primary);
-  border-radius: 3px;
+  outline: 1px solid rgba(232, 195, 102, 0.45);
+  outline-offset: 3px;
+  border-radius: 2px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 6px rgba(212, 175, 55, 0.3);
+  background:
+    url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23fbe69e' stroke-opacity='0.16'%3E%3Cpath d='M22 2 L25 19 L42 22 L25 25 L22 42 L19 25 L2 22 L19 19 Z'/%3E%3C/g%3E%3C/svg%3E");
+  box-shadow: inset 0 0 10px rgba(232, 195, 102, 0.28);
 }
 
-/* â”˜Ã¥â•ªÂ¿â•ªâ”¤â–ˆÃ®Î“Ã‡Ã®â”˜Ã§â•ªÂºâ–ˆÃ® â•ªÂ¿â•ªâ–’â”˜Ã¥â•ªÂ¼â–ˆÃ® â•ªâ–“â•ªâ–’â–ˆÃ®â”˜Ã¥ â”ŒÃ¥â”˜Ã§â•ªÂºâ•ªâ–’â”ŒÂ»â”˜Ãªâ•ªâ”¤â”˜Ã§ â•ªÂ¼â”˜Ã¤â•ªÂ» */
 .corner-brass {
   position: absolute;
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   border: 2px solid var(--gold-light);
+  background: radial-gradient(circle at 30% 30%, #fff6d9 0%, var(--gold-primary) 45%, #7a5c14 100%);
+  box-shadow: 0 1px 3px rgba(0,0,0,.6);
 }
+.c-top-right { top: 2px; right: 2px; border-left: none; border-bottom: none; border-radius: 0 2px 0 6px; }
+.c-top-left { top: 2px; left: 2px; border-right: none; border-bottom: none; border-radius: 2px 0 6px 0; }
+.c-bottom-right { bottom: 2px; right: 2px; border-left: none; border-top: none; border-radius: 6px 0 2px 0; }
+.c-bottom-left { bottom: 2px; left: 2px; border-right: none; border-top: none; border-radius: 0 6px 0 2px; }
 
-.c-top-right { top: 2px; right: 2px; border-left: none; border-bottom: none; }
-.c-top-left { top: 2px; left: 2px; border-right: none; border-bottom: none; }
-.c-bottom-right { bottom: 2px; right: 2px; border-left: none; border-top: none; }
-.c-bottom-left { bottom: 2px; left: 2px; border-right: none; border-top: none; }
-
-.cover-body {
+.cover-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100%;
-  padding: 0.4rem;
+  padding: 0.3rem;
 }
 
-.cover-top-motif {
-  width: 75px;
-  margin-bottom: 0.6rem;
+.cover-top-ornament {
+  width: 118px;
+  margin-bottom: 0.35rem;
 }
 
-.motif-svg {
+.ornament-svg {
   width: 100%;
   height: auto;
 }
 
-.cover-toranj {
-  width: 78px;
-  height: 78px;
-  margin-bottom: 0.7rem;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
+.ornament-pro, .toranj-pro { display: block; }
+
+.cover-medallion {
+  width: 84px;
+  height: 98px;
+  margin-bottom: 0.45rem;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.8));
 }
 
 .toranj-svg {
@@ -854,39 +945,72 @@ button { font-family: inherit; }
   height: 100%;
 }
 
-.cover-title-group {
-  margin-bottom: 0.3rem;
+.cover-bottom-ornament {
+  width: 104px;
+  margin-top: 0.3rem;
+  display: flex;
+  justify-content: center;
 }
 
-.cover-title-text {
+.ornament-small { width: 100%; height: auto; }
+
+.cover-title {
   font-family: var(--font-poetry);
-  font-size: 1.95rem;
-  color: var(--gold-highlight);
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 8px var(--gold-primary);
+  font-size: 1.85rem;
+  color: #fff6d9;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 10px var(--gold-primary);
   line-height: 1.25;
 }
 
-.cover-subtitle-text {
-  font-size: 0.72rem;
+.cover-subtitle {
+  font-size: 0.7rem;
   color: var(--gold-light);
   font-weight: 500;
   letter-spacing: 0.5px;
 }
 
-.cover-bottom-tassel {
-  margin-top: 0.6rem;
+.cover-bookmark-ribbon {
+  margin-top: 0.45rem;
 }
 
-.silk-ribbon {
+.ribbon-tail {
   display: block;
-  width: 14px;
-  height: 22px;
-  background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-dark) 100%);
-  border-radius: 2px 2px 4px 4px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  width: 12px;
+  height: 18px;
+  background: linear-gradient(180deg, var(--gold-light) 0%, #9c7722 100%);
+  border-radius: 1px 1px 3px 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-/* â•ªâ”‚â•ªÂºâ–ˆÃ®â”˜Ã§ â”ŒâŒâ”˜Ã¼ â•ªâ–“â–ˆÃ®â•ªâ–’ â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ */
+/* آستر داخلی جلد (با گردش ۱۸۰ درجه دیده می‌شود) */
+.cover-inner {
+  background-color: var(--leather-base);
+  background-image: 
+    url("assets/paper.jpg"),
+    radial-gradient(circle at center, rgba(122, 31, 40, 0.85) 0%, rgba(77, 16, 23, 0.95) 100%);
+  background-size: cover, auto;
+  background-blend-mode: multiply;
+  border: 2px solid #8e6d19;
+  padding: 8px;
+}
+
+.inner-lining-border {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 2px;
+}
+
+/* سایه کف زیر کتاب */
+.book-cast-shadow {
+  position: absolute;
+  bottom: -15px;
+  width: 180px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.65) 0%, transparent 70%);
+  pointer-events: none;
+}
 
 /* --- DIVINATION TRIGGER & SPINNER --- */
 .divination-control {
@@ -901,16 +1025,16 @@ button { font-family: inherit; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #a78020 0%, #d4af37 40%, #fae8a8 70%, #b89128 100%);
-  color: #170d01;
+  background: linear-gradient(135deg, #0e8f94 0%, #16407c 60%, #0e2a55 100%);
+  color: #fff;
   font-family: var(--font-ui);
   font-size: 1.22rem;
   font-weight: 800;
   padding: 1rem 2.8rem;
   border-radius: 999px;
-  border: 2px solid #fff6d9;
+  border: 2px solid #b8862f;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.35);
+  box-shadow: 0 8px 24px rgba(22,64,124,.35), inset 0 1px 0 rgba(255,255,255,.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   min-height: 56px;
   user-select: none;
@@ -919,7 +1043,7 @@ button { font-family: inherit; }
 
 .btn-divinate:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 28px rgba(212, 175, 55, 0.55);
+  box-shadow: 0 12px 28px rgba(22,64,124,.45), 0 0 22px rgba(184, 134, 47, .45);
 }
 
 .btn-divinate:active {
@@ -945,7 +1069,6 @@ button { font-family: inherit; }
   color: #4b3405;
 }
 
-/* â”˜Ãªâ•ªâ•¢â•ªâ•£â–ˆÃ®â•ªÂ¬ â•ªÂºâ”˜Ã¥â–ˆÃ®â”˜Ã â–ˆÃ®â•ªâ”¤â”˜Ã¥ â•ªÂ»â•ªâ–’ â•ªÂ¡â•ªÂºâ”˜Ã¤ â•ªÂ¬â”˜Ã¼â•ªÃºâ”˜Ã¤ */
 .divination-ritual-status {
   display: none;
   flex-direction: column;
@@ -986,7 +1109,7 @@ button { font-family: inherit; }
 .ritual-msg {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--gold-light);
+  color: #0e2a55;
 }
 
 .ritual-hints {
@@ -996,7 +1119,7 @@ button { font-family: inherit; }
   flex-wrap: wrap;
   gap: 0.7rem;
   font-size: 0.8rem;
-  color: #8c9ebf;
+  color: #6b543a;
   margin-top: 0.3rem;
 }
 
@@ -1015,73 +1138,833 @@ button { font-family: inherit; }
 }
 
 /* --------------------------------------------------------------------------
-   
-.cover-medallion {
-  width: 90px;
-  height: 90px;
-  margin: 1rem 0;
-  position: relative;
-  z-index: 10;
-}
-.toranj-svg {
+   8. STAGE 2: REVELATION & ILLUMINATED MANUSCRIPT CARD
+   -------------------------------------------------------------------------- */
+.stage-result {
+  max-width: 1020px;
+  margin: 0 auto;
   width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0; left: 0;
 }
-.cover-top-ornament {
-  width: 120px;
-  height: 25px;
-  margin-top: 1rem;
+
+.result-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.8rem;
+  align-items: start;
+  width: 100%;
 }
-.ornament-svg { width: 100%; height: 100%; }
-.cover-content {
+
+/* ستون جانبی برای تعبیر و ابزارها (Sticky در دسکتاپ) */
+.result-side-panel {
+  position: sticky;
+  top: 1.5rem;
   display: flex;
   flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* کتیبه تذهیب و نسخه خطی */
+.manuscript-card {
+  position: relative;
+  background: 
+    radial-gradient(circle at 50% 20%, #fffdf5 0%, #f6edd7 70%, #eadaba 100%);
+  border-radius: 18px;
+  border: 3px double #b8862f;
+  box-shadow:
+    0 12px 35px rgba(62,42,16,.25),
+    0 0 25px rgba(184, 134, 47, 0.25);
+  padding: 1.8rem 2rem 2.4rem;
+  color: var(--ink-primary);
+  animation: cardFadeIn 0.6s var(--ease-mystic) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes cardFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.manuscript-card::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(184, 145, 40, 0.35);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+/* سرلوحه تذهیب (Tadhhib Header) */
+.tadhhib-header {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.tadhhib-arch {
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.12), transparent);
+  border-top: 1px solid rgba(212, 175, 55, 0.4);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 1.8rem 1rem 2.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.tadhhib-arch::before, .tadhhib-arch::after {
+  content: '♦';
+  position: absolute;
+  color: var(--gold-primary);
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.tadhhib-arch::before { top: -6px; }
+.tadhhib-arch::after { bottom: -6px; }
+
+.ghazal-title {
+  font-family: var(--font-poetry);
+  font-size: clamp(1.8rem, 4.5vw, 2.3rem);
+  font-weight: normal;
+  color: var(--ink-primary);
+  text-shadow: none;
+  line-height: 1;
+}
+
+
+
+.tadhhib-divider {
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  padding: 10px;
+  gap: 0.8rem;
+  margin: 1rem 0 1.5rem;
 }
-.cover-title {
-  color: var(--gold-light);
-  font-family: var(--font-poetry);
-  font-size: 2.5rem;
-  margin: 10px 0 0 0;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+
+.tadhhib-divider .line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
 }
-.cover-subtitle {
+
+.divider-icon {
   color: var(--gold-primary);
-  font-family: var(--font-ui);
-  font-size: 0.8rem;
-  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
 }
-.cover-bookmark-ribbon { display: none; }
-.first-page-title {
-  font-family: var(--font-poetry);
-  font-size: 2rem;
-  color: var(--ink-primary);
-}
-.first-page-subtitle {
-  font-family: var(--font-ui);
-  font-size: 0.8rem;
-  color: var(--ink-secondary);
-}
-.first-page-couplet {
-  font-family: var(--font-poetry);
-  font-size: 1.2rem;
-  color: var(--ink-primary);
+
+/* --------------------------------------------------------------------------
+   9. POEM BODY & CLASSICAL TWO-HEMISTICH NASTALIQ COUPLETS
+   -------------------------------------------------------------------------- */
+.poem-body {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.55rem;
+  margin: 1rem 0 1.8rem;
+  font-family: var(--font-poetry);
+  width: 100%;
+}
+
+.bayt {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 0.6rem;
+  border-radius: 6px;
+  border-bottom: 1px dashed rgba(184, 145, 40, 0.25);
+  transition: background-color var(--trans-fast);
+  opacity: 0;
+  transform: translateY(12px);
+  animation: baytSlideUp 0.5s var(--ease-mystic) forwards;
+  animation-delay: calc(var(--bayt-index, 0) * 0.06s);
+  will-change: transform, opacity;
+}
+
+.bayt:last-child {
+  border-bottom: none;
+}
+
+.bayt:hover {
+  background-color: rgba(212, 175, 55, 0.08);
+}
+
+@keyframes baytSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mesra {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  line-height: 2.2;
+  color: var(--ink-primary);
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+}
+
+.mesra-first {
+  text-align: right;
+  padding-left: 0.5rem;
+}
+
+.mesra-second {
+  text-align: left;
+  padding-right: 0.5rem;
+}
+
+.bayt-divider {
+  color: var(--gold-primary);
+  opacity: 0.7;
+  font-size: 0.65rem;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tadhhib-footer-ornament {
+  display: flex;
+  justify-content: center;
+  width: 100%;
   margin-top: 1rem;
 }
-.leather-front {
-  overflow: hidden;
-  position: absolute;
-  inset: 0;
+
+.flourish-svg {
+  width: 140px;
+  height: 22px;
 }
-.leather-front, .first-page-inner { zoom: 0.6; }
-@supports not (zoom: 0.6) {
-  .leather-front, .first-page-inner { transform: scale(0.6); transform-origin: top center; }
+
+/* --------------------------------------------------------------------------
+   10. INTERPRETATION CARD
+   -------------------------------------------------------------------------- */
+.interpretation-card {
+  background: linear-gradient(180deg, #fffdf4 0%, #f7ecd2 100%);
+  border: 1.5px solid #0e8f94;
+  border-radius: 14px;
+  padding: 1.6rem 1.8rem;
+  box-shadow: 0 10px 30px rgba(62,42,16,.22);
+  opacity: 1;
+  transform: none;
+  overflow: hidden;
+}
+
+.interp-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid #b8862f;
+}
+
+.interp-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #e9c46a, #b8862f);
+  border: 2px solid #fff;
+  box-shadow: 0 3px 8px rgba(62,42,16,.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6d0f1f;
+}
+
+.interp-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #6d0f1f;
+}
+
+.interp-subtitle {
+  font-size: 0.82rem;
+  color: #16407c;
+}
+
+.interp-text {
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  line-height: 2.05;
+  color: #4a3822;
+  text-align: justify;
+}
+
+/* --------------------------------------------------------------------------
+   11. ACTION BAR
+   -------------------------------------------------------------------------- */
+.action-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  opacity: 1;
+}
+
+.action-bar .btn-primary {
+  width: 100%;
+  padding: 0.9rem 1.4rem;
+  font-size: 1.05rem;
+  justify-content: center;
+}
+
+.action-btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.action-btn-row .action-btn {
+  padding: 0.7rem 0.4rem;
+  font-size: 0.85rem;
+  justify-content: center;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-ui);
+  font-size: 0.96rem;
+  font-weight: 600;
+  padding: 0.8rem 1.6rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+  border: 1px solid transparent;
+  min-height: 48px;
+  user-select: none;
+}
+
+.btn-icon-svg {
+  display: flex;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #92182a 0%, #6d0f1f 100%);
+  color: #fff;
+  font-weight: 700;
+  border-color: #b8862f;
+  box-shadow: 0 4px 14px rgba(146, 24, 42, .35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(146, 24, 42, .5);
+  filter: brightness(1.07);
+}
+
+.btn-secondary {
+  background: linear-gradient(180deg, #fffdf4, #f3e6c6);
+  color: #0e2a55;
+  border-color: #b8862f;
+}
+
+.btn-secondary:hover {
+  background: #d9f0ee;
+  border-color: #0e8f94;
+  color: #0a6d71;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: #fffdf4;
+  color: #16407c;
+  border-color: #b8862f;
+}
+
+.btn-outline:hover {
+  background: #16407c;
+  border-color: #16407c;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   12. FOOTER
+   -------------------------------------------------------------------------- */
+.app-footer {
+  position: relative;
+  z-index: 10;
+  padding: 0 0 2.2rem;
+  text-align: center;
+  border-top: none;
+  background: transparent;
+}
+
+.app-footer::before {
+  content: '';
+  display: block;
+  height: 14px;
+  margin-bottom: 1.4rem;
+  border-top: 2px solid #b8862f;
+  border-bottom: 2px solid #b8862f;
+  background: repeating-linear-gradient(90deg, #0e8f94 0 22px, #fffdf4 22px 26px, #16407c 26px 48px, #fffdf4 48px 52px, #b8862f 52px 74px, #fffdf4 74px 78px);
+}
+
+.footer-quote {
+  font-family: var(--font-poetry);
+  font-size: 1.3rem;
+  color: #0e2a55;
+  line-height: 1.9;
+}
+
+.footer-credits {
+  font-size: 0.82rem;
+  color: #6b543a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.footer-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-credits .sep {
+  color: #b8862f;
+}
+
+.footer-link {
+  color: #0a6d71;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   13. MODALS (SEARCH & ADAB)
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(5, 9, 17, 0.85);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-container {
+  background: linear-gradient(180deg, #fffdf4, #f8efdb);
+  border: 2px solid #b8862f;
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(62,42,16,.35);
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(15px);
+  transition: transform 0.25s var(--ease-mystic);
+}
+
+.modal-overlay.active .modal-container {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.modal-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #6d0f1f;
+}
+
+.modal-close {
+  background: rgba(146, 24, 42, .08);
+  border: 1px solid #b8862f;
+  color: #6d0f1f;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--trans-fast);
+}
+
+.modal-close:hover {
+  background: #92182a;
+  color: #fff;
+}
+
+.modal-body {
+  padding: 1.3rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.modal-hint {
+  font-size: 0.86rem;
+  color: #6b543a;
+  margin-bottom: 0.9rem;
+  line-height: 1.6;
+}
+
+.search-input-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.search-input {
+  flex: 1;
+  background: #fff;
+  border: 1.5px solid #b8862f;
+  border-radius: 6px;
+  color: #3a2a18;
+  padding: 0.75rem 0.9rem;
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  transition: border-color var(--trans-fast);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #0e8f94;
+  box-shadow: 0 0 0 3px rgba(14,143,148,.18);
+}
+
+.search-action-btn {
+  background: linear-gradient(135deg, #0e8f94, #16407c);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  padding: 0 1.2rem;
+  cursor: pointer;
+  transition: background var(--trans-fast);
+}
+
+.search-action-btn:hover {
+  background: linear-gradient(135deg, #0a6d71, #0e2a55);
+}
+
+.search-divider {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #6b543a;
+  margin: 0.7rem 0;
+}
+
+.search-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 0.8rem;
+  max-height: 230px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 0.9rem;
+  background: #fff;
+  border: 1px solid rgba(184, 134, 47, .4);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.search-result-item:hover {
+  background: #d9f0ee;
+  border-color: #0e8f94;
+  transform: translateX(-2px);
+}
+
+.item-ghazal-num {
+  font-weight: 700;
+  color: #fff;
+  background: #16407c;
+  border-radius: 999px;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.88rem;
+}
+
+.item-ghazal-first-line {
+  font-family: var(--font-poetry);
+  font-size: 1.05rem;
+  color: #3a2a18;
+}
+
+/* محتوای مودال آداب */
+.adab-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.adab-section h4 {
+  font-size: 1rem;
+  color: #6d0f1f;
+  margin-bottom: 0.35rem;
+}
+
+.adab-section p {
+  font-size: 0.9rem;
+  color: #4a3822;
+  line-height: 1.75;
+}
+
+.adab-section ul {
+  padding-right: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.88rem;
+  color: #54402a;
+  line-height: 1.65;
+}
+
+/* --------------------------------------------------------------------------
+   14. TOAST NOTIFICATION
+   -------------------------------------------------------------------------- */
+.toast-notification {
+  position: fixed;
+  bottom: 1.8rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(25px);
+  background: linear-gradient(135deg, #0e2a55, #0a6d71);
+  border: 1.5px solid #e9c46a;
+  color: #fff;
+  padding: 0.75rem 1.6rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s var(--ease-mystic);
+}
+
+.toast-notification.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-icon-wrap {
+  display: flex;
+  align-items: center;
+  color: var(--gold-primary);
+  width: 18px;
+  height: 18px;
+}
+
+/* لایه‌ی سازگاری سنتی — بدون تغییر چیدمان، فقط رنگ/بافت روشن ایرانی */
+.brand-text { display: flex; flex-direction: column; }
+.btn-label, .btn-text { line-height: inherit; }
+.interp-body { padding-top: 0.2rem; }
+.interp-title-wrap { display: flex; flex-direction: column; }
+.leather-front { position: absolute; inset: 0; }
+.lining-pattern { position: absolute; inset: 0; }
+.toast-msg { line-height: 1.6; }
+
+/* --------------------------------------------------------------------------
+   15. RESPONSIVE OPTIMIZATIONS (TABLET & MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 959px) {
+  .stage-result {
+    max-width: 640px;
+  }
+
+  .result-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+
+  .result-side-panel {
+    position: static;
+  }
+
+}
+
+@media (max-width: 679px) {
+  .app-header {
+    padding: 0.85rem 1rem;
+  }
+
+  .brand-title {
+    font-size: 1.35rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .stage-wrapper {
+    gap: 1.3rem;
+  }
+
+  .book-scene {
+    width: 240px;
+    height: 310px;
+    margin: 0.8rem auto 0.4rem;
+  }
+
+  /* در حالت گشوده، کتاب دو برابر پهن میشود؛ مقیاس کوچکتر تا سرریز افقی رخ ندهد */
+  .book-scene.is-opening .book-3d {
+    transform: translateX(-68px) rotateY(-10deg) rotateX(7deg) scale(0.68);
+  }
+
+  .btn-divinate {
+    width: 100%;
+    padding: 0.95rem 1.6rem;
+    font-size: 1.12rem;
+  }
+
+  .manuscript-card {
+    padding: 1.4rem 1.1rem 1.8rem;
+    border-radius: 14px;
+  }
+
+  /* چیدمان ابیات در موبایل */
+  .bayt {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    padding: 0.6rem 0.4rem;
+    border-bottom: 1px dashed rgba(184, 145, 40, 0.25);
+  }
+
+  .bayt:last-child {
+    border-bottom: none;
+  }
+
+  .bayt-divider {
+    display: none;
+  }
+
+  .mesra {
+    font-size: 1.25rem;
+    line-height: 2.2;
+    width: 100%;
+    text-align: right;
+    text-align-last: right;
+    white-space: normal;
+  }
+
+  .mesra-first {
+    padding-left: 0;
+  }
+
+  .mesra-second {
+    text-align: left;
+    text-align-last: left;
+    padding-right: 0;
+  }
+
+  .interpretation-card {
+    padding: 1.3rem 1.2rem;
+  }
+
+  .interp-text {
+    font-size: 0.98rem;
+    line-height: 1.95;
+  }
+
+  .action-btn-row {
+    grid-template-columns: 1fr;
+  }
+
+  .action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   16. PRINT STYLESHEET
+   -------------------------------------------------------------------------- */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .stars-backdrop,
+  .watermark-pattern,
+  .app-header,
+  .action-bar,
+  .app-footer,
+  .divination-control,
+  .whisper-banner,
+  .book-scene {
+    display: none !important;
+  }
+
+  .stage-result {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .manuscript-card {
+    border: 2px solid #000 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #000 !important;
+    padding: 1rem !important;
+  }
+
+  .interpretation-card {
+    background: #fff !important;
+    border: 1px solid #777 !important;
+    color: #000 !important;
+    box-shadow: none !important;
+  }
+
+  .interp-text, .mesra {
+    color: #000 !important;
+  }
 }

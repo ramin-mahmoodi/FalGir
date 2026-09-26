@@ -1,172 +1,815 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#f2efe9" />
-  <title>فالگیر - دیوان لسان‌الغیب</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="book.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فال‌گیر | تفأل به دیوان حافظ شیرازی</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="فال‌گیر | تفأل به دیوان حافظ شیرازی">
+  <meta name="description" content="سامانه تفأل به دیوان حافظ شیرازی با طراحی اصیل ایرانی، کتاب سه‌بعدی، خط نستعلیق و تعبیر غزل‌ها">
+  <meta name="theme-color" content="#070d18">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ramin-mahmoodi.github.io/FalGir/">
+  <meta property="og:title" content="فال‌گیر | فال حافظ شیرازی">
+  <meta property="og:description" content="نیت کنید و به دیوان خواجه شیراز تفأل بزنید همراه با نوای سنتی، خط نستعلیق و تعبیر غزل.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b1322'/%3E%3Cpath d='M25 22h50a4 4 0 0 1 4 4v50a4 4 0 0 1-4 4H25a4 4 0 0 1-4-4V26a4 4 0 0 1 4-4z' fill='%232a0c24' stroke='%23d4af37' stroke-width='4'/%3E%3Ccircle cx='50' cy='50' r='12' fill='none' stroke='%23d4af37' stroke-width='3'/%3E%3C/svg%3E">
+  
+  <!-- Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Ambient Audio -->
-  <audio id="ambientAudio" loop>
-    <source src="assets/audio/ambient-santur.mp3" type="audio/mpeg" />
-  </audio>
 
-  <div class="vintage-container">
-    <header class="masthead">
-      <div class="masthead-top">
-        <h1 class="newspaper-title">دیوان حافظ شیرازی</h1>
+  <!-- Ambient Backdrop -->
+  <div class="stars-backdrop" aria-hidden="true"></div>
+  <div class="watermark-pattern" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-emblem" aria-hidden="true">
+          <svg class="emblem-svg" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" stroke="url(#goldGrad)" stroke-width="1.5" />
+            <circle cx="20" cy="20" r="14" stroke="url(#goldGrad)" stroke-width="0.8" stroke-dasharray="2 3" />
+            <path d="M20 7 L23 16 L32 20 L23 24 L20 33 L17 24 L8 20 L17 16 Z" fill="url(#goldGrad)" />
+            <defs>
+              <linearGradient id="goldGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#fff2c6"/>
+                <stop offset="0.5" stop-color="#d4af37"/>
+                <stop offset="1" stop-color="#8c6a1b"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">فال‌گیر</h1>
+          <span class="brand-subtitle">دیوان لسان‌الغیب خواجه حافظ شیرازی</span>
+        </div>
       </div>
-      <nav class="news-nav">
-        <a href="#" class="nav-item active">صفحه اصلی</a>
-        <a href="#" class="nav-item" id="btnSearchModal">جستجوی غزل</a>
-        <a href="#" class="nav-item" id="btnAboutModal">آداب تفأل</a>
-        <a href="#" class="nav-item" id="btnSoundToggle">موسیقی</a>
+
+      <nav class="header-actions">
+        <!-- Sound Toggle -->
+        <button id="btnSoundToggle" class="icon-btn" title="صدا: فعال" aria-label="قطع یا وصل صدا">
+          <span class="icon-svg-wrap" id="soundIconWrap">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+          </span>
+          <span class="btn-tooltip">صدا</span>
+        </button>
+
+        <!-- Search / Ghazal Picker -->
+        <button id="btnSearchModal" class="icon-btn" title="فهرست و جستجوی غزل" aria-label="جستجوی غزل">
+          <span class="icon-svg-wrap">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <span class="btn-tooltip">جستجو</span>
+        </button>
+
+        <!-- Guide / Adab -->
+        <button id="btnAboutModal" class="icon-btn" title="آداب تفأل به حافظ" aria-label="آداب تفأل">
+          <span class="icon-svg-wrap">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+          </span>
+          <span class="btn-tooltip">آداب فال</span>
+        </button>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main class="main-content">
-      
-      <div id="niyyatStage" class="stage active">
-         <div class="intro-text">
-            <p>مجموعه غزلیات حافظ، گنجینه‌ای از حکمت و عرفان است. چشم‌ها را ببندید، نیت قلبی کنید، کتاب را بگشایید و برای دریافت پاسخ خود، دکمه تفأل را لمس کنید.</p>
-         </div>
+  <!-- Main Content Stage -->
+  <main class="main-content">
 
-         <div class="book-wrapper" id="bookScene">
-           <figure class="book" id="book3D">
-             <ul class="hardcover_front">
-               <li>
-                 <div class="leather-front">
-                    <div class="gold-frame">
-                      <div class="corner-brass c-top-left"></div>
-                      <div class="corner-brass c-top-right"></div>
-                      <div class="corner-brass c-bottom-left"></div>
-                      <div class="corner-brass c-bottom-right"></div>
-                      <div class="cover-content">
-                        <div class="cover-top-ornament">
-                          <svg viewBox="0 0 100 20" class="ornament-svg">
-                            <path d="M0,10 Q25,0 50,10 Q75,20 100,10" stroke="#d4af37" fill="none" stroke-width="1.5"/>
-                            <circle cx="50" cy="10" r="3" fill="#d4af37"/>
-                          </svg>
-                        </div>
-                        <div class="cover-medallion">
-                          <svg viewBox="0 0 90 90" class="toranj-svg">
-                            <polygon points="45,4 53,27 77,17 65,39 88,45 65,51 77,73 53,63 45,86 37,63 13,73 25,51 2,45 25,39 13,17 37,27" fill="transparent" stroke="#d4af37" stroke-width="0.8"/>
-                            <circle cx="45" cy="45" r="18" fill="#1e061b" stroke="#f6e29d" stroke-width="1.2"/>
-                            <circle cx="45" cy="45" r="6" fill="#f6e29d"/>
-                          </svg>
-                        </div>
-                        <h2 class="cover-title">دیوان حافظ</h2>
-                        <p class="cover-subtitle">لسان‌الغیب شیرازی</p>
+    <!-- STAGE 1: NIYYAT & REALISTIC 3D BOOK -->
+    <section id="niyyatStage" class="stage stage-niyyat active">
+      <div class="stage-wrapper">
+
+        <!-- Poetic Whisper Card -->
+        <div class="whisper-banner">
+          <span class="whisper-badge">آیین تفأل</span>
+          <h2 class="whisper-quote">
+            «ای حافظِ شیرازی، تو محرم هر رازی، بر ما نظر اندازی...»
+          </h2>
+          <p class="whisper-desc">
+            نیت قلبی کنید، ذهن را از تشویش برهانید و سپس دیوان را بگشایید تا کلام لسان‌الغیب پاسخگوی دل شما باشد.
+          </p>
+        </div>
+
+        <!-- 3D Book Stage -->
+        <div class="book-scene" id="bookScene">
+          <div class="mystic-aura" id="mysticAura" aria-hidden="true"></div>
+          <div class="book-light-beam" id="bookLightBeam" aria-hidden="true"></div>
+
+          <!-- The Real 3D Book Object -->
+          <div class="book-3d" id="book3D" role="button" tabindex="0" aria-label="دیوان سه‌بعدی حافظ شیرازی">
+            
+            <!-- مخزن تعریف‌های SVG: گرادیان‌ها، نقش‌ها و اسلیمی‌های مشترک جلد -->
+            <svg class="book-defs" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#fff2c9"/>
+                  <stop offset="20%" stop-color="#e9c46a"/>
+                  <stop offset="50%" stop-color="#b58c2b"/>
+                  <stop offset="74%" stop-color="#e9c46a"/>
+                  <stop offset="100%" stop-color="#87661e"/>
+                </linearGradient>
+                <linearGradient id="gGoldH" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#8a6820"/>
+                  <stop offset="18%" stop-color="#e9c46a"/>
+                  <stop offset="46%" stop-color="#fff2c9"/>
+                  <stop offset="72%" stop-color="#dfb457"/>
+                  <stop offset="100%" stop-color="#8a6820"/>
+                </linearGradient>
+                <radialGradient id="gGoldR" cx="40%" cy="32%" r="72%">
+                  <stop offset="0%" stop-color="#fffbe8"/>
+                  <stop offset="40%" stop-color="#eecd7c"/>
+                  <stop offset="100%" stop-color="#8a6820"/>
+                </radialGradient>
+                <radialGradient id="gField" cx="42%" cy="30%" r="80%">
+                  <stop offset="0%" stop-color="#b3243a"/>
+                  <stop offset="52%" stop-color="#8a1929"/>
+                  <stop offset="100%" stop-color="#45080f"/>
+                </radialGradient>
+                <radialGradient id="gFieldSoft" cx="50%" cy="34%" r="82%">
+                  <stop offset="0%" stop-color="#8e1e2d"/>
+                  <stop offset="58%" stop-color="#66101c"/>
+                  <stop offset="100%" stop-color="#3a060d"/>
+                </radialGradient>
+                <pattern id="pMosaic" width="7" height="7" patternUnits="userSpaceOnUse">
+                  <path d="M3.5 0 L7 3.5 L3.5 7 L0 3.5 Z" fill="#f6e3a4" fill-opacity="0.5"/>
+                </pattern>
+              </defs>
+            </svg>
+
+            <!-- ۱. جلد پشت (hardcover_back) — دو وجه: چرم بیرونی طلاکوب و آستر ابری‌بافت -->
+            <ul class="hardcover_back">
+              <li class="hc-back-outer">
+                <span class="leather-skin" aria-hidden="true"></span>
+                <svg class="board-tooling board-tooling--back" viewBox="0 0 200 280" preserveAspectRatio="none" aria-hidden="true">
+                  <rect x="9.5" y="9.5" width="181" height="261" rx="3" fill="none" stroke="url(#gGold)" stroke-width="2"/>
+                  <rect x="14.5" y="14.5" width="171" height="251" rx="2" fill="none" stroke="url(#gGoldH)" stroke-width="0.8" stroke-dasharray="2.5 3.2" opacity="0.6"/>
+                  <g>
+                    <path d="M100 92 C108 106 116 114 128 121 C116 128 108 136 100 150 C92 136 84 128 72 121 C84 114 92 106 100 92 Z"
+                          fill="url(#gFieldSoft)" fill-opacity="0.75" stroke="url(#gGold)" stroke-width="1.1"/>
+                    <path d="M100 100 C106 112 113 118 122 123 C113 128 106 134 100 145 C94 134 87 128 78 123 C87 118 94 112 100 100 Z"
+                          fill="none" stroke="url(#gGold)" stroke-width="0.6" opacity="0.75"/>
+                    <circle cx="100" cy="121" r="8" fill="none" stroke="url(#gGold)" stroke-width="0.8"/>
+                    <circle cx="100" cy="121" r="3.1" fill="url(#gGoldR)"/>
+                  </g>
+                  <g fill="none" stroke="url(#gGold)" stroke-width="0.9" opacity="0.7">
+                    <path d="M40 121 C48 117 54 118 58 121 C54 124 48 125 40 121 Z" fill="url(#gGoldR)" stroke="none"/>
+                    <path d="M160 121 C152 117 146 118 142 121 C146 124 152 125 160 121 Z" fill="url(#gGoldR)" stroke="none"/>
+                  </g>
+                </svg>
+              </li>
+              <li class="hc-back-inner">
+                <div class="endpaper">
+                  <div class="endpaper-frame">
+                    <div class="lining-pattern" aria-hidden="true"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <!-- ۲. لبه‌های بلوک کاغذ (ضخامت ورق‌ها) -->
+            <div class="book-face book-pages-left"></div>
+            <div class="book-face book-pages-top"></div>
+            <div class="book-face book-pages-bottom"></div>
+
+            <!-- ۳. ورق‌های دیوان: هر برگ دو رو دارد و حول عطفِ سمت راست کامل ورق می‌خورد -->
+            <ul class="page" id="bookPageStack">
+              <li class="leaf" style="--leaf-index: 0;">
+                <div class="leaf-face leaf-front leaf-manuscript">
+                  <div class="leaf-header">غزل ۳</div>
+                  <div class="leaf-tazhib-line"></div>
+                  <div class="leaf-body">
+                    <p class="leaf-verse">اگر آن ترک شیرازی به دست آرد دل ما را</p>
+                    <p class="leaf-verse">به خال هندویش بخشم سمرقند و بخارا را</p>
+                    <p class="leaf-verse">بده ساقی می باقی که در جنت نخواهی یافت</p>
+                    <p class="leaf-verse">کنار آب رکن آباد و گلگشت مصلا را</p>
+                  </div>
+                  <div class="leaf-footer">❦ دیوان حافظ ❦</div>
+                </div>
+
+                <!-- پشتِ برگ یکم (verso) — متن به‌صورت صحیح دیده می‌شود -->
+                <div class="leaf-face leaf-back leaf-manuscript" aria-hidden="true">
+                  <div class="leaf-header">غزل ۵</div>
+                  <div class="leaf-tazhib-line"></div>
+                  <div class="leaf-body">
+                    <p class="leaf-verse">دوش دیدم که ملائک در میخانه زدند</p>
+                    <p class="leaf-verse">گل آدم بسرشتند و به پیمانه زدند</p>
+                    <p class="leaf-verse">ساکنان حرم ستر و عفاف ملکوت</p>
+                    <p class="leaf-verse">با من راه‌نشین باده مستانه زدند</p>
+                  </div>
+                  <div class="leaf-footer">❦ دیوان حافظ ❦</div>
+                </div>
+              </li>
+
+              <li class="leaf" style="--leaf-index: 1;">
+                <div class="leaf-face leaf-front leaf-manuscript">
+                  <div class="leaf-header">غزل ۱۸</div>
+                  <div class="leaf-tazhib-line"></div>
+                  <div class="leaf-body">
+                    <p class="leaf-verse">ساقیا آمدن عید مبارک بادت</p>
+                    <p class="leaf-verse">وان مواعید که کردی مرواد از یادت</p>
+                    <p class="leaf-verse">در شگفتم که در این مدت ایام فراق</p>
+                    <p class="leaf-verse">برگرفتی ز حریفان دل و دل می‌دادت</p>
+                  </div>
+                  <div class="leaf-footer">❦ دیوان حافظ ❦</div>
+                </div>
+
+                <!-- پشتِ برگ دوم (verso) -->
+                <div class="leaf-face leaf-back leaf-manuscript" aria-hidden="true">
+                  <div class="leaf-header">غزل ۱۲</div>
+                  <div class="leaf-tazhib-line"></div>
+                  <div class="leaf-body">
+                    <p class="leaf-verse">ما در پیاله عکس رخ یار دیده‌ایم</p>
+                    <p class="leaf-verse">ای بی‌خبر ز لذت شرب مدام ما</p>
+                    <p class="leaf-verse">هرگز نمیرد آن که دلش زنده شد به عشق</p>
+                    <p class="leaf-verse">ثبت است بر جریده عالم دوام ما</p>
+                  </div>
+                  <div class="leaf-footer">❦ دیوان حافظ ❦</div>
+                </div>
+              </li>
+
+              <li class="leaf" style="--leaf-index: 2;">
+                <div class="leaf-face leaf-front leaf-manuscript">
+                  <div class="leaf-header">غزل ۴۶</div>
+                  <div class="leaf-tazhib-line"></div>
+                  <div class="leaf-body">
+                    <p class="leaf-verse">گل در بر و می در کف و معشوق به کام است</p>
+                    <p class="leaf-verse">سلطان جهانم به چنین روز غلام است</p>
+                    <p class="leaf-verse">گو شمع میارید در این جمع که امشب</p>
+                    <p class="leaf-verse">در مجلس ما ماه رخ دوست تمام است</p>
+                  </div>
+                  <div class="leaf-footer">❦ دیوان حافظ ❦</div>
+                </div>
+
+                <!-- پشتِ برگ سوم (verso) -->
+                <div class="leaf-face leaf-back leaf-manuscript" aria-hidden="true">
+                  <div class="leaf-header">غزل ۲۱</div>
+                  <div class="leaf-tazhib-line"></div>
+                  <div class="leaf-body">
+                    <p class="leaf-verse">بیا تا گل برافشانیم و می در ساغر اندازیم</p>
+                    <p class="leaf-verse">فلک را سقف بشکافیم و طرحی نو دراندازیم</p>
+                    <p class="leaf-verse">اگر غم لشکر انگیزد که خون عاشقان ریزد</p>
+                    <p class="leaf-verse">من و ساقی به هم تازیم و بنیادش براندازیم</p>
+                  </div>
+                  <div class="leaf-footer">❦ دیوان حافظ ❦</div>
+                </div>
+              </li>
+
+              <li class="leaf" style="--leaf-index: 3;">
+                <div class="leaf-face leaf-front leaf-manuscript">
+                  <div class="leaf-header">غزل ۹۴</div>
+                  <div class="leaf-tazhib-line"></div>
+                  <div class="leaf-body">
+                    <p class="leaf-verse">زان یار دلنوازم شکریست با شکایت</p>
+                    <p class="leaf-verse">گر نکته دان عشقی بشنو تو این حکایت</p>
+                    <p class="leaf-verse">بی مزد بود و منت هر خدمتی که کردم</p>
+                    <p class="leaf-verse">یا رب مباد کس را مخدوم بی‌عنایت</p>
+                  </div>
+                  <div class="leaf-footer">❦ دیوان حافظ ❦</div>
+                </div>
+
+                <!-- پشتِ برگ چهارم (verso) -->
+                <div class="leaf-face leaf-back leaf-manuscript" aria-hidden="true">
+                  <div class="leaf-header">غزل ۳۴</div>
+                  <div class="leaf-tazhib-line"></div>
+                  <div class="leaf-body">
+                    <p class="leaf-verse">رسید مژده که ایام غم نخواهد ماند</p>
+                    <p class="leaf-verse">چنان نماند چنین نیز هم نخواهد ماند</p>
+                    <p class="leaf-verse">بیا که قصر امل سخت سست بنیاد است</p>
+                    <p class="leaf-verse">بیار باده که بنیاد عمر بر باد است</p>
+                  </div>
+                  <div class="leaf-footer">❦ دیوان حافظ ❦</div>
+                </div>
+              </li>
+
+              <li class="leaf" style="--leaf-index: 4;">
+                <div class="leaf-face leaf-front leaf-manuscript">
+                  <div class="leaf-header">غزل ۱۴۳</div>
+                  <div class="leaf-tazhib-line"></div>
+                  <div class="leaf-body">
+                    <p class="leaf-verse">سال‌ها دل طلب جام جم از ما می‌کرد</p>
+                    <p class="leaf-verse">وان چه خود داشت ز بیگانه تمنا می‌کرد</p>
+                    <p class="leaf-verse">گوهری کز صدف کون و مکان بیرون است</p>
+                    <p class="leaf-verse">طلب از گمشدگان لب دریا می‌کرد</p>
+                  </div>
+                  <div class="leaf-footer">❦ دیوان حافظ ❦</div>
+                </div>
+
+                <!-- پشتِ برگ پنجم (verso) -->
+                <div class="leaf-face leaf-back leaf-manuscript" aria-hidden="true">
+                  <div class="leaf-header">غزل ۵۵</div>
+                  <div class="leaf-tazhib-line"></div>
+                  <div class="leaf-body">
+                    <p class="leaf-verse">مرا عهدیست با جانان که تا جان در بدن دارم</p>
+                    <p class="leaf-verse">هواداران کویش را چو جان خویشتن دارم</p>
+                    <p class="leaf-verse">دلا معاش چنان کن که گر بلغزد پای</p>
+                    <p class="leaf-verse">فرشته‌ات به دو دست دعا نگه دارد</p>
+                  </div>
+                  <div class="leaf-footer">❦ دیوان حافظ ❦</div>
+                </div>
+              </li>
+            </ul>
+
+            <!-- ۴. صفحه آشکارشده نهایی (پس از ورق خوردن همه برگ‌ها نمایان می‌شود) -->
+            <div class="book-face book-first-page" id="bookRevealedPage">
+              <div class="first-page-inner leaf-manuscript">
+                <div class="leaf-header" id="bookRevealedTitle">غزل ۱</div>
+                <div class="leaf-tazhib-line"></div>
+                <div class="leaf-body" id="bookRevealedBody">
+                  <p class="leaf-verse">الا یا ایها الساقی ادر کأسا و ناولها</p>
+                  <p class="leaf-verse">که عشق آسان نمود اول ولی افتاد مشکل‌ها</p>
+                  <p class="leaf-verse">به بوی نافه‌ای کاخر صبا زان طره بگشاید</p>
+                  <p class="leaf-verse">ز تاب جعد مشکینش چه خون افتاد در دل‌ها</p>
+                </div>
+                <div class="leaf-footer">❦ دیوان حافظ شیرازی ❦</div>
+              </div>
+            </div>
+
+            <!-- 4. عطف کتاب (Spine) — سمت راست، طبق سنت کتاب‌های فارسی -->
+            <div class="book-face book-spine">
+              <span class="spine-leather" aria-hidden="true"></span>
+              <span class="spine-cap spine-cap--top" aria-hidden="true"></span>
+              <span class="spine-cap spine-cap--bottom" aria-hidden="true"></span>
+              <span class="spine-band" style="--band-y: 34px" aria-hidden="true"></span>
+              <span class="spine-band" style="--band-y: 84px" aria-hidden="true"></span>
+              <span class="spine-band" style="--band-y: 196px" aria-hidden="true"></span>
+              <span class="spine-band" style="--band-y: 246px" aria-hidden="true"></span>
+              <div class="spine-panel">
+                <span class="spine-panel-rule" aria-hidden="true"></span>
+                <span class="spine-text">دیوان حافظ</span>
+                <span class="spine-panel-rule" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <!-- ۵. جلد رویی (hardcover_front) — حول عطفِ سمت راست کامل باز می‌شود -->
+            <ul class="hardcover_front" id="bookFrontCover">
+              <!-- وجه بیرونی: چرم عنابی طلاکوب با ترنج و کتیبه -->
+              <li class="hc-front-outer">
+                <div class="cover-side cover-outer">
+                  <span class="leather-skin" aria-hidden="true"></span>
+
+                  <svg class="board-tooling board-tooling--front" viewBox="0 0 200 280" preserveAspectRatio="none" aria-hidden="true">
+                    <defs>
+                      <g id="goosheh">
+                        <path d="M20 20 H56 A7.5 7.5 0 0 1 48.5 27.5 A7.5 7.5 0 0 0 41 35 A7.5 7.5 0 0 1 33.5 42.5 A7.5 7.5 0 0 0 27.5 48.5 A7.5 7.5 0 0 1 20 56 Z"
+                              fill="url(#gFieldSoft)" fill-opacity="0.55" stroke="url(#gGoldH)" stroke-width="1.2"/>
+                        <path d="M24 24 C30 21 35 24 34 29 C33.3 32.6 29 32 29 29.4" fill="none" stroke="url(#gGold)" stroke-width="1" stroke-linecap="round"/>
+                        <path d="M31 27.5 C34 22.5 39 21.5 43 23.5 C39 28.5 34 29.5 31 27.5 Z" fill="url(#gGoldR)" stroke="#7a5c14" stroke-width="0.4"/>
+                        <circle cx="26.5" cy="26.5" r="1.5" fill="#f6e3a4"/>
+                      </g>
+                      <g id="sideSprig">
+                        <path d="M0 0 C9 -3 15 -6 22 -5 C27 -4.4 29.5 -1.6 27.6 1.8 C25.8 5 21.6 4.6 20 2" fill="none" stroke="url(#gGold)" stroke-width="1" stroke-linecap="round"/>
+                        <path d="M22 -5 C24 -8.6 28.4 -9.6 30 -6.8 C28 -3 24.4 -2.2 22 -5 Z" fill="url(#gGoldR)" stroke="#7a5c14" stroke-width="0.4"/>
+                        <circle cx="3.4" cy="0.5" r="1.3" fill="#f6e3a4"/>
+                      </g>
+                      <g id="bandStar">
+                        <path d="M0 -9.5 L2.4 -3.1 L8.6 -3.1 L3.6 0.7 L5.6 6.9 L0 3.2 L-5.6 6.9 L-3.6 0.7 L-8.6 -3.1 L-2.4 -3.1 Z" fill="url(#gGoldR)" stroke="#7a5c14" stroke-width="0.4"/>
+                        <circle r="8.2" fill="none" stroke="url(#gGold)" stroke-width="0.7" opacity="0.8"/>
+                      </g>
+                    </defs>
+
+                    <!-- قاب طلاکوب سه‌لایه -->
+                    <rect x="7.5" y="7.5" width="185" height="265" rx="3" fill="none" stroke="url(#gGold)" stroke-width="2.6"/>
+                    <rect x="12.2" y="12.2" width="175.6" height="255.6" rx="2" fill="none" stroke="url(#gGoldH)" stroke-width="0.85" opacity="0.85"/>
+                    <rect x="16.4" y="16.4" width="167.2" height="247.2" rx="1.5" fill="none" stroke="url(#gGoldH)" stroke-width="0.7" stroke-dasharray="2.6 3.4" opacity="0.55"/>
+
+                    <!-- چهار گوشهٔ اسلیمی -->
+                    <use href="#goosheh"/>
+                    <use href="#goosheh" transform="translate(200 0) scale(-1 1)"/>
+                    <use href="#goosheh" transform="translate(0 280) scale(1 -1)"/>
+                    <use href="#goosheh" transform="translate(200 280) scale(-1 -1)"/>
+
+                    <!-- نوار تذهیب بالا -->
+                    <g class="tooling-band">
+                      <path d="M22 41 H178" stroke="url(#gGoldH)" stroke-width="0.9"/>
+                      <path d="M22 45.6 H178" stroke="url(#gGoldH)" stroke-width="0.5" opacity="0.6"/>
+                      <g transform="translate(100 43.3)"><use href="#bandStar"/></g>
+                      <path d="M44 43.3 L48 39.8 L52 43.3 L48 46.8 Z" fill="url(#gGold)"/>
+                      <path d="M148 43.3 L152 39.8 L156 43.3 L152 46.8 Z" fill="url(#gGold)"/>
+                    </g>
+
+                    <!-- اسلیمی‌های کناری -->
+                    <use href="#sideSprig" transform="translate(20 84)"/>
+                    <use href="#sideSprig" transform="translate(180 84) scale(-1 1)"/>
+                    <use href="#sideSprig" transform="translate(20 190)"/>
+                    <use href="#sideSprig" transform="translate(180 190) scale(-1 1)"/>
+
+                    <!-- کتیبهٔ نام در پایین -->
+                    <g class="tooling-cartouche">
+                      <path d="M46 224 H154 L164 233 L154 242 H46 L36 233 Z" fill="url(#gFieldSoft)" fill-opacity="0.72" stroke="url(#gGoldH)" stroke-width="1.3"/>
+                      <path d="M50.6 228 H150.4 L157.4 233 L150.4 238 H50.6 L43.6 233 Z" fill="none" stroke="url(#gGold)" stroke-width="0.6"/>
+                      <path d="M14 233 C22 229.5 28 230.5 32 233 C28 235.5 22 236.5 14 233 Z" fill="url(#gGoldR)"/>
+                      <path d="M186 233 C178 229.5 172 230.5 168 233 C172 235.5 178 236.5 186 233 Z" fill="url(#gGoldR)"/>
+                      <circle cx="25" cy="233" r="1.4" fill="#f6e3a4"/>
+                      <circle cx="175" cy="233" r="1.4" fill="#f6e3a4"/>
+                    </g>
+                  </svg>
+                  <!-- ترنجِ بادامی، شمسه، سَرترنج و اسلیمی‌ها -->
+                  <div class="board-medallion" aria-hidden="true">
+                    <svg class="toranj-svg" viewBox="0 0 122 158" preserveAspectRatio="xMidYMid meet">
+                      <defs>
+                        <path id="toranjPetal" d="M0 -12.6 C4.4 -8.2 4.4 -3.6 0 0 C-4.4 -3.6 -4.4 -8.2 0 -12.6 Z"/>
+                        <g id="toranjSprig">
+                          <path d="M0 0 C10 -3 17 -7 25 -6 C30 -5.4 33 -2.4 31 1.6 C29 5.4 24.4 5 22.6 2" fill="none" stroke="url(#gGold)" stroke-width="1.05" stroke-linecap="round"/>
+                          <path d="M25 -6 C27 -10 32 -11 34 -8 C32 -4 28 -3 25 -6 Z" fill="url(#gGoldR)" stroke="#7a5c14" stroke-width="0.4"/>
+                          <path d="M9 -2 C12 -7 17 -9 21 -6.5" fill="none" stroke="url(#gGold)" stroke-width="0.75" opacity="0.85"/>
+                          <circle cx="4" cy="0.6" r="1.5" fill="#f6e3a4"/>
+                          <circle cx="30.5" cy="3" r="1.05" fill="#f6e3a4" opacity="0.9"/>
+                        </g>
+                        <path id="toranjBody" d="M61 22 A64.4 64.4 0 0 1 61 146 A64.4 64.4 0 0 1 61 22 Z"/>
+                      </defs>
+
+                      <!-- سَرترنجِ بالا و پایین -->
+                      <path d="M61 2 C65.5 10 71 13.5 77 16.5 C71.5 22.5 66 25.5 61 27.5 C56 25.5 50.5 22.5 45 16.5 C51 13.5 56.5 10 61 2 Z"
+                            fill="url(#gField)" stroke="url(#gGold)" stroke-width="1.5"/>
+                      <path d="M61 8 C63.5 12.5 66.5 15 70 17 C66.5 20 63.5 22 61 23 C58.5 22 55.5 20 52 17 C55.5 15 58.5 12.5 61 8 Z"
+                            fill="none" stroke="url(#gGold)" stroke-width="0.6" opacity="0.8"/>
+                      <path d="M61 156 C65.5 148 71 144.5 77 141.5 C71.5 135.5 66 132.5 61 130.5 C56 132.5 50.5 135.5 45 141.5 C51 144.5 56.5 148 61 156 Z"
+                            fill="url(#gField)" stroke="url(#gGold)" stroke-width="1.5"/>
+                      <path d="M61 150 C63.5 145.5 66.5 143 70 141 C66.5 138 63.5 136 61 135 C58.5 136 55.5 138 52 141 C55.5 143 58.5 145.5 61 150 Z"
+                            fill="none" stroke="url(#gGold)" stroke-width="0.6" opacity="0.8"/>
+
+                      <!-- بال‌های کناری -->
+                      <path d="M104 72 C113 68 119 76 122 84 C119 92 113 100 104 96 C108 88 108 80 104 72 Z" fill="url(#gField)" stroke="url(#gGold)" stroke-width="1.3"/>
+                      <path d="M18 72 C9 68 3 76 0 84 C3 92 9 100 18 96 C14 88 14 80 18 72 Z" fill="url(#gField)" stroke="url(#gGold)" stroke-width="1.3"/>
+
+                      <!-- بدنهٔ بادامی -->
+                      <use href="#toranjBody" fill="url(#gField)" stroke="url(#gGold)" stroke-width="2.4"/>
+                      <use href="#toranjBody" transform="translate(61 84) scale(0.93) translate(-61 -84)" fill="url(#pMosaic)" fill-opacity="0.13"/>
+                      <use href="#toranjBody" transform="translate(61 84) scale(0.93) translate(-61 -84)" fill="none" stroke="url(#gGold)" stroke-width="1.1"/>
+                      <use href="#toranjBody" transform="translate(61 84) scale(0.845) translate(-61 -84)" fill="none" stroke="url(#gGold)" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.65"/>
+
+                      <!-- شمسهٔ دوازده‌پر -->
+                      <g class="shamseh" transform="translate(61 52)">
+                        <g fill="url(#gGoldR)" stroke="#7a5c14" stroke-width="0.4">
+                          <use href="#toranjPetal"/>
+                          <use href="#toranjPetal" transform="rotate(30)"/>
+                          <use href="#toranjPetal" transform="rotate(60)"/>
+                          <use href="#toranjPetal" transform="rotate(90)"/>
+                          <use href="#toranjPetal" transform="rotate(120)"/>
+                          <use href="#toranjPetal" transform="rotate(150)"/>
+                          <use href="#toranjPetal" transform="rotate(180)"/>
+                          <use href="#toranjPetal" transform="rotate(210)"/>
+                          <use href="#toranjPetal" transform="rotate(240)"/>
+                          <use href="#toranjPetal" transform="rotate(270)"/>
+                          <use href="#toranjPetal" transform="rotate(300)"/>
+                          <use href="#toranjPetal" transform="rotate(330)"/>
+                        </g>
+                        <circle r="4.6" fill="url(#gGold)"/>
+                        <circle r="2.1" fill="#5d0d1b"/>
+                        <circle r="0.9" fill="#fff6d9"/>
+                      </g>
+
+                      <!-- اسلیمی‌های دو طرف عنوان -->
+                      <use href="#toranjSprig" transform="translate(15 70)"/>
+                      <use href="#toranjSprig" transform="translate(107 70) scale(-1 1)"/>
+
+                      <!-- خط زرین و برگ‌های زیر عنوان -->
+                      <g transform="translate(61 119)">
+                        <path d="M-25 0 H25" stroke="url(#gGold)" stroke-width="1"/>
+                        <path d="M0 -3.4 L3.4 0 L0 3.4 L-3.4 0 Z" fill="url(#gGold)"/>
+                        <path d="M-28 0 C-31 -2.2 -34.5 -2.2 -37 0 C-34.5 2.2 -31 2.2 -28 0 Z" fill="url(#gGoldR)"/>
+                        <path d="M28 0 C31 -2.2 34.5 -2.2 37 0 C34.5 2.2 31 2.2 28 0 Z" fill="url(#gGoldR)"/>
+                      </g>
+                      <path d="M61 126 C64.5 130.5 66 134.5 61 139 C56 134.5 57.5 130.5 61 126 Z" fill="none" stroke="url(#gGold)" stroke-width="0.9" opacity="0.75"/>
+                    </svg>
+                  </div>
+                  <!-- عنوان و نام (متن واقعی، بالای نقش‌ها) -->
+                  <div class="board-content">
+                    <div class="cover-title-wrap">
+                      <h2 class="cover-title">دیوان حافظ</h2>
+                      <p class="cover-subtitle">لسان‌الغیب شیرازی</p>
+                    </div>
+                    <p class="cover-imprint">خواجه شمس‌الدین محمد حافظ شیرازی</p>
+                  </div>
+
+                  <!-- نشانک ابریشمی -->
+                  <span class="bookmark-ribbon" aria-hidden="true"></span>
+                </div>
+              </li>
+
+              <!-- آستر داخلی جلد (پس از باز شدن کامل جلد دیده می‌شود) -->
+              <li class="hc-front-inner">
+                <div class="cover-side cover-inner">
+                  <div class="endpaper">
+                    <div class="endpaper-frame">
+                      <div class="lining-pattern" aria-hidden="true"></div>
+                      <div class="exlibris" aria-hidden="true">
+                        <span class="exlibris-star">✦</span>
+                        <span class="exlibris-title">دیوان حافظ</span>
+                        <span class="exlibris-rule"></span>
+                        <span class="exlibris-sub">لسان‌الغیب شیرازی</span>
                       </div>
                     </div>
-                 </div>
-               </li>
-               <li></li>
-             </ul>
-
-             <ul class="page">
-               <li>
-                 <div class="first-page-inner" style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; padding: 20px;">
-                    <div class="first-page-shamseh" style="width: 60px; height: 60px; margin-bottom: 15px;">
-                      <svg viewBox="0 0 60 60" class="shamseh-svg-small" style="width:100%;height:100%;">
-                        <polygon points="30,4 36,20 53,13 44,28 60,30 44,32 53,47 36,40 30,56 24,40 7,47 16,32 0,30 16,28 7,13 24,20" fill="#d4af37"/>
-                        <circle cx="30" cy="30" r="10" fill="#20061e" stroke="#f6e29d" stroke-width="1"/>
-                        <circle cx="30" cy="30" r="4" fill="#f6e29d"/>
-                      </svg>
-                    </div>
-                    <h3 class="first-page-title">دیوان حافظ شیرازی</h3>
-                    <p class="first-page-subtitle">لسان‌الغیب و ترجمان‌الاسرار</p>
-                    <div class="first-page-couplet">
-                      <span>الا یا ایها الساقی ادر کأسا و ناولها</span>
-                      <span>که عشق آسان نمود اول ولی افتاد مشکل‌ها</span>
-                    </div>
-                 </div>
-               </li>
-               <li>
-                 <button id="btnDivinate" class="btn-inside-book">تفأل بزن</button>
-                 <div id="ritualStatus" class="divination-ritual-status">
-                   <span id="ritualMsg"></span>
-                 </div>
-               </li>
-               <li></li>
-               <li></li>
-               <li></li>
-             </ul>
-
-             <ul class="hardcover_back">
-               <li></li>
-               <li></li>
-             </ul>
-             <ul class="book_spine">
-               <li>
-                 <div class="spine-ribs">
-                    <span class="rib"></span>
-                    <span class="rib"></span>
-                    <span class="rib"></span>
-                    <span class="rib"></span>
-                    <span class="rib"></span>
                   </div>
-               </li>
-               <li></li>
-             </ul>
-           </figure>
-         </div>
+                </div>
+              </li>
+            </ul>
+
+          </div>
+
+          <!-- Realistic Cast Shadow -->
+          <div class="book-cast-shadow" aria-hidden="true"></div>
+        </div>
+
+        <!-- Action / Divination Trigger -->
+        <div class="divination-control">
+          <button id="btnDivinate" class="btn-divinate" type="button">
+            <span class="btn-content">
+              <span class="btn-icon-svg" aria-hidden="true">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+                </svg>
+              </span>
+              <span class="btn-label">نیت کردم؛ تفأل بزن</span>
+              <span class="btn-icon-svg" aria-hidden="true">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+                </svg>
+              </span>
+            </span>
+          </button>
+
+          <!-- Ritual Progress State -->
+          <div class="divination-ritual-status" id="ritualStatus" aria-live="polite">
+            <div class="mystic-loader-spinner" aria-hidden="true">
+              <svg class="spinner-svg" viewBox="0 0 50 50">
+                <circle class="spinner-track" cx="25" cy="25" r="20" fill="none" stroke-width="3"></circle>
+                <circle class="spinner-head" cx="25" cy="25" r="20" fill="none" stroke-width="3" stroke-linecap="round"></circle>
+              </svg>
+            </div>
+            <p class="ritual-msg" id="ritualMsg">در حال نیت و گشودن دیوان لسان‌الغیب...</p>
+          </div>
+        </div>
+
+        <!-- Highlights Footer -->
+        <div class="ritual-hints">
+          <span class="hint-item">
+            <svg class="mini-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+            ۴۹۵ غزل کامل دیوان حافظ
+          </span>
+          <span class="hint-divider">•</span>
+          <span class="hint-item">
+            <svg class="mini-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+            تعبیر و تفسیر جامع
+          </span>
+          <span class="hint-divider">•</span>
+          <span class="hint-item">
+            <svg class="mini-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+            خطاطی اصیل نستعلیق
+          </span>
+        </div>
+
       </div>
+    </section>
 
-      <div id="resultStage" class="stage">
-         <div class="result-card" id="manuscriptCard">
-           <h2 class="ghazal-headline" id="ghazalTitle">غزل شماره ...</h2>
-           <div id="poemContainer" class="poem-body"></div>
-           <div class="interpretation-box" id="interpretationCard">
-              <h3 class="interp-title">تعبیر و پیام</h3>
-              <p id="interpText" class="interp-text">تعبیر در اینجا قرار می‌گیرد.</p>
-           </div>
-           <div class="action-btn-row">
-             <button id="btnTryAgain" class="newspaper-btn">تفأل دوباره</button>
-             <button id="btnCopyFal" class="newspaper-btn">کپی</button>
-             <button id="btnShareFal" class="newspaper-btn">اشتراک</button>
-           </div>
-         </div>
+    <!-- STAGE 2: REVELATION & RESULT STAGE -->
+    <section id="resultStage" class="stage stage-result">
+      <div class="result-wrapper">
+
+        <!-- Manuscript Card (نسخه خطی و کتیبه تذهیب) -->
+        <article class="manuscript-card" id="manuscriptCard">
+          
+          <!-- Tadhhib Header -->
+          <div class="tadhhib-header">
+            <div class="tadhhib-arch">
+              <h2 class="ghazal-title" id="ghazalTitle">غزل شمارهٔ ...</h2>
+            </div>
+          </div>
+
+
+          <!-- Divider -->
+          <div class="tadhhib-divider">
+            <span class="line"></span>
+            <span class="divider-icon">
+              <svg class="mini-svg" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3.5"/></svg>
+            </span>
+            <span class="line"></span>
+          </div>
+
+          <!-- Poem Couplets (ابیات غزل به خط نستعلیق) -->
+          <div class="poem-body" id="poemContainer" aria-label="متن غزل حافظ">
+            <!-- Dynamic couplets injected here by script.js -->
+          </div>
+
+          <!-- Bottom Flourish -->
+          <div class="tadhhib-footer-ornament">
+            <svg viewBox="0 0 200 24" class="flourish-svg">
+              <path d="M10,12 Q60,24 100,12 Q140,24 190,12" stroke="#d4af37" stroke-width="1.2" fill="none"/>
+              <circle cx="100" cy="12" r="3.5" fill="#d4af37"/>
+            </svg>
+          </div>
+
+        </article>
+
+        <!-- Side Panel (تعبیر فال در دید مستقیم و ابزارها) -->
+        <div class="result-side-panel" id="resultSidePanel">
+
+          <!-- Interpretation Card (تعبیر فال) -->
+          <aside class="interpretation-card" id="interpretationCard" aria-label="تعبیر فال">
+            <div class="interp-header">
+              <div class="interp-icon-wrap" aria-hidden="true">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                  <line x1="16" y1="8" x2="2" y2="22"></line>
+                  <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                </svg>
+              </div>
+              <div class="interp-title-wrap">
+                <h3 class="interp-title">تعبیر و پیام لسان‌الغیب</h3>
+                <p class="interp-subtitle">پاسخ خواجه شیراز به نیت شما</p>
+              </div>
+            </div>
+
+            <div class="interp-body">
+              <p class="interp-text" id="interpText">
+                در حال بارگذاری تعبیر...
+              </p>
+            </div>
+          </aside>
+
+          <!-- Actions Toolbar -->
+          <nav class="action-bar" aria-label="ابزارهای فال">
+            <!-- Try Again -->
+            <button id="btnTryAgain" class="action-btn btn-primary" type="button">
+              <span class="btn-icon-svg" aria-hidden="true">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                </svg>
+              </span>
+              <span class="btn-text">تفأل دوباره (نیت جدید)</span>
+            </button>
+
+            <div class="action-btn-row">
+              <!-- Copy -->
+              <button id="btnCopyFal" class="action-btn btn-secondary" type="button" title="کپی متن کامل فال">
+                <span class="btn-icon-svg" aria-hidden="true">
+                  <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </span>
+                <span class="btn-text">کپی فال</span>
+              </button>
+
+              <!-- Share -->
+              <button id="btnShareFal" class="action-btn btn-secondary" type="button" title="اشتراک‌گذاری فال">
+                <span class="btn-icon-svg" aria-hidden="true">
+                  <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                  </svg>
+                </span>
+                <span class="btn-text">اشتراک</span>
+              </button>
+
+              <!-- Print -->
+              <button id="btnPrintFal" class="action-btn btn-outline" type="button" title="چاپ یا ذخیره PDF">
+                <span class="btn-icon-svg" aria-hidden="true">
+                  <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                  </svg>
+                </span>
+                <span class="btn-text">چاپ</span>
+              </button>
+            </div>
+          </nav>
+
+        </div>
+
       </div>
+    </section>
 
-    </main>
-  </div>
+  </main>
 
-  <div class="modal-overlay" id="searchModal">
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p class="footer-quote">
+        «بر سرِ تربتِ ما چون گذری، همّت خواه / که زیارتگَهِ رندانِ جهان خواهد بود»
+      </p>
+      <div class="footer-credits">
+        <span>پروژه <strong>FalGir</strong></span>
+        <span class="sep">•</span>
+        <span>دیوان لسان‌الغیب حافظ شیرازی</span>
+        <span class="sep">•</span>
+        <a href="https://github.com/ramin-mahmoodi/FalGir" target="_blank" rel="noopener noreferrer" class="footer-link">
+          سورس گیت‌هاب
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Search Modal -->
+  <div class="modal-overlay" id="searchModal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal-container">
       <div class="modal-header">
-        <h3 class="modal-title">جستجوی غزل</h3>
-        <button class="icon-btn" id="btnCloseSearchModal">×</button>
+        <h3 class="modal-title">جستجو و انتخاب مستقیم غزل</h3>
+        <button class="modal-close" id="btnCloseSearchModal" aria-label="بستن">
+          <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
       <div class="modal-body">
+        <p class="modal-hint">
+          شماره غزل دلخواه خود را از ۱ تا ۴۹۵ وارد کنید یا واژه‌ای از شعر را بنویسید:
+        </p>
+        
         <div class="search-input-group">
-          <input type="number" id="ghazalNumberInput" class="newspaper-input" placeholder="شماره غزل (۱ تا ۴۹۵)" />
-          <button id="btnJumpToNumber" class="newspaper-btn">برو</button>
+          <input type="number" id="ghazalNumberInput" min="1" max="495" placeholder="شماره غزل (مثلاً: ۲۵)..." class="search-input">
+          <button id="btnJumpToNumber" class="search-action-btn">مشاهده</button>
         </div>
-        <div class="search-divider">یا</div>
-        <input type="text" id="ghazalSearchInput" class="newspaper-input" placeholder="بخشی از شعر را بنویسید..." />
-        <div class="search-results-list" id="searchResultsList"></div>
+
+        <div class="search-divider">یا جستجو در متن غزل‌ها:</div>
+
+        <input type="text" id="ghazalSearchInput" placeholder="واژه‌ای از شعر را بنویسید (مثلاً: ساقی)..." class="search-input">
+
+        <div class="search-results-list" id="searchResultsList">
+          <!-- Filtered items appear dynamically -->
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="modal-overlay" id="aboutModal">
+  <!-- Adab Modal -->
+  <div class="modal-overlay" id="aboutModal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal-container">
       <div class="modal-header">
-        <h3 class="modal-title">آداب تفأل</h3>
-        <button class="icon-btn" id="btnCloseAboutModal">×</button>
+        <h3 class="modal-title">آداب و رسم تفأل به لسان‌الغیب</h3>
+        <button class="modal-close" id="btnCloseAboutModal" aria-label="بستن">
+          <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
-      <div class="modal-body"><p>وضو بگیرید، نیت کنید و فاتحه‌ای بخوانید.</p></div>
+      <div class="modal-body adab-modal-content">
+        <div class="adab-section">
+          <h4>راز تفأل به شعر حافظ:</h4>
+          <p>
+            خواجه شمس‌الدین محمد حافظ شیرازی، ملقب به <em>لسان‌الغیب</em>، آیینه‌دار رازهای درون و ضمیر ناخودآگاه آدمی است. شعر حافظ به سبب چندمعنایی و حکمت ژرف، در هر بزنگاهِ تردید، پرتو امیدی بر روان خواننده می‌تاباند.
+          </p>
+        </div>
+        
+        <div class="adab-section">
+          <h4>آیین کهن تفأل:</h4>
+          <ul>
+            <li><strong>تمرکز ذهن و خلوص نیت:</strong> پیش از گشودن کتاب، ذهن را از قضاوت‌ها و دغدغه‌های روزمره تهی ساخته و بر خواسته قلبی خود تمرکز نمایید.</li>
+            <li><strong>پیمان و سوگند به شاخ نبات:</strong> در باور کهن، نجوا می‌کنند: «ای حافظ شیرازی، تو محرم هر رازی، بر ما نظر اندازی، تو را به شاخ نباتت قسم که پرده از راز برداری...».</li>
+            <li><strong>گشودن کتاب و درنگ بر ابیات:</strong> با دلی امیدوار دیوان را بگشایید و به پیام پنهان در هر بیت بیندیشید.</li>
+          </ul>
+        </div>
+
+        <div class="adab-section">
+          <h4>درباره سامانه FalGir:</h4>
+          <p>
+            این سامانه شامل تمامی ۴۹۵ غزل رسمی دیوان حافظ همراه با تعبیر جامع و خوشنویسی نستعلیق است که به شکل کاملاً مستقل، سبک و بهینه‌سازی‌شده برای دسکتاپ و موبایل پیاده‌سازی شده است.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="toastNotification" class="toast-notification">
-    <div class="toast-content"><div id="toastIconWrap"></div><span id="toastMsg"></span></div>
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toastNotification" role="alert" aria-live="assertive">
+    <span class="toast-icon-wrap" id="toastIconWrap">
+      <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </span>
+    <span class="toast-msg" id="toastMsg">پیام</span>
   </div>
 
+  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
