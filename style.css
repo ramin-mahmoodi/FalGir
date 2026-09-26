@@ -1258,23 +1258,40 @@ body {
   max-width: 1020px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
 
+/* Mobile-First: چیدمان تک‌ستونه تمام‌عرض برای موبایل و تبلت */
 .result-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 1.8rem;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
   width: 100%;
+  box-sizing: border-box;
 }
 
-/* ستون جانبی برای تعبیر و ابزارها (Sticky در دسکتاپ) */
 .result-side-panel {
-  position: sticky;
-  top: 1.5rem;
+  position: static;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* در دسکتاپ‌های عریض، ستون تعبیر در کنار شعر قرار می‌گیرد */
+@media (min-width: 960px) {
+  .result-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 1.8rem;
+    align-items: start;
+  }
+
+  .result-side-panel {
+    position: sticky;
+    top: 1.5rem;
+  }
 }
 
 /* کتیبه تذهیب و نسخه خطی */
