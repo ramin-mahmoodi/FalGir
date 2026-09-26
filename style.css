@@ -741,7 +741,15 @@ body {
   transform-style: preserve-3d;
   /* در حالت بسته، هر برگ روی برگِ بعدی می‌نشیند */
   transform: translateZ(calc(19.6px - var(--leaf-index, 0) * 0.8px)) rotateY(0deg);
-  transition: transform 0.8s cubic-bezier(0.34, 0.02, 0.2, 1);
+  transition: property: transform;
+  transition-timing-function: cubic-bezier(0.28, 0.08, 0.25, 1);
+}
+
+.page > li.leaf:nth-child(1) { transition-duration: 0.95s; }
+.page > li.leaf:nth-child(2) { transition-duration: 1.15s; }
+.page > li.leaf:nth-child(3) { transition-duration: 1.35s; }
+.page > li.leaf:nth-child(4) { transition-duration: 1.55s; }
+.page > li.leaf:nth-child(5) { transition-duration: 1.75s;
 }
 
 /* روی برگ (recto) و پشت برگ (verso)؛ پشت از پیش ۱۸۰ درجه چرخیده
@@ -758,13 +766,21 @@ body {
   background-blend-mode: multiply;
   border: 1px solid #c9a75d;
   box-shadow:
-    inset -3px 0 8px rgba(90, 60, 10, 0.18),
-    inset 0 0 10px rgba(110, 80, 20, 0.18),
-    0 2px 6px rgba(62, 42, 16, 0.28);
+    
+    inset -14px 0 18px -6px rgba(45, 20, 5, 0.40),
+    inset 0 0 10px rgba(110, 80, 20, 0.15),
+    0 4px 12px rgba(40, 20, 5, 0.25);
   overflow: hidden;
   direction: rtl !important;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+.leaf-face.leaf-back {
+  box-shadow:
+    inset 14px 0 18px -6px rgba(45, 20, 5, 0.40),
+    inset 0 0 10px rgba(110, 80, 20, 0.15),
+    0 4px 12px rgba(40, 20, 5, 0.25);
 }
 
 /* روی برگ (recto) رو به بیننده است و پشت برگ (verso) ۱۸۰ درجه چرخیده */
@@ -847,16 +863,26 @@ body {
    ورق خوردنِ کامل: هر برگ ۱۸۰ درجه حول عطفِ سمت راست می‌چرخد، روی جلدِ
    بازشده می‌خوابد و برگِ بعدی با تأخیرِ کوتاه روی آن می‌نشیند.
    -------------------------------------------------------------------------- */
-.book-scene.is-opening .page > li.leaf {
-  transform: translateZ(calc(20.9px + var(--leaf-index, 0) * 1.6px))
-             rotateY(calc(177deg + var(--leaf-index, 0) * 0.35deg));
+.book-scene.is-opening .page > li.leaf:nth-child(1) {
+  transform: translateZ(21px) rotateY(174deg);
+  transition-delay: 0.45s;
 }
-
-.book-scene.is-opening .page > li.leaf:nth-child(1) { transition-delay: 0.55s; }
-.book-scene.is-opening .page > li.leaf:nth-child(2) { transition-delay: 0.72s; }
-.book-scene.is-opening .page > li.leaf:nth-child(3) { transition-delay: 0.89s; }
-.book-scene.is-opening .page > li.leaf:nth-child(4) { transition-delay: 1.06s; }
-.book-scene.is-opening .page > li.leaf:nth-child(5) { transition-delay: 1.23s; }
+.book-scene.is-opening .page > li.leaf:nth-child(2) {
+  transform: translateZ(22.5px) rotateY(168deg);
+  transition-delay: 0.60s;
+}
+.book-scene.is-opening .page > li.leaf:nth-child(3) {
+  transform: translateZ(24px) rotateY(161deg);
+  transition-delay: 0.78s;
+}
+.book-scene.is-opening .page > li.leaf:nth-child(4) {
+  transform: translateZ(25.5px) rotateY(153deg);
+  transition-delay: 0.96s;
+}
+.book-scene.is-opening .page > li.leaf:nth-child(5) {
+  transform: translateZ(27px) rotateY(176deg);
+  transition-delay: 1.15s;
+}
 
 .cover-side {
   position: absolute;
