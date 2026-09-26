@@ -420,7 +420,7 @@ body {
   height: 280px;
   transform-style: preserve-3d;
   /* زاویه سه‌بعدی طبیعی و چشم‌نواز */
-  transform: rotateY(-24deg) rotateX(14deg);
+  transform: rotateY(-22deg) rotateX(0deg);
   transition: transform 0.85s var(--ease-mystic);
   cursor: pointer;
   user-select: none;
@@ -428,13 +428,13 @@ body {
   outline: none;
 }
 
-.book-scene:not(.is-divinating) .book-3d:hover {
-  transform: rotateY(-16deg) rotateX(8deg) translateY(-8px);
+.book-scene:not(.is-divinating):not(.is-opening) .book-3d:hover {
+  transform: rotateY(-15deg) rotateX(0deg) translateY(-6px);
 }
 
 /* فاز ۱ تفأل: کتاب روبه‌رو شده و بالا می‌رود */
 .book-scene.is-divinating .book-3d {
-  transform: rotateY(0deg) rotateX(4deg) translateY(-22px) scale(1.04);
+  transform: rotateY(0deg) rotateX(0deg) translateY(-22px) scale(1.04);
 }
 
 .book-scene.is-divinating .mystic-aura {
@@ -582,6 +582,7 @@ body {
 }
 
 .book-pages-top {
+  display: none !important;
   left: 3px;
   top: -20px;
   width: 194px;
@@ -704,8 +705,7 @@ body {
 
 /* وضعیت باز شدن کامل دیوان */
 .book-scene.is-opening .book-3d {
-  /* کتابِ گشوده دو برابر پهن‌تر است؛ برای حفظ مرکزیت صحنه جبران می‌شود */
-  transform: translateX(-78px) rotateY(-14deg) rotateX(9deg) scale(0.82);
+  transform: translateX(-88px) rotateY(-10deg) rotateX(0deg) scale(0.82) !important;
 }
 
 /* جلد ۱۸۲ درجه می‌چرخد تا کاملاً روی ورق‌های ورق‌خورده بخوابد */
@@ -869,7 +869,7 @@ body {
 /* ==========================================================================
    جلد بیرونی کتاب (cover-outer) و لایه‌های تذهیب و عنوان
    ========================================================================== */
-.cover-outer {
+.cover-outer, .cover-outer * {\n  backface-visibility: hidden !important;\n  -webkit-backface-visibility: hidden !important;\n}\n.cover-outer {
   position: absolute;
   inset: 0;
   padding: 0;
@@ -938,7 +938,7 @@ body {
 /* عنوان و لسان‌الغیب داخل مرکز ترنج */
 .cover-title-wrap {
   position: absolute;
-  top: 142px;
+  top:  140px;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90px;
@@ -951,7 +951,7 @@ body {
 
 .cover-title {
   font-family: var(--font-poetry);
-  font-size: 1.45rem;
+  font-size:  1.65rem;
   color: #fff6d9;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 10px rgba(233, 196, 106, 0.8);
   line-height: 1.05;
@@ -975,9 +975,11 @@ body {
   top: 233px;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 130px;
+  width: 104px;
+  max-width: 104px;
   font-family: var(--font-ui);
-  font-size: 0.48rem;
+  font-size: 0.38rem;
+  letter-spacing: -0.2px;
   color: #f6e3a4;
   white-space: nowrap;
   text-align: center;
@@ -987,18 +989,7 @@ body {
 }
 
 /* لایه ۵: روبان ابریشمی نشانک کتاب */
-.bookmark-ribbon {
-  position: absolute;
-  bottom: -16px;
-  left: 36px;
-  width: 11px;
-  height: 28px;
-  background: linear-gradient(180deg, #d4af37 0%, #876214 70%, #5d420a 100%);
-  border-radius: 1px 1px 3px 3px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
-  z-index: 5;
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
-}
+.bookmark-ribbon { display: none !important; }
 
 /* آستر داخلی جلد (پس از باز شدن) */
 .endpaper {
@@ -1930,8 +1921,8 @@ body {
 
   /* در حالت گشوده، کتاب دو برابر پهن میشود؛ مقیاس کوچکتر تا سرریز افقی رخ ندهد */
   .book-scene.is-opening .book-3d {
-    transform: translateX(-68px) rotateY(-10deg) rotateX(7deg) scale(0.68);
-  }
+  transform: translateX(-88px) rotateY(-10deg) rotateX(0deg) scale(0.82) !important;
+}
 
   .btn-divinate {
     width: 100%;
