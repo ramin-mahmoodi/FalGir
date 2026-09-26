@@ -325,8 +325,9 @@
   // بروزرسانی برگه‌های متحرک و همچنین صفحه ثابت زیرین کتاب با غزل نهایی
   function populateFlippingLeaves(finalIndex) {
     if (!STATE.faals || STATE.faals.length === 0) return;
+    const total = STATE.faals.length;
 
-    // ۱. صفحه ثابت زیرین (که در انتهای ورق‌زدن باز می‌ماند) دقیقاً همان غزل انتخاب‌شده فال می‌شود
+    // ۱. صفحه ثابت زیرین (که در انتهای ورق‌زدن در سمت راست نمایان می‌شود): غزل نهایی فال
     const chosenFaal = STATE.faals[finalIndex] || STATE.faals[0];
     if (DOM.bookRevealedTitle) {
       DOM.bookRevealedTitle.textContent = `غزل ${toPersianDigits(finalIndex + 1)}`;
@@ -342,35 +343,58 @@
         .join('');
     }
 
-    // ۲. هر برگ دو رو دارد (رو + پشت)؛ روی هر وجه چند بیت از یک غزل تازه دیوان
-    //    نوشته میشود تا حین ورق خوردن، دیوان زنده و پرمحتوا دیده شود.
+    // ۲. برگه‌های متحرک ورق‌زن (۵ برگ): شماره‌گذاری دقیق و متوالی طبق واقعیت کتاب
+    //    برگ آخر (برگ ۴):
+    //      - پشت برگ (leaf-back): غزل ۱-N (در سمت چپ روبروی غزل نهایی باز می‌ماند)
+    //      - روی برگ (leaf-front): غزل ۲-N (قبل از آخرین ورق‌خوردن در سمت راست دیده می‌شود)
+    //    برگ‌های قبلی نیز به ترتیب منظم از قبل تا غزل فال چیده می‌شوند تا هیچ پرش یا تفاوت شماره‌ای رخ ندهد.
     const leaves = document.querySelectorAll('#bookPageStack .leaf');
     if (!leaves || leaves.length === 0) return;
 
-    const total = STATE.faals.length;
-    leaves.forEach((leaf) => {
-      const faces = leaf.querySelectorAll('.leaf-face');
-      faces.forEach((face) => {
-        const sampleIndex = Math.floor(Math.random() * total);
-        const faal = STATE.faals[sampleIndex];
-        if (!faal) return;
+    const leafCount = leaves.length; // ۵ برگ
+    leaves.forEach((leaf, leafIdx) => {
+      // فاصله از برگ آخر (برای برگ ۴ مقدار ۰، برای برگ ۳ مقدار ۱، ...)
+      const offsetFromEnd = (leafCount - 1) - leafIdx;
 
-        const headerEl = face.querySelector('.leaf-header');
-        if (headerEl) {
-          headerEl.textContent = `غزل ${toPersianDigits(sampleIndex + 1)}`;
+      // شماره پشت برگ (verso) که بعد از ورق خوردن به سمت چپ می‌افتد
+      const backIdx = (finalIndex - (offsetFromEnd * 2 + 1) + total * 20) % total;
+      // شماره روی برگ (recto) که قبل از ورق خوردن در سمت راست است
+      const frontIdx = (finalIndex - (offsetFromEnd * 2 + 2) + total * 20) % total;
+
+      const frontFace = leaf.querySelector('.leaf-front');
+      const backFace = leaf.querySelector('.leaf-back');
+
+      // تنظیم وجه رویی برگ
+      if (frontFace) {
+        const faalFront = STATE.faals[frontIdx] || STATE.faals[0];
+        const hFront = frontFace.querySelector('.leaf-header');
+        if (hFront) hFront.textContent = `غزل ${toPersianDigits(frontIdx + 1)}`;
+        const bFront = frontFace.querySelector('.leaf-body');
+        if (bFront && faalFront) {
+          const lines = faalFront.poem
+            .split(/\r?\n/)
+            .map(l => l.trim())
+            .filter(l => l.length > 0)
+            .slice(0, 4);
+          bFront.innerHTML = lines.map(line => `<p class="leaf-verse">${line}</p>`).join('');
         }
+      }
 
-        const lines = faal.poem
-          .split(/\r?\n/)
-          .map(l => l.trim())
-          .filter(l => l.length > 0)
-          .slice(0, 4);
-
-        const bodyEl = face.querySelector('.leaf-body');
-        if (bodyEl && lines.length > 0) {
-          bodyEl.innerHTML = lines.map(line => `<p class="leaf-verse">${line}</p>`).join('');
+      // تنظیم وجه پشتی برگ
+      if (backFace) {
+        const faalBack = STATE.faals[backIdx] || STATE.faals[0];
+        const hBack = backFace.querySelector('.leaf-header');
+        if (hBack) hBack.textContent = `غزل ${toPersianDigits(backIdx + 1)}`;
+        const bBack = backFace.querySelector('.leaf-body');
+        if (bBack && faalBack) {
+          const lines = faalBack.poem
+            .split(/\r?\n/)
+            .map(l => l.trim())
+            .filter(l => l.length > 0)
+            .slice(0, 4);
+          bBack.innerHTML = lines.map(line => `<p class="leaf-verse">${line}</p>`).join('');
         }
-      });
+      }
     });
   }
 
