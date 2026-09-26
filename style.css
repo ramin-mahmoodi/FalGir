@@ -887,15 +887,26 @@ body {
    8. STAGE 2: REVELATION & ILLUMINATED MANUSCRIPT CARD
    -------------------------------------------------------------------------- */
 .stage-result {
-  max-width: 860px;
+  max-width: 1020px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .result-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 1.8rem;
+  align-items: start;
+  width: 100%;
+}
+
+/* ستون جانبی برای تعبیر و ابزارها (Sticky در دسکتاپ) */
+.result-side-panel {
+  position: sticky;
+  top: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
-  width: 100%;
+  gap: 1.2rem;
 }
 
 /* کتیبه تذهیب و نسخه خطی */
@@ -908,7 +919,7 @@ body {
   box-shadow: 
     0 12px 35px rgba(0, 0, 0, 0.55),
     0 0 25px rgba(212, 175, 55, 0.2);
-  padding: 2.2rem 2.4rem 2.6rem;
+  padding: 1.8rem 2rem 2.4rem;
   color: var(--ink-primary);
   animation: cardFadeIn 0.6s var(--ease-mystic) forwards;
   will-change: transform, opacity;
@@ -938,7 +949,7 @@ body {
 .tadhhib-header {
   position: relative;
   width: 100%;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   text-align: center;
 }
 
@@ -968,12 +979,42 @@ body {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
+/* دکمه پرش سریع به تعبیر (موبایل و ابعاد کوچکتر) */
+.quick-interp-bar {
+  display: none;
+  justify-content: center;
+  margin: -0.2rem 0 1.2rem;
+}
+
+.quick-interp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(36, 10, 35, 0.08);
+  border: 1px solid var(--gold-border);
+  color: var(--gold-dark);
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--trans-fast);
+}
+
+.quick-interp-btn:hover {
+  background: var(--gold-primary);
+  color: #1a0515;
+  border-color: var(--gold-primary);
+  transform: translateY(-1px);
+}
+
 .tadhhib-divider {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  margin: 1.2rem 0 1.8rem;
+  margin: 1rem 0 1.5rem;
 }
 
 .tadhhib-divider .line {
@@ -994,25 +1035,30 @@ body {
 .poem-body {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin: 1.2rem 0 2rem;
+  gap: 0.55rem;
+  margin: 1rem 0 1.8rem;
   font-family: var(--font-poetry);
   width: 100%;
 }
 
 .bayt {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 22px 1fr;
+  align-items: center;
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.6rem;
   border-radius: 6px;
+  border-bottom: 1px dashed rgba(184, 145, 40, 0.25);
   transition: background-color var(--trans-fast);
   opacity: 0;
   transform: translateY(12px);
   animation: baytSlideUp 0.5s var(--ease-mystic) forwards;
-  animation-delay: calc(var(--bayt-index, 0) * 0.08s);
+  animation-delay: calc(var(--bayt-index, 0) * 0.06s);
   will-change: transform, opacity;
+}
+
+.bayt:last-child {
+  border-bottom: none;
 }
 
 .bayt:hover {
@@ -1027,33 +1073,31 @@ body {
 }
 
 .mesra {
-  flex: 1;
-  font-size: clamp(1.22rem, 2.6vw, 1.55rem);
-  line-height: 2.3;
+  font-size: clamp(1.22rem, 1.7vw, 1.42rem);
+  line-height: 2.2;
   color: var(--ink-primary);
   text-rendering: optimizeLegibility;
+  white-space: nowrap;
 }
 
-/* مصرع اول در سمت راست به طور طبیعی راست‌چین است */
 .mesra-first {
   text-align: right;
-  padding-left: 1.2rem;
+  padding-left: 0.5rem;
 }
 
-/* مصرع دوم در سمت چپ به طور طبیعی چپ‌چین است تا تقارن کلاسیک ایجاد شود */
 .mesra-second {
   text-align: left;
-  padding-right: 1.2rem;
+  padding-right: 0.5rem;
 }
 
 .bayt-divider {
   color: var(--gold-primary);
-  opacity: 0.65;
-  font-size: 0.75rem;
-  padding: 0 0.8rem;
+  opacity: 0.7;
+  font-size: 0.65rem;
   user-select: none;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .tadhhib-footer-ornament {
@@ -1075,21 +1119,11 @@ body {
   background: linear-gradient(180deg, #131d34 0%, #0d1526 100%);
   border: 1.5px solid var(--gold-primary);
   border-radius: 14px;
-  padding: 1.8rem 2rem;
+  padding: 1.6rem 1.8rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.15);
   position: relative;
   opacity: 1;
   transform: none;
-}
-
-.interpretation-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--gold-primary);
 }
 
 .interp-header {
@@ -1126,8 +1160,8 @@ body {
 
 .interp-text {
   font-family: var(--font-ui);
-  font-size: 1.08rem;
-  line-height: 2.1;
+  font-size: 1.05rem;
+  line-height: 2.05;
   color: #eaf0fc;
   text-align: justify;
 }
@@ -1137,12 +1171,30 @@ body {
    -------------------------------------------------------------------------- */
 .action-bar {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  justify-content: center;
+  flex-direction: column;
+  gap: 0.75rem;
   width: 100%;
   opacity: 1;
-  margin-top: 0.5rem;
+}
+
+.action-bar .btn-primary {
+  width: 100%;
+  padding: 0.9rem 1.4rem;
+  font-size: 1.05rem;
+  justify-content: center;
+}
+
+.action-btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.action-btn-row .action-btn {
+  padding: 0.7rem 0.4rem;
+  font-size: 0.85rem;
+  justify-content: center;
 }
 
 .action-btn {
@@ -1494,8 +1546,28 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   15. RESPONSIVE OPTIMIZATIONS (MOBILE)
+   15. RESPONSIVE OPTIMIZATIONS (TABLET & MOBILE)
    -------------------------------------------------------------------------- */
+@media (max-width: 959px) {
+  .stage-result {
+    max-width: 640px;
+  }
+
+  .result-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+
+  .result-side-panel {
+    position: static;
+  }
+
+  .quick-interp-bar {
+    display: flex;
+  }
+}
+
 @media (max-width: 679px) {
   .app-header {
     padding: 0.85rem 1rem;
@@ -1532,6 +1604,7 @@ body {
 
   /* چیدمان ابیات در موبایل */
   .bayt {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 0.35rem;
@@ -1551,15 +1624,19 @@ body {
     font-size: 1.25rem;
     line-height: 2.2;
     width: 100%;
+    text-align: right;
+    text-align-last: right;
   }
 
   .mesra-first {
     text-align: right;
+    text-align-last: right;
     padding-left: 0;
   }
 
   .mesra-second {
     text-align: left;
+    text-align-last: left;
     padding-right: 0;
   }
 
@@ -1572,28 +1649,13 @@ body {
     line-height: 1.95;
   }
 
-  .action-bar {
-    flex-direction: column;
+  .action-btn-row {
+    grid-template-columns: 1fr;
   }
 
   .action-btn {
     width: 100%;
     justify-content: center;
-  }
-}
-
-@media (min-width: 680px) {
-  .bayt {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .mesra-first {
-    text-align: right;
-  }
-
-  .mesra-second {
-    text-align: left;
   }
 }
 

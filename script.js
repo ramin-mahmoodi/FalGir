@@ -87,6 +87,7 @@
     poemContainer: document.getElementById('poemContainer'),
     interpretationCard: document.getElementById('interpretationCard'),
     interpText: document.getElementById('interpText'),
+    btnQuickInterp: document.getElementById('btnQuickInterp'),
     
     // Actions
     btnTryAgain: document.getElementById('btnTryAgain'),
@@ -570,6 +571,13 @@ https://ramin-mahmoodi.github.io/FalGir/`;
     DOM.btnCopyFal.addEventListener('click', copyFalText);
     DOM.btnShareFal.addEventListener('click', shareFal);
     DOM.btnPrintFal.addEventListener('click', () => window.print());
+
+    if (DOM.btnQuickInterp) {
+      DOM.btnQuickInterp.addEventListener('click', (e) => {
+        e.preventDefault();
+        DOM.interpretationCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
 
     // دکمه صدا
     DOM.btnSoundToggle.addEventListener('click', () => sound.toggle());
