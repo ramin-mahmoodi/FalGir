@@ -894,7 +894,7 @@ body {
 
 .result-wrapper {
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: 1fr 320px;
   gap: 1.8rem;
   align-items: start;
   width: 100%;
@@ -979,35 +979,7 @@ body {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* دکمه پرش سریع به تعبیر (موبایل و ابعاد کوچکتر) */
-.quick-interp-bar {
-  display: none;
-  justify-content: center;
-  margin: -0.2rem 0 1.2rem;
-}
 
-.quick-interp-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(36, 10, 35, 0.08);
-  border: 1px solid var(--gold-border);
-  color: var(--gold-dark);
-  padding: 0.5rem 1.2rem;
-  border-radius: 999px;
-  font-family: var(--font-ui);
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all var(--trans-fast);
-}
-
-.quick-interp-btn:hover {
-  background: var(--gold-primary);
-  color: #1a0515;
-  border-color: var(--gold-primary);
-  transform: translateY(-1px);
-}
 
 .tadhhib-divider {
   display: flex;
@@ -1073,20 +1045,21 @@ body {
 }
 
 .mesra {
-  font-size: clamp(1.22rem, 1.7vw, 1.42rem);
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
   line-height: 2.2;
   color: var(--ink-primary);
   text-rendering: optimizeLegibility;
+  text-align: justify;
+  text-align-last: justify;
+  text-justify: inter-word;
   white-space: nowrap;
 }
 
 .mesra-first {
-  text-align: right;
   padding-left: 0.5rem;
 }
 
 .mesra-second {
-  text-align: left;
   padding-right: 0.5rem;
 }
 
@@ -1117,13 +1090,13 @@ body {
    -------------------------------------------------------------------------- */
 .interpretation-card {
   background: linear-gradient(180deg, #131d34 0%, #0d1526 100%);
-  border: 1.5px solid var(--gold-primary);
+  border: 1px solid var(--gold-primary);
   border-radius: 14px;
   padding: 1.6rem 1.8rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.15);
-  position: relative;
   opacity: 1;
   transform: none;
+  overflow: hidden;
 }
 
 .interp-header {
@@ -1338,7 +1311,7 @@ body {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
   width: 100%;
   max-width: 520px;
-  max-height: 85vh;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -1563,9 +1536,6 @@ body {
     position: static;
   }
 
-  .quick-interp-bar {
-    display: flex;
-  }
 }
 
 @media (max-width: 679px) {
@@ -1626,11 +1596,10 @@ body {
     width: 100%;
     text-align: right;
     text-align-last: right;
+    white-space: normal;
   }
 
   .mesra-first {
-    text-align: right;
-    text-align-last: right;
     padding-left: 0;
   }
 
