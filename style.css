@@ -1015,10 +1015,10 @@ body {
 
 .bayt {
   display: grid;
-  grid-template-columns: 1fr 22px 1fr;
+  grid-template-columns: 1fr 40px 1fr;
   align-items: center;
   width: 100%;
-  padding: 0.45rem 0.6rem;
+  padding: 0.75rem 0.6rem;
   border-radius: 6px;
   border-bottom: 1px dashed rgba(184, 145, 40, 0.25);
   transition: background-color var(--trans-fast);
@@ -1358,6 +1358,8 @@ body {
 .modal-body {
   padding: 1.3rem;
   overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 
 .modal-hint {
