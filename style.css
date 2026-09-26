@@ -421,3 +421,667 @@ button { font-family: inherit; }
   margin: 0;
   padding: 0;
 }
+
+.leather-front {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px 8px 8px 3px;
+  background: 
+    radial-gradient(circle at 50% 45%, rgba(212, 175, 55, 0.15) 0%, transparent 65%),
+    linear-gradient(135deg, var(--leather-base) 0%, #3e1236 50%, var(--leather-dark) 100%);
+  border: 2px solid var(--gold-primary);
+  box-shadow: 
+    inset 0 0 14px rgba(0, 0, 0, 0.7),
+    0 8px 24px rgba(0, 0, 0, 0.5);
+  padding: 9px;
+}
+
+.gold-frame {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--gold-primary);
+  border-radius: 3px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 6px rgba(212, 175, 55, 0.3);
+}
+
+.corner-brass {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--gold-light);
+}
+
+.c-top-left { top: 2px; left: 2px; border-right: none; border-bottom: none; }
+
+.c-top-right { top: 2px; right: 2px; border-left: none; border-bottom: none; }
+
+.c-bottom-left { bottom: 2px; left: 2px; border-right: none; border-top: none; }
+
+.c-bottom-right { bottom: 2px; right: 2px; border-left: none; border-top: none; }
+
+.toranj-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.spine-ribs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.rib {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #876214, var(--gold-light), #876214);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+:root {
+  --leather-base: #1f0b1a;
+  --leather-dark: #0e040c;
+  --gold-primary: #d4af37;
+  --gold-light: #f6e29d;
+  --gold-border: #735212;
+}
+
+/* --------------------------------------------------------------------------
+   7. STAGE 1: NIYYAT & REALISTIC 3D PERSIAN DIWAN
+   -------------------------------------------------------------------------- */
+.stage-niyyat {
+  text-align: center;
+}
+
+.stage-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.whisper-banner {
+  background: rgba(18, 29, 52, 0.85);
+  border: 1px solid var(--gold-border);
+  border-radius: 12px;
+  padding: 1.1rem 1.6rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.whisper-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+}
+
+.whisper-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid var(--gold-border);
+  padding: 0.15rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+.whisper-quote {
+  font-size: clamp(1.05rem, 3.2vw, 1.25rem);
+  font-weight: 600;
+  color: var(--gold-highlight);
+  line-height: 1.6;
+  margin-bottom: 0.35rem;
+}
+
+.whisper-desc {
+  font-size: 0.86rem;
+  color: #b7c7e5;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   THE AUTHENTIC 3D BOOK (6 REALISTIC 3D FACES WITH REAL DEPTH)
+   ========================================================================== */
+
+/* â”˜Ã§â•ªÂºâ”˜Ã¤â”˜Ã§ â”˜Ã â”˜Ã¤â•ªÂºâ–ˆÃ®â”˜Ã  â”˜â•›â•ªâ”‚Î“Ã‡Ã®â•ªâ–“â”˜Ã â–ˆÃ®â”˜Ã¥â”˜Ã§ â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ */
+.mystic-aura {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, transparent 65%);
+  transform: translateZ(-100px);
+  pointer-events: none;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+/* â•ªÃ³â•ªÂ¿â•ªÂ¼â”ŒâŒâ•ªÂ¬ â•ªâ”‚â”˜Ã§Î“Ã‡Ã®â•ªÂ¿â•ªâ•£â•ªÂ»â–ˆÃ® â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ (Book Container) */
+
+
+/* â”˜Ã¼â•ªÂºâ•ªâ–“ â–ˆâ–’ â•ªÂ¬â”˜Ã¼â•ªÃºâ”˜Ã¤: â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ â•ªâ–’â”˜Ãªâ•ªÂ¿â”˜Ã§Î“Ã‡Ã®â•ªâ–’â”˜Ãª â•ªâ”¤â•ªÂ»â”˜Ã§ â”˜Ãª â•ªÂ¿â•ªÂºâ”˜Ã¤â•ªÂº â”˜Ã â–ˆÃ®Î“Ã‡Ã®â•ªâ–’â”˜Ãªâ•ªÂ» */
+
+
+/* â”˜Ã¼â•ªÂºâ•ªâ–“ â–ˆâ–“ â•ªÂ¬â”˜Ã¼â•ªÃºâ”˜Ã¤: â”ŒÃ¥â•ªâ–’â•ªÂ«â•ªâ”¤ â–ˆâ”‚â–ˆâ•¢â–ˆâ–‘ â•ªÂ»â•ªâ–’â•ªÂ¼â”˜Ã§Î“Ã‡Ã®â•ªÂºâ–ˆÃ® â”˜Ãª â”ŒÂ»â•ªâ”¤â”˜Ãªâ•ªÂ»â”˜Ã§ â•ªâ”¤â•ªÂ»â”˜Ã¥ â•ªÂ¼â”˜Ã¤â•ªÂ» â•ªâ”‚â”˜Ã§Î“Ã‡Ã®â•ªÂ¿â•ªâ•£â•ªÂ»â–ˆÃ® â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ */
+
+/* â•ªÂºâ•ªâ”‚â•ªÂ¬â•ªÂºâ–ˆÃ®â”˜Ã¤ â•ªâ•£â”˜Ã â”˜Ãªâ”˜Ã â–ˆÃ® â”˜Ãªâ•ªÂ¼â”˜Ã§Î“Ã‡Ã®â”˜Ã§â•ªÂºâ–ˆÃ® â•ªâ”‚â”˜Ã§Î“Ã‡Ã®â•ªÂ¿â•ªâ•£â•ªÂ»â–ˆÃ® â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ */
+
+/* 1. â•ªâ•£â•ªâ•–â”˜Ã¼ â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ (Spine Face) - â•ªâ”‚â”˜Ã â•ªÂ¬ â•ªâ–’â•ªÂºâ•ªâ”‚â•ªÂ¬ â•ªÂ»â•ªâ–’ â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿Î“Ã‡Ã®â”˜Ã§â•ªÂºâ–ˆÃ® â”˜Ã¼â•ªÂºâ•ªâ–’â•ªâ”‚â–ˆÃ® â•ªÂ¿â•ªÂº â•ªâ•¢â•ªÂ«â•ªÂºâ”˜Ã â•ªÂ¬ 34px */
+.face-spine {
+  top: 0;
+  right: 0;
+  width: var(--book-depth);
+  height: 100%;
+  transform-origin: right center;
+  transform: rotateY(-90deg);
+  background: linear-gradient(90deg, #180517 0%, #350c30 50%, #1a0619 100%);
+  border-top: 1px solid var(--gold-primary);
+  border-bottom: 1px solid var(--gold-primary);
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  z-index: 5;
+}
+
+/* â•ªÂ¬â–ˆÃ®â•ªâ•‘â”˜Ã§Î“Ã‡Ã®â”˜Ã§â•ªÂºâ–ˆÃ® â•ªÂ¿â•ªâ–’â•ªÂ¼â•ªâ”‚â•ªÂ¬â”˜Ã§ â•ªâ•–â”˜Ã¤â•ªÂºâ”ŒâŒâ”˜Ãªâ•ªÂ¿ â•ªâ–’â”˜Ãªâ–ˆÃ® â•ªâ•£â•ªâ•–â”˜Ã¼ â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ */
+.spine-ribs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.spine-ribs .rib {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #876214, var(--gold-light), #876214);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.spine-title {
+  writing-mode: vertical-rl;
+  color: var(--gold-light);
+  font-size: 0.74rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
+  position: relative;
+  z-index: 2;
+  margin: auto 0;
+}
+
+.spine-bottom-rosette {
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--gold-primary);
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+}
+
+/* 2. â”˜Ã¤â•ªÂ¿â”˜Ã§ â•ªÂ¼â”˜Ã¤â”˜Ãªâ–ˆÃ®â–ˆÃ® â”˜Ãªâ•ªâ–’â”˜Ã©Î“Ã‡Ã®â”˜Ã§â•ªÂº (Left Fore-edge Face) - â”˜Ãªâ•ªâ–’â”˜Ã©Î“Ã‡Ã®â”˜Ã§â•ªÂºâ–ˆÃ® â”˜Ã¤â•ªÂ¿â”˜Ã§Î“Ã‡Ã®â•ªâ•–â”˜Ã¤â•ªÂºâ–ˆÃ®â–ˆÃ® â•ªâ–’â”˜Ãª â•ªÂ¿â”˜Ã§ â•ªÂ¿â–ˆÃ®â•ªâ–’â”˜Ãªâ”˜Ã¥ */
+.face-fore-edge {
+  top: 3px;
+  left: 0;
+  width: var(--book-depth);
+  height: calc(100% - 6px);
+  transform-origin: left center;
+  transform: rotateY(90deg);
+  background: repeating-linear-gradient(
+    90deg,
+    #deb865 0px,
+    #fff3d1 1px,
+    #aa8323 2px,
+    #cf9e38 3px
+  );
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+}
+
+/* 3. â”˜Ã¤â•ªÂ¿â”˜Ã§ â•ªÂ¿â•ªÂºâ”˜Ã¤â•ªÂºâ–ˆÃ®â–ˆÃ® â”˜Ãªâ•ªâ–’â”˜Ã©Î“Ã‡Ã®â”˜Ã§â•ªÂº (Top Edge Face) */
+.face-top-edge {
+  top: 0;
+  left: 3px;
+  width: calc(100% - 6px);
+  height: var(--book-depth);
+  transform-origin: top center;
+  transform: rotateX(90deg);
+  background: repeating-linear-gradient(
+    0deg,
+    #deb865 0px,
+    #fff3d1 1px,
+    #aa8323 2px,
+    #cf9e38 3px
+  );
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+/* 4. â”˜Ã¤â•ªÂ¿â”˜Ã§ â”˜â•›â•ªÂºâ–ˆÃ®â–ˆÃ®â”˜Ã¥â–ˆÃ® â”˜Ãªâ•ªâ–’â”˜Ã©Î“Ã‡Ã®â”˜Ã§â•ªÂº (Bottom Edge Face) */
+.face-bottom-edge {
+  bottom: 0;
+  left: 3px;
+  width: calc(100% - 6px);
+  height: var(--book-depth);
+  transform-origin: bottom center;
+  transform: rotateX(-90deg);
+  background: repeating-linear-gradient(
+    0deg,
+    #deb865 0px,
+    #fff3d1 1px,
+    #aa8323 2px,
+    #cf9e38 3px
+  );
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+/* 5. â•ªÂ¼â”˜Ã¤â•ªÂ» â•ªâ–“â–ˆÃ®â•ªâ–’â–ˆÃ®â”˜Ã¥ â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ (Back Cover Face) */
+.face-back {
+  inset: 0;
+  transform: translateZ(calc(-1 * var(--book-depth)));
+  background: linear-gradient(135deg, #180415 0%, #290824 50%, #150313 100%);
+  border-radius: 3px 8px 8px 3px;
+  border: 1px solid var(--gold-dark);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  padding: 8px;
+}
+
+.back-cover-emboss {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 3px;
+}
+
+/* 6. â•ªâ•¡â”˜Ã¼â•ªÂ¡â”˜Ã§ â•ªÂ»â•ªÂºâ•ªÂ«â”˜Ã¤â–ˆÃ® â”˜Ã¥â•ªâ”‚â•ªÂ«â”˜Ã§ â•ªÂ«â•ªâ•–â–ˆÃ® (Inner Page Face) - â•ªâ–“â–ˆÃ®â•ªâ–’ â•ªÂ¼â”˜Ã¤â•ªÂ» â”˜Ã©â•ªâ–’â•ªÂºâ•ªâ–’ â•ªÂ»â•ªÂºâ•ªâ–’â•ªÂ» â”˜Ãª â•ªÂ¿â•ªÂº â•ªÂ¿â•ªÂºâ•ªâ–“ â•ªâ”¤â•ªÂ»â”˜Ã¥ â”˜Ã¥â”˜Ã â•ªÂºâ–ˆÃ®â•ªÂºâ”˜Ã¥ â”˜Ã â–ˆÃ®Î“Ã‡Ã®â•ªâ”¤â”˜Ãªâ•ªÂ» */
+.face-inner {
+  inset: 4px;
+  transform: translateZ(-2px);
+  background: radial-gradient(circle at center, #fdf9ee 0%, #f4edd8 80%, #ebdcb8 100%);
+  border-radius: 3px;
+  box-shadow: inset 0 0 15px rgba(138, 104, 30, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.inner-page-content {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--gold-primary);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem 0.5rem;
+}
+
+.inner-tadhhib-arch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.inner-shamseh {
+  width: 44px;
+  height: 44px;
+}
+
+.inner-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.inner-calligraphy {
+  font-family: var(--font-poetry);
+  font-size: 1.25rem;
+  color: var(--ink-primary);
+  line-height: 1.4;
+}
+
+.inner-couplet {
+  font-family: var(--font-poetry);
+  font-size: 0.88rem;
+  color: var(--ink-secondary);
+  line-height: 1.8;
+  margin-top: 0.4rem;
+}
+
+/* 7. â•ªÂ¼â”˜Ã¤â•ªÂ» â•ªâ–’â”˜Ãªâ–ˆÃ®â–ˆÃ® â•ªâ–“â•ªâ–’â”ŒâŒâ”˜Ãªâ•ªÂ¿ â”˜Ãª â•ªâ”‚â”˜Ã§Î“Ã‡Ã®â•ªÂ¿â•ªâ•£â•ªÂ»â–ˆÃ® (Front Cover Face) */
+.face-front {
+  inset: 0;
+  transform-origin: right center;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.35, 0, 0.25, 1);
+  transform: translateZ(0);
+  z-index: 10;
+}
+
+.leather-front {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px 8px 8px 3px;
+  background: 
+    radial-gradient(circle at 50% 45%, rgba(212, 175, 55, 0.15) 0%, transparent 65%),
+    linear-gradient(135deg, var(--leather-base) 0%, #3e1236 50%, var(--leather-dark) 100%);
+  border: 2px solid var(--gold-primary);
+  box-shadow: 
+    inset 0 0 14px rgba(0, 0, 0, 0.7),
+    0 8px 24px rgba(0, 0, 0, 0.5);
+  padding: 9px;
+}
+
+.gold-frame {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--gold-primary);
+  border-radius: 3px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 6px rgba(212, 175, 55, 0.3);
+}
+
+/* â”˜Ã¥â•ªÂ¿â•ªâ”¤â–ˆÃ®Î“Ã‡Ã®â”˜Ã§â•ªÂºâ–ˆÃ® â•ªÂ¿â•ªâ–’â”˜Ã¥â•ªÂ¼â–ˆÃ® â•ªâ–“â•ªâ–’â–ˆÃ®â”˜Ã¥ â”ŒÃ¥â”˜Ã§â•ªÂºâ•ªâ–’â”ŒÂ»â”˜Ãªâ•ªâ”¤â”˜Ã§ â•ªÂ¼â”˜Ã¤â•ªÂ» */
+.corner-brass {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--gold-light);
+}
+
+.c-top-right { top: 2px; right: 2px; border-left: none; border-bottom: none; }
+.c-top-left { top: 2px; left: 2px; border-right: none; border-bottom: none; }
+.c-bottom-right { bottom: 2px; right: 2px; border-left: none; border-top: none; }
+.c-bottom-left { bottom: 2px; left: 2px; border-right: none; border-top: none; }
+
+.cover-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 0.4rem;
+}
+
+.cover-top-motif {
+  width: 75px;
+  margin-bottom: 0.6rem;
+}
+
+.motif-svg {
+  width: 100%;
+  height: auto;
+}
+
+.cover-toranj {
+  width: 78px;
+  height: 78px;
+  margin-bottom: 0.7rem;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
+}
+
+.toranj-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cover-title-group {
+  margin-bottom: 0.3rem;
+}
+
+.cover-title-text {
+  font-family: var(--font-poetry);
+  font-size: 1.95rem;
+  color: var(--gold-highlight);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 8px var(--gold-primary);
+  line-height: 1.25;
+}
+
+.cover-subtitle-text {
+  font-size: 0.72rem;
+  color: var(--gold-light);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.cover-bottom-tassel {
+  margin-top: 0.6rem;
+}
+
+.silk-ribbon {
+  display: block;
+  width: 14px;
+  height: 22px;
+  background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-dark) 100%);
+  border-radius: 2px 2px 4px 4px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* â•ªâ”‚â•ªÂºâ–ˆÃ®â”˜Ã§ â”ŒâŒâ”˜Ã¼ â•ªâ–“â–ˆÃ®â•ªâ–’ â”ŒâŒâ•ªÂ¬â•ªÂºâ•ªÂ¿ */
+
+/* --- DIVINATION TRIGGER & SPINNER --- */
+.divination-control {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-divinate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #a78020 0%, #d4af37 40%, #fae8a8 70%, #b89128 100%);
+  color: #170d01;
+  font-family: var(--font-ui);
+  font-size: 1.22rem;
+  font-weight: 800;
+  padding: 1rem 2.8rem;
+  border-radius: 999px;
+  border: 2px solid #fff6d9;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 56px;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-divinate:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 28px rgba(212, 175, 55, 0.55);
+}
+
+.btn-divinate:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-divinate:disabled {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-icon-svg {
+  display: flex;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  color: #4b3405;
+}
+
+/* â”˜Ãªâ•ªâ•¢â•ªâ•£â–ˆÃ®â•ªÂ¬ â•ªÂºâ”˜Ã¥â–ˆÃ®â”˜Ã â–ˆÃ®â•ªâ”¤â”˜Ã¥ â•ªÂ»â•ªâ–’ â•ªÂ¡â•ªÂºâ”˜Ã¤ â•ªÂ¬â”˜Ã¼â•ªÃºâ”˜Ã¤ */
+.divination-ritual-status {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.divination-ritual-status.active {
+  display: flex;
+}
+
+.mystic-loader-spinner {
+  width: 36px;
+  height: 36px;
+  animation: spinnerRotate 1.2s linear infinite;
+}
+
+@keyframes spinnerRotate {
+  100% { transform: rotate(360deg); }
+}
+
+.spinner-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.spinner-track {
+  stroke: rgba(212, 175, 55, 0.2);
+}
+
+.spinner-head {
+  stroke: var(--gold-light);
+  stroke-dasharray: 60, 150;
+  stroke-dashoffset: 0;
+}
+
+.ritual-msg {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold-light);
+}
+
+.ritual-hints {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  font-size: 0.8rem;
+  color: #8c9ebf;
+  margin-top: 0.3rem;
+}
+
+.hint-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.hint-item .mini-svg {
+  color: var(--gold-primary);
+}
+
+.hint-divider {
+  color: var(--gold-dark);
+}
+
+/* --------------------------------------------------------------------------
+   
+.cover-medallion {
+  width: 90px;
+  height: 90px;
+  margin: 1rem 0;
+  position: relative;
+  z-index: 10;
+}
+.toranj-svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+}
+.cover-top-ornament {
+  width: 120px;
+  height: 25px;
+  margin-top: 1rem;
+}
+.ornament-svg { width: 100%; height: 100%; }
+.cover-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 10px;
+}
+.cover-title {
+  color: var(--gold-light);
+  font-family: var(--font-poetry);
+  font-size: 2.5rem;
+  margin: 10px 0 0 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+.cover-subtitle {
+  color: var(--gold-primary);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+.cover-bookmark-ribbon { display: none; }
+.first-page-title {
+  font-family: var(--font-poetry);
+  font-size: 2rem;
+  color: var(--ink-primary);
+}
+.first-page-subtitle {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--ink-secondary);
+}
+.first-page-couplet {
+  font-family: var(--font-poetry);
+  font-size: 1.2rem;
+  color: var(--ink-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.leather-front {
+  overflow: hidden;
+  position: absolute;
+  inset: 0;
+}
+.leather-front, .first-page-inner { zoom: 0.6; }
+@supports not (zoom: 0.6) {
+  .leather-front, .first-page-inner { transform: scale(0.6); transform-origin: top center; }
+}

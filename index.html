@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#f2efe9" />
   <title>فالگیر - دیوان لسان‌الغیب</title>
-  <link rel="stylesheet" href="style.css" />`n  <link rel="stylesheet" href="book.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="book.css" />
 </head>
 <body>
   <!-- Ambient Audio -->
@@ -14,7 +15,6 @@
   </audio>
 
   <div class="vintage-container">
-    <!-- MASTHEAD -->
     <header class="masthead">
       <div class="masthead-top">
         <h1 class="newspaper-title">دیوان حافظ شیرازی</h1>
@@ -29,31 +29,63 @@
 
     <main class="main-content">
       
-      <!-- NIYYAT STAGE -->
       <div id="niyyatStage" class="stage active">
          <div class="intro-text">
             <p>مجموعه غزلیات حافظ، گنجینه‌ای از حکمت و عرفان است. چشم‌ها را ببندید، نیت قلبی کنید، کتاب را بگشایید و برای دریافت پاسخ خود، دکمه تفأل را لمس کنید.</p>
          </div>
 
-         <!-- THE NEW BOOK ANIMATION -->
          <div class="book-wrapper" id="bookScene">
            <figure class="book" id="book3D">
-             <!-- Front -->
              <ul class="hardcover_front">
                <li>
-                 <div class="coverDesign vintage-cover">
-                   <h2 class="cover-title">دیوان حافظ</h2>
-                   <p class="cover-subtitle">لسان‌الغیب شیرازی</p>
+                 <div class="leather-front">
+                    <div class="gold-frame">
+                      <div class="corner-brass c-top-left"></div>
+                      <div class="corner-brass c-top-right"></div>
+                      <div class="corner-brass c-bottom-left"></div>
+                      <div class="corner-brass c-bottom-right"></div>
+                      <div class="cover-content">
+                        <div class="cover-top-ornament">
+                          <svg viewBox="0 0 100 20" class="ornament-svg">
+                            <path d="M0,10 Q25,0 50,10 Q75,20 100,10" stroke="#d4af37" fill="none" stroke-width="1.5"/>
+                            <circle cx="50" cy="10" r="3" fill="#d4af37"/>
+                          </svg>
+                        </div>
+                        <div class="cover-medallion">
+                          <svg viewBox="0 0 90 90" class="toranj-svg">
+                            <polygon points="45,4 53,27 77,17 65,39 88,45 65,51 77,73 53,63 45,86 37,63 13,73 25,51 2,45 25,39 13,17 37,27" fill="transparent" stroke="#d4af37" stroke-width="0.8"/>
+                            <circle cx="45" cy="45" r="18" fill="#1e061b" stroke="#f6e29d" stroke-width="1.2"/>
+                            <circle cx="45" cy="45" r="6" fill="#f6e29d"/>
+                          </svg>
+                        </div>
+                        <h2 class="cover-title">دیوان حافظ</h2>
+                        <p class="cover-subtitle">لسان‌الغیب شیرازی</p>
+                      </div>
+                    </div>
                  </div>
                </li>
                <li></li>
              </ul>
 
-             <!-- Pages -->
              <ul class="page">
-               <li></li>
                <li>
-                 <!-- The Divination Button is INSIDE the book! -->
+                 <div class="first-page-inner" style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; padding: 20px;">
+                    <div class="first-page-shamseh" style="width: 60px; height: 60px; margin-bottom: 15px;">
+                      <svg viewBox="0 0 60 60" class="shamseh-svg-small" style="width:100%;height:100%;">
+                        <polygon points="30,4 36,20 53,13 44,28 60,30 44,32 53,47 36,40 30,56 24,40 7,47 16,32 0,30 16,28 7,13 24,20" fill="#d4af37"/>
+                        <circle cx="30" cy="30" r="10" fill="#20061e" stroke="#f6e29d" stroke-width="1"/>
+                        <circle cx="30" cy="30" r="4" fill="#f6e29d"/>
+                      </svg>
+                    </div>
+                    <h3 class="first-page-title">دیوان حافظ شیرازی</h3>
+                    <p class="first-page-subtitle">لسان‌الغیب و ترجمان‌الاسرار</p>
+                    <div class="first-page-couplet">
+                      <span>الا یا ایها الساقی ادر کأسا و ناولها</span>
+                      <span>که عشق آسان نمود اول ولی افتاد مشکل‌ها</span>
+                    </div>
+                 </div>
+               </li>
+               <li>
                  <button id="btnDivinate" class="btn-inside-book">تفأل بزن</button>
                  <div id="ritualStatus" class="divination-ritual-status">
                    <span id="ritualMsg"></span>
@@ -64,31 +96,34 @@
                <li></li>
              </ul>
 
-             <!-- Back -->
              <ul class="hardcover_back">
                <li></li>
                <li></li>
              </ul>
              <ul class="book_spine">
-               <li></li>
+               <li>
+                 <div class="spine-ribs">
+                    <span class="rib"></span>
+                    <span class="rib"></span>
+                    <span class="rib"></span>
+                    <span class="rib"></span>
+                    <span class="rib"></span>
+                  </div>
+               </li>
                <li></li>
              </ul>
            </figure>
          </div>
       </div>
 
-      <!-- RESULT STAGE -->
       <div id="resultStage" class="stage">
          <div class="result-card" id="manuscriptCard">
            <h2 class="ghazal-headline" id="ghazalTitle">غزل شماره ...</h2>
-           
            <div id="poemContainer" class="poem-body"></div>
-           
            <div class="interpretation-box" id="interpretationCard">
               <h3 class="interp-title">تعبیر و پیام</h3>
               <p id="interpText" class="interp-text">تعبیر در اینجا قرار می‌گیرد.</p>
            </div>
-           
            <div class="action-btn-row">
              <button id="btnTryAgain" class="newspaper-btn">تفأل دوباره</button>
              <button id="btnCopyFal" class="newspaper-btn">کپی</button>
@@ -100,7 +135,6 @@
     </main>
   </div>
 
-  <!-- MODALS -->
   <div class="modal-overlay" id="searchModal">
     <div class="modal-container">
       <div class="modal-header">
