@@ -1288,8 +1288,8 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
   background: rgba(5, 9, 17, 0.85);
   z-index: 200;
   display: flex;
@@ -1314,6 +1314,7 @@ body {
   width: 100%;
   max-width: 520px;
   max-height: 90vh;
+  margin: auto;
   display: flex;
   flex-direction: column;
   overflow: hidden;
