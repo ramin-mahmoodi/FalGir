@@ -866,8 +866,15 @@ body {
   -webkit-backface-visibility: hidden;
 }
 
-/* وجه بیرونی چرم — بافت چرم عنابی + قاب دوبل طلایی */
+/* ==========================================================================
+   جلد بیرونی کتاب (cover-outer) و لایه‌های تذهیب و عنوان
+   ========================================================================== */
 .cover-outer {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  overflow: visible;
+  direction: rtl !important;
   background:
     radial-gradient(circle at 50% 38%, rgba(233,196,106,.30) 0%, transparent 55%),
     radial-gradient(circle at 18% 12%, rgba(255,240,200,.14) 0%, transparent 40%),
@@ -878,111 +885,180 @@ body {
     inset 0 0 0 3px rgba(20, 5, 8, 0.55),
     inset 0 0 22px rgba(0, 0, 0, 0.7),
     0 8px 24px rgba(0, 0, 0, 0.6);
-  padding: 8px;
-  direction: rtl !important;
+  border-radius: 3px;
 }
 
-.gold-frame {
+/* لایه ۱: چرم زیرین */
+.leather-skin {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+/* لایه ۲: جدول‌کشی و حاشیه‌نگاری طلایی (SVG) */
+.board-tooling {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  border: 1px solid var(--gold-primary);
-  outline: 1px solid rgba(232, 195, 102, 0.45);
-  outline-offset: 3px;
-  border-radius: 2px;
-  position: relative;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* لایه ۳: ترنج و شمسه میانی */
+.board-medallion {
+  position: absolute;
+  top: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 122px;
+  height: 158px;
+  pointer-events: none;
+  z-index: 3;
+  display: block;
+}
+
+.board-medallion .toranj-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
+}
+
+/* لایه ۴: کتیبه و عنوان‌های روی جلد */
+.board-content {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* عنوان و لسان‌الغیب داخل مرکز ترنج */
+.cover-title-wrap {
+  position: absolute;
+  top: 142px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background:
-    url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23fbe69e' stroke-opacity='0.16'%3E%3Cpath d='M22 2 L25 19 L42 22 L25 25 L22 42 L19 25 L2 22 L19 19 Z'/%3E%3C/g%3E%3C/svg%3E");
-  box-shadow: inset 0 0 10px rgba(232, 195, 102, 0.28);
+  text-align: center;
 }
 
-.corner-brass {
+.cover-title {
+  font-family: var(--font-poetry);
+  font-size: 1.45rem;
+  color: #fff6d9;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 10px rgba(233, 196, 106, 0.8);
+  line-height: 1.05;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.cover-subtitle {
+  font-family: var(--font-ui);
+  font-size: 0.52rem;
+  color: #e9c46a;
+  letter-spacing: 0.4px;
+  margin-top: 1px;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* کتیبه پایینی: خواجه شمس‌الدین محمد حافظ شیرازی */
+.cover-imprint {
   position: absolute;
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--gold-light);
-  background: radial-gradient(circle at 30% 30%, #fff6d9 0%, var(--gold-primary) 45%, #7a5c14 100%);
-  box-shadow: 0 1px 3px rgba(0,0,0,.6);
+  top: 233px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130px;
+  font-family: var(--font-ui);
+  font-size: 0.48rem;
+  color: #f6e3a4;
+  white-space: nowrap;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+  line-height: 1;
+  margin: 0;
 }
-.c-top-right { top: 2px; right: 2px; border-left: none; border-bottom: none; border-radius: 0 2px 0 6px; }
-.c-top-left { top: 2px; left: 2px; border-right: none; border-bottom: none; border-radius: 2px 0 6px 0; }
-.c-bottom-right { bottom: 2px; right: 2px; border-left: none; border-top: none; border-radius: 6px 0 2px 0; }
-.c-bottom-left { bottom: 2px; left: 2px; border-right: none; border-top: none; border-radius: 0 6px 0 2px; }
 
-.cover-content {
+/* لایه ۵: روبان ابریشمی نشانک کتاب */
+.bookmark-ribbon {
+  position: absolute;
+  bottom: -16px;
+  left: 36px;
+  width: 11px;
+  height: 28px;
+  background: linear-gradient(180deg, #d4af37 0%, #876214 70%, #5d420a 100%);
+  border-radius: 1px 1px 3px 3px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+  z-index: 5;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+}
+
+/* آستر داخلی جلد (پس از باز شدن) */
+.endpaper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+}
+
+.endpaper-frame {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.exlibris {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 100%;
-  padding: 0.3rem;
+  padding: 10px;
 }
 
-.cover-top-ornament {
-  width: 118px;
-  margin-bottom: 0.35rem;
+.exlibris-star {
+  color: var(--gold-primary);
+  font-size: 0.9rem;
 }
 
-.ornament-svg {
-  width: 100%;
-  height: auto;
-}
-
-.ornament-pro, .toranj-pro { display: block; }
-
-.cover-medallion {
-  width: 84px;
-  height: 98px;
-  margin-bottom: 0.45rem;
-  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.8));
-}
-
-.toranj-svg {
-  width: 100%;
-  height: 100%;
-}
-
-.cover-bottom-ornament {
-  width: 104px;
-  margin-top: 0.3rem;
-  display: flex;
-  justify-content: center;
-}
-
-.ornament-small { width: 100%; height: auto; }
-
-.cover-title {
+.exlibris-title {
   font-family: var(--font-poetry);
-  font-size: 1.85rem;
+  font-size: 1.4rem;
   color: #fff6d9;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 10px var(--gold-primary);
-  line-height: 1.25;
+  margin-top: 4px;
 }
 
-.cover-subtitle {
-  font-size: 0.7rem;
+.exlibris-rule {
+  width: 50px;
+  height: 1px;
+  background: var(--gold-primary);
+  margin: 6px 0;
+  opacity: 0.7;
+}
+
+.exlibris-sub {
+  font-family: var(--font-ui);
+  font-size: 0.55rem;
   color: var(--gold-light);
-  font-weight: 500;
   letter-spacing: 0.5px;
 }
 
-.cover-bookmark-ribbon {
-  margin-top: 0.45rem;
-}
 
-.ribbon-tail {
-  display: block;
-  width: 12px;
-  height: 18px;
-  background: linear-gradient(180deg, var(--gold-light) 0%, #9c7722 100%);
-  border-radius: 1px 1px 3px 3px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-/* آستر داخلی جلد (با گردش ۱۸۰ درجه دیده می‌شود) */
 .cover-inner {
   background-color: var(--leather-base);
   background-image: 
