@@ -89,8 +89,6 @@ body {
   direction: rtl;
   text-align: right;
   overflow-x: hidden;
-  position: relative;
-  transform: translate3d(0, 0, 0);
 }
 
 /* --------------------------------------------------------------------------
