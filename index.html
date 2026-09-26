@@ -68,18 +68,357 @@
                 <span class="meta-author">♦ فال روزانه</span>
                 <span class="meta-date">♦ ویژه</span>
              </div>
-             
-             <!-- Fake book scene for JS -->
-             <div id="bookScene" class="book-scene">
-               <div id="book3D" class="book-3d">
-                 <div id="bookFrontCover" class="vintage-image-wrap">
-                   <div class="vintage-overlay"></div>
-                   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Hafez_Shirazi.jpg/800px-Hafez_Shirazi.jpg" alt="Hafez" class="vintage-image" />
-                 </div>
-               </div>
-             </div>
+<div class="book-scene" id="bookScene">
+          <div class="mystic-aura" id="mysticAura" aria-hidden="true"></div>
+          <div class="book-light-beam" id="bookLightBeam" aria-hidden="true"></div>
 
+          <!-- The Real 3D Book Object -->
+          <div class="book-3d" id="book3D" role="button" tabindex="0" aria-label="╪»█î┘ê╪º┘å ╪│┘çΓÇî╪¿╪╣╪»█î ╪¡╪º┘ü╪╕ ╪┤█î╪▒╪º╪▓█î">
+            
+            <!-- 1. Back Cover -->
+            <div class="book-face book-cover-back">
+              <div class="leather-back"></div>
+            </div>
+
+            <!-- 2. Pages Block (Paper Thickness) -->
+            <div class="book-face book-pages-left"></div>
+            <div class="book-face book-pages-top"></div>
+            <div class="book-face book-pages-bottom"></div>
+
+            <!-- 3. First Manuscript Page (revealed when cover opens) -->
+            <div class="book-face book-first-page">
+              <div class="first-page-inner">
+                <div class="first-page-shamseh">
+                  <svg viewBox="0 0 60 60" class="shamseh-svg-small">
+                    <polygon points="30,4 36,20 53,13 44,28 60,30 44,32 53,47 36,40 30,56 24,40 7,47 16,32 0,30 16,28 7,13 24,20" fill="#d4af37"/>
+                    <circle cx="30" cy="30" r="10" fill="#20061e" stroke="#f6e29d" stroke-width="1"/>
+                    <circle cx="30" cy="30" r="4" fill="#fff5d4"/>
+                  </svg>
+                </div>
+                <h3 class="first-page-title">دیوان حافظ شیرازی</h3>
+                <p class="first-page-subtitle">لسان‌الغیب و ترجمان‌الاسرار</p>
+                <div class="first-page-couplet">
+<span>الا یا ایها الساقی ادر کأسا و ناولها</span>
+<span>که عشق آسان نمود اول ولی افتاد مشکل‌ها</span>
+</div>
+              </div>
+            </div>
+
+            <!-- 4. Spine (Right side in Persian books) -->
+            <div class="book-face book-spine">
+              <div class="spine-ribs">
+                <span class="rib"></span>
+                <span class="rib"></span>
+                <span class="rib"></span>
+                <span class="rib"></span>
+                <span class="rib"></span>
+              </div>
+              <div class="spine-text">دیوان حافظ شیرازی</div>
+              <div class="spine-motif">Γ£ª</div>
+            </div>
+
+            <!-- 5. Front Cover (Opens around right hinge) -->
+            <div class="book-face book-cover-front" id="bookFrontCover">
+              <!-- Outer Leather Face -->
+              <div class="cover-side cover-outer">
+                <div class="leather-front">
+                  <div class="gold-frame">
+                    <div class="corner-brass c-top-right"></div>
+                    <div class="corner-brass c-top-left"></div>
+                    <div class="corner-brass c-bottom-right"></div>
+                    <div class="corner-brass c-bottom-left"></div>
+
+                    <div class="cover-content">
+                      <div class="cover-top-ornament">
+                        <svg viewBox="0 0 100 20" class="ornament-svg">
+                          <path d="M0,10 Q25,0 50,10 Q75,20 100,10" stroke="#353535" fill="none" stroke-width="1.5"/>
+                          <circle cx="50" cy="10" r="3" fill="#353535"/>
+                        </svg>
+                      </div>
+
+                      <div class="cover-medallion">
+                        <svg viewBox="0 0 90 90" class="toranj-svg">
+                          <polygon points="45,4 53,27 77,17 65,39 88,45 65,51 77,73 53,63 45,86 37,63 13,73 25,51 2,45 25,39 13,17 37,27" fill="transparent" stroke="#353535" stroke-width="0.8"/>
+                          <circle cx="45" cy="45" r="18" fill="#1e061b" stroke="#fbe499" stroke-width="1.2"/>
+                          <circle cx="45" cy="45" r="6" fill="#fff5d6"/>
+                          <defs>
+                            <linearGradient id="toranjGold" x1="0" y1="0" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+                              <stop stop-color="#fff5d4"/>
+                              <stop offset="0.5" stop-color="#d4af37"/>
+                              <stop offset="1" stop-color="#735212"/>
+                            </linearGradient>
+                          </defs>
+                        </svg>
+                      </div>
+
+                      <h2 class="cover-title">دیوان حافظ</h2>
+                      <p class="cover-subtitle">لسان‌الغیب شیرازی</p>
+
+                      <div class="cover-bookmark-ribbon">
+                        <span class="ribbon-tail"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Inner Cover Lining (seen when flipped open) -->
+              <div class="cover-side cover-inner">
+                <div class="inner-lining-border">
+                  <div class="lining-pattern"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Realistic Cast Shadow -->
+          <div class="book-cast-shadow" aria-hidden="true"></div>
+        </div>
+
+        
              <div class="article-text-preview">
+                <p>مجموعه غزلیات حافظ، گنجینه‌ای از حکمت و عرفان است. چشم‌ها را ببندید، نیت قلبی کنید و برای دریافت پاسخ خود، دیوان را بگشایید.</p>
+             </div>
+             
+             <div class="divination-control">
+               <div id="ritualStatus" class="divination-ritual-status">
+                 <span id="ritualMsg"></span>
+               </div>
+               <button id="btnDivinate" class="newspaper-btn primary-btn">
+                  تفأل به دیوان حافظ
+               </button>
+             </div>
+           </div>
+        </div>
+
+        <!-- RESULT STAGE -->
+        <div id="resultStage" class="stage">
+           <div class="article-box main-article" id="manuscriptCard">
+             <h2 class="main-headline" id="ghazalTitle">غزل شماره ...</h2>
+             <div class="article-meta">
+                <span class="meta-tag">Poetry</span>
+                <span class="meta-author">♦ دیوان حافظ</span>
+             </div>
+             
+             <div class="poetry-image-wrap">
+               <div class="vintage-overlay"></div>
+               <img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Hafez_Tomb.jpg" alt="Hafez Tomb" class="vintage-image" />
+             </div>
+             <p class="caption-text">آرامگاه حافظ در شیراز، تجلی‌گاه عاشقان و رندان جهان است.</p>
+
+             <div id="poemContainer" class="poem-body">
+               <!-- poetry goes here -->
+             </div>
+             
+             <div class="action-btn-row">
+               <button id="btnTryAgain" class="newspaper-btn">تفأل دوباره</button>
+               <button id="btnCopyFal" class="newspaper-btn">کپی</button>
+               <button id="btnShareFal" class="newspaper-btn">اشتراک</button>
+               <button id="btnPrintFal" class="newspaper-btn">چاپ</button>
+             </div>
+           </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN -->
+      <aside class="col-right">
+        <div class="sidebar-header">
+          <h3>مطالب پربازدید</h3>
+        </div>
+        <ul class="popular-list">
+          <li>
+            <span class="num">۰۱</span>
+            <div class="list-text">
+              <h4>نحوه صحیح نیت کردن</h4>
+              <p>چگونه با حضور قلب دیوان حافظ را بگشاییم؟</p>
+            </div>
+          </li>
+          <li>
+            <span class="num">۰۲</span>
+            <div class="list-text">
+              <h4>تاریخچه فال حافظ</h4>
+              <p>رسم تفأل از چه زمانی در ایران رواج یافت؟</p>
+            </div>
+          </li>
+          <li>
+            <span class="num">۰۳</span>
+            <div class="list-text">
+              <h4>فال روزانه</h4>
+              <p>هر روز با یک غزل جدید، روز خود را آغاز کنید.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num">۰۴</span>
+            <div class="list-text">
+              <h4>تفسیر عرفانی</h4>
+              <p>نگاهی عمیق‌تر به مفاهیم و استعاره‌های اشعار.</p>
+            </div>
+          </li>
+        </ul>
+      </aside>
+
+    </main>
+  </div>
+
+  <!-- MODALS (Keep IDs for JS) -->
+  <!-- Search Modal -->
+  <div class="modal-overlay" id="searchModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">جستجوی غزل</h3>
+        <button class="icon-btn" id="btnCloseSearchModal">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="search-input-group">
+          <input type="number" id="ghazalNumberInput" class="newspaper-input" placeholder="شماره غزل (۱ تا ۴۹۵)" />
+          <button id="btnJumpToNumber" class="newspaper-btn">برو</button>
+        </div>
+        <div class="search-divider">یا</div>
+        <input type="text" id="ghazalSearchInput" class="newspaper-input" placeholder="بخشی از شعر را بنویسید..." />
+        <div class="search-results-list" id="searchResultsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Modal -->
+  <div class="modal-overlay" id="aboutModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">آداب تفأل</h3>
+        <button class="icon-btn" id="btnCloseAboutModal">×</button>
+      </div>
+      <div class="modal-body">
+        <p>وضو بگیرید، نیت کنید و فاتحه‌ای بخوانید.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="toast-notification">
+    <div class="toast-content">
+      <div id="toastIconWrap"></div>
+      <span id="toastMsg"></span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('todaysDate').innerText = new Intl.DateTimeFormat('fa-IR', {
+      dateStyle: 'long'
+    }).format(new Date());
+  </script>
+</body>
+</html>
+<div class="book-scene" id="bookScene">
+          <div class="mystic-aura" id="mysticAura" aria-hidden="true"></div>
+          <div class="book-light-beam" id="bookLightBeam" aria-hidden="true"></div>
+
+          <!-- The Real 3D Book Object -->
+          <div class="book-3d" id="book3D" role="button" tabindex="0" aria-label="دیوان سه‌بعدی حافظ شیرازی">
+            
+            <!-- 1. Back Cover -->
+            <div class="book-face book-cover-back">
+              <div class="leather-back"></div>
+            </div>
+
+            <!-- 2. Pages Block (Paper Thickness) -->
+            <div class="book-face book-pages-left"></div>
+            <div class="book-face book-pages-top"></div>
+            <div class="book-face book-pages-bottom"></div>
+
+            <!-- 3. First Manuscript Page (revealed when cover opens) -->
+            <div class="book-face book-first-page">
+              <div class="first-page-inner">
+                <div class="first-page-shamseh">
+                  <svg viewBox="0 0 60 60" class="shamseh-svg-small">
+                    <polygon points="30,4 36,20 53,13 44,28 60,30 44,32 53,47 36,40 30,56 24,40 7,47 16,32 0,30 16,28 7,13 24,20" fill="#d4af37"/>
+                    <circle cx="30" cy="30" r="10" fill="#20061e" stroke="#f6e29d" stroke-width="1"/>
+                    <circle cx="30" cy="30" r="4" fill="#fff5d4"/>
+                  </svg>
+                </div>
+                <h3 class="first-page-title">دیوان حافظ شیرازی</h3>
+                <p class="first-page-subtitle">لسان‌الغیب و ترجمان‌الاسرار</p>
+                <div class="first-page-couplet">
+<span>الا یا ایها الساقی ادر کأسا و ناولها</span>
+<span>که عشق آسان نمود اول ولی افتاد مشکل‌ها</span>
+</div>
+              </div>
+            </div>
+
+            <!-- 4. Spine (Right side in Persian books) -->
+            <div class="book-face book-spine">
+              <div class="spine-ribs">
+                <span class="rib"></span>
+                <span class="rib"></span>
+                <span class="rib"></span>
+                <span class="rib"></span>
+                <span class="rib"></span>
+              </div>
+              <div class="spine-text">دیوان حافظ شیرازی</div>
+              <div class="spine-motif">✦</div>
+            </div>
+
+            <!-- 5. Front Cover (Opens around right hinge) -->
+            <div class="book-face book-cover-front" id="bookFrontCover">
+              <!-- Outer Leather Face -->
+              <div class="cover-side cover-outer">
+                <div class="leather-front">
+                  <div class="gold-frame">
+                    <div class="corner-brass c-top-right"></div>
+                    <div class="corner-brass c-top-left"></div>
+                    <div class="corner-brass c-bottom-right"></div>
+                    <div class="corner-brass c-bottom-left"></div>
+
+                    <div class="cover-content">
+                      <div class="cover-top-ornament">
+                        <svg viewBox="0 0 100 20" class="ornament-svg">
+                          <path d="M0,10 Q25,0 50,10 Q75,20 100,10" stroke="#353535" fill="none" stroke-width="1.5"/>
+                          <circle cx="50" cy="10" r="3" fill="#353535"/>
+                        </svg>
+                      </div>
+
+                      <div class="cover-medallion">
+                        <svg viewBox="0 0 90 90" class="toranj-svg">
+                          <polygon points="45,4 53,27 77,17 65,39 88,45 65,51 77,73 53,63 45,86 37,63 13,73 25,51 2,45 25,39 13,17 37,27" fill="transparent" stroke="#353535" stroke-width="0.8"/>
+                          <circle cx="45" cy="45" r="18" fill="#1e061b" stroke="#fbe499" stroke-width="1.2"/>
+                          <circle cx="45" cy="45" r="6" fill="#fff5d6"/>
+                          <defs>
+                            <linearGradient id="toranjGold" x1="0" y1="0" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+                              <stop stop-color="#fff5d4"/>
+                              <stop offset="0.5" stop-color="#d4af37"/>
+                              <stop offset="1" stop-color="#735212"/>
+                            </linearGradient>
+                          </defs>
+                        </svg>
+                      </div>
+
+                      <h2 class="cover-title">دیوان حافظ</h2>
+                      <p class="cover-subtitle">لسان‌الغیب شیرازی</p>
+
+                      <div class="cover-bookmark-ribbon">
+                        <span class="ribbon-tail"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Inner Cover Lining (seen when flipped open) -->
+              <div class="cover-side cover-inner">
+                <div class="inner-lining-border">
+                  <div class="lining-pattern"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Realistic Cast Shadow -->
+          <div class="book-cast-shadow" aria-hidden="true"></div>
+        </div>
+
+        <div class="article-text-preview">
                 <p>مجموعه غزلیات حافظ، گنجینه‌ای از حکمت و عرفان است. چشم‌ها را ببندید، نیت قلبی کنید و برای دریافت پاسخ خود، دیوان را بگشایید.</p>
              </div>
              
