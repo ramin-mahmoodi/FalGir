@@ -952,29 +952,34 @@ body {
 }
 
 .tadhhib-arch {
-  background: linear-gradient(180deg, #240a23 0%, #150516 100%);
-  border: 1.5px solid var(--gold-primary);
-  border-radius: 10px;
-  padding: 0.9rem 1.4rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.12), transparent);
+  border-top: 1px solid rgba(212, 175, 55, 0.4);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 1.8rem 1rem 2.2rem;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 0.25rem;
+  position: relative;
 }
 
-.arch-khatam {
-  font-family: var(--font-poetry);
-  font-size: 1.25rem;
-  color: var(--gold-light);
-  line-height: 1.3;
+.tadhhib-arch::before, .tadhhib-arch::after {
+  content: '♦';
+  position: absolute;
+  color: var(--gold-primary);
+  font-size: 0.7rem;
+  opacity: 0.6;
 }
+
+.tadhhib-arch::before { top: -6px; }
+.tadhhib-arch::after { bottom: -6px; }
 
 .ghazal-title {
-  font-size: clamp(1.35rem, 3.8vw, 1.75rem);
-  font-weight: 800;
-  color: #fff8e1;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  font-family: var(--font-poetry);
+  font-size: clamp(1.8rem, 4.5vw, 2.3rem);
+  font-weight: normal;
+  color: var(--ink-primary);
+  text-shadow: none;
+  line-height: 1;
 }
 
 
