@@ -339,15 +339,15 @@
     DOM.bookScene.classList.add('is-divinating');
     sound.playSingingBowl(432, 2.0);
 
-    // فاز ۲: گشودن جلد سه‌بعدی کتاب (در ۱.۱ ثانیه)
+    // فاز ۲: گشودن جلد سه‌بعدی کتاب (در ۸۵۰ میلی‌ثانیه)
     setTimeout(() => {
       DOM.ritualMsg.textContent = 'دیوان گشوده شد... راز فال آشکار می‌گردد';
       DOM.bookScene.classList.remove('is-divinating');
       DOM.bookScene.classList.add('is-opening');
       sound.playPageTurn();
-    }, 1100);
+    }, 850);
 
-    // فاز ۳: ورود به کتیبه غزل (در ۱.۸ ثانیه)
+    // فاز ۳: ورود به کتیبه غزل (در ۲.۱۵ ثانیه)
     setTimeout(() => {
       renderGhazalResult(STATE.currentFaal, STATE.currentFaalIndex);
       DOM.niyyatStage.classList.remove('active');
@@ -362,7 +362,7 @@
       DOM.ritualStatus.classList.remove('active');
       DOM.btnDivinate.disabled = false;
       STATE.isDivinating = false;
-    }, 1850);
+    }, 2150);
   }
 
   // =========================================================================

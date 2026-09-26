@@ -34,46 +34,33 @@
 }
 
 /* --------------------------------------------------------------------------
-   2. DESIGN TOKENS & SYSTEM VARIABLES
+   2. SYSTEM VARIABLES
    -------------------------------------------------------------------------- */
 :root {
-  /* پالت رنگ سنتی ایرانی */
   --bg-deep: #070d18;
   --bg-midnight: #0c1527;
   --bg-card: #121c32;
   --bg-card-hover: #182643;
   
-  /* رنگ‌های زرین و تذهیب */
   --gold-primary: #d4af37;
   --gold-light: #f5e197;
   --gold-highlight: #fff6d9;
   --gold-dark: #8c6d1f;
   --gold-border: rgba(212, 175, 55, 0.35);
   
-  /* چرم و مخمل */
   --leather-base: #280a22;
   --leather-dark: #190515;
-  --leather-rim: #3d1034;
   
-  /* بافت نسخه خطی کهن */
   --parchment-base: #fcf8ee;
   --parchment-shade: #f4edd8;
-  --parchment-edge: #e6d7b4;
   --ink-primary: #1e1309;
   --ink-secondary: #4a3726;
   
-  /* فونت‌ها */
   --font-poetry: 'IranNastaliq', 'IranNastaliq Web', 'Urdu Typesetting', 'Scheherazade New', 'Amiri', serif;
   --font-ui: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Tahoma, Arial, sans-serif;
   
-  /* ترنزیشن‌ها */
   --ease-mystic: cubic-bezier(0.25, 1, 0.5, 1);
   --trans-fast: 0.2s ease;
-  
-  /* ابعاد سه‌بعدی کتاب */
-  --book-width: 210px;
-  --book-height: 295px;
-  --book-depth: 34px;
 }
 
 /* --------------------------------------------------------------------------
@@ -103,21 +90,18 @@ body {
   text-align: right;
   overflow-x: hidden;
   position: relative;
-  /* جلوگیری از لگ و رندر بهینه در GPU */
   transform: translate3d(0, 0, 0);
 }
 
 /* --------------------------------------------------------------------------
-   4. LIGHTWEIGHT HARDWARE-ACCELERATED BACKGROUND (NO BLUR OVERHEAD)
+   4. LIGHTWEIGHT BACKGROUND
    -------------------------------------------------------------------------- */
 .stars-backdrop {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: 
-    radial-gradient(circle at 50% 20%, #15223e 0%, #0c162b 45%, #070d18 100%);
-  opacity: 1;
+  background: radial-gradient(circle at 50% 20%, #15223e 0%, #0c162b 45%, #070d18 100%);
 }
 
 .watermark-pattern {
@@ -131,11 +115,10 @@ body {
   z-index: 0;
   border-radius: 50%;
   border: 1px dashed rgba(212, 175, 55, 0.08);
-  box-shadow: inset 0 0 80px rgba(212, 175, 55, 0.03);
 }
 
 /* --------------------------------------------------------------------------
-   5. HEADER & VECTOR SVG ICONS
+   5. HEADER & ICONS
    -------------------------------------------------------------------------- */
 .app-header {
   position: relative;
@@ -265,7 +248,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   6. MAIN WORKSPACE
+   6. MAIN STAGE
    -------------------------------------------------------------------------- */
 .main-content {
   position: relative;
@@ -302,7 +285,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1.6rem;
-  max-width: 620px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
@@ -353,11 +336,11 @@ body {
 }
 
 /* ==========================================================================
-   THE AUTHENTIC 3D BOOK (6 REALISTIC 3D FACES WITH REAL DEPTH)
+   AUTHENTIC 3D BOOK GEOMETRY (DIRECTION: LTR FOR PURE 3D MATHS)
    ========================================================================== */
 .book-scene {
   position: relative;
-  width: 260px;
+  width: 280px;
   height: 330px;
   margin: 1.2rem auto 0.6rem;
   perspective: 1200px;
@@ -365,6 +348,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  direction: ltr !important; /* Forces uniform coordinate system for 3D faces */
 }
 
 /* هاله ملایم پس‌زمینه کتاب */
@@ -374,19 +358,19 @@ body {
   height: 260px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, transparent 65%);
-  transform: translateZ(-100px);
+  transform: translateZ(-80px);
   pointer-events: none;
-  transition: transform 0.6s ease, opacity 0.6s ease;
+  transition: transform 0.6s ease;
 }
 
-/* آبجکت سه‌بعدی کتاب (Book Container) */
+/* آبجکت سه‌بعدی کتاب */
 .book-3d {
   position: relative;
-  width: var(--book-width);
-  height: var(--book-height);
+  width: 200px;
+  height: 280px;
   transform-style: preserve-3d;
-  /* زاویه نمای سه‌بعدی واقعی در حالت استراحت */
-  transform: rotateY(-22deg) rotateX(14deg) rotateZ(-2deg);
+  /* زاویه سه‌بعدی طبیعی و چشم‌نواز */
+  transform: rotateY(-24deg) rotateX(14deg);
   transition: transform 0.85s var(--ease-mystic);
   cursor: pointer;
   user-select: none;
@@ -395,7 +379,7 @@ body {
 }
 
 .book-scene:not(.is-divinating) .book-3d:hover {
-  transform: rotateY(-14deg) rotateX(10deg) translateY(-8px);
+  transform: rotateY(-16deg) rotateX(8deg) translateY(-8px);
 }
 
 /* فاز ۱ تفأل: کتاب روبه‌رو شده و بالا می‌رود */
@@ -404,286 +388,315 @@ body {
 }
 
 .book-scene.is-divinating .mystic-aura {
-  transform: translateZ(-100px) scale(1.35);
+  transform: translateZ(-80px) scale(1.35);
   background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, transparent 70%);
 }
 
-/* فاز ۲ تفأل: چرخش ۳۶۰ درجه‌ای و گشوده شدن جلد سه‌بعدی کتاب */
-.book-scene.is-opening .face-front {
-  transform: rotateY(162deg);
+/* پرتو نور زرین هنگام باز شدن کتاب */
+.book-light-beam {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 246, 217, 0.85) 0%, rgba(212, 175, 55, 0.45) 45%, transparent 70%);
+  opacity: 0;
+  transform: translateZ(25px) scale(0.5);
+  transition: all 0.7s var(--ease-mystic);
+  pointer-events: none;
+  z-index: 20;
 }
 
-/* استایل عمومی وجه‌های سه‌بعدی کتاب */
+.book-scene.is-opening .book-light-beam {
+  opacity: 1;
+  transform: translateZ(35px) scale(1.3);
+}
+
+/* فاز ۲ تفأل: چرخش جلد و گشوده شدن سه‌بعدی کتاب */
+.book-scene.is-opening .book-cover-front {
+  transform: translateZ(20px) rotateY(155deg);
+}
+
+/* وجه‌های سه‌بعدی */
 .book-face {
   position: absolute;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  box-sizing: border-box;
 }
 
-/* 1. عطف کتاب (Spine Face) - سمت راست در کتاب‌های فارسی با ضخامت 34px */
-.face-spine {
+/* 1. جلد پشتی (Back Cover) */
+.book-cover-back {
+  left: 0;
   top: 0;
-  right: 0;
-  width: var(--book-depth);
+  width: 200px;
+  height: 280px;
+  transform: translateZ(-20px);
+  border-radius: 4px;
+  background: linear-gradient(135deg, #180316 0%, #2e0828 50%, #150214 100%);
+  border: 1px solid #8e6d19;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+.leather-back {
+  width: 100%;
   height: 100%;
-  transform-origin: right center;
-  transform: rotateY(-90deg);
-  background: linear-gradient(90deg, #180517 0%, #350c30 50%, #1a0619 100%);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 3px;
+}
+
+/* 2. عطف کتاب (Spine) در سمت راست */
+.book-spine {
+  right: -20px;
+  top: 0;
+  width: 40px;
+  height: 280px;
+  transform-origin: center center;
+  transform: rotateY(90deg);
+  background: linear-gradient(90deg, #1a0418 0%, #3a0c34 50%, #180316 100%);
   border-top: 1px solid var(--gold-primary);
   border-bottom: 1px solid var(--gold-primary);
-  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.9);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.9);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 12px 0;
+  direction: rtl !important;
   z-index: 5;
 }
 
-/* تیغه‌های برجسته طلاکوب روی عطف کتاب */
 .spine-ribs {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 100%;
-  position: absolute;
-  inset: 0;
   pointer-events: none;
 }
 
 .spine-ribs .rib {
-  display: block;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, #876214, var(--gold-light), #876214);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  background: linear-gradient(90deg, #6c4e0f, var(--gold-light), #6c4e0f);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
 }
 
-.spine-title {
+.spine-text {
   writing-mode: vertical-rl;
   color: var(--gold-light);
-  font-size: 0.74rem;
-  letter-spacing: 2px;
+  font-size: 0.76rem;
   font-weight: 700;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
-  position: relative;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
   z-index: 2;
   margin: auto 0;
 }
 
-.spine-bottom-rosette {
-  width: 12px;
-  height: 12px;
-  border: 1px solid var(--gold-primary);
-  border-radius: 50%;
-  position: relative;
+.spine-motif {
+  color: var(--gold-primary);
+  font-size: 0.8rem;
   z-index: 2;
 }
 
-/* 2. لبه جلویی ورق‌ها (Left Fore-edge Face) - ورق‌های لبه‌طلایی رو به بیرون */
-.face-fore-edge {
+/* 3. لبه‌های ورق‌های کاغذ (Paper Edges) */
+.book-pages-left {
+  left: -20px;
   top: 3px;
-  left: 0;
-  width: var(--book-depth);
-  height: calc(100% - 6px);
-  transform-origin: left center;
-  transform: rotateY(90deg);
+  width: 40px;
+  height: 274px;
+  transform-origin: center center;
+  transform: rotateY(-90deg);
   background: repeating-linear-gradient(
     90deg,
-    #deb865 0px,
+    #cfab53 0px,
     #fff3d1 1px,
-    #aa8323 2px,
-    #cf9e38 3px
+    #98721c 2px,
+    #b99030 3px
   );
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
   border-radius: 2px;
 }
 
-/* 3. لبه بالایی ورق‌ها (Top Edge Face) */
-.face-top-edge {
-  top: 0;
+.book-pages-top {
   left: 3px;
-  width: calc(100% - 6px);
-  height: var(--book-depth);
-  transform-origin: top center;
+  top: -20px;
+  width: 194px;
+  height: 40px;
+  transform-origin: center center;
   transform: rotateX(90deg);
   background: repeating-linear-gradient(
     0deg,
-    #deb865 0px,
+    #cfab53 0px,
     #fff3d1 1px,
-    #aa8323 2px,
-    #cf9e38 3px
+    #98721c 2px,
+    #b99030 3px
   );
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
 }
 
-/* 4. لبه پایینی ورق‌ها (Bottom Edge Face) */
-.face-bottom-edge {
-  bottom: 0;
+.book-pages-bottom {
   left: 3px;
-  width: calc(100% - 6px);
-  height: var(--book-depth);
-  transform-origin: bottom center;
+  bottom: -20px;
+  width: 194px;
+  height: 40px;
+  transform-origin: center center;
   transform: rotateX(-90deg);
   background: repeating-linear-gradient(
     0deg,
-    #deb865 0px,
+    #cfab53 0px,
     #fff3d1 1px,
-    #aa8323 2px,
-    #cf9e38 3px
+    #98721c 2px,
+    #b99030 3px
   );
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
 }
 
-/* 5. جلد زیرین کتاب (Back Cover Face) */
-.face-back {
-  inset: 0;
-  transform: translateZ(calc(-1 * var(--book-depth)));
-  background: linear-gradient(135deg, #180415 0%, #290824 50%, #150313 100%);
-  border-radius: 3px 8px 8px 3px;
-  border: 1px solid var(--gold-dark);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-  padding: 8px;
-}
-
-.back-cover-emboss {
-  width: 100%;
-  height: 100%;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 3px;
-}
-
-/* 6. صفحه داخلی نسخه خطی (Inner Page Face) - زیر جلد قرار دارد و با باز شدن نمایان می‌شود */
-.face-inner {
-  inset: 4px;
-  transform: translateZ(-2px);
-  background: radial-gradient(circle at center, #fdf9ee 0%, #f4edd8 80%, #ebdcb8 100%);
-  border-radius: 3px;
-  box-shadow: inset 0 0 15px rgba(138, 104, 30, 0.25);
+/* 4. صفحه اول داخل کتاب (First Manuscript Page) */
+.book-first-page {
+  left: 3px;
+  top: 3px;
+  width: 194px;
+  height: 274px;
+  transform: translateZ(19px);
+  background: radial-gradient(circle at center, #fffcf5 0%, #f6edda 75%, #ecdcb7 100%);
+  border-radius: 2px;
+  box-shadow: inset 0 0 14px rgba(110, 80, 20, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px;
+  direction: rtl !important;
+  text-align: center;
 }
 
-.inner-page-content {
+.first-page-inner {
   width: 100%;
   height: 100%;
   border: 1px solid var(--gold-primary);
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 1rem 0.5rem;
-}
-
-.inner-tadhhib-arch {
+  border-radius: 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  justify-content: center;
+  padding: 0.8rem 0.4rem;
+  gap: 0.4rem;
 }
 
-.inner-shamseh {
+.first-page-shamseh {
   width: 44px;
   height: 44px;
 }
 
-.inner-svg {
+.shamseh-svg-small {
   width: 100%;
   height: 100%;
 }
 
-.inner-calligraphy {
+.first-page-title {
   font-family: var(--font-poetry);
-  font-size: 1.25rem;
-  color: var(--ink-primary);
-  line-height: 1.4;
+  font-size: 1.3rem;
+  color: #1a0f05;
+  line-height: 1.3;
 }
 
-.inner-couplet {
+.first-page-subtitle {
+  font-size: 0.68rem;
+  color: #8c6a1b;
+  font-weight: 600;
+}
+
+.first-page-couplet {
   font-family: var(--font-poetry);
-  font-size: 0.88rem;
-  color: var(--ink-secondary);
+  font-size: 0.82rem;
+  color: #3b2816;
   line-height: 1.8;
-  margin-top: 0.4rem;
+  margin-top: 0.3rem;
+  display: flex;
+  flex-direction: column;
 }
 
-/* 7. جلد رویی زرکوب و سه‌بعدی (Front Cover Face) */
-.face-front {
-  inset: 0;
-  transform-origin: right center;
+/* 5. جلد رویی کتاب (Front Cover) */
+.book-cover-front {
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 280px;
+  transform-origin: right center; /* لولای گردش روی عطف راست */
+  transform: translateZ(20px);
   transform-style: preserve-3d;
-  transition: transform 0.9s cubic-bezier(0.35, 0, 0.25, 1);
-  transform: translateZ(0);
+  transition: transform 0.95s cubic-bezier(0.3, 0, 0.2, 1);
+  border-radius: 3px;
   z-index: 10;
 }
 
-.leather-front {
-  width: 100%;
-  height: 100%;
-  border-radius: 3px 8px 8px 3px;
+.cover-side {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* وجه بیرونی چرم */
+.cover-outer {
+  transform: rotateY(0deg);
   background: 
-    radial-gradient(circle at 50% 45%, rgba(212, 175, 55, 0.15) 0%, transparent 65%),
-    linear-gradient(135deg, var(--leather-base) 0%, #3e1236 50%, var(--leather-dark) 100%);
+    radial-gradient(circle at 50% 45%, rgba(212, 175, 55, 0.16) 0%, transparent 65%),
+    linear-gradient(135deg, var(--leather-base) 0%, #43113c 50%, #1e051c 100%);
   border: 2px solid var(--gold-primary);
   box-shadow: 
-    inset 0 0 14px rgba(0, 0, 0, 0.7),
-    0 8px 24px rgba(0, 0, 0, 0.5);
-  padding: 9px;
+    inset 0 0 14px rgba(0, 0, 0, 0.75),
+    0 8px 24px rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  direction: rtl !important;
 }
 
 .gold-frame {
   width: 100%;
   height: 100%;
   border: 1px solid var(--gold-primary);
-  border-radius: 3px;
+  border-radius: 2px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 6px rgba(212, 175, 55, 0.3);
+  box-shadow: inset 0 0 6px rgba(212, 175, 55, 0.35);
 }
 
-/* نبشی‌های برنجی زرین چهارگوشه جلد */
 .corner-brass {
   position: absolute;
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   border: 2px solid var(--gold-light);
 }
-
 .c-top-right { top: 2px; right: 2px; border-left: none; border-bottom: none; }
 .c-top-left { top: 2px; left: 2px; border-right: none; border-bottom: none; }
 .c-bottom-right { bottom: 2px; right: 2px; border-left: none; border-top: none; }
 .c-bottom-left { bottom: 2px; left: 2px; border-right: none; border-top: none; }
 
-.cover-body {
+.cover-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100%;
-  padding: 0.4rem;
+  padding: 0.3rem;
 }
 
-.cover-top-motif {
-  width: 75px;
-  margin-bottom: 0.6rem;
+.cover-top-ornament {
+  width: 70px;
+  margin-bottom: 0.4rem;
 }
 
-.motif-svg {
+.ornament-svg {
   width: 100%;
   height: auto;
 }
 
-.cover-toranj {
-  width: 78px;
-  height: 78px;
-  margin-bottom: 0.7rem;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
+.cover-medallion {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.8));
 }
 
 .toranj-svg {
@@ -691,46 +704,57 @@ body {
   height: 100%;
 }
 
-.cover-title-group {
-  margin-bottom: 0.3rem;
-}
-
-.cover-title-text {
+.cover-title {
   font-family: var(--font-poetry);
-  font-size: 1.95rem;
-  color: var(--gold-highlight);
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 8px var(--gold-primary);
+  font-size: 1.85rem;
+  color: #fff6d9;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 10px var(--gold-primary);
   line-height: 1.25;
 }
 
-.cover-subtitle-text {
-  font-size: 0.72rem;
+.cover-subtitle {
+  font-size: 0.7rem;
   color: var(--gold-light);
   font-weight: 500;
   letter-spacing: 0.5px;
 }
 
-.cover-bottom-tassel {
-  margin-top: 0.6rem;
+.cover-bookmark-ribbon {
+  margin-top: 0.5rem;
 }
 
-.silk-ribbon {
+.ribbon-tail {
   display: block;
-  width: 14px;
-  height: 22px;
-  background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-dark) 100%);
-  border-radius: 2px 2px 4px 4px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  width: 12px;
+  height: 18px;
+  background: linear-gradient(180deg, var(--gold-light) 0%, #9c7722 100%);
+  border-radius: 1px 1px 3px 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* آستر داخلی جلد (با گردش ۱۸۰ درجه دیده می‌شود) */
+.cover-inner {
+  transform: rotateY(180deg);
+  background: radial-gradient(circle at center, #2e0c29 0%, #170415 100%);
+  border: 2px solid #8e6d19;
+  padding: 8px;
+}
+
+.inner-lining-border {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 2px;
 }
 
 /* سایه کف زیر کتاب */
 .book-cast-shadow {
   position: absolute;
-  bottom: -16px;
+  bottom: -15px;
   width: 180px;
-  height: 20px;
+  height: 22px;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.7) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.65) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -791,7 +815,6 @@ body {
   color: #4b3405;
 }
 
-/* وضعیت انیمیشن در حال تفأل */
 .divination-ritual-status {
   display: none;
   flex-direction: column;
@@ -864,7 +887,7 @@ body {
    8. STAGE 2: REVELATION & ILLUMINATED MANUSCRIPT CARD
    -------------------------------------------------------------------------- */
 .stage-result {
-  max-width: 820px;
+  max-width: 860px;
   margin: 0 auto;
 }
 
@@ -885,7 +908,7 @@ body {
   box-shadow: 
     0 12px 35px rgba(0, 0, 0, 0.55),
     0 0 25px rgba(212, 175, 55, 0.2);
-  padding: 2rem 2rem 2.4rem;
+  padding: 2.2rem 2.4rem 2.6rem;
   color: var(--ink-primary);
   animation: cardFadeIn 0.6s var(--ease-mystic) forwards;
   will-change: transform, opacity;
@@ -911,49 +934,38 @@ body {
   pointer-events: none;
 }
 
-/* سرلوحه تذهیب (Tadhhib Arch) */
+/* سرلوحه تذهیب (Tadhhib Header) */
 .tadhhib-header {
   position: relative;
   width: 100%;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .tadhhib-arch {
-  position: relative;
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-.arch-svg {
-  width: 100%;
-  height: 75px;
-  display: block;
-}
-
-.arch-content {
-  position: absolute;
-  inset: 0;
+  background: linear-gradient(180deg, #240a23 0%, #150516 100%);
+  border: 1.5px solid var(--gold-primary);
+  border-radius: 10px;
+  padding: 0.9rem 1.4rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  gap: 0.25rem;
 }
 
 .arch-khatam {
   font-family: var(--font-poetry);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   color: var(--gold-light);
-  margin-bottom: 0.15rem;
+  line-height: 1.3;
 }
 
 .ghazal-title {
-  font-size: clamp(1.25rem, 3.6vw, 1.6rem);
+  font-size: clamp(1.35rem, 3.8vw, 1.75rem);
   font-weight: 800;
-  color: #fff6d9;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+  color: #fff8e1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .tadhhib-divider {
@@ -961,7 +973,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  margin: 1rem 0 1.8rem;
+  margin: 1.2rem 0 1.8rem;
 }
 
 .tadhhib-divider .line {
@@ -977,12 +989,12 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   9. POEM BODY & TRADITIONAL TWO-HEMISTICH NASTALIQ COUPLETS
+   9. POEM BODY & CLASSICAL TWO-HEMISTICH NASTALIQ COUPLETS
    -------------------------------------------------------------------------- */
 .poem-body {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 0.75rem;
   margin: 1.2rem 0 2rem;
   font-family: var(--font-poetry);
   width: 100%;
@@ -993,7 +1005,7 @@ body {
   align-items: baseline;
   justify-content: space-between;
   width: 100%;
-  padding: 0.45rem 0.6rem;
+  padding: 0.5rem 1rem;
   border-radius: 6px;
   transition: background-color var(--trans-fast);
   opacity: 0;
@@ -1016,40 +1028,44 @@ body {
 
 .mesra {
   flex: 1;
-  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
-  line-height: 2.25;
+  font-size: clamp(1.22rem, 2.6vw, 1.55rem);
+  line-height: 2.3;
   color: var(--ink-primary);
   text-rendering: optimizeLegibility;
 }
 
+/* مصرع اول در سمت راست به طور طبیعی راست‌چین است */
 .mesra-first {
-  text-align: left;
-  padding-left: 0.5rem;
+  text-align: right;
+  padding-left: 1.2rem;
 }
 
+/* مصرع دوم در سمت چپ به طور طبیعی چپ‌چین است تا تقارن کلاسیک ایجاد شود */
 .mesra-second {
-  text-align: right;
-  padding-right: 0.5rem;
+  text-align: left;
+  padding-right: 1.2rem;
 }
 
 .bayt-divider {
   color: var(--gold-primary);
-  opacity: 0.6;
+  opacity: 0.65;
   font-size: 0.75rem;
   padding: 0 0.8rem;
   user-select: none;
+  display: flex;
+  align-items: center;
 }
 
 .tadhhib-footer-ornament {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 0.8rem;
+  margin-top: 1rem;
 }
 
 .flourish-svg {
-  width: 120px;
-  height: 20px;
+  width: 140px;
+  height: 22px;
 }
 
 /* --------------------------------------------------------------------------
@@ -1057,23 +1073,13 @@ body {
    -------------------------------------------------------------------------- */
 .interpretation-card {
   background: linear-gradient(180deg, #131d34 0%, #0d1526 100%);
-  border: 1px solid var(--gold-border);
-  border-radius: 12px;
-  padding: 1.6rem 1.8rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  border: 1.5px solid var(--gold-primary);
+  border-radius: 14px;
+  padding: 1.8rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.15);
   position: relative;
-  opacity: 0;
-  transform: translateY(18px);
-  animation: interpReveal 0.65s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
-  animation-delay: 0.8s;
-  will-change: transform, opacity;
-}
-
-@keyframes interpReveal {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  opacity: 1;
+  transform: none;
 }
 
 .interpretation-card::before {
@@ -1081,7 +1087,7 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  width: 3px;
+  width: 4px;
   height: 100%;
   background: var(--gold-primary);
 }
@@ -1090,14 +1096,14 @@ body {
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.7rem;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.8rem;
   border-bottom: 1px solid rgba(212, 175, 55, 0.18);
 }
 
 .interp-icon-wrap {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   border-radius: 8px;
   background: rgba(212, 175, 55, 0.12);
   border: 1px solid var(--gold-border);
@@ -1108,20 +1114,20 @@ body {
 }
 
 .interp-title {
-  font-size: 1.22rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--gold-highlight);
 }
 
 .interp-subtitle {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: #9cb1d4;
 }
 
 .interp-text {
   font-family: var(--font-ui);
-  font-size: 1.05rem;
-  line-height: 2.05;
+  font-size: 1.08rem;
+  line-height: 2.1;
   color: #eaf0fc;
   text-align: justify;
 }
@@ -1132,16 +1138,11 @@ body {
 .action-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 0.9rem;
   justify-content: center;
   width: 100%;
-  opacity: 0;
-  animation: barReveal 0.5s ease forwards;
-  animation-delay: 1s;
-}
-
-@keyframes barReveal {
-  to { opacity: 1; }
+  opacity: 1;
+  margin-top: 0.5rem;
 }
 
 .action-btn {
@@ -1149,14 +1150,14 @@ body {
   align-items: center;
   gap: 0.6rem;
   font-family: var(--font-ui);
-  font-size: 0.95rem;
+  font-size: 0.96rem;
   font-weight: 600;
-  padding: 0.75rem 1.4rem;
+  padding: 0.8rem 1.6rem;
   border-radius: 10px;
   cursor: pointer;
   transition: all var(--trans-fast);
   border: 1px solid transparent;
-  min-height: 46px;
+  min-height: 48px;
   user-select: none;
 }
 
@@ -1212,7 +1213,7 @@ body {
 .app-footer {
   position: relative;
   z-index: 10;
-  padding: 2rem 1.2rem;
+  padding: 2.2rem 1.4rem;
   text-align: center;
   border-top: 1px solid rgba(212, 175, 55, 0.15);
   background: rgba(7, 13, 24, 0.95);
@@ -1223,14 +1224,14 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.8rem;
 }
 
 .footer-quote {
   font-family: var(--font-poetry);
-  font-size: 1.22rem;
+  font-size: 1.25rem;
   color: var(--gold-light);
-  line-height: 1.8;
+  line-height: 1.9;
 }
 
 .footer-credits {
@@ -1427,7 +1428,7 @@ body {
   color: #f0f4fc;
 }
 
-/* محتوای مودال آداب تفأل */
+/* محتوای مودال آداب */
 .adab-modal-content {
   display: flex;
   flex-direction: column;
@@ -1513,15 +1514,9 @@ body {
   }
 
   .book-scene {
-    width: 220px;
-    height: 300px;
+    width: 240px;
+    height: 310px;
     margin: 0.8rem auto 0.4rem;
-  }
-
-  :root {
-    --book-width: 185px;
-    --book-height: 265px;
-    --book-depth: 30px;
   }
 
   .btn-divinate {
@@ -1531,20 +1526,16 @@ body {
   }
 
   .manuscript-card {
-    padding: 1.3rem 1rem 1.6rem;
+    padding: 1.4rem 1.1rem 1.8rem;
     border-radius: 14px;
   }
 
-  .arch-svg {
-    height: 65px;
-  }
-
-  /* چیدمان هوشمند دو مصرع در موبایل */
+  /* چیدمان ابیات در موبایل */
   .bayt {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.25rem;
-    padding: 0.55rem 0.3rem;
+    gap: 0.35rem;
+    padding: 0.6rem 0.4rem;
     border-bottom: 1px dashed rgba(184, 145, 40, 0.25);
   }
 
@@ -1573,11 +1564,11 @@ body {
   }
 
   .interpretation-card {
-    padding: 1.2rem 1.1rem;
+    padding: 1.3rem 1.2rem;
   }
 
   .interp-text {
-    font-size: 0.96rem;
+    font-size: 0.98rem;
     line-height: 1.95;
   }
 
@@ -1598,11 +1589,11 @@ body {
   }
 
   .mesra-first {
-    text-align: left;
+    text-align: right;
   }
 
   .mesra-second {
-    text-align: right;
+    text-align: left;
   }
 }
 

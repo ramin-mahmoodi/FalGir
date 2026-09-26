@@ -29,7 +29,7 @@
 </head>
 <body>
 
-  <!-- Optimized Mystical Ambient Backdrop -->
+  <!-- Ambient Backdrop -->
   <div class="stars-backdrop" aria-hidden="true"></div>
   <div class="watermark-pattern" aria-hidden="true"></div>
 
@@ -61,7 +61,6 @@
         <!-- Sound Toggle -->
         <button id="btnSoundToggle" class="icon-btn" title="صدا: فعال" aria-label="قطع یا وصل صدا">
           <span class="icon-svg-wrap" id="soundIconWrap">
-            <!-- Speaker on SVG -->
             <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
               <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -114,15 +113,45 @@
           </p>
         </div>
 
-        <!-- 3D Book Stage (Rich 3D Hardcover Persian Diwan) -->
+        <!-- 3D Book Stage -->
         <div class="book-scene" id="bookScene">
           <div class="mystic-aura" id="mysticAura" aria-hidden="true"></div>
+          <div class="book-light-beam" id="bookLightBeam" aria-hidden="true"></div>
 
           <!-- The Real 3D Book Object -->
           <div class="book-3d" id="book3D" role="button" tabindex="0" aria-label="دیوان سه‌بعدی حافظ شیرازی">
             
-            <!-- Book Spine (عطف کتاب در سمت راست در نسخه کتاب‌های پارسی) -->
-            <div class="book-face face-spine">
+            <!-- 1. Back Cover -->
+            <div class="book-face book-cover-back">
+              <div class="leather-back"></div>
+            </div>
+
+            <!-- 2. Pages Block (Paper Thickness) -->
+            <div class="book-face book-pages-left"></div>
+            <div class="book-face book-pages-top"></div>
+            <div class="book-face book-pages-bottom"></div>
+
+            <!-- 3. First Manuscript Page (revealed when cover opens) -->
+            <div class="book-face book-first-page">
+              <div class="first-page-inner">
+                <div class="first-page-shamseh">
+                  <svg viewBox="0 0 60 60" class="shamseh-svg-small">
+                    <polygon points="30,4 36,20 53,13 44,28 60,30 44,32 53,47 36,40 30,56 24,40 7,47 16,32 0,30 16,28 7,13 24,20" fill="#d4af37"/>
+                    <circle cx="30" cy="30" r="10" fill="#20061e" stroke="#f6e29d" stroke-width="1"/>
+                    <circle cx="30" cy="30" r="4" fill="#fff5d4"/>
+                  </svg>
+                </div>
+                <h3 class="first-page-title">دیوان حافظ شیرازی</h3>
+                <p class="first-page-subtitle">لسان‌الغیب و ترجمان‌الاسرار</p>
+                <div class="first-page-couplet">
+                  <span>الا یا ایها الساقی ادر کأسا و ناولها</span>
+                  <span>که عشق آسان نمود اول ولی افتاد مشکل‌ها</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Spine (Right side in Persian books) -->
+            <div class="book-face book-spine">
               <div class="spine-ribs">
                 <span class="rib"></span>
                 <span class="rib"></span>
@@ -130,99 +159,60 @@
                 <span class="rib"></span>
                 <span class="rib"></span>
               </div>
-              <div class="spine-title">دیوان خواجه حافظ شیرازی</div>
-              <div class="spine-bottom-rosette"></div>
+              <div class="spine-text">دیوان حافظ شیرازی</div>
+              <div class="spine-motif">✦</div>
             </div>
 
-            <!-- Left Fore-edge (لبه جلویی کاغذها و ورق‌های لبه‌طلایی) -->
-            <div class="book-face face-fore-edge"></div>
+            <!-- 5. Front Cover (Opens around right hinge) -->
+            <div class="book-face book-cover-front" id="bookFrontCover">
+              <!-- Outer Leather Face -->
+              <div class="cover-side cover-outer">
+                <div class="leather-front">
+                  <div class="gold-frame">
+                    <div class="corner-brass c-top-right"></div>
+                    <div class="corner-brass c-top-left"></div>
+                    <div class="corner-brass c-bottom-right"></div>
+                    <div class="corner-brass c-bottom-left"></div>
 
-            <!-- Top Edge (لبه بالایی ورق‌ها) -->
-            <div class="book-face face-top-edge"></div>
+                    <div class="cover-content">
+                      <div class="cover-top-ornament">
+                        <svg viewBox="0 0 100 20" class="ornament-svg">
+                          <path d="M0,10 Q25,0 50,10 Q75,20 100,10" stroke="#d4af37" fill="none" stroke-width="1.5"/>
+                          <circle cx="50" cy="10" r="3" fill="#fff3c6"/>
+                        </svg>
+                      </div>
 
-            <!-- Bottom Edge (لبه پایینی ورق‌ها) -->
-            <div class="book-face face-bottom-edge"></div>
+                      <div class="cover-medallion">
+                        <svg viewBox="0 0 90 90" class="toranj-svg">
+                          <polygon points="45,4 53,27 77,17 65,39 88,45 65,51 77,73 53,63 45,86 37,63 13,73 25,51 2,45 25,39 13,17 37,27" fill="url(#toranjGold)" stroke="#927018" stroke-width="0.8"/>
+                          <circle cx="45" cy="45" r="18" fill="#1e061b" stroke="#fbe499" stroke-width="1.2"/>
+                          <circle cx="45" cy="45" r="6" fill="#fff5d6"/>
+                          <defs>
+                            <linearGradient id="toranjGold" x1="0" y1="0" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+                              <stop stop-color="#fff5d4"/>
+                              <stop offset="0.5" stop-color="#d4af37"/>
+                              <stop offset="1" stop-color="#735212"/>
+                            </linearGradient>
+                          </defs>
+                        </svg>
+                      </div>
 
-            <!-- Back Cover (جلد زیرین کتاب) -->
-            <div class="book-face face-back">
-              <div class="back-cover-emboss"></div>
-            </div>
+                      <h2 class="cover-title">دیوان حافظ</h2>
+                      <p class="cover-subtitle">لسان‌الغیب شیرازی</p>
 
-            <!-- Inner Manuscript Page (صفحهٔ گشوده‌شده زیر جلد) -->
-            <div class="book-face face-inner">
-              <div class="inner-page-content">
-                <div class="inner-tadhhib-arch">
-                  <div class="inner-shamseh">
-                    <svg viewBox="0 0 60 60" class="inner-svg">
-                      <polygon points="30,5 36,21 53,14 44,29 60,30 44,31 53,46 36,39 30,55 24,39 7,46 16,31 0,30 16,29 7,14 24,21" fill="#d4af37"/>
-                      <circle cx="30" cy="30" r="10" fill="#2b0e27"/>
-                      <circle cx="30" cy="30" r="4" fill="#fcebb2"/>
-                    </svg>
-                  </div>
-                  <div class="inner-calligraphy">دیوان حافظ شیرازی</div>
-                  <div class="inner-couplet">
-                    به بوی نافه‌ای کاخر صبا زان طره بگشاید<br>
-                    ز تاب جعد مشکینش چه خون افتاد در دل‌ها
+                      <div class="cover-bookmark-ribbon">
+                        <span class="ribbon-tail"></span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Front Cover (جلد رویی زرکوب و منبت‌کاری) -->
-            <div class="book-face face-front" id="bookFrontCover">
-              <div class="leather-front">
-                
-                <!-- Gold Filigree Frame -->
-                <div class="gold-frame">
-                  
-                  <!-- Four Corner Ornaments -->
-                  <div class="corner-brass c-top-right"></div>
-                  <div class="corner-brass c-top-left"></div>
-                  <div class="corner-brass c-bottom-right"></div>
-                  <div class="corner-brass c-bottom-left"></div>
-
-                  <div class="cover-body">
-                    <!-- Top Eslimi Arch -->
-                    <div class="cover-top-motif">
-                      <svg viewBox="0 0 120 24" class="motif-svg">
-                        <path d="M0,12 C30,0 45,22 60,12 C75,2 90,24 120,12" stroke="#d4af37" stroke-width="1.6" fill="none"/>
-                        <circle cx="60" cy="12" r="3.5" fill="#fff1c6"/>
-                      </svg>
-                    </div>
-
-                    <!-- Central Medallion (ترنج زرین سنتی) -->
-                    <div class="cover-toranj">
-                      <svg viewBox="0 0 90 90" class="toranj-svg">
-                        <!-- Outer golden starburst -->
-                        <polygon points="45,4 53,27 77,17 65,39 88,45 65,51 77,73 53,63 45,86 37,63 13,73 25,51 2,45 25,39 13,17 37,27" fill="url(#toranjGrad)" stroke="#a27e1f" stroke-width="0.8"/>
-                        <!-- Inner rim -->
-                        <circle cx="45" cy="45" r="18" fill="#1f091d" stroke="#fcebb2" stroke-width="1.2"/>
-                        <!-- Center gem -->
-                        <circle cx="45" cy="45" r="6" fill="#fff3cd"/>
-                        <defs>
-                          <linearGradient id="toranjGrad" x1="0" y1="0" x2="90" y2="90" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#fff5d0"/>
-                            <stop offset="0.4" stop-color="#d4af37"/>
-                            <stop offset="1" stop-color="#735212"/>
-                          </linearGradient>
-                        </defs>
-                      </svg>
-                    </div>
-
-                    <!-- Diwan Title -->
-                    <div class="cover-title-group">
-                      <h2 class="cover-title-text">دیوان حافظ</h2>
-                      <p class="cover-subtitle-text">لسان‌الغیب شیرازی</p>
-                    </div>
-
-                    <!-- Bottom Bookmark Ribbon -->
-                    <div class="cover-bottom-tassel">
-                      <span class="silk-ribbon"></span>
-                    </div>
-
-                  </div>
+              <!-- Inner Cover Lining (seen when flipped open) -->
+              <div class="cover-side cover-inner">
+                <div class="inner-lining-border">
+                  <div class="lining-pattern"></div>
                 </div>
-
               </div>
             </div>
 
@@ -290,27 +280,11 @@
         <!-- Manuscript Card (نسخه خطی و کتیبه تذهیب) -->
         <article class="manuscript-card" id="manuscriptCard">
           
-          <!-- Tadhhib Arch Header -->
+          <!-- Tadhhib Header -->
           <div class="tadhhib-header">
             <div class="tadhhib-arch">
-              <svg viewBox="0 0 600 70" class="arch-svg" preserveAspectRatio="none">
-                <path d="M0,70 L0,15 Q150,0 300,18 Q450,0 600,15 L600,70 Z" fill="url(#tadhhibBg)" stroke="#d4af37" stroke-width="1.8"/>
-                <path d="M20,65 Q150,14 300,26 Q450,14 580,65" fill="none" stroke="#fcedb4" stroke-width="0.9" stroke-dasharray="3 3"/>
-                <defs>
-                  <linearGradient id="tadhhibBg" x1="0" y1="0" x2="0" y2="70" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#1f0a20"/>
-                    <stop offset="0.6" stop-color="#2d0f2e"/>
-                    <stop offset="1" stop-color="#140615"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-
-              <div class="arch-content">
-                <div class="arch-khatam">دیوان لسان‌الغیب</div>
-                <div class="ghazal-badge-container">
-                  <h2 class="ghazal-title" id="ghazalTitle">غزل شمارهٔ ...</h2>
-                </div>
-              </div>
+              <span class="arch-khatam">دیوان لسان‌الغیب حافظ شیرازی</span>
+              <h2 class="ghazal-title" id="ghazalTitle">غزل شمارهٔ ...</h2>
             </div>
           </div>
 
@@ -318,7 +292,7 @@
           <div class="tadhhib-divider">
             <span class="line"></span>
             <span class="divider-icon">
-              <svg class="mini-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+              <svg class="mini-svg" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3.5"/></svg>
             </span>
             <span class="line"></span>
           </div>
