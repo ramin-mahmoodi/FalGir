@@ -1045,21 +1045,20 @@ body {
 }
 
 .mesra {
-  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
   line-height: 2.2;
   color: var(--ink-primary);
   text-rendering: optimizeLegibility;
-  text-align: justify;
-  text-align-last: justify;
-  text-justify: inter-word;
   white-space: nowrap;
 }
 
 .mesra-first {
+  text-align: right;
   padding-left: 0.5rem;
 }
 
 .mesra-second {
+  text-align: left;
   padding-right: 0.5rem;
 }
 
