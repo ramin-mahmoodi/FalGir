@@ -80,6 +80,9 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -97,6 +100,9 @@ body {
   direction: rtl;
   text-align: right;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
 }
 
 /* --------------------------------------------------------------------------
@@ -107,6 +113,8 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 0;
+  max-width: 100vw;
+  overflow: hidden;
   background: radial-gradient(circle at 50% 20%, #fffdf4 0%, var(--bg-deep) 100%);
   background-image: radial-gradient(circle at 50% 20%, #fffdf4 0%, var(--bg-deep) 100%), url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0L45 35L80 40L45 45L40 80L35 45L0 40L35 35Z' fill='none' stroke='%23b8862f' stroke-opacity='0.10' stroke-width='1'/%3E%3Ccircle cx='40' cy='40' r='20' fill='none' stroke='%23b8862f' stroke-opacity='0.10' stroke-width='1'/%3E%3C/svg%3E");
   background-size: 100% 100%, 160px 160px;
@@ -123,10 +131,12 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(900px, 120vw);
-  height: min(900px, 120vw);
+  width: min(800px, 92vw);
+  height: min(800px, 92vw);
+  max-width: 100vw;
   pointer-events: none;
   z-index: 0;
+  overflow: hidden;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M100 0 L115 35 L150 15 L140 50 L185 50 L155 75 L185 110 L145 105 L150 145 L115 125 L100 160 L85 125 L50 145 L55 105 L15 110 L45 75 L15 50 L60 50 L50 15 L85 35 Z' fill='none' stroke='%23e8c366' stroke-opacity='0.08' stroke-width='2'/%3E%3Ccircle cx='100' cy='100' r='55' fill='none' stroke='%23e8c366' stroke-opacity='0.05' stroke-width='1'/%3E%3Ccircle cx='100' cy='100' r='30' fill='none' stroke='%23e8c366' stroke-opacity='0.05' stroke-width='1'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
@@ -294,6 +304,7 @@ body {
   max-width: 960px;
   width: 100%;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 .stage {
@@ -442,18 +453,19 @@ body {
   background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, transparent 70%);
 }
 
-/* پرتو نور زرین هنگام باز شدن کتاب */
+/* مخزن تعاریف SVG بدون بعد و پنهان */
+.book-defs {
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+/* افکت نورانی ورق زدن حذف شد */
 .book-light-beam {
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 246, 217, 0.85) 0%, rgba(212, 175, 55, 0.45) 45%, transparent 70%);
-  opacity: 0;
-  transform: translateZ(25px) scale(0.5);
-  transition: all 0.7s var(--ease-mystic);
-  pointer-events: none;
-  z-index: 20;
+  display: none !important;
 }
 
 
@@ -714,8 +726,7 @@ body {
 }
 
 .book-scene.is-opening .book-light-beam {
-  opacity: 1;
-  transform: translateZ(35px) scale(1.3);
+  display: none !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -1740,10 +1751,12 @@ body {
   overflow-y: auto;
   flex: 1;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-hint {
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   color: #6b543a;
   margin-bottom: 0.9rem;
   line-height: 1.6;
@@ -1751,20 +1764,22 @@ body {
 
 .search-input-group {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.8rem;
+  gap: 0.6rem;
+  width: 100%;
+  margin-bottom: 0.6rem;
 }
 
 .search-input {
-  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
   background: #fff;
   border: 1.5px solid #b8862f;
-  border-radius: 6px;
+  border-radius: 8px;
   color: #3a2a18;
-  padding: 0.75rem 0.9rem;
+  padding: 0.75rem 0.95rem;
   font-family: var(--font-ui);
   font-size: 0.92rem;
-  transition: border-color var(--trans-fast);
+  transition: border-color var(--trans-fast), box-shadow var(--trans-fast);
 }
 
 .search-input:focus {
@@ -1773,16 +1788,23 @@ body {
   box-shadow: 0 0 0 3px rgba(14,143,148,.18);
 }
 
+.search-input-group .search-input {
+  flex: 1;
+  min-width: 0;
+}
+
 .search-action-btn {
   background: linear-gradient(135deg, #0e8f94, #16407c);
   color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-family: var(--font-ui);
   font-weight: 700;
-  padding: 0 1.2rem;
+  padding: 0 1.3rem;
   cursor: pointer;
-  transition: background var(--trans-fast);
+  white-space: nowrap;
+  font-size: 0.92rem;
+  transition: background var(--trans-fast), transform var(--trans-fast);
 }
 
 .search-action-btn:hover {
@@ -1790,10 +1812,33 @@ body {
 }
 
 .search-divider {
-  text-align: center;
-  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.1rem 0 0.85rem;
+  font-size: 0.84rem;
   color: #6b543a;
-  margin: 0.7rem 0;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.search-divider::before,
+.search-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184, 134, 47, 0.45), transparent);
+}
+
+.search-box-wrap {
+  width: 100%;
+  margin-bottom: 0.6rem;
+}
+
+.search-input--full {
+  width: 100%;
+  display: block;
 }
 
 .search-results-list {
@@ -1934,19 +1979,62 @@ body {
 
 @media (max-width: 679px) {
   .app-header {
-    padding: 0.85rem 1rem;
+    padding: 0.75rem 0.65rem;
+    max-width: 100vw;
+    overflow-x: clip;
+  }
+
+  .brand {
+    gap: 0.5rem;
+  }
+
+  .brand-emblem {
+    width: 32px;
+    height: 32px;
   }
 
   .brand-title {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
   }
 
   .brand-subtitle {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
+  }
+
+  .header-actions {
+    gap: 0.35rem;
+  }
+
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .btn-tooltip {
+    display: none !important;
+  }
+
+  .main-content {
+    padding: 0.8rem 0.5rem 2rem;
+    width: 100%;
+    max-width: 100%;
   }
 
   .stage-wrapper {
+    width: 100%;
+    max-width: 100%;
     gap: 1.3rem;
+  }
+
+  .stage-result {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .result-wrapper {
+    width: 100%;
+    gap: 1.2rem;
   }
 
   .book-scene {
@@ -1957,8 +2045,8 @@ body {
 
   /* در حالت گشوده، کتاب دو برابر پهن میشود؛ مقیاس کوچکتر تا سرریز افقی رخ ندهد */
   .book-scene.is-opening .book-3d {
-  transform: translateX(-88px) rotateY(-10deg) rotateX(0deg) scale(0.82) !important;
-}
+    transform: translateX(-88px) rotateY(-10deg) rotateX(0deg) scale(0.82) !important;
+  }
 
   .btn-divinate {
     width: 100%;
@@ -1966,9 +2054,34 @@ body {
     font-size: 1.12rem;
   }
 
+  /* کادر شعر در موبایل: پهن، باشکوه و دارای حاشیه زرین و واضح */
   .manuscript-card {
-    padding: 1.4rem 1.1rem 1.8rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.3rem 0.9rem 1.8rem;
     border-radius: 14px;
+    border: 3px double #b8862f;
+    box-shadow: 0 8px 24px rgba(62,42,16,.18), 0 0 16px rgba(184, 134, 47, 0.2);
+  }
+
+  .manuscript-card::before {
+    inset: 4px;
+    border: 1.5px solid rgba(184, 145, 40, 0.45);
+    border-radius: 10px;
+  }
+
+  .tadhhib-arch {
+    padding: 1rem 0.5rem 1.2rem;
+  }
+
+  .ghazal-title {
+    font-size: 1.85rem;
+  }
+
+  .poem-body {
+    width: 100%;
+    gap: 0.35rem;
+    margin: 0.7rem 0 1.2rem;
   }
 
   /* چیدمان ابیات در موبایل */
@@ -1976,9 +2089,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 0.35rem;
-    padding: 0.6rem 0.4rem;
-    border-bottom: 1px dashed rgba(184, 145, 40, 0.25);
+    gap: 0.25rem;
+    padding: 0.55rem 0.4rem;
+    border-bottom: 1px dashed rgba(184, 145, 40, 0.28);
   }
 
   .bayt:last-child {
@@ -1990,8 +2103,8 @@ body {
   }
 
   .mesra {
-    font-size: 1.25rem;
-    line-height: 2.2;
+    font-size: 1.26rem;
+    line-height: 2.15;
     width: 100%;
     text-align: right;
     text-align-last: right;
@@ -2009,7 +2122,10 @@ body {
   }
 
   .interpretation-card {
-    padding: 1.3rem 1.2rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.3rem 1.1rem;
+    border-radius: 12px;
   }
 
   .interp-text {
@@ -2024,6 +2140,17 @@ body {
   .action-btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .modal-container {
+    width: calc(100% - 20px);
+    max-width: 420px;
+    margin: 0 auto;
+    border-radius: 14px;
+  }
+
+  .modal-body {
+    padding: 1.1rem 0.85rem;
   }
 }
 

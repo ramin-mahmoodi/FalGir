@@ -116,13 +116,12 @@
         <!-- 3D Book Stage -->
         <div class="book-scene" id="bookScene">
           <div class="mystic-aura" id="mysticAura" aria-hidden="true"></div>
-          <div class="book-light-beam" id="bookLightBeam" aria-hidden="true"></div>
 
           <!-- The Real 3D Book Object -->
           <div class="book-3d" id="book3D" role="button" tabindex="0" aria-label="دیوان سه‌بعدی حافظ شیرازی">
             
             <!-- مخزن تعریف‌های SVG: گرادیان‌ها، نقش‌ها و اسلیمی‌های مشترک جلد -->
-            <svg class="book-defs" aria-hidden="true" focusable="false">
+            <svg class="book-defs" aria-hidden="true" focusable="false" style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; visibility: hidden;">
               <defs>
                 <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stop-color="#fff2c9"/>
@@ -741,13 +740,17 @@
         </p>
         
         <div class="search-input-group">
-          <input type="number" id="ghazalNumberInput" min="1" max="495" placeholder="شماره غزل (مثلاً: ۲۵)..." class="search-input">
+          <input type="number" id="ghazalNumberInput" min="1" max="495" placeholder="شماره غزل (مثلاً: ۲۵)..." class="search-input" aria-label="شماره غزل">
           <button id="btnJumpToNumber" class="search-action-btn">مشاهده</button>
         </div>
 
-        <div class="search-divider">یا جستجو در متن غزل‌ها:</div>
+        <div class="search-divider">
+          <span>یا جستجو در متن غزل‌ها:</span>
+        </div>
 
-        <input type="text" id="ghazalSearchInput" placeholder="واژه‌ای از شعر را بنویسید (مثلاً: ساقی)..." class="search-input">
+        <div class="search-box-wrap">
+          <input type="text" id="ghazalSearchInput" placeholder="واژه‌ای از شعر را بنویسید (مثلاً: ساقی)..." class="search-input search-input--full" aria-label="جستجو در متن شعر">
+        </div>
 
         <div class="search-results-list" id="searchResultsList">
           <!-- Filtered items appear dynamically -->
