@@ -37,30 +37,29 @@
    2. SYSTEM VARIABLES
    -------------------------------------------------------------------------- */
 :root {
-  /* Traditional Lapis Lazuli (لاجوردی) */
-  --bg-deep: #0a1122;
-  --bg-midnight: #101a30;
-  --bg-card: #152445;
-  --bg-card-hover: #1b2e59;
+  /* Newspaper Palette */
+  --bg-deep: #85877c; /* Olive/Khaki outer background */
+  --bg-midnight: #85877c;
+  --bg-card: #f2efe9; /* Pearl Bush / Cream paper */
+  --bg-card-hover: #e8e4d8;
   
-  /* Traditional Gold (طلایی زنده) */
-  --gold-primary: #e8c366;
-  --gold-light: #fbe69e;
-  --gold-highlight: #fffdf5;
-  --gold-dark: #b59242;
-  --gold-border: rgba(232, 195, 102, 0.4);
+  --gold-primary: #d74108; /* Grenadier Orange for accents */
+  --gold-light: #e8602d;
+  --gold-highlight: #ff8b5e;
+  --gold-dark: #b33606;
+  --gold-border: #353535; /* Dark grey borders */
   
-  /* Book cover now Ruby / Persian Red (عنابی) */
-  --leather-base: #7a1f28;
-  --leather-dark: #4d1017;
+  --leather-base: #f2efe9; /* Paper color for book */
+  --leather-dark: #e0dbce;
   
-  --parchment-base: #fdfaf2;
-  --parchment-shade: #f3e9d2;
-  --ink-primary: #2b1d11;
-  --ink-secondary: #5c4431;
+  --parchment-base: #f2efe9;
+  --parchment-shade: #e8e4d8;
+  --ink-primary: #353535; /* Dark Grey text */
+  --ink-secondary: #666666;
   
-  --font-poetry: 'IranNastaliq', 'IranNastaliq Web', 'Urdu Typesetting', 'Scheherazade New', 'Amiri', serif;
-  --font-ui: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Tahoma, Arial, sans-serif;
+  --font-poetry: 'IranNastaliq', 'IranNastaliq Web', serif;
+  --font-ui: 'Helvetica', 'Arial', 'Vazirmatn', sans-serif;
+  --font-serif: 'Ibarra Real Nova', 'Georgia', 'Times New Roman', serif;
   
   --ease-mystic: cubic-bezier(0.25, 1, 0.5, 1);
   --trans-fast: 0.2s ease;
@@ -86,7 +85,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-deep);
-  color: #f1f4f9;
+  color: var(--ink-primary);
   font-family: var(--font-ui);
   line-height: 1.6;
   direction: rtl;
@@ -97,41 +96,9 @@ body {
 /* --------------------------------------------------------------------------
    4. LIGHTWEIGHT BACKGROUND
    -------------------------------------------------------------------------- */
-.stars-backdrop {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background: radial-gradient(circle at 50% 20%, var(--bg-midnight) 0%, var(--bg-deep) 100%);
-  background-image: radial-gradient(circle at 50% 20%, var(--bg-midnight) 0%, var(--bg-deep) 100%), url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0L45 35L80 40L45 45L40 80L35 45L0 40L35 35Z' fill='none' stroke='%23e8c366' stroke-opacity='0.03' stroke-width='1'/%3E%3Ccircle cx='40' cy='40' r='20' fill='none' stroke='%23e8c366' stroke-opacity='0.03' stroke-width='1'/%3E%3C/svg%3E");
-  background-size: 100% 100%, 160px 160px;
-  animation: bgDrift 120s linear infinite;
-}
-
-@keyframes bgDrift {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: 0 0, 160px 160px; }
-}
-
+.stars-backdrop,
 .watermark-pattern {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(900px, 120vw);
-  height: min(900px, 120vw);
-  pointer-events: none;
-  z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M100 0 L115 35 L150 15 L140 50 L185 50 L155 75 L185 110 L145 105 L150 145 L115 125 L100 160 L85 125 L50 145 L55 105 L15 110 L45 75 L15 50 L60 50 L50 15 L85 35 Z' fill='none' stroke='%23e8c366' stroke-opacity='0.08' stroke-width='2'/%3E%3Ccircle cx='100' cy='100' r='55' fill='none' stroke='%23e8c366' stroke-opacity='0.05' stroke-width='1'/%3E%3Ccircle cx='100' cy='100' r='30' fill='none' stroke='%23e8c366' stroke-opacity='0.05' stroke-width='1'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  animation: spinShamseh 180s linear infinite;
-}
-
-@keyframes spinShamseh {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+  display: none !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -141,8 +108,8 @@ body {
   position: relative;
   z-index: 20;
   padding: 1rem 1.4rem;
-  background: rgba(10, 18, 34, 0.95);
-  border-bottom: 1px solid var(--gold-border);
+  background: var(--bg-card);
+  border-bottom: 3px double var(--ink-primary); border-top: 1px solid var(--ink-primary); margin-top: 1rem;
 }
 
 .header-container {
@@ -176,7 +143,7 @@ body {
   font-size: 1.6rem;
   font-weight: 800;
   line-height: 1.2;
-  color: var(--gold-light);
+  color: var(--ink-primary); font-family: var(--font-serif); font-size: 3rem;
   letter-spacing: -0.02em;
 }
 
@@ -196,10 +163,10 @@ body {
 .icon-btn {
   background: rgba(22, 36, 64, 0.7);
   border: 1px solid var(--gold-border);
-  color: var(--gold-light);
+  color: var(--ink-primary); font-family: var(--font-serif); font-size: 3rem;
   width: 40px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -211,7 +178,7 @@ body {
 .icon-btn:hover {
   background: rgba(212, 175, 55, 0.15);
   border-color: var(--gold-primary);
-  color: #fff;
+  color: var(--ink-primary);
   transform: translateY(-2px);
 }
 
@@ -247,8 +214,8 @@ body {
   left: 50%;
   transform: translateX(-50%);
   background: #0f192e;
-  border: 1px solid var(--gold-primary);
-  color: #fff;
+  border: 1px solid var(--ink-primary); border-top: 4px solid var(--ink-primary);
+  color: var(--ink-primary);
   font-size: 0.72rem;
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
@@ -330,11 +297,11 @@ body {
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--gold-light);
+  color: var(--ink-primary); font-family: var(--font-serif); font-size: 3rem;
   background: rgba(212, 175, 55, 0.12);
   border: 1px solid var(--gold-border);
   padding: 0.15rem 0.75rem;
-  border-radius: 999px;
+  border-radius: 0;
   margin-bottom: 0.5rem;
 }
 
@@ -375,7 +342,7 @@ body {
 }
 
 /* هاله ملایم پس‌زمینه کتاب */
-.mystic-aura {
+.mystic-aura { display: none;
   position: absolute;
   width: 260px;
   height: 260px;
@@ -422,7 +389,7 @@ body {
   transform: rotateY(0deg) rotateX(4deg) translateY(-22px) scale(1.04);
 }
 
-.book-scene.is-divinating .mystic-aura {
+.book-scene.is-divinating .mystic-aura { display: none;
   transform: translateZ(-80px) scale(1.35);
   background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, transparent 70%);
 }
@@ -465,7 +432,7 @@ body {
   height: 280px;
   transform: translateZ(-20px);
   border-radius: 4px;
-  background: linear-gradient(135deg, var(--leather-dark) 0%, var(--leather-base) 50%, var(--leather-dark) 100%);
+  background: linear-gradient(135deg, var(--bg-card-hover) 0%, var(--bg-card) 50%, var(--bg-card-hover) 100%);
   border: 1px solid #8e6d19;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
 }
@@ -473,7 +440,7 @@ body {
 .leather-back {
   width: 100%;
   height: 100%;
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  border: 1px solid var(--ink-primary);
   border-radius: 3px;
 }
 
@@ -485,7 +452,7 @@ body {
   height: 280px;
   transform-origin: center center;
   transform: rotateY(90deg);
-  background: linear-gradient(90deg, var(--leather-dark) 0%, var(--leather-base) 50%, var(--leather-dark) 100%);
+  background: linear-gradient(90deg, var(--bg-card-hover) 0%, var(--bg-card) 50%, var(--bg-card-hover) 100%);
   border-top: 1px solid var(--gold-primary);
   border-bottom: 1px solid var(--gold-primary);
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.9);
@@ -516,7 +483,7 @@ body {
 
 .spine-text {
   writing-mode: vertical-rl;
-  color: var(--gold-light);
+  color: var(--ink-primary); font-family: var(--font-serif); font-size: 3rem;
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 2px;
@@ -605,7 +572,7 @@ body {
 .first-page-inner {
   width: 100%;
   height: 100%;
-  border: 1px solid var(--gold-primary);
+  border: 1px solid var(--ink-primary); border-top: 4px solid var(--ink-primary);
   border-radius: 2px;
   display: flex;
   flex-direction: column;
@@ -675,11 +642,11 @@ body {
   transform: rotateY(0deg);
   background: 
     radial-gradient(circle at 50% 45%, var(--gold-border) 0%, transparent 65%),
-    linear-gradient(135deg, var(--leather-base) 0%, var(--leather-dark) 100%);
+    linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card-hover) 100%);
   border: 2px solid var(--gold-primary);
   box-shadow: 
-    inset 0 0 14px rgba(0, 0, 0, 0.75),
-    0 8px 24px rgba(0, 0, 0, 0.6);
+    inset 0 0 0 transparent,
+    4px 4px 0 var(--ink-primary);
   padding: 8px;
   direction: rtl !important;
 }
@@ -687,7 +654,7 @@ body {
 .gold-frame {
   width: 100%;
   height: 100%;
-  border: 1px solid var(--gold-primary);
+  border: 1px solid var(--ink-primary); border-top: 4px solid var(--ink-primary);
   border-radius: 2px;
   position: relative;
   display: flex;
@@ -749,7 +716,7 @@ body {
 
 .cover-subtitle {
   font-size: 0.7rem;
-  color: var(--gold-light);
+  color: var(--ink-primary); font-family: var(--font-serif); font-size: 3rem;
   font-weight: 500;
   letter-spacing: 0.5px;
 }
@@ -770,7 +737,7 @@ body {
 /* آستر داخلی جلد (با گردش ۱۸۰ درجه دیده می‌شود) */
 .cover-inner {
   transform: rotateY(180deg);
-  background: radial-gradient(circle at center, var(--leather-base) 0%, var(--leather-dark) 100%);
+  background: radial-gradient(circle at center, var(--bg-card) 0%, var(--bg-card-hover) 100%);
   border: 2px solid #8e6d19;
   padding: 8px;
 }
@@ -778,7 +745,7 @@ body {
 .inner-lining-border {
   width: 100%;
   height: 100%;
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  border: 1px solid var(--ink-primary);
   border-radius: 2px;
 }
 
@@ -806,16 +773,16 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #a78020 0%, #d4af37 40%, #fae8a8 70%, #b89128 100%);
-  color: #170d01;
+  background: var(--gold-primary);
+  color: var(--ink-primary);
   font-family: var(--font-ui);
   font-size: 1.22rem;
   font-weight: 800;
   padding: 1rem 2.8rem;
-  border-radius: 999px;
-  border: 2px solid #fff6d9;
+  border-radius: 0;
+  border: 2px solid var(--ink-primary);
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.35);
+  box-shadow: 4px 4px 0 var(--ink-primary);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   min-height: 56px;
   user-select: none;
@@ -824,7 +791,7 @@ body {
 
 .btn-divinate:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 28px rgba(212, 175, 55, 0.55);
+  box-shadow: 6px 6px 0 var(--ink-primary);
 }
 
 .btn-divinate:active {
@@ -890,7 +857,7 @@ body {
 .ritual-msg {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--gold-light);
+  color: var(--ink-primary); font-family: var(--font-serif); font-size: 3rem;
 }
 
 .ritual-hints {
@@ -948,12 +915,12 @@ body {
 .manuscript-card {
   position: relative;
   background: 
-    radial-gradient(circle at 50% 20%, #fffdf5 0%, #f6edd7 70%, #eadaba 100%);
-  border-radius: 18px;
-  border: 3px double var(--gold-primary);
+    var(--bg-card);
+  border-radius: 0;
+  border: 1px solid var(--ink-primary);
   box-shadow: 
-    0 12px 35px rgba(0, 0, 0, 0.55),
-    0 0 25px rgba(212, 175, 55, 0.2);
+    4px 4px 0 var(--ink-primary)
+    
   padding: 1.8rem 2rem 2.4rem;
   color: var(--ink-primary);
   animation: cardFadeIn 0.6s var(--ease-mystic) forwards;
@@ -989,9 +956,9 @@ body {
 }
 
 .tadhhib-arch {
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.12), transparent);
-  border-top: 1px solid rgba(212, 175, 55, 0.4);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+  background: transparent;
+  border-top: 1px solid var(--ink-primary);
+  border-bottom: 1px solid var(--ink-primary);
   padding: 1.8rem 1rem 2.2rem;
   display: flex;
   justify-content: center;
@@ -1059,8 +1026,8 @@ body {
   align-items: center;
   width: 100%;
   padding: 0.75rem 0.6rem;
-  border-radius: 6px;
-  border-bottom: 1px dashed rgba(184, 145, 40, 0.25);
+  border-radius: 0;
+  border-bottom: 1px solid var(--ink-primary); padding-bottom: 1rem;
   transition: background-color var(--trans-fast);
   opacity: 0;
   transform: translateY(12px);
@@ -1128,11 +1095,11 @@ body {
    10. INTERPRETATION CARD
    -------------------------------------------------------------------------- */
 .interpretation-card {
-  background: linear-gradient(180deg, #131d34 0%, #0d1526 100%);
-  border: 1px solid var(--gold-primary);
-  border-radius: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--ink-primary); border-top: 4px solid var(--ink-primary);
+  border-radius: 0;
   padding: 1.6rem 1.8rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.15);
+  box-shadow: none;
   opacity: 1;
   transform: none;
   overflow: hidden;
@@ -1150,13 +1117,13 @@ body {
 .interp-icon-wrap {
   width: 42px;
   height: 42px;
-  border-radius: 8px;
+  border-radius: 0;
   background: rgba(212, 175, 55, 0.12);
   border: 1px solid var(--gold-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gold-light);
+  color: var(--ink-primary); font-family: var(--font-serif); font-size: 3rem;
 }
 
 .interp-title {
@@ -1174,7 +1141,7 @@ body {
   font-family: var(--font-ui);
   font-size: 1.05rem;
   line-height: 2.05;
-  color: #eaf0fc;
+  color: var(--ink-secondary);
   text-align: justify;
 }
 
@@ -1217,10 +1184,10 @@ body {
   font-size: 0.96rem;
   font-weight: 600;
   padding: 0.8rem 1.6rem;
-  border-radius: 10px;
+  border-radius: 0;
   cursor: pointer;
   transition: all var(--trans-fast);
-  border: 1px solid transparent;
+  border: 1px solid var(--ink-primary);
   min-height: 48px;
   user-select: none;
 }
@@ -1234,7 +1201,7 @@ body {
 
 .btn-primary {
   background: linear-gradient(135deg, #b38a20 0%, #d4af37 50%, #f9e29a 100%);
-  color: #170d01;
+  color: var(--ink-primary);
   font-weight: 700;
   border-color: #ffeeb2;
   box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
@@ -1246,28 +1213,28 @@ body {
 }
 
 .btn-secondary {
-  background: rgba(22, 36, 64, 0.9);
-  color: #f1f4fb;
-  border-color: var(--gold-border);
+  background: transparent;
+  color: var(--ink-primary);
+  border-color: var(--ink-primary); color: var(--ink-primary);
 }
 
 .btn-secondary:hover {
   background: rgba(28, 46, 80, 0.95);
   border-color: var(--gold-primary);
-  color: #fff;
+  color: var(--ink-primary);
   transform: translateY(-2px);
 }
 
 .btn-outline {
   background: transparent;
-  color: #c7d6ee;
+  color: var(--ink-primary); border-radius: 0; box-shadow: 4px 4px 0 var(--ink-primary);
   border-color: rgba(199, 214, 238, 0.25);
 }
 
 .btn-outline:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: #fff;
-  color: #fff;
+  border-color: var(--ink-primary);
+  color: var(--ink-primary);
   transform: translateY(-2px);
 }
 
@@ -1294,7 +1261,7 @@ body {
 .footer-quote {
   font-family: var(--font-poetry);
   font-size: 1.25rem;
-  color: var(--gold-light);
+  color: var(--ink-primary); font-family: var(--font-serif); font-size: 3rem;
   line-height: 1.9;
 }
 
@@ -1348,8 +1315,8 @@ body {
 
 .modal-container {
   background: linear-gradient(135deg, #131e36 0%, #0d1527 100%);
-  border: 1px solid var(--gold-primary);
-  border-radius: 14px;
+  border: 1px solid var(--ink-primary); border-top: 4px solid var(--ink-primary);
+  border-radius: 0;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
   width: 100%;
   max-width: 520px;
@@ -1383,7 +1350,7 @@ body {
 .modal-close {
   background: transparent;
   border: none;
-  color: #a4b3ce;
+  color: var(--ink-secondary); border-top: 1px solid var(--ink-primary); border-bottom: 1px solid var(--ink-primary); padding: 0.2rem 1rem; margin-top: 0.5rem;
   cursor: pointer;
   width: 32px;
   height: 32px;
@@ -1396,7 +1363,7 @@ body {
 
 .modal-close:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: var(--ink-primary);
 }
 
 .modal-body {
@@ -1423,8 +1390,8 @@ body {
   flex: 1;
   background: rgba(7, 13, 25, 0.85);
   border: 1px solid var(--gold-border);
-  border-radius: 6px;
-  color: #fff;
+  border-radius: 0;
+  color: var(--ink-primary);
   padding: 0.75rem 0.9rem;
   font-family: var(--font-ui);
   font-size: 0.92rem;
@@ -1438,9 +1405,9 @@ body {
 
 .search-action-btn {
   background: var(--gold-primary);
-  color: #170d01;
+  color: var(--ink-primary);
   border: none;
-  border-radius: 6px;
+  border-radius: 0;
   font-family: var(--font-ui);
   font-weight: 700;
   padding: 0 1.2rem;
@@ -1475,7 +1442,7 @@ body {
   padding: 0.7rem 0.9rem;
   background: rgba(18, 30, 54, 0.6);
   border: 1px solid rgba(212, 175, 55, 0.15);
-  border-radius: 6px;
+  border-radius: 0;
   cursor: pointer;
   transition: all var(--trans-fast);
 }
@@ -1488,7 +1455,7 @@ body {
 
 .item-ghazal-num {
   font-weight: 700;
-  color: var(--gold-light);
+  color: var(--ink-primary); font-family: var(--font-serif); font-size: 3rem;
   font-size: 0.88rem;
 }
 
@@ -1507,7 +1474,7 @@ body {
 
 .adab-section h4 {
   font-size: 1rem;
-  color: var(--gold-light);
+  color: var(--ink-primary); font-family: var(--font-serif); font-size: 3rem;
   margin-bottom: 0.35rem;
 }
 
@@ -1536,10 +1503,10 @@ body {
   left: 50%;
   transform: translateX(-50%) translateY(25px);
   background: #0f1c34;
-  border: 1px solid var(--gold-primary);
-  color: #fff;
+  border: 1px solid var(--ink-primary); border-top: 4px solid var(--ink-primary);
+  color: var(--ink-primary);
   padding: 0.75rem 1.6rem;
-  border-radius: 999px;
+  border-radius: 0;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
@@ -1614,7 +1581,7 @@ body {
 
   .manuscript-card {
     padding: 1.4rem 1.1rem 1.8rem;
-    border-radius: 14px;
+    border-radius: 0;
   }
 
   /* چیدمان ابیات در موبایل */
@@ -1624,7 +1591,7 @@ body {
     align-items: stretch;
     gap: 0.35rem;
     padding: 0.6rem 0.4rem;
-    border-bottom: 1px dashed rgba(184, 145, 40, 0.25);
+    border-bottom: 1px solid var(--ink-primary); padding-bottom: 1rem;
   }
 
   .bayt:last-child {
