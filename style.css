@@ -1037,21 +1037,29 @@ button:focus-visible {
 }
 
 /* TOP RESULT BANNER */
+/* ==========================================================================
+   TOP RESULT BANNER (Neo-Brutalist Graphical Header)
+   ========================================================================== */
 .result-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 24px 32px;
-  margin-bottom: 26px;
+  gap: 28px;
+  padding: clamp(24px, 3.5vw, 36px) clamp(24px, 4vw, 44px);
+  margin-bottom: 28px;
   background: var(--white);
+  position: relative;
+  overflow: hidden;
 }
 
 .result-banner-copy {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
+  flex: 1 1 380px;
+  position: relative;
+  z-index: 2;
 }
 
 .result-badge-wrap {
@@ -1059,6 +1067,23 @@ button:focus-visible {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.result-pulse-dot {
+  width: 10px;
+  height: 10px;
+  background: #10b981;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: resultPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes resultPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 .result-badge {
@@ -1075,31 +1100,176 @@ button:focus-visible {
 
 .result-pill {
   font-family: var(--font-base);
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   font-weight: 700;
-  color: #666;
+  color: #555;
 }
 
 .result-title {
   margin: 0;
   font-family: var(--font-base);
-  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
   font-weight: 900;
   color: var(--ink);
   letter-spacing: 0;
+  line-height: 1.25;
 }
 
 .result-sub {
   margin: 0;
-  font-size: 0.92rem;
-  color: #555;
+  font-size: 0.95rem;
+  color: #444;
   font-weight: 600;
+  line-height: 1.7;
+}
+
+.result-banner-actions {
+  margin-top: 4px;
 }
 
 .btn-banner-try-again {
   min-height: 48px;
-  padding: 0 22px;
+  padding: 0 24px;
   font-size: 0.95rem;
+}
+
+/* Graphical Artwork in Result Banner */
+.result-banner-visual {
+  position: relative;
+  flex: 0 0 240px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  user-select: none;
+}
+
+.banner-sun-orb {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: var(--yellow);
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 300ms ease;
+}
+
+.banner-sun-orb:hover {
+  transform: scale(1.05) rotate(4deg);
+}
+
+.banner-sun-core {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2.5px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.banner-sun-icon {
+  font-size: 1.8rem;
+  color: var(--terracotta);
+  line-height: 1;
+}
+
+.banner-sun-rays {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 2px dashed rgba(23, 23, 23, 0.45);
+  animation: rotateBannerRays 28s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotateBannerRays {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.floating-geo {
+  position: absolute;
+  font-family: var(--font-base);
+  font-weight: 800;
+  border: 2px solid var(--ink);
+  box-shadow: 2.5px 2.5px 0 var(--ink);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.geo-badge-pink {
+  background: var(--pink);
+  color: var(--ink);
+  font-size: 0.74rem;
+  padding: 3px 12px;
+  border-radius: 999px;
+  top: 10px;
+  right: -6px;
+  transform: rotate(-6deg);
+}
+
+.geo-badge-yellow {
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 0.74rem;
+  padding: 3px 12px;
+  border-radius: 999px;
+  bottom: 12px;
+  left: -12px;
+  transform: rotate(5deg);
+}
+
+.geo-star-1 {
+  background: var(--white);
+  color: var(--terracotta);
+  font-size: 1rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  top: 6px;
+  left: 18px;
+  transform: rotate(14deg);
+}
+
+.geo-star-2 {
+  background: var(--white);
+  color: var(--ink);
+  font-size: 1rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  bottom: 8px;
+  right: 18px;
+  transform: rotate(-12deg);
+}
+
+.geo-star-3 {
+  background: var(--blue);
+  color: var(--ink);
+  font-size: 0.85rem;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  top: 48%;
+  right: -24px;
+  transform: translateY(-50%) rotate(10deg);
 }
 
 /* WORKSPACE GRID */
@@ -1111,7 +1281,7 @@ button:focus-visible {
 }
 
 /* ==========================================================================
-   POEM MANUSCRIPT CARD (Continuous Diwan Page - NO Box Around Verses)
+   POEM MANUSCRIPT CARD (Pure Manuscript Flow - Title & Couplets Only)
    ========================================================================== */
 .manuscript-card {
   padding: clamp(28px, 4.5vw, 48px);
@@ -1120,32 +1290,10 @@ button:focus-visible {
 }
 
 .manuscript-header {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px dashed rgba(23, 23, 23, 0.16);
 }
-
-.manuscript-tags {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.manuscript-pill {
-  font-family: var(--font-base);
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 3px 10px;
-  border: 1.5px solid var(--ink);
-  border-radius: 6px;
-  box-shadow: 2px 2px 0 var(--ink);
-  color: var(--ink);
-}
-
-.manuscript-pill--yellow { background: var(--yellow); }
-.manuscript-pill--blue   { background: var(--blue); }
-.manuscript-pill--pink   { background: var(--pink); }
 
 .ghazal-title {
   margin: 0;
@@ -1157,33 +1305,7 @@ button:focus-visible {
   line-height: 1.2;
 }
 
-/* Ornamental Tazhib Separator */
-.manuscript-tazhib-band {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin: 24px 0 28px;
-}
-
-.tazhib-line {
-  flex: 1;
-  height: 2px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--ink) 0 5px,
-    transparent 5px 10px
-  );
-  opacity: 0.3;
-}
-
-.tazhib-rosette {
-  font-size: 1.4rem;
-  color: var(--terracotta);
-  line-height: 1;
-}
-
-/* Poem Body & Couplets - NO BOX / NO CARD */
+/* Poem Body & Couplets - Borderless Manuscript Flow */
 .poem-body {
   display: flex;
   flex-direction: column;
@@ -1249,49 +1371,16 @@ button:focus-visible {
   user-select: none;
 }
 
-/* Manuscript Colophon */
-.manuscript-footer {
-  margin-top: 36px;
-  padding-top: 24px;
-  border-top: 2px dashed rgba(23, 23, 23, 0.2);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.colophon-seal {
-  display: inline-block;
-  padding: 4px 16px;
-  background: var(--yellow);
-  color: var(--ink);
-  border: 1.5px solid var(--ink);
-  border-radius: 999px;
-  font-family: var(--font-base);
-  font-size: 0.82rem;
-  font-weight: 800;
-  box-shadow: 2px 2px 0 var(--ink);
-}
-
-.colophon-text {
-  margin: 0;
-  font-family: var(--font-base);
-  font-size: 0.84rem;
-  color: #666;
-  font-weight: 600;
-}
-
 /* ==========================================================================
-   INTERPRETATION CARD (Panel of Wisdom & Actions)
+   INTERPRETATION CARD (Panel of Wisdom & Actions) - LIGHT NEO-BRUTALIST THEME
    ========================================================================== */
 .inspector {
   position: sticky;
   top: 76px;
   min-width: 0;
   padding: clamp(26px, 4vw, 36px);
-  background: var(--ink);
-  color: var(--white);
+  background: var(--white);
+  color: var(--ink);
 }
 
 .inspector-header {
@@ -1299,7 +1388,7 @@ button:focus-visible {
   flex-direction: column;
   gap: 10px;
   padding-bottom: 18px;
-  border-bottom: 1.5px solid rgba(255, 255, 255, 0.16);
+  border-bottom: 1.5px solid rgba(23, 23, 23, 0.12);
   margin-bottom: 20px;
 }
 
@@ -1320,59 +1409,24 @@ button:focus-visible {
   font-size: 0.8rem;
   font-weight: 900;
   letter-spacing: 0;
-  box-shadow: 2px 2px 0 #fff;
+  box-shadow: 2px 2px 0 var(--ink);
 }
 
 .inspector-subtag {
   font-family: var(--font-base);
   font-size: 0.76rem;
-  color: #c7c3ba;
+  color: #666;
   font-weight: 700;
 }
 
 .interpretation-title {
   margin: 0;
   font-family: var(--font-base);
-  font-size: 1.32rem;
+  font-size: 1.35rem;
   font-weight: 900;
   letter-spacing: 0;
-  color: #ffe382;
+  color: var(--ink);
   line-height: 1.3;
-}
-
-/* Insight Callout Box */
-.interp-insight-box {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1.5px solid rgba(255, 255, 255, 0.18);
-  border-radius: 12px;
-  margin-bottom: 22px;
-}
-
-.insight-icon {
-  font-size: 1.25rem;
-  flex-shrink: 0;
-  line-height: 1;
-  margin-top: 2px;
-}
-
-.insight-content strong {
-  display: block;
-  font-family: var(--font-base);
-  font-size: 0.86rem;
-  color: var(--yellow);
-  margin-bottom: 4px;
-  font-weight: 800;
-}
-
-.insight-content p {
-  margin: 0;
-  font-size: 0.84rem;
-  line-height: 1.6;
-  color: #dedbd3;
 }
 
 /* Interpretation Body */
@@ -1389,7 +1443,7 @@ button:focus-visible {
   font-size: 4.8rem;
   line-height: 1;
   font-family: Georgia, serif;
-  color: rgba(248, 207, 98, 0.12);
+  color: rgba(224, 86, 36, 0.1);
   pointer-events: none;
 }
 
@@ -1397,7 +1451,7 @@ button:focus-visible {
   margin: 0;
   position: relative;
   z-index: 1;
-  color: #fbf9f4;
+  color: #2b2825;
   line-height: 2.15;
   font-size: 1.15rem;
   font-weight: 500;
@@ -1407,7 +1461,7 @@ button:focus-visible {
 .inspector-divider {
   width: 100%;
   height: 1.5px;
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(23, 23, 23, 0.12);
   margin: 22px 0;
 }
 
@@ -1430,9 +1484,10 @@ button:focus-visible {
   min-height: 46px;
   padding: 0 18px;
   font-weight: 800;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--white);
+  border: 2px solid var(--ink);
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
   transition: all 140ms ease;
 }
 
@@ -1440,15 +1495,20 @@ button:focus-visible {
   background: var(--yellow);
   color: var(--ink);
   border-color: var(--ink);
-  box-shadow: 3.5px 3.5px 0 var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
   transform: translate(-1.5px, -1.5px);
 }
 
 .inspector-actions .text-button {
-  color: #d8d4ca;
+  color: #555;
   align-self: center;
   margin-top: 4px;
   font-weight: 700;
+}
+
+.inspector-actions .text-button:hover {
+  color: var(--ink);
+  text-decoration: underline;
 }
 
 /* ==========================================================================
@@ -1973,6 +2033,16 @@ body.dream-mode .result-pill {
   color: #a7a0b8;
 }
 
+body.dream-mode .banner-sun-core {
+  background: #2a1f40;
+}
+
+body.dream-mode .geo-star-1,
+body.dream-mode .geo-star-2 {
+  background: #2a1f40;
+  color: #ffe382;
+}
+
 body.dream-mode .manuscript-card {
   background: #1f182e;
   border-color: rgba(255, 255, 255, 0.22);
@@ -1994,13 +2064,52 @@ body.dream-mode .bayt:not(:last-child) {
   border-bottom-color: rgba(255, 255, 255, 0.12) !important;
 }
 
-body.dream-mode .colophon-text {
+body.dream-mode .inspector {
+  background: #1a1329;
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fcfbfa;
+}
+
+body.dream-mode .inspector-header {
+  border-bottom-color: rgba(255, 255, 255, 0.16);
+}
+
+body.dream-mode .inspector-subtag {
   color: #a7a0b8;
 }
 
-body.dream-mode .inspector {
-  background: #130d20;
-  border-color: rgba(255, 255, 255, 0.25);
+body.dream-mode .interpretation-title {
+  color: #ffe382;
+}
+
+body.dream-mode .interpretation-body p {
+  color: #dedbd3;
+}
+
+body.dream-mode .inspector-divider {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+body.dream-mode .inspector-actions .secondary-button {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--white);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.4);
+}
+
+body.dream-mode .inspector-actions .secondary-button:hover {
+  background: var(--yellow);
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+body.dream-mode .inspector-actions .text-button {
+  color: #a7a0b8;
+}
+
+body.dream-mode .inspector-actions .text-button:hover {
+  color: #ffe382;
 }
 
 /* ==========================================================================
@@ -2075,8 +2184,26 @@ body.dream-mode .inspector {
 
   .result-banner {
     flex-direction: column;
-    align-items: stretch;
-    padding: 20px;
+    align-items: center;
+    text-align: center;
+    padding: 24px 18px;
+    gap: 22px;
+  }
+
+  .result-banner-copy {
+    align-items: center;
+    text-align: center;
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .result-badge-wrap {
+    justify-content: center;
+  }
+
+  .result-banner-visual {
+    margin: 6px auto 0;
+    transform: scale(0.92);
   }
 
   .btn-banner-try-again {

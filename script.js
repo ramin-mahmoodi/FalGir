@@ -454,7 +454,7 @@
     if (!faal) return;
 
     const ghazalNumber = index + 1;
-    DOM.ghazalTitle.textContent = `غزل شمارهٔ ${toPersianDigits(ghazalNumber)}`;
+    DOM.ghazalTitle.textContent = `غزل شماره ${toPersianDigits(ghazalNumber)}`;
 
     const couplets = parsePoemLines(faal.poem);
     DOM.poemContainer.innerHTML = '';
@@ -509,7 +509,7 @@
     const ghazalNum = STATE.currentFaalIndex !== null ? STATE.currentFaalIndex + 1 : '';
     const formattedText = 
 `«فال‌گیر - دیوان حافظ شیرازی»
-غزل شمارهٔ ${toPersianDigits(ghazalNum)}:
+غزل شماره ${toPersianDigits(ghazalNum)}:
 
 ${STATE.currentFaal.poem}
 
