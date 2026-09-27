@@ -1526,48 +1526,34 @@ button,
 
 .inspector-header {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-bottom: 18px;
-  border-bottom: 1.5px solid rgba(23, 23, 23, 0.12);
-  margin-bottom: 20px;
-}
-
-.inspector-badge-wrap {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 2px dashed rgba(23, 23, 23, 0.16);
+  margin-bottom: 22px;
+}
+
+.interpretation-title-wrap {
+  display: inline-flex;
+  align-items: center;
   gap: 10px;
 }
 
-.severity-badge {
-  padding: 4px 12px;
-  border: 1.5px solid var(--ink);
-  border-radius: 6px;
-  background: var(--yellow);
-  color: var(--ink);
-  font-family: var(--font-base);
-  font-size: 0.8rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  box-shadow: 2px 2px 0 var(--ink);
-}
-
-.inspector-subtag {
-  font-family: var(--font-base);
-  font-size: 0.76rem;
-  color: #666;
-  font-weight: 700;
+.interpretation-decor-star {
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--terracotta);
+  user-select: none;
+  flex-shrink: 0;
 }
 
 .interpretation-title {
   margin: 0;
   font-family: var(--font-base);
-  font-size: 1.35rem;
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
   font-weight: 900;
   letter-spacing: 0;
   color: var(--ink);
-  line-height: 1.3;
+  line-height: 1.25;
 }
 
 /* Interpretation Body */
@@ -2241,6 +2227,10 @@ body.dream-mode .inspector-subtag {
 
 body.dream-mode .interpretation-title {
   color: #ffe382;
+}
+
+body.dream-mode .interpretation-decor-star {
+  color: var(--yellow);
 }
 
 body.dream-mode .interpretation-body p {
