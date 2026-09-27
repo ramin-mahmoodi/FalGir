@@ -82,6 +82,45 @@ button:focus-visible {
 
 .primary-button,
 .secondary-button,
+/* ==========================================================================
+   SHARP NEO-BRUTALIST ARCHITECTURE (Zero Roundness / 100% Sharp Corners)
+   ========================================================================== */
+.bento-card,
+.modal-container,
+.toast,
+.nav-btn,
+.primary-button,
+.secondary-button,
+.filter-button,
+.text-button,
+.footer-pill-btn,
+.footer-scroll-btn,
+.brand-badge,
+.severity-badge,
+.result-badge,
+.footer-badge,
+.item-ghazal-num,
+.search-input,
+.search-result-item,
+.modal-close,
+.bayt,
+.bento-cover-face,
+.bento-cover-eyebrow,
+.bento-cover-pill,
+.bento-endpaper,
+.bento-exlibris,
+.bento-corner,
+.spine-title-badge,
+.banner-emblem-box,
+.result-pulse-dot,
+.dream-dot,
+button,
+input,
+select,
+textarea {
+  border-radius: 0 !important;
+}
+
 .filter-button,
 .text-button {
   cursor: pointer;
@@ -95,7 +134,7 @@ button:focus-visible {
 .secondary-button {
   min-height: 52px;
   padding: 0 20px;
-  border-radius: 14px;
+  border-radius: 0 !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -144,6 +183,10 @@ button:focus-visible {
   border-color: transparent;
   background: transparent;
   color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -159,7 +202,7 @@ button:focus-visible {
 
 .bento-card {
   border: var(--border);
-  border-radius: 22px;
+  border-radius: 0 !important;
   background: var(--white);
   box-shadow: var(--shadow);
   position: relative;
@@ -218,7 +261,7 @@ button:focus-visible {
   padding: 5px 14px;
   background: var(--yellow);
   border: 2px solid var(--ink);
-  border-radius: 6px;
+  border-radius: 0 !important;
   font-family: var(--font-base);
   font-size: 0.95rem;
   font-weight: 900;
@@ -272,7 +315,7 @@ button:focus-visible {
   min-height: 42px;
   padding: 0 16px;
   border: 2px solid var(--ink);
-  border-radius: 8px;
+  border-radius: 0 !important;
   background: var(--white);
   color: var(--ink);
   box-shadow: 2.5px 2.5px 0 var(--ink);
@@ -320,7 +363,7 @@ button:focus-visible {
 .dream-dot {
   width: 9px;
   height: 9px;
-  border-radius: 50%;
+  border-radius: 0 !important;
   background: var(--purple);
   border: 1.5px solid var(--ink);
   display: inline-block;
@@ -368,7 +411,8 @@ button:focus-visible {
   width: 260px;
   height: 260px;
   border: var(--border);
-  border-radius: 50%;
+  border-radius: 0 !important;
+  transform: rotate(25deg);
   background: var(--pink);
   content: "";
   z-index: 1;
@@ -1075,7 +1119,7 @@ button:focus-visible {
   height: 10px;
   background: #10b981;
   border: 1.5px solid var(--ink);
-  border-radius: 50%;
+  border-radius: 0 !important;
   display: inline-block;
   box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
   animation: resultPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
@@ -1096,7 +1140,7 @@ button:focus-visible {
   background: var(--yellow);
   color: var(--ink);
   border: 1.5px solid var(--ink);
-  border-radius: 999px;
+  border-radius: 0 !important;
   box-shadow: 2px 2px 0 var(--ink);
   white-space: nowrap;
 }
@@ -1137,12 +1181,12 @@ button:focus-visible {
   font-size: 0.92rem;
 }
 
-/* Graphical Artwork in Result Banner */
+/* Graphical Artwork in Result Banner - Sharp Geometric Neo-Brutalist Emblem */
 .result-banner-visual {
   position: relative;
-  flex: 0 0 200px;
-  width: 200px;
-  height: 140px;
+  flex: 0 0 140px;
+  width: 140px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1150,131 +1194,28 @@ button:focus-visible {
   user-select: none;
 }
 
-.banner-sun-orb {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
+.banner-emblem-box {
+  width: 78px;
+  height: 78px;
   background: var(--yellow);
-  border: 3px solid var(--ink);
+  border: 2.5px solid var(--ink);
+  border-radius: 0 !important;
   box-shadow: 3.5px 3.5px 0 var(--ink);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  transition: transform 300ms ease;
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-.banner-sun-orb:hover {
-  transform: scale(1.05) rotate(4deg);
+.banner-emblem-box:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5.5px 5.5px 0 var(--ink);
 }
 
-.banner-sun-core {
+.banner-emblem-svg {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  background: var(--white);
-  border: 2px solid var(--ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-
-.banner-sun-icon {
-  font-size: 1.6rem;
-  color: var(--terracotta);
-  line-height: 1;
-}
-
-.banner-sun-rays {
-  position: absolute;
-  inset: -12px;
-  border-radius: 50%;
-  border: 2px dashed rgba(23, 23, 23, 0.45);
-  animation: rotateBannerRays 28s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes rotateBannerRays {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.floating-geo {
-  position: absolute;
-  font-family: var(--font-base);
-  font-weight: 800;
-  border: 2px solid var(--ink);
-  box-shadow: 2px 2px 0 var(--ink);
-  z-index: 3;
-  pointer-events: none;
-}
-
-.geo-badge-pink {
-  background: var(--pink);
-  color: var(--ink);
-  font-size: 0.72rem;
-  padding: 3px 11px;
-  border-radius: 999px;
-  top: 8px;
-  right: 2px;
-  transform: rotate(-6deg);
-}
-
-.geo-badge-yellow {
-  background: var(--yellow);
-  color: var(--ink);
-  font-size: 0.72rem;
-  padding: 3px 11px;
-  border-radius: 999px;
-  bottom: 8px;
-  left: 2px;
-  transform: rotate(5deg);
-}
-
-.geo-star-1 {
-  background: var(--white);
-  color: var(--terracotta);
-  font-size: 0.95rem;
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  top: 4px;
-  left: 18px;
-  transform: rotate(14deg);
-}
-
-.geo-star-2 {
-  background: var(--white);
-  color: var(--ink);
-  font-size: 0.95rem;
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  bottom: 6px;
-  right: 18px;
-  transform: rotate(-12deg);
-}
-
-.geo-star-3 {
-  background: var(--blue);
-  color: var(--ink);
-  font-size: 0.8rem;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  top: 50%;
-  right: -2px;
-  transform: translateY(-50%) rotate(10deg);
+  display: block;
 }
 
 /* WORKSPACE GRID */
@@ -1326,7 +1267,7 @@ button:focus-visible {
   border: none !important;
   box-shadow: none !important;
   background: transparent;
-  border-radius: 8px;
+  border-radius: 0 !important;
   transition: background 150ms ease;
   position: relative;
 }
@@ -1371,6 +1312,11 @@ button:focus-visible {
   box-shadow: none;
 }
 
+.bayt-ornament-svg {
+  display: block;
+  fill: currentColor;
+}
+
 .ornament-glyph {
   font-family: serif;
   user-select: none;
@@ -1407,7 +1353,7 @@ button:focus-visible {
 .severity-badge {
   padding: 4px 12px;
   border: 1.5px solid var(--ink);
-  border-radius: 6px;
+  border-radius: 0 !important;
   background: var(--yellow);
   color: var(--ink);
   font-family: var(--font-base);
@@ -1439,17 +1385,6 @@ button:focus-visible {
   position: relative;
   margin: 0 0 24px;
   padding: 0 4px;
-}
-
-.interp-quote-icon {
-  position: absolute;
-  top: -24px;
-  right: -8px;
-  font-size: 4.8rem;
-  line-height: 1;
-  font-family: Georgia, serif;
-  color: rgba(224, 86, 36, 0.1);
-  pointer-events: none;
 }
 
 .interpretation-body p {
@@ -1565,7 +1500,7 @@ button:focus-visible {
   background: var(--yellow);
   color: var(--ink);
   border: 1.5px solid var(--ink);
-  border-radius: 6px;
+  border-radius: 0 !important;
   box-shadow: 2px 2px 0 var(--ink);
 }
 
@@ -1588,7 +1523,7 @@ button:focus-visible {
   background: var(--yellow);
   color: var(--ink);
   border: 2px solid var(--ink);
-  border-radius: 10px;
+  border-radius: 0 !important;
   box-shadow: 3px 3px 0 var(--ink);
   font-family: var(--font-base);
   font-size: 0.94rem;
@@ -1663,7 +1598,14 @@ button:focus-visible {
   color: #dedbd3;
 }
 
-.footer-list li span {
+.footer-bullet {
+  color: var(--yellow);
+  font-size: 0.85rem;
+  line-height: 1;
+  display: inline-block;
+}
+
+.footer-list li span:not(.footer-bullet) {
   color: var(--yellow);
   font-size: 0.75rem;
 }
@@ -1682,7 +1624,7 @@ button:focus-visible {
   padding: 10px 14px;
   background: rgba(255, 255, 255, 0.07);
   border: 1.5px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+  border-radius: 0 !important;
   color: #dedbd3;
   font-family: var(--font-base);
   font-size: 0.88rem;
@@ -1741,7 +1683,7 @@ button:focus-visible {
   z-index: 100;
   padding: 14px 20px;
   border: var(--border);
-  border-radius: 14px;
+  border-radius: 0 !important;
   background: var(--yellow);
   box-shadow: var(--shadow);
   font-weight: 700;
@@ -1785,6 +1727,7 @@ button:focus-visible {
   overflow-y: auto;
   padding: clamp(24px, 4vw, 36px);
   background: var(--white);
+  border-radius: 0 !important;
 }
 
 .modal-header {
@@ -1808,7 +1751,7 @@ button:focus-visible {
   width: 38px;
   height: 38px;
   border: var(--border);
-  border-radius: 50%;
+  border-radius: 0 !important;
   background: var(--pink);
   font-size: 1.1rem;
   font-weight: 800;
@@ -1840,7 +1783,7 @@ button:focus-visible {
   height: 50px;
   padding: 0 16px;
   border: var(--border);
-  border-radius: 12px;
+  border-radius: 0 !important;
   background: var(--white);
   font-family: var(--font-base);
   font-size: 0.95rem;
@@ -1902,7 +1845,7 @@ button:focus-visible {
   align-items: center;
   padding: 12px 16px;
   border: 2px solid var(--ink);
-  border-radius: 12px;
+  border-radius: 0 !important;
   background: var(--white);
   cursor: pointer;
   transition: transform 120ms ease, background 120ms ease;
@@ -1927,7 +1870,7 @@ button:focus-visible {
   letter-spacing: 0;
   padding: 3px 10px;
   border: 1.5px solid var(--ink);
-  border-radius: 999px;
+  border-radius: 0 !important;
   background: var(--blue);
 }
 
@@ -2254,7 +2197,7 @@ body.dream-mode .inspector-actions .text-button:hover {
     padding: 0;
     flex: 0 0 36px;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 0 !important;
     border-width: 2px;
     box-shadow: 2px 2px 0 var(--ink);
     gap: 0;
@@ -2280,6 +2223,7 @@ body.dream-mode .inspector-actions .text-button:hover {
     left: 4px;
     width: 6px;
     height: 6px;
+    border-radius: 0 !important;
     border-width: 1px;
   }
 
@@ -2308,7 +2252,7 @@ body.dream-mode .inspector-actions .text-button:hover {
     width: 100%;
     min-width: 0;
     gap: 8px;
-    padding-left: 64px; /* Space for the top-left corner medallion */
+    padding-left: 60px; /* Space for the top-left corner emblem */
     flex: 0 0 auto !important;
     height: auto !important;
   }
@@ -2321,6 +2265,7 @@ body.dream-mode .inspector-actions .text-button:hover {
   .result-badge {
     font-size: 0.72rem;
     padding: 2px 8px;
+    border-radius: 0 !important;
   }
 
   .result-pill {
@@ -2353,64 +2298,29 @@ body.dream-mode .inspector-actions .text-button:hover {
     justify-content: center;
   }
 
-  /* Compact rotating sun medallion in the top-left corner on mobile */
+  /* Compact geometric emblem in the top-left corner on mobile */
   .result-banner-visual {
     position: absolute;
     top: 14px;
     left: 12px;
-    width: 52px;
-    height: 52px;
-    flex: 0 0 52px;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
     margin: 0;
     pointer-events: none;
     z-index: 3;
     transform: none;
   }
 
-  .banner-sun-orb {
-    width: 44px;
-    height: 44px;
-    border-width: 2px;
+  .banner-emblem-box {
+    width: 40px;
+    height: 40px;
     box-shadow: 2px 2px 0 var(--ink);
   }
 
-  .banner-sun-core {
-    width: 22px;
-    height: 22px;
-    border-width: 1.5px;
-  }
-
-  .banner-sun-icon {
-    font-size: 0.85rem;
-  }
-
-  .banner-sun-rays {
-    inset: -5px;
-    border-width: 1.5px;
-  }
-
-  .geo-badge-pink,
-  .geo-badge-yellow,
-  .geo-star-3 {
-    display: none;
-  }
-
-  .geo-star-1 {
-    top: -4px;
-    left: -2px;
-    width: 16px;
-    height: 16px;
-    font-size: 0.6rem;
-    border-width: 1.5px;
-  }
-
-  .geo-star-2 {
-    bottom: -4px;
-    right: -2px;
-    width: 16px;
-    height: 16px;
-    font-size: 0.6rem;
-    border-width: 1.5px;
+  .banner-emblem-svg {
+    width: 24px;
+    height: 24px;
   }
 
   .manuscript-card {
@@ -2530,7 +2440,7 @@ body.dream-mode .inspector-actions .text-button:hover {
   }
 
   .result-banner-copy {
-    padding-left: 50px;
+    padding-left: 48px;
     flex: 0 0 auto !important;
     height: auto !important;
   }
@@ -2538,23 +2448,19 @@ body.dream-mode .inspector-actions .text-button:hover {
   .result-banner-visual {
     top: 12px;
     left: 8px;
-    width: 42px;
-    height: 42px;
-    flex: 0 0 42px;
-  }
-
-  .banner-sun-orb {
     width: 36px;
     height: 36px;
+    flex: 0 0 36px;
   }
 
-  .banner-sun-core {
-    width: 18px;
-    height: 18px;
+  .banner-emblem-box {
+    width: 32px;
+    height: 32px;
   }
 
-  .banner-sun-icon {
-    font-size: 0.72rem;
+  .banner-emblem-svg {
+    width: 20px;
+    height: 20px;
   }
 
   .result-title {
