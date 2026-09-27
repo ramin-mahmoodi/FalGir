@@ -80,44 +80,20 @@ button:focus-visible {
   outline-offset: 4px;
 }
 
-.primary-button,
-.secondary-button,
 /* ==========================================================================
-   SHARP NEO-BRUTALIST ARCHITECTURE (Zero Roundness / 100% Sharp Corners)
+   SHARP CARDS & BUTTONS (کادرها و تمام دکمه‌ها کاملاً تیز و بدون گردی)
    ========================================================================== */
 .bento-card,
 .modal-container,
-.toast,
-.nav-btn,
 .primary-button,
 .secondary-button,
+.btn-banner-try-again,
 .filter-button,
 .text-button,
-.footer-pill-btn,
+.nav-btn,
 .footer-scroll-btn,
-.brand-badge,
-.severity-badge,
-.result-badge,
-.footer-badge,
-.item-ghazal-num,
-.search-input,
-.search-result-item,
-.modal-close,
-.bayt,
-.bento-cover-face,
-.bento-cover-eyebrow,
-.bento-cover-pill,
-.bento-endpaper,
-.bento-exlibris,
-.bento-corner,
-.spine-title-badge,
-.banner-emblem-box,
-.result-pulse-dot,
-.dream-dot,
-button,
-input,
-select,
-textarea {
+.footer-pill-btn,
+button {
   border-radius: 0 !important;
 }
 
@@ -125,6 +101,7 @@ textarea {
 .text-button {
   cursor: pointer;
   border: var(--border);
+  border-radius: 0 !important;
   font-weight: 700;
   transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
   font-family: var(--font-base);
@@ -261,7 +238,7 @@ textarea {
   padding: 5px 14px;
   background: var(--yellow);
   border: 2px solid var(--ink);
-  border-radius: 0 !important;
+  border-radius: 6px;
   font-family: var(--font-base);
   font-size: 0.95rem;
   font-weight: 900;
@@ -363,7 +340,7 @@ textarea {
 .dream-dot {
   width: 9px;
   height: 9px;
-  border-radius: 0 !important;
+  border-radius: 50%;
   background: var(--purple);
   border: 1.5px solid var(--ink);
   display: inline-block;
@@ -411,8 +388,7 @@ textarea {
   width: 260px;
   height: 260px;
   border: var(--border);
-  border-radius: 0 !important;
-  transform: rotate(25deg);
+  border-radius: 50%;
   background: var(--pink);
   content: "";
   z-index: 1;
@@ -1119,7 +1095,7 @@ textarea {
   height: 10px;
   background: #10b981;
   border: 1.5px solid var(--ink);
-  border-radius: 0 !important;
+  border-radius: 50%;
   display: inline-block;
   box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
   animation: resultPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
@@ -1140,7 +1116,7 @@ textarea {
   background: var(--yellow);
   color: var(--ink);
   border: 1.5px solid var(--ink);
-  border-radius: 0 !important;
+  border-radius: 999px;
   box-shadow: 2px 2px 0 var(--ink);
   white-space: nowrap;
 }
@@ -1181,12 +1157,12 @@ textarea {
   font-size: 0.92rem;
 }
 
-/* Graphical Artwork in Result Banner - Sharp Geometric Neo-Brutalist Emblem */
+/* Graphical Artwork in Result Banner - Elegant Circular Sun Emblem & Floating Badges */
 .result-banner-visual {
   position: relative;
-  flex: 0 0 140px;
-  width: 140px;
-  height: 110px;
+  flex: 0 0 200px;
+  width: 200px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1194,28 +1170,131 @@ textarea {
   user-select: none;
 }
 
-.banner-emblem-box {
-  width: 78px;
-  height: 78px;
+.banner-sun-orb {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
   background: var(--yellow);
-  border: 2.5px solid var(--ink);
-  border-radius: 0 !important;
+  border: 3px solid var(--ink);
   box-shadow: 3.5px 3.5px 0 var(--ink);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  position: relative;
+  transition: transform 300ms ease;
 }
 
-.banner-emblem-box:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5.5px 5.5px 0 var(--ink);
+.banner-sun-orb:hover {
+  transform: scale(1.05) rotate(4deg);
 }
 
-.banner-emblem-svg {
+.banner-sun-core {
   width: 50px;
   height: 50px;
-  display: block;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.banner-sun-icon {
+  font-size: 1.6rem;
+  color: var(--terracotta);
+  line-height: 1;
+}
+
+.banner-sun-rays {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px dashed rgba(23, 23, 23, 0.45);
+  animation: rotateBannerRays 28s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotateBannerRays {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.floating-geo {
+  position: absolute;
+  font-family: var(--font-base);
+  font-weight: 800;
+  border: 2px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.geo-badge-pink {
+  background: var(--pink);
+  color: var(--ink);
+  font-size: 0.72rem;
+  padding: 3px 11px;
+  border-radius: 999px;
+  top: 8px;
+  right: 2px;
+  transform: rotate(-6deg);
+}
+
+.geo-badge-yellow {
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 0.72rem;
+  padding: 3px 11px;
+  border-radius: 999px;
+  bottom: 8px;
+  left: 2px;
+  transform: rotate(5deg);
+}
+
+.geo-star-1 {
+  background: var(--white);
+  color: var(--terracotta);
+  font-size: 0.95rem;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  top: 4px;
+  left: 18px;
+  transform: rotate(14deg);
+}
+
+.geo-star-2 {
+  background: var(--white);
+  color: var(--ink);
+  font-size: 0.95rem;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  bottom: 6px;
+  right: 18px;
+  transform: rotate(-12deg);
+}
+
+.geo-star-3 {
+  background: var(--blue);
+  color: var(--ink);
+  font-size: 0.8rem;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  top: 50%;
+  right: -2px;
+  transform: translateY(-50%) rotate(10deg);
 }
 
 /* WORKSPACE GRID */
@@ -1267,7 +1346,7 @@ textarea {
   border: none !important;
   box-shadow: none !important;
   background: transparent;
-  border-radius: 0 !important;
+  border-radius: 0;
   transition: background 150ms ease;
   position: relative;
 }
@@ -1353,7 +1432,7 @@ textarea {
 .severity-badge {
   padding: 4px 12px;
   border: 1.5px solid var(--ink);
-  border-radius: 0 !important;
+  border-radius: 6px;
   background: var(--yellow);
   color: var(--ink);
   font-family: var(--font-base);
@@ -1500,7 +1579,7 @@ textarea {
   background: var(--yellow);
   color: var(--ink);
   border: 1.5px solid var(--ink);
-  border-radius: 0 !important;
+  border-radius: 6px;
   box-shadow: 2px 2px 0 var(--ink);
 }
 
@@ -1751,7 +1830,7 @@ textarea {
   width: 38px;
   height: 38px;
   border: var(--border);
-  border-radius: 0 !important;
+  border-radius: 50%;
   background: var(--pink);
   font-size: 1.1rem;
   font-weight: 800;
@@ -1870,7 +1949,7 @@ textarea {
   letter-spacing: 0;
   padding: 3px 10px;
   border: 1.5px solid var(--ink);
-  border-radius: 0 !important;
+  border-radius: 999px;
   background: var(--blue);
 }
 
@@ -2223,7 +2302,7 @@ body.dream-mode .inspector-actions .text-button:hover {
     left: 4px;
     width: 6px;
     height: 6px;
-    border-radius: 0 !important;
+    border-radius: 50%;
     border-width: 1px;
   }
 
@@ -2265,7 +2344,7 @@ body.dream-mode .inspector-actions .text-button:hover {
   .result-badge {
     font-size: 0.72rem;
     padding: 2px 8px;
-    border-radius: 0 !important;
+    border-radius: 999px;
   }
 
   .result-pill {
@@ -2298,29 +2377,64 @@ body.dream-mode .inspector-actions .text-button:hover {
     justify-content: center;
   }
 
-  /* Compact geometric emblem in the top-left corner on mobile */
+  /* Compact rotating sun medallion in the top-left corner on mobile */
   .result-banner-visual {
     position: absolute;
     top: 14px;
     left: 12px;
-    width: 44px;
-    height: 44px;
-    flex: 0 0 44px;
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
     margin: 0;
     pointer-events: none;
     z-index: 3;
     transform: none;
   }
 
-  .banner-emblem-box {
-    width: 40px;
-    height: 40px;
+  .banner-sun-orb {
+    width: 44px;
+    height: 44px;
+    border-width: 2px;
     box-shadow: 2px 2px 0 var(--ink);
   }
 
-  .banner-emblem-svg {
-    width: 24px;
-    height: 24px;
+  .banner-sun-core {
+    width: 22px;
+    height: 22px;
+    border-width: 1.5px;
+  }
+
+  .banner-sun-icon {
+    font-size: 0.85rem;
+  }
+
+  .banner-sun-rays {
+    inset: -5px;
+    border-width: 1.5px;
+  }
+
+  .geo-badge-pink,
+  .geo-badge-yellow,
+  .geo-star-3 {
+    display: none;
+  }
+
+  .geo-star-1 {
+    top: -4px;
+    left: -2px;
+    width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
+    border-width: 1.5px;
+  }
+
+  .geo-star-2 {
+    bottom: -4px;
+    right: -2px;
+    width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
+    border-width: 1.5px;
   }
 
   .manuscript-card {
@@ -2448,19 +2562,23 @@ body.dream-mode .inspector-actions .text-button:hover {
   .result-banner-visual {
     top: 12px;
     left: 8px;
-    width: 36px;
-    height: 36px;
-    flex: 0 0 36px;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
   }
 
-  .banner-emblem-box {
-    width: 32px;
-    height: 32px;
+  .banner-sun-orb {
+    width: 34px;
+    height: 34px;
   }
 
-  .banner-emblem-svg {
-    width: 20px;
-    height: 20px;
+  .banner-sun-core {
+    width: 18px;
+    height: 18px;
+  }
+
+  .banner-sun-icon {
+    font-size: 0.72rem;
   }
 
   .result-title {

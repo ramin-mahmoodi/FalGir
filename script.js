@@ -488,7 +488,7 @@
 
       const divider = document.createElement('span');
       divider.className = 'bayt-divider';
-      divider.innerHTML = '<svg class="bayt-ornament-svg" viewBox="0 0 16 16" width="10" height="10" fill="currentColor" aria-hidden="true"><polygon points="8,1 15,8 8,15 1,8"></polygon></svg>';
+      divider.innerHTML = '<svg class="bayt-ornament-svg" viewBox="0 0 16 16" width="6" height="6" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="3.5"></circle></svg>';
       divider.setAttribute('aria-hidden', 'true');
 
       const mesra2 = document.createElement('span');
