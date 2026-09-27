@@ -21,12 +21,57 @@
   <main class="app-shell" id="appShell">
     
     <!-- =========================================================================
+         GLOBAL BENTO NAVBAR / HEADER
+         ========================================================================= -->
+    <header class="navbar bento-card" id="mainNavbar">
+      <div class="navbar-brand">
+        <span class="navbar-badge">فال‌گیر</span>
+        <h2 class="navbar-title">دیوان حافظ شیرازی</h2>
+      </div>
+
+      <nav class="navbar-actions" aria-label="ابزارهای سامانه">
+        <button class="nav-button" id="btnSearchModal" type="button" title="جستجو در متن یا شماره غزل">
+          <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span>جستجوی غزل</span>
+        </button>
+
+        <button class="nav-button" id="btnAboutModal" type="button" title="آشنایی با آداب و رسم تفأل">
+          <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <span>آداب تفأل</span>
+        </button>
+
+        <button class="nav-button" id="btnSoundToggle" type="button" title="صدا: فعال">
+          <span id="soundIconWrap">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+          </span>
+          <span>صدا</span>
+        </button>
+
+        <button class="nav-button" id="dreamToggle" type="button" aria-pressed="false" title="تغییر به حالت عرفانی شب">
+          <span class="dream-dot"></span>
+          <span>حالت عرفانی: خاموش</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- =========================================================================
          STAGE 1: NIYYAT & HERO BENTO SECTION
          ========================================================================= -->
     <section id="niyyatStage" class="stage-niyyat active">
       
       <!-- HERO BENTO CARD -->
-      <header class="hero bento-card">
+      <div class="hero bento-card">
         <div class="hero-copy">
           <p class="eyebrow" id="eyebrow">فال‌گیر · نسخه اختصاصی دیوان لسان‌الغیب</p>
 
@@ -41,36 +86,9 @@
 
           <div class="hero-actions">
             <!-- دکمه تفأل اصلی -->
-            <button class="primary-button" id="btnDivinate" type="button">
+            <button class="primary-button hero-cta-btn" id="btnDivinate" type="button">
               <span>نیت کردم؛ تفأل بزن</span>
               <span aria-hidden="true">↗</span>
-            </button>
-
-            <!-- آداب تفأل -->
-            <button class="secondary-button" id="btnAboutModal" type="button">
-              آداب تفأل
-            </button>
-
-            <!-- جستجو -->
-            <button class="secondary-button" id="btnSearchModal" type="button">
-              جستجوی غزل
-            </button>
-
-            <!-- کنترل صدا -->
-            <button class="secondary-button" id="btnSoundToggle" type="button" title="صدا: فعال">
-              <span id="soundIconWrap">
-                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
-                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-                </svg>
-              </span>
-              <span>صدا</span>
-            </button>
-
-            <!-- حالت عرفانی -->
-            <button class="secondary-button" id="dreamToggle" type="button" aria-pressed="false">
-              حالت عرفانی: خاموش
             </button>
           </div>
         </div>
@@ -304,28 +322,7 @@
           </div>
           <p id="symbolLabel">برای تفأل بر روی دیوان کلیک کنید</p>
         </div>
-      </header>
-
-      <!-- STATS BENTO GRID (۳ مشخصه دیوان) -->
-      <section class="stats-grid" aria-label="مشخصات دیوان حافظ">
-        <article class="stat-card bento-card stat-yellow">
-          <p class="stat-label">تعداد غزل‌ها</p>
-          <strong>۴۹۵</strong>
-          <span>غزل کامل با تفسیر و تعبیر جامع</span>
-        </article>
-
-        <article class="stat-card bento-card stat-blue">
-          <p class="stat-label">پیشینه تاریخی</p>
-          <strong>۷۰۰+</strong>
-          <span>سال همنشینی با دلدادگان شعر و ادب</span>
-        </article>
-
-        <article class="stat-card bento-card stat-pink">
-          <p class="stat-label">هنر خوشنویسی</p>
-          <strong style="margin-top: auto; font-family: var(--font-base); font-size: clamp(2.2rem, 3.6vw, 3rem); font-weight: 900;">نستعلیق</strong>
-          <span>قلم اصیل و موزون ایرانی</span>
-        </article>
-      </section>
+      </div>
 
       <!-- WISDOM GRID (آداب و حکمت تفأل) -->
       <section class="remediation-grid" aria-label="آداب و حکمت تفأل">
@@ -429,16 +426,30 @@
       </div>
     </section>
 
-    <!-- FOOTER BENTO CARD -->
-    <footer class="footer bento-card">
-      <div>
-        <p class="eyebrow">لسان‌الغیب شیرازی</p>
-        <h2>«بر سرِ تربتِ ما چون گذری، همّت خواه / که زیارتگَهِ رندانِ جهان خواهد بود»</h2>
+    <!-- GLOBAL BENTO FOOTER -->
+    <footer class="app-footer bento-card" id="mainFooter">
+      <div class="footer-top">
+        <div class="footer-quote-wrap">
+          <span class="footer-badge">لسان‌الغیب شیرازی</span>
+          <p class="footer-quote">«بر سرِ تربتِ ما چون گذری، همّت خواه / که زیارتگَهِ رندانِ جهان خواهد بود»</p>
+        </div>
+        <button class="nav-button btn-scroll-top" id="btnScrollTop" type="button" title="بازگشت به ابتدای صفحه">
+          <span>بازگشت به بالا ↑</span>
+        </button>
       </div>
-      <p>
-        پروژه فال‌گیر (FalGir)<br>
-        دیوان کامل حافظ شیرازی · قالب بنتو
-      </p>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <div class="footer-credits">
+          <span>سامانهٔ <strong>فال‌گیر (FalGir)</strong></span>
+          <span class="footer-dot">•</span>
+          <span>دیوان کامل خواجه شمس‌الدین محمد حافظ شیرازی</span>
+          <span class="footer-dot">•</span>
+          <span>۴۹۵ غزل با تعبیر جامع و خط نستعلیق</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/ramin-mahmoodi/FalGir" target="_blank" rel="noopener noreferrer" class="footer-link">سورس گیت‌هاب ↗</a>
+        </div>
+      </div>
     </footer>
 
     <!-- TOAST NOTIFICATION -->

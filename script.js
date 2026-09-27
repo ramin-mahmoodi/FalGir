@@ -664,8 +664,21 @@ https://ramin-mahmoodi.github.io/FalGir/`;
       btnDream.addEventListener('click', () => {
         const isDream = document.body.classList.toggle('dream-mode');
         btnDream.setAttribute('aria-pressed', isDream.toString());
-        btnDream.textContent = isDream ? 'حالت عرفانی: روشن' : 'حالت عرفانی: خاموش';
+        const textSpan = btnDream.querySelector('span:last-child');
+        if (textSpan) {
+          textSpan.textContent = isDream ? 'حالت عرفانی: روشن' : 'حالت عرفانی: خاموش';
+        } else {
+          btnDream.textContent = isDream ? 'حالت عرفانی: روشن' : 'حالت عرفانی: خاموش';
+        }
         sound.playSingingBowl(isDream ? 528 : 432, 0.6);
+      });
+    }
+
+    // دکمه بازگشت به بالا (Scroll to Top)
+    const btnScrollTop = document.getElementById('btnScrollTop');
+    if (btnScrollTop) {
+      btnScrollTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
 
