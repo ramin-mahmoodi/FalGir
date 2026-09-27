@@ -33,21 +33,21 @@
 
       <!-- Navigation & Quick Actions -->
       <nav class="header-actions" aria-label="ابزارهای سامانه">
-        <button class="nav-btn nav-btn-search" id="btnSearchModal" type="button" title="جستجو در متن یا شماره غزل">
+        <button class="nav-btn nav-btn-search" id="btnSearchModal" type="button" title="جستجوی غزل">
           <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <span>جستجوی غزل</span>
+          <span class="nav-btn-text">جستجوی غزل</span>
         </button>
 
-        <button class="nav-btn nav-btn-adab" id="btnAboutModal" type="button" title="آشنایی با آداب و رسم تفأل">
+        <button class="nav-btn nav-btn-adab" id="btnAboutModal" type="button" title="آداب تفأل">
           <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="12" y1="16" x2="12" y2="12"></line>
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
           </svg>
-          <span>آداب تفأل</span>
+          <span class="nav-btn-text">آداب تفأل</span>
         </button>
 
         <button class="nav-btn nav-btn-sound" id="btnSoundToggle" type="button" title="صدا: فعال">
@@ -58,12 +58,17 @@
               <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
             </svg>
           </span>
-          <span>صدا</span>
+          <span class="nav-btn-text">صدا</span>
         </button>
 
-        <button class="nav-btn nav-btn-dream" id="dreamToggle" type="button" aria-pressed="false" title="تغییر به حالت عرفانی شب">
-          <span class="dream-dot"></span>
-          <span>حالت عرفانی: خاموش</span>
+        <button class="nav-btn nav-btn-dream" id="dreamToggle" type="button" aria-pressed="false" title="حالت عرفانی: خاموش">
+          <span id="dreamIconWrap">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+          <span class="dream-dot" aria-hidden="true"></span>
+          <span class="nav-btn-text">حالت عرفانی: خاموش</span>
         </button>
       </nav>
 

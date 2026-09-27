@@ -46,6 +46,22 @@
         <circle cx="12" cy="12" r="10"></circle>
         <line x1="12" y1="8" x2="12" y2="12"></line>
         <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>`,
+    moon: `
+      <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>`,
+    sun: `
+      <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
       </svg>`
   };
 
@@ -664,15 +680,18 @@ https://ramin-mahmoodi.github.io/FalGir/`;
 
     // دکمه حالت عرفانی (Dream Mode)
     const btnDream = document.getElementById('dreamToggle');
+    const dreamIconWrap = document.getElementById('dreamIconWrap');
     if (btnDream) {
       btnDream.addEventListener('click', () => {
         const isDream = document.body.classList.toggle('dream-mode');
         btnDream.setAttribute('aria-pressed', isDream.toString());
-        const textSpan = btnDream.querySelector('span:last-child');
+        const textSpan = btnDream.querySelector('.nav-btn-text') || btnDream.querySelector('span:last-child');
         if (textSpan) {
           textSpan.textContent = isDream ? 'حالت عرفانی: روشن' : 'حالت عرفانی: خاموش';
-        } else {
-          btnDream.textContent = isDream ? 'حالت عرفانی: روشن' : 'حالت عرفانی: خاموش';
+        }
+        btnDream.title = isDream ? 'حالت عرفانی: روشن (فعال)' : 'حالت عرفانی: خاموش';
+        if (dreamIconWrap) {
+          dreamIconWrap.innerHTML = isDream ? SVG_ICONS.sun : SVG_ICONS.moon;
         }
         sound.playSingingBowl(isDream ? 528 : 432, 0.6);
       });
