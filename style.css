@@ -28,9 +28,9 @@
   --shadow: 7px 7px 0 var(--ink);
   --small-shadow: 4px 4px 0 var(--ink);
   
-  --font-base: 'Vazirmatn', 'Space Grotesk', system-ui, sans-serif;
-  --font-display: 'Space Grotesk', 'Vazirmatn', sans-serif;
-  --font-mono: 'DM Mono', monospace;
+  --font-base: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+  --font-display: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Vazirmatn', 'DM Mono', monospace;
   --font-poetry: 'IranNastaliq', 'Vazirmatn', serif;
 }
 
@@ -166,12 +166,11 @@ button:focus-visible {
 
 .eyebrow {
   margin: 0 0 10px;
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-family: var(--font-base);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
   line-height: 1.4;
-  text-transform: uppercase;
   color: var(--ink);
 }
 
@@ -213,11 +212,11 @@ button:focus-visible {
 .hero h1 {
   max-width: 760px;
   margin: 0;
-  font-family: var(--font-display);
+  font-family: var(--font-base);
   font-size: clamp(3.2rem, 7.5vw, 6.8rem);
-  font-weight: 800;
-  letter-spacing: -0.06em;
-  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.05;
   color: var(--ink);
 }
 
@@ -257,18 +256,18 @@ button:focus-visible {
   overflow: hidden;
 }
 
-.hero-symbol p {
+.hero-symbol > #symbolLabel {
   position: absolute;
   right: 20px;
   bottom: 16px;
   left: 20px;
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-family: var(--font-base);
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   text-align: center;
-  text-transform: uppercase;
+  color: var(--ink);
 }
 
 .sun-ring {
@@ -336,6 +335,7 @@ button:focus-visible {
   transform: rotateY(-22deg) rotateX(10deg);
   transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1.1);
   outline: none;
+  box-shadow: none !important;
 }
 
 .book-scene:not(.is-opening) .book-3d:hover {
@@ -359,6 +359,8 @@ button:focus-visible {
   padding: 0;
   margin: 0;
   transform-style: preserve-3d;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .hardcover_front {
@@ -378,6 +380,8 @@ button:focus-visible {
   inset: 0;
   list-style: none;
   transform-style: preserve-3d;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .hardcover_front > li:first-child { transform: translateZ(1px); }
@@ -390,19 +394,19 @@ button:focus-visible {
 .hardcover_back > li:first-child { transform: rotateY(180deg) translateZ(1px); }
 .hardcover_back > li:last-child { transform: translateZ(1px); }
 
-/* طرح روی جلد نئو-بروتالیست */
+/* طرح روی جلد نئو-بروتالیست: کاملاً بدون گردی و بدون سایه */
 .bento-cover-face {
   position: absolute;
   inset: 0;
   background: var(--yellow);
   border: var(--border);
-  border-radius: 16px;
-  box-shadow: var(--small-shadow);
+  border-radius: 0 !important;
+  box-shadow: none !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 10px;
+  padding: 12px 8px;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -416,34 +420,35 @@ button:focus-visible {
   position: absolute;
   inset: 5px;
   border: 1.5px dashed var(--ink);
-  border-radius: 12px;
+  border-radius: 0 !important;
   pointer-events: none;
   opacity: 0.35;
 }
 
 .bento-corner {
   position: absolute;
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--ink);
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: 0 !important;
 }
-.bento-corner--tl { top: 8px; left: 8px; background: var(--pink); border-radius: 3px; }
-.bento-corner--tr { top: 8px; right: 8px; background: var(--blue); border-radius: 3px; }
-.bento-corner--bl { bottom: 8px; left: 8px; background: var(--green); border-radius: 3px; }
-.bento-corner--br { bottom: 8px; right: 8px; background: var(--purple); border-radius: 3px; }
+.bento-corner--tl { top: 7px; left: 7px; background: var(--pink); }
+.bento-corner--tr { top: 7px; right: 7px; background: var(--blue); }
+.bento-corner--bl { bottom: 7px; left: 7px; background: var(--green); }
+.bento-corner--br { bottom: 7px; right: 7px; background: var(--purple); }
 
 .bento-cover-eyebrow {
   position: relative;
   z-index: 2;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-family: var(--font-base);
+  font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  padding: 3px 12px;
+  letter-spacing: 0;
+  padding: 2px 8px;
   background: var(--white);
-  border: 2px solid var(--ink);
-  border-radius: 999px;
-  box-shadow: 2px 2px 0 var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .bento-cover-sun {
@@ -453,26 +458,27 @@ button:focus-visible {
   height: 120px;
   display: grid;
   place-items: center;
-  border: 2.5px solid var(--ink);
+  border: 2px solid var(--ink);
   border-radius: 50%;
   background: repeating-conic-gradient(
     from 0deg,
     var(--yellow) 0deg 10deg,
     var(--ink) 10deg 20deg
   );
-  box-shadow: 3px 3px 0 var(--ink);
+  box-shadow: none !important;
 }
 
 .bento-sun-center {
   position: absolute;
   inset: 16px;
-  border: 2.5px solid var(--ink);
+  border: 2px solid var(--ink);
   border-radius: 50%;
   background: var(--pink);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  box-shadow: none !important;
 }
 
 .bento-sun-title {
@@ -483,18 +489,24 @@ button:focus-visible {
   line-height: 1;
 }
 
+/* کادر اسم نویسنده کتاب: کوچکتر، بدون گردی و بدون سایه */
 .bento-cover-pill {
   position: relative;
   z-index: 2;
   font-family: var(--font-base);
-  font-size: 0.62rem;
+  font-size: 0.52rem;
   font-weight: 700;
-  padding: 4px 10px;
+  letter-spacing: 0;
+  padding: 2px 6px;
   background: var(--white);
-  border: 2px solid var(--ink);
-  border-radius: 999px;
-  box-shadow: 2px 2px 0 var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 0 !important;
+  box-shadow: none !important;
   white-space: nowrap;
+  max-width: 92%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 /* آستر داخلی جلد */
@@ -503,7 +515,8 @@ button:focus-visible {
   inset: 0;
   background: var(--purple);
   border: var(--border);
-  border-radius: 16px;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -511,11 +524,11 @@ button:focus-visible {
 }
 
 .bento-exlibris {
-  padding: 16px 20px;
+  padding: 14px 18px;
   background: var(--white);
   border: 2px solid var(--ink);
-  border-radius: 14px;
-  box-shadow: 3px 3px 0 var(--ink);
+  border-radius: 0 !important;
+  box-shadow: none !important;
   text-align: center;
 }
 
@@ -537,6 +550,8 @@ button:focus-visible {
   transform: rotateY(90deg);
   background: var(--blue);
   border: var(--border);
+  border-radius: 0 !important;
+  box-shadow: none !important;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -558,13 +573,13 @@ button:focus-visible {
   font-family: var(--font-base);
   font-size: 0.8rem;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 0;
   color: var(--ink);
   background: var(--white);
-  border: 2px solid var(--ink);
-  border-radius: 8px;
-  padding: 10px 4px;
-  box-shadow: 2px 2px 0 var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 0 !important;
+  padding: 8px 4px;
+  box-shadow: none !important;
 }
 
 /* لبه‌های کاغذ */
@@ -582,6 +597,8 @@ button:focus-visible {
     var(--white) 1.5px 4px
   );
   border: var(--border);
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .book-pages-bottom {
@@ -598,6 +615,8 @@ button:focus-visible {
     var(--white) 1.5px 4px
   );
   border: var(--border);
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .book-pages-top {
@@ -611,7 +630,7 @@ button:focus-visible {
   transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-/* برگه نهایی داخل کتاب */
+/* برگه نهایی داخل کتاب - بدون گردی و بدون سایه */
 .book-first-page {
   position: absolute;
   left: 3px;
@@ -621,7 +640,8 @@ button:focus-visible {
   transform: translateZ(15.5px);
   background: var(--white);
   border: 2px solid var(--ink);
-  border-radius: 6px;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -652,6 +672,8 @@ button:focus-visible {
   transform-style: preserve-3d;
   transform: translateZ(calc(19.6px - var(--leaf-index, 0) * 0.8px)) rotateY(0deg);
   transition: transform 0.6s cubic-bezier(0.28, 0.08, 0.25, 1);
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .book-scene.is-opening .page > li.leaf:nth-child(1) {
@@ -680,12 +702,14 @@ button:focus-visible {
   transition-delay: 1.12s;
 }
 
+/* رویه برگه‌های کتاب - کاملاً بدون گردی و بدون سایه */
 .leaf-face {
   position: absolute;
   inset: 0;
-  border-radius: 6px;
+  border-radius: 0 !important;
   background: var(--white);
   border: 2px solid var(--ink);
+  box-shadow: none !important;
   overflow: hidden;
   direction: rtl !important;
   backface-visibility: hidden;
@@ -696,12 +720,13 @@ button:focus-visible {
 .leaf-front { transform: rotateY(0deg) translateZ(0.5px); }
 .leaf-back { transform: rotateY(180deg) translateZ(0.5px); }
 
+/* طرح دست‌نویس داخل صفحات */
 .leaf-manuscript {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 8px;
+  padding: 12px 6px;
   text-align: center;
   height: 100%;
   box-sizing: border-box;
@@ -710,18 +735,18 @@ button:focus-visible {
 
 .leaf-header {
   font-family: var(--font-base);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 800;
   color: var(--ink);
   background: var(--yellow);
-  border: 2px solid var(--ink);
-  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  border-radius: 0 !important;
+  box-shadow: none !important;
   padding: 2px 10px;
-  box-shadow: 2px 2px 0 var(--ink);
 }
 
 .leaf-tazhib-line {
-  width: 80%;
+  width: 82%;
   height: 2px;
   border-top: 1.5px dashed var(--ink);
   margin: 6px 0;
@@ -731,27 +756,33 @@ button:focus-visible {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
   margin: auto 0;
+  padding: 0 4px;
 }
 
 .leaf-verse {
-  font-family: var(--font-poetry);
-  font-size: 0.72rem;
-  line-height: 1.5;
-  color: var(--ink);
+  position: static !important;
+  margin: 0 !important;
+  font-family: var(--font-poetry) !important;
+  font-size: 0.8rem !important;
+  line-height: 1.85 !important;
+  color: var(--ink) !important;
+  letter-spacing: 0 !important;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0;
+  overflow: visible;
+  text-align: center;
 }
 
 .leaf-footer {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  font-weight: 600;
+  font-family: var(--font-base);
+  font-size: 0.62rem;
+  font-weight: 700;
   color: var(--ink);
   opacity: 0.8;
+  letter-spacing: 0;
 }
 
 /* ==========================================================================
@@ -779,18 +810,20 @@ button:focus-visible {
 
 .stat-label {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.07em;
+  font-family: var(--font-base);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .stat-card strong {
   margin-top: auto;
-  font-family: var(--font-display);
-  font-size: clamp(3.6rem, 6vw, 5.8rem);
-  letter-spacing: -0.07em;
-  line-height: 0.9;
+  font-family: var(--font-base);
+  font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
 }
 
 .stat-card span {
@@ -822,9 +855,10 @@ button:focus-visible {
 .section-heading h2,
 .footer h2 {
   margin: 0;
+  font-family: var(--font-base);
   font-size: clamp(1.8rem, 3.8vw, 3.4rem);
-  letter-spacing: -0.055em;
-  line-height: 1.1;
+  letter-spacing: 0;
+  line-height: 1.15;
   font-weight: 800;
 }
 
@@ -876,9 +910,10 @@ button:focus-visible {
 
 .audit-result span {
   flex: 0 0 auto;
-  font-family: var(--font-mono);
+  font-family: var(--font-base);
   font-size: 1.15rem;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0;
 }
 
 /* ==========================================================================
@@ -908,17 +943,19 @@ button:focus-visible {
   top: 15px;
   left: 22px;
   color: rgba(23, 23, 23, 0.16);
-  font-family: var(--font-display);
+  font-family: var(--font-base);
   font-size: 5rem;
-  font-weight: 800;
-  letter-spacing: -0.08em;
+  font-weight: 900;
+  letter-spacing: 0;
 }
 
 .remediation-card h3 {
   margin: 70px 0 18px;
+  font-family: var(--font-base);
   font-size: clamp(1.4rem, 2.5vw, 2.2rem);
-  letter-spacing: -0.04em;
-  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.2;
 }
 
 .remediation-card > p:last-child {
@@ -979,10 +1016,10 @@ button:focus-visible {
 
 .ghazal-title {
   margin: 0;
-  font-family: var(--font-display);
+  font-family: var(--font-base);
   font-size: clamp(2rem, 3.5vw, 3.2rem);
-  font-weight: 800;
-  letter-spacing: -0.05em;
+  font-weight: 900;
+  letter-spacing: 0;
   color: var(--ink);
 }
 
@@ -1052,9 +1089,10 @@ button:focus-visible {
   padding-top: 18px;
   border-top: 2px solid var(--ink);
   text-align: center;
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-family: var(--font-base);
+  font-size: 0.78rem;
   font-weight: 700;
+  letter-spacing: 0;
   color: var(--ink);
 }
 
@@ -1074,10 +1112,10 @@ button:focus-visible {
   border-radius: 999px;
   background: var(--pink);
   color: var(--ink);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-family: var(--font-base);
+  font-size: 0.74rem;
   font-weight: 800;
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -1087,9 +1125,10 @@ button:focus-visible {
 
 .incident-number,
 .detail-category {
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  letter-spacing: 0.06em;
+  font-family: var(--font-base);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -1101,9 +1140,11 @@ button:focus-visible {
 
 .inspector h3 {
   margin: 0;
+  font-family: var(--font-base);
   font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-  letter-spacing: -0.04em;
-  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.15;
 }
 
 .detail-block {
@@ -1112,9 +1153,10 @@ button:focus-visible {
 
 .detail-block span,
 .recommendation-box span {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
+  font-family: var(--font-base);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--yellow);
   display: block;
@@ -1195,11 +1237,11 @@ button:focus-visible {
 
 .footer > p {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-family: var(--font-base);
+  font-size: 0.85rem;
   line-height: 1.7;
   text-align: left;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 /* ==========================================================================
@@ -1392,9 +1434,10 @@ button:focus-visible {
 }
 
 .item-ghazal-num {
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-family: var(--font-base);
+  font-size: 0.78rem;
   font-weight: 700;
+  letter-spacing: 0;
   padding: 3px 10px;
   border: 1.5px solid var(--ink);
   border-radius: 999px;
@@ -1526,13 +1569,20 @@ body.dream-mode .footer {
     gap: 8px;
   }
 
-  .mesra-first,
+  .mesra-first {
+    text-align: right !important;
+  }
+
   .mesra-second {
-    text-align: right;
+    text-align: left !important;
   }
 
   .bayt-divider {
     align-self: center;
+  }
+
+  .footer > p {
+    text-align: right;
   }
 
   .inspector-actions {
