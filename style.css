@@ -73,6 +73,7 @@ body {
 button {
   color: inherit;
   font: inherit;
+  cursor: pointer;
 }
 
 button:focus-visible {
@@ -93,8 +94,26 @@ button:focus-visible {
 .nav-btn,
 .footer-scroll-btn,
 .footer-pill-btn,
+.toast,
+.search-input,
+.search-result-item,
 button {
   border-radius: 0 !important;
+}
+
+button,
+.primary-button,
+.secondary-button,
+.btn-banner-try-again,
+.filter-button,
+.text-button,
+.nav-btn,
+.footer-scroll-btn,
+.footer-pill-btn,
+.modal-close,
+.search-result-item,
+.book-3d {
+  cursor: pointer !important;
 }
 
 .filter-button,
@@ -1975,6 +1994,8 @@ button {
 .search-results-list {
   max-height: 260px;
   overflow-y: auto;
+  overflow-x: hidden !important;
+  padding: 4px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -1988,20 +2009,24 @@ button {
   border: 2px solid var(--ink);
   border-radius: 0 !important;
   background: var(--white);
-  cursor: pointer;
-  transition: transform 120ms ease, background 120ms ease;
+  cursor: pointer !important;
+  transition: background 120ms ease, box-shadow 120ms ease;
+  user-select: none;
 }
 
 .search-result-item:hover {
-  transform: translate(-2px, -2px);
   background: var(--yellow);
-  box-shadow: 3px 3px 0 var(--ink);
+  box-shadow: 2.5px 2.5px 0 var(--ink);
 }
 
 .item-ghazal-first-line {
   font-family: var(--font-poetry);
   font-size: 1.15rem;
   color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 8px;
 }
 
 .item-ghazal-num {
@@ -2013,6 +2038,7 @@ button {
   border: 1.5px solid var(--ink);
   border-radius: 999px;
   background: var(--blue);
+  flex-shrink: 0;
 }
 
 .adab-section {
@@ -2318,6 +2344,15 @@ body.dream-mode .inspector-actions .text-button:hover {
     gap: 0;
   }
 
+  .nav-btn-dream .dream-dot {
+    position: static;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    margin: 0;
+  }
+
   .result-banner-actions {
     width: 100% !important;
   }
@@ -2404,16 +2439,18 @@ body.dream-mode .inspector-actions .text-button:hover {
 
   .nav-btn-dream {
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav-btn-dream .dream-dot {
-    position: absolute;
-    bottom: 4px;
-    left: 4px;
-    width: 6px;
-    height: 6px;
+    position: static;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
-    border-width: 1px;
+    border: 2px solid var(--ink);
+    margin: 0;
   }
 
   .hero h1 {

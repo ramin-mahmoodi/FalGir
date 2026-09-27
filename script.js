@@ -203,41 +203,67 @@
       }
     }
 
-    playPageTurn() {
+    playPageTurn(variation = 1) {
       if (!STATE.soundEnabled) return;
       try {
         const ctx = this.getContext();
         if (!ctx) return;
 
         const now = ctx.currentTime;
-        const dur = 0.35;
-        const bufferSize = Math.floor(ctx.sampleRate * dur);
-        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const dur = 0.28;
+        const sampleRate = ctx.sampleRate;
+        const bufferSize = Math.floor(sampleRate * dur);
+        const buffer = ctx.createBuffer(1, bufferSize, sampleRate);
         const data = buffer.getChannelData(0);
 
+        // Crisp parchment paper texture noise
         for (let i = 0; i < bufferSize; i++) {
-          data[i] = (Math.random() * 2 - 1) * 0.05;
+          const t = i / sampleRate;
+          const flutter = 1 + 0.35 * Math.sin(2 * Math.PI * (35 + (variation % 4) * 12) * t);
+          data[i] = (Math.random() * 2 - 1) * flutter;
         }
 
         const noise = ctx.createBufferSource();
         noise.buffer = buffer;
 
+        // Bandpass filter centered at paper friction frequency
         const filter = ctx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(500, now);
-        filter.frequency.exponentialRampToValueAtTime(200, now + dur);
+        filter.type = 'bandpass';
+        const centerFreq = 2600 + (variation % 3) * 200;
+        filter.frequency.setValueAtTime(centerFreq, now);
+        filter.frequency.exponentialRampToValueAtTime(1400, now + dur);
+        filter.Q.setValueAtTime(1.4, now);
 
+        // Dynamic page turn volume envelope
         const gain = ctx.createGain();
-        gain.gain.setValueAtTime(0.01, now);
-        gain.gain.linearRampToValueAtTime(0.1, now + 0.05);
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.38, now + 0.025);
+        gain.gain.exponentialRampToValueAtTime(0.09, now + 0.12);
+        gain.gain.linearRampToValueAtTime(0.18, now + 0.16); // secondary page flap
         gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
 
         noise.connect(filter);
         filter.connect(gain);
         gain.connect(ctx.destination);
 
+        // Low-frequency page movement body
+        const osc = ctx.createOscillator();
+        const oscGain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(160, now);
+        osc.frequency.exponentialRampToValueAtTime(70, now + 0.09);
+
+        oscGain.gain.setValueAtTime(0.001, now);
+        oscGain.gain.linearRampToValueAtTime(0.18, now + 0.02);
+        oscGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+
+        osc.connect(oscGain);
+        oscGain.connect(ctx.destination);
+
         noise.start(now);
         noise.stop(now + dur);
+        osc.start(now);
+        osc.stop(now + 0.1);
       } catch (e) {
         // Audio policy ignore
       }
@@ -437,9 +463,9 @@
       DOM.bookScene.classList.add('is-opening');
 
       // صدای باز شدن جلد و سپس صدای ورق خوردن هر برگ
-      sound.playPageTurn();
-      [550, 720, 890, 1060, 1230].forEach(delay => {
-        setTimeout(() => sound.playPageTurn(), delay);
+      sound.playPageTurn(0);
+      [400, 580, 760, 940, 1120].forEach((delay, idx) => {
+        setTimeout(() => sound.playPageTurn(idx + 1), delay);
       });
     }, 450);
 
@@ -582,14 +608,33 @@ https://ramin-mahmoodi.github.io/FalGir/`;
   // =========================================================================
   // 9. LAZY & DEBOUNCED SEARCH
   // =========================================================================
+  function normalizePersianText(str) {
+    if (!str) return '';
+    return str
+      .replace(/[\u064B-\u065F\u0670]/g, '') // حذف اعراب و حرکات
+      .replace(/[يی]/g, 'ی')
+      .replace(/[كک]/g, 'ک')
+      .replace(/[آأإ]/g, 'ا')
+      .replace(/[\u200c\s]+/g, ' ') // یکسان‌سازی نیم‌فاصله و فاصله‌ها
+      .trim()
+      .toLowerCase();
+  }
+
+  function persianToEnglishDigits(str) {
+    if (!str) return '';
+    return str.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+  }
+
   function getSearchCache() {
     if (!STATE.searchCache && STATE.faals.length > 0) {
       STATE.searchCache = STATE.faals.map((item, idx) => {
-        const firstLine = item.poem.split('\r\n')[0] || '';
+        const lines = (item.poem || '').split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+        const firstLine = lines[0] || '';
         return {
           index: idx,
-          firstLine: firstLine.trim(),
-          fullTextLower: item.poem.toLowerCase()
+          numStr: (idx + 1).toString(),
+          firstLine: firstLine,
+          normalizedText: normalizePersianText(item.poem || '')
         };
       });
     }
@@ -600,15 +645,21 @@ https://ramin-mahmoodi.github.io/FalGir/`;
     if (!DOM.searchResultsList) return;
     DOM.searchResultsList.innerHTML = '';
 
-    const query = filter.trim().toLowerCase();
+    const rawQuery = filter.trim();
+    const engNumQuery = persianToEnglishDigits(rawQuery);
+    const normalizedQuery = normalizePersianText(rawQuery);
     const cache = getSearchCache();
     let matches = [];
 
     for (let i = 0; i < cache.length; i++) {
       const item = cache[i];
-      if (!query || (item.index + 1).toString() === query || item.fullTextLower.includes(query)) {
+      if (
+        !rawQuery ||
+        item.numStr === engNumQuery ||
+        item.normalizedText.includes(normalizedQuery)
+      ) {
         matches.push(item);
-        if (matches.length >= 25) break; // حداکثر ۲۵ مورد برای سرعت فوق‌العاده
+        if (matches.length >= 20) break; // حداکثر ۲۰ مورد برای سرعت بالا و بدون لگ
       }
     }
 
@@ -677,7 +728,6 @@ https://ramin-mahmoodi.github.io/FalGir/`;
 
     // دکمه حالت عرفانی (Dream Mode)
     const btnDream = document.getElementById('dreamToggle');
-    const dreamIconWrap = document.getElementById('dreamIconWrap');
     if (btnDream) {
       btnDream.addEventListener('click', () => {
         const isDream = document.body.classList.toggle('dream-mode');
@@ -687,9 +737,6 @@ https://ramin-mahmoodi.github.io/FalGir/`;
           textSpan.textContent = 'حالت عرفانی';
         }
         btnDream.title = isDream ? 'حالت عرفانی (فعال)' : 'حالت عرفانی';
-        if (dreamIconWrap) {
-          dreamIconWrap.innerHTML = isDream ? SVG_ICONS.sun : SVG_ICONS.moon;
-        }
         sound.playSingingBowl(isDream ? 528 : 432, 0.6);
       });
     }
