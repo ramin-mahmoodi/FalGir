@@ -3,6 +3,7 @@
 @font-face {
   font-family: 'IranNastaliq';
   src: url('assets/fonts/IranNastaliq.woff2') format('woff2'),
+       url('assets/fonts/IranNastaliq-v304-Regular.ttf') format('truetype'),
        url('assets/fonts/IranNastaliq.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
