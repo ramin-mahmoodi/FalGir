@@ -203,70 +203,8 @@
       }
     }
 
-    playPageTurn(variation = 1) {
-      if (!STATE.soundEnabled) return;
-      try {
-        const ctx = this.getContext();
-        if (!ctx) return;
-
-        const now = ctx.currentTime;
-        const dur = 0.28;
-        const sampleRate = ctx.sampleRate;
-        const bufferSize = Math.floor(sampleRate * dur);
-        const buffer = ctx.createBuffer(1, bufferSize, sampleRate);
-        const data = buffer.getChannelData(0);
-
-        // Crisp parchment paper texture noise
-        for (let i = 0; i < bufferSize; i++) {
-          const t = i / sampleRate;
-          const flutter = 1 + 0.35 * Math.sin(2 * Math.PI * (35 + (variation % 4) * 12) * t);
-          data[i] = (Math.random() * 2 - 1) * flutter;
-        }
-
-        const noise = ctx.createBufferSource();
-        noise.buffer = buffer;
-
-        // Bandpass filter centered at paper friction frequency
-        const filter = ctx.createBiquadFilter();
-        filter.type = 'bandpass';
-        const centerFreq = 2600 + (variation % 3) * 200;
-        filter.frequency.setValueAtTime(centerFreq, now);
-        filter.frequency.exponentialRampToValueAtTime(1400, now + dur);
-        filter.Q.setValueAtTime(1.4, now);
-
-        // Dynamic page turn volume envelope
-        const gain = ctx.createGain();
-        gain.gain.setValueAtTime(0.001, now);
-        gain.gain.linearRampToValueAtTime(0.38, now + 0.025);
-        gain.gain.exponentialRampToValueAtTime(0.09, now + 0.12);
-        gain.gain.linearRampToValueAtTime(0.18, now + 0.16); // secondary page flap
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
-
-        noise.connect(filter);
-        filter.connect(gain);
-        gain.connect(ctx.destination);
-
-        // Low-frequency page movement body
-        const osc = ctx.createOscillator();
-        const oscGain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(160, now);
-        osc.frequency.exponentialRampToValueAtTime(70, now + 0.09);
-
-        oscGain.gain.setValueAtTime(0.001, now);
-        oscGain.gain.linearRampToValueAtTime(0.18, now + 0.02);
-        oscGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
-
-        osc.connect(oscGain);
-        oscGain.connect(ctx.destination);
-
-        noise.start(now);
-        noise.stop(now + dur);
-        osc.start(now);
-        osc.stop(now + 0.1);
-      } catch (e) {
-        // Audio policy ignore
-      }
+    playPageTurn() {
+      // صدای ورق زدن به درخواست کاربر حذف شد
     }
 
     playRevealChord() {
@@ -461,12 +399,6 @@
     setTimeout(() => {
       DOM.bookScene.classList.remove('is-divinating');
       DOM.bookScene.classList.add('is-opening');
-
-      // صدای باز شدن جلد و سپس صدای ورق خوردن هر برگ
-      sound.playPageTurn(0);
-      [400, 580, 760, 940, 1120].forEach((delay, idx) => {
-        setTimeout(() => sound.playPageTurn(idx + 1), delay);
-      });
     }, 450);
 
     // فاز ۳: ورود به کتیبه غزل (پس از پایان کامل تورق: ۴۵۰ + ۲۴۰۰ میلیثانیه)
