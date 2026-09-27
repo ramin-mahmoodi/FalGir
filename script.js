@@ -26,13 +26,13 @@
   // SVG Icons for dynamic insertion
   const SVG_ICONS = {
     soundOn: `
-      <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
         <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
         <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
       </svg>`,
     soundOff: `
-      <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
         <line x1="23" y1="9" x2="17" y2="15"></line>
         <line x1="17" y1="9" x2="23" y2="15"></line>
@@ -472,7 +472,7 @@
 
       const divider = document.createElement('span');
       divider.className = 'bayt-divider';
-      divider.innerHTML = '<svg class="mini-svg" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3.5"/></svg>';
+      divider.innerHTML = '<span class="ornament-glyph" aria-hidden="true">❦</span>';
       divider.setAttribute('aria-hidden', 'true');
 
       const mesra2 = document.createElement('span');
@@ -650,6 +650,10 @@ https://ramin-mahmoodi.github.io/FalGir/`;
 
     // دکمه‌های صفحه نتایج
     DOM.btnTryAgain.addEventListener('click', tryAgain);
+    const btnBannerTryAgain = document.getElementById('btnBannerTryAgain');
+    if (btnBannerTryAgain) {
+      btnBannerTryAgain.addEventListener('click', tryAgain);
+    }
     DOM.btnCopyFal.addEventListener('click', copyFalText);
     DOM.btnShareFal.addEventListener('click', shareFal);
     DOM.btnPrintFal.addEventListener('click', () => window.print());

@@ -332,6 +332,23 @@ button:focus-visible {
   min-height: 56px;
 }
 
+.svg-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+#soundIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 /* ==========================================================================
    HERO BENTO CARD
    ========================================================================== */
@@ -993,7 +1010,7 @@ button:focus-visible {
 }
 
 /* ==========================================================================
-   STAGE 2: REVELATION & RESULT WORKSPACE
+   STAGE 2: REVELATION & RESULT WORKSPACE (Redesigned Manuscript & Interpretation)
    ========================================================================== */
 .stage-result {
   display: none;
@@ -1018,79 +1035,189 @@ button:focus-visible {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.section-heading {
-  align-items: flex-end;
-  margin-bottom: 24px;
+/* TOP RESULT BANNER */
+.result-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 24px 32px;
+  margin-bottom: 26px;
+  background: var(--white);
 }
 
+.result-banner-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.result-badge-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.result-badge {
+  font-family: var(--font-base);
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 3px 12px;
+  background: var(--yellow);
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.result-pill {
+  font-family: var(--font-base);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #666;
+}
+
+.result-title {
+  margin: 0;
+  font-family: var(--font-base);
+  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: 0;
+}
+
+.result-sub {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.btn-banner-try-again {
+  min-height: 48px;
+  padding: 0 22px;
+  font-size: 0.95rem;
+}
+
+/* WORKSPACE GRID */
 .workspace {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(340px, 0.8fr);
+  grid-template-columns: minmax(0, 1.45fr) minmax(360px, 0.95fr);
   gap: 26px;
   align-items: start;
 }
 
-/* کادر نسخه خطی شعر */
+/* ==========================================================================
+   POEM MANUSCRIPT CARD (Continuous Diwan Page - NO Box Around Verses)
+   ========================================================================== */
 .manuscript-card {
-  padding: clamp(24px, 4vw, 44px);
+  padding: clamp(28px, 4.5vw, 48px);
   background: var(--white);
+  position: relative;
 }
 
 .manuscript-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  flex-direction: column;
+  gap: 12px;
 }
+
+.manuscript-tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.manuscript-pill {
+  font-family: var(--font-base);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 var(--ink);
+  color: var(--ink);
+}
+
+.manuscript-pill--yellow { background: var(--yellow); }
+.manuscript-pill--blue   { background: var(--blue); }
+.manuscript-pill--pink   { background: var(--pink); }
 
 .ghazal-title {
   margin: 0;
   font-family: var(--font-base);
-  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-size: clamp(2rem, 3.8vw, 3.4rem);
   font-weight: 900;
   letter-spacing: 0;
   color: var(--ink);
+  line-height: 1.2;
 }
 
-.manuscript-divider {
-  width: 100%;
-  height: 3px;
-  border-top: 2px dashed var(--ink);
-  margin: 24px 0 32px;
+/* Ornamental Tazhib Separator */
+.manuscript-tazhib-band {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 28px;
 }
 
+.tazhib-line {
+  flex: 1;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ink) 0 5px,
+    transparent 5px 10px
+  );
+  opacity: 0.3;
+}
+
+.tazhib-rosette {
+  font-size: 1.4rem;
+  color: var(--terracotta);
+  line-height: 1;
+}
+
+/* Poem Body & Couplets - NO BOX / NO CARD */
 .poem-body {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 2px;
 }
 
 .bayt {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 16px 22px;
-  border: 2px solid var(--ink);
-  border-radius: 14px;
-  background: var(--white);
-  box-shadow: 3px 3px 0 var(--ink);
-  transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
+  gap: 24px;
+  padding: 14px 20px;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent;
+  border-radius: 8px;
+  transition: background 150ms ease;
+  position: relative;
+}
+
+.bayt:not(:last-child) {
+  border-bottom: 1px dashed rgba(23, 23, 23, 0.12) !important;
 }
 
 .bayt:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 var(--ink);
-  background: #fffcf0;
+  background: rgba(248, 207, 98, 0.15);
 }
 
 .mesra {
-  font-family: var(--font-poetry);
-  font-size: clamp(1.15rem, 2vw, 1.55rem);
-  line-height: 1.85;
+  font-family: var(--font-poetry) !important;
+  font-size: clamp(1.35rem, 2.3vw, 1.8rem);
+  line-height: 2.25;
   color: var(--ink);
-  flex: 1 1 40%;
+  flex: 1 1 45%;
+  letter-spacing: 0;
 }
 
 .mesra-first {
@@ -1102,97 +1229,225 @@ button:focus-visible {
 }
 
 .bayt-divider {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border: 1.5px solid var(--ink);
-  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--terracotta);
+  font-size: 1.15rem;
+  opacity: 0.75;
+  flex: 0 0 auto;
+  border: none;
+  background: transparent;
+  width: auto;
+  height: auto;
+  box-shadow: none;
+}
+
+.ornament-glyph {
+  font-family: serif;
+  user-select: none;
+}
+
+/* Manuscript Colophon */
+.manuscript-footer {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 2px dashed rgba(23, 23, 23, 0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.colophon-seal {
+  display: inline-block;
+  padding: 4px 16px;
   background: var(--yellow);
   color: var(--ink);
-  flex: 0 0 auto;
-}
-
-.manuscript-footer {
-  margin-top: 34px;
-  padding-top: 18px;
-  border-top: 2px solid var(--ink);
-  text-align: center;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
   font-family: var(--font-base);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0;
-  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+  box-shadow: 2px 2px 0 var(--ink);
 }
 
-/* پنل تعبیر لسان‌الغیب */
+.colophon-text {
+  margin: 0;
+  font-family: var(--font-base);
+  font-size: 0.84rem;
+  color: #666;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   INTERPRETATION CARD (Panel of Wisdom & Actions)
+   ========================================================================== */
 .inspector {
   position: sticky;
-  top: 18px;
+  top: 76px;
   min-width: 0;
-  padding: 28px;
+  padding: clamp(26px, 4vw, 36px);
   background: var(--ink);
   color: var(--white);
 }
 
 .inspector-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding-bottom: 16px;
-  border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 18px;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.16);
   margin-bottom: 20px;
 }
 
+.inspector-badge-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .severity-badge {
-  padding: 6px 14px;
-  border: 1.5px solid var(--white);
-  border-radius: 999px;
+  padding: 4px 12px;
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
   background: var(--yellow);
   color: var(--ink);
   font-family: var(--font-base);
-  font-size: 0.74rem;
-  font-weight: 800;
+  font-size: 0.8rem;
+  font-weight: 900;
   letter-spacing: 0;
+  box-shadow: 2px 2px 0 #fff;
+}
+
+.inspector-subtag {
+  font-family: var(--font-base);
+  font-size: 0.76rem;
+  color: #c7c3ba;
+  font-weight: 700;
 }
 
 .interpretation-title {
   margin: 0;
   font-family: var(--font-base);
-  font-size: 1.25rem;
-  font-weight: 800;
+  font-size: 1.32rem;
+  font-weight: 900;
   letter-spacing: 0;
-  color: var(--white);
+  color: #ffe382;
+  line-height: 1.3;
 }
 
+/* Insight Callout Box */
+.interp-insight-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  margin-bottom: 22px;
+}
+
+.insight-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.insight-content strong {
+  display: block;
+  font-family: var(--font-base);
+  font-size: 0.86rem;
+  color: var(--yellow);
+  margin-bottom: 4px;
+  font-weight: 800;
+}
+
+.insight-content p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: #dedbd3;
+}
+
+/* Interpretation Body */
 .interpretation-body {
+  position: relative;
   margin: 0 0 24px;
+  padding: 0 4px;
+}
+
+.interp-quote-icon {
+  position: absolute;
+  top: -24px;
+  right: -8px;
+  font-size: 4.8rem;
+  line-height: 1;
+  font-family: Georgia, serif;
+  color: rgba(248, 207, 98, 0.12);
+  pointer-events: none;
 }
 
 .interpretation-body p {
   margin: 0;
-  color: #dedbd3;
-  line-height: 1.85;
-  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
+  color: #fbf9f4;
+  line-height: 2.15;
+  font-size: 1.15rem;
   font-weight: 500;
+  text-align: justify;
+}
+
+.inspector-divider {
+  width: 100%;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.14);
+  margin: 22px 0;
 }
 
 .inspector-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
-  margin-top: 24px;
 }
 
-.dark-button {
-  border-color: var(--white);
+.inspector-actions .primary-button {
+  width: 100%;
+  justify-content: center;
+  font-size: 1.05rem;
+  min-height: 52px;
+}
+
+.inspector-actions .secondary-button {
+  width: 100%;
+  justify-content: space-between;
+  min-height: 46px;
+  padding: 0 18px;
+  font-weight: 800;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+  transition: all 140ms ease;
+}
+
+.inspector-actions .secondary-button:hover {
   background: var(--yellow);
   color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 3.5px 3.5px 0 var(--ink);
+  transform: translate(-1.5px, -1.5px);
 }
 
-.inspector .text-button {
-  color: var(--white);
+.inspector-actions .text-button {
+  color: #d8d4ca;
+  align-self: center;
+  margin-top: 4px;
+  font-weight: 700;
 }
 
 /* ==========================================================================
@@ -1703,6 +1958,50 @@ body.dream-mode .app-footer {
   border-top-color: rgba(255, 255, 255, 0.22);
 }
 
+body.dream-mode .result-banner {
+  background: #1c152a;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+body.dream-mode .result-title {
+  color: #ffe382;
+}
+
+body.dream-mode .result-sub,
+body.dream-mode .result-pill {
+  color: #a7a0b8;
+}
+
+body.dream-mode .manuscript-card {
+  background: #1f182e;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+body.dream-mode .ghazal-title {
+  color: #ffe382;
+}
+
+body.dream-mode .mesra {
+  color: #fcfbfa !important;
+}
+
+body.dream-mode .bayt:hover {
+  background: rgba(185, 156, 255, 0.16);
+}
+
+body.dream-mode .bayt:not(:last-child) {
+  border-bottom-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+body.dream-mode .colophon-text {
+  color: #a7a0b8;
+}
+
+body.dream-mode .inspector {
+  background: #130d20;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
 /* ==========================================================================
    RESPONSIVE DESIGN (MOBILE & TABLET)
    ========================================================================== */
@@ -1719,6 +2018,10 @@ body.dream-mode .app-footer {
 
   .workspace {
     grid-template-columns: 1fr;
+  }
+
+  .inspector {
+    position: static;
   }
 
   .remediation-grid {
@@ -1769,6 +2072,37 @@ body.dream-mode .app-footer {
     font-size: 3.4rem;
   }
 
+  .result-banner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+  }
+
+  .btn-banner-try-again {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .bayt {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 12px 6px;
+  }
+
+  .mesra-first {
+    text-align: right !important;
+  }
+
+  .mesra-second {
+    text-align: left !important;
+    padding-right: 28px;
+  }
+
+  .bayt-divider {
+    display: none;
+  }
+
   .footer-hero-band {
     flex-direction: column;
     align-items: stretch;
@@ -1793,24 +2127,6 @@ body.dream-mode .app-footer {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-  }
-
-  .bayt {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-  }
-
-  .mesra-first {
-    text-align: right !important;
-  }
-
-  .mesra-second {
-    text-align: left !important;
-  }
-
-  .bayt-divider {
-    align-self: center;
   }
 
   .inspector-actions {
@@ -1861,6 +2177,6 @@ body.dream-mode .app-footer {
 
   .bayt {
     box-shadow: none !important;
-    border: 1px solid #ddd !important;
+    border: none !important;
   }
 }
