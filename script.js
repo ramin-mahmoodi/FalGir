@@ -719,6 +719,21 @@ https://ramin-mahmoodi.github.io/FalGir/`;
       if (e.target === DOM.aboutModal) closeModal(DOM.aboutModal);
     });
 
+    // دکمه‌های کمکی فوتر
+    const btnFooterSearch = document.getElementById('btnFooterSearch');
+    if (btnFooterSearch) {
+      btnFooterSearch.addEventListener('click', () => {
+        openModal(DOM.searchModal);
+        renderSearchResults('');
+        if (DOM.ghazalNumberInput) DOM.ghazalNumberInput.focus();
+      });
+    }
+
+    const btnFooterAdab = document.getElementById('btnFooterAdab');
+    if (btnFooterAdab) {
+      btnFooterAdab.addEventListener('click', () => openModal(DOM.aboutModal));
+    }
+
     // کلیدهای میانبر
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
