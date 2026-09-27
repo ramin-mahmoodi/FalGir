@@ -350,8 +350,7 @@
       const chosenLines = chosenFaal.poem
         .split(/\r?\n/)
         .map(l => l.trim())
-        .filter(l => l.length > 0)
-        .slice(0, 4);
+        .filter(l => l.length > 0);
       DOM.bookRevealedBody.innerHTML = chosenLines
         .map(line => `<p class="leaf-verse">${line}</p>`)
         .join('');
@@ -388,8 +387,7 @@
           const lines = faalFront.poem
             .split(/\r?\n/)
             .map(l => l.trim())
-            .filter(l => l.length > 0)
-            .slice(0, 4);
+            .filter(l => l.length > 0);
           bFront.innerHTML = lines.map(line => `<p class="leaf-verse">${line}</p>`).join('');
         }
       }
@@ -404,8 +402,7 @@
           const lines = faalBack.poem
             .split(/\r?\n/)
             .map(l => l.trim())
-            .filter(l => l.length > 0)
-            .slice(0, 4);
+            .filter(l => l.length > 0);
           bBack.innerHTML = lines.map(line => `<p class="leaf-verse">${line}</p>`).join('');
         }
       }
@@ -687,9 +684,9 @@ https://ramin-mahmoodi.github.io/FalGir/`;
         btnDream.setAttribute('aria-pressed', isDream.toString());
         const textSpan = btnDream.querySelector('.nav-btn-text') || btnDream.querySelector('span:last-child');
         if (textSpan) {
-          textSpan.textContent = isDream ? 'حالت عرفانی: روشن' : 'حالت عرفانی: خاموش';
+          textSpan.textContent = 'حالت عرفانی';
         }
-        btnDream.title = isDream ? 'حالت عرفانی: روشن (فعال)' : 'حالت عرفانی: خاموش';
+        btnDream.title = isDream ? 'حالت عرفانی (فعال)' : 'حالت عرفانی';
         if (dreamIconWrap) {
           dreamIconWrap.innerHTML = isDream ? SVG_ICONS.sun : SVG_ICONS.moon;
         }

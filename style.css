@@ -174,7 +174,7 @@ button {
 .app-shell {
   width: min(1400px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 24px 0 60px;
+  padding: 24px 0 16px;
 }
 
 .bento-card {
@@ -219,6 +219,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: nowrap !important;
   gap: 16px;
   padding: 12px 0;
 }
@@ -229,6 +230,7 @@ button {
   gap: 14px;
   text-decoration: none;
   color: var(--ink);
+  flex-shrink: 0;
 }
 
 .brand-badge {
@@ -271,6 +273,7 @@ button {
   color: var(--ink);
   letter-spacing: 0;
   line-height: 1.25;
+  white-space: nowrap;
 }
 
 .brand-sub {
@@ -279,13 +282,15 @@ button {
   font-weight: 600;
   color: #666;
   letter-spacing: 0;
+  white-space: nowrap;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-wrap: nowrap !important;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .nav-btn {
@@ -920,9 +925,9 @@ button {
 .leaf-manuscript {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  padding: 12px 6px;
+  padding: 10px 6px;
   text-align: center;
   height: 100%;
   box-sizing: border-box;
@@ -939,46 +944,51 @@ button {
   border-radius: 0 !important;
   box-shadow: none !important;
   padding: 2px 10px;
+  flex-shrink: 0;
 }
 
 .leaf-tazhib-line {
   width: 82%;
   height: 2px;
   border-top: 1.5px dashed var(--ink);
-  margin: 6px 0;
+  margin: 5px 0 6px;
+  flex-shrink: 0;
 }
 
 .leaf-body {
   width: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  gap: 5px;
-  margin: auto 0;
-  padding: 0 4px;
+  gap: 3px;
+  margin: 0;
+  padding: 0 4px 6px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.leaf-body::-webkit-scrollbar {
+  display: none;
 }
 
 .leaf-verse {
   position: static !important;
   margin: 0 !important;
   font-family: var(--font-poetry) !important;
-  font-size: 0.8rem !important;
-  line-height: 1.85 !important;
+  font-size: 0.78rem !important;
+  line-height: 1.65 !important;
   color: var(--ink) !important;
   letter-spacing: 0 !important;
-  white-space: nowrap;
-  overflow: visible;
+  white-space: normal;
+  word-break: break-word;
   text-align: center;
+  width: 100%;
 }
 
 .leaf-footer {
-  font-family: var(--font-base);
-  font-size: 0.62rem;
-  font-weight: 700;
-  color: var(--ink);
-  opacity: 0.8;
-  letter-spacing: 0;
+  display: none !important;
 }
 
 /* ==========================================================================
@@ -1316,18 +1326,70 @@ button {
 
 .manuscript-header {
   margin-bottom: 24px;
-  padding-bottom: 16px;
+  padding-bottom: 18px;
   border-bottom: 2px dashed rgba(23, 23, 23, 0.16);
+  text-align: center;
+}
+
+.ghazal-title-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
 }
 
 .ghazal-title {
   margin: 0;
   font-family: var(--font-base);
-  font-size: clamp(2rem, 3.8vw, 3.4rem);
+  font-size: clamp(1.8rem, 3.5vw, 3.2rem);
   font-weight: 900;
   letter-spacing: 0;
   color: var(--ink);
   line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ghazal-decor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 140px;
+}
+
+.ghazal-decor--right {
+  justify-content: flex-end;
+}
+
+.ghazal-decor--left {
+  justify-content: flex-start;
+}
+
+.ghazal-decor-star {
+  font-size: 1.15rem;
+  line-height: 1;
+  color: var(--terracotta);
+  user-select: none;
+}
+
+.ghazal-decor-rosette {
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--ink);
+  user-select: none;
+}
+
+.ghazal-decor-line {
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ink) 0 4px,
+    transparent 4px 8px
+  );
+  flex: 1;
+  opacity: 0.35;
 }
 
 /* Poem Body & Couplets - Borderless Manuscript Flow */
@@ -1543,8 +1605,8 @@ button {
   border-right: none;
   border-radius: 0 !important;
   box-shadow: none !important;
-  padding: 56px 0 32px;
-  margin-top: 48px;
+  padding: 32px 0 24px;
+  margin-top: 20px;
 }
 
 .footer-container {
@@ -2079,6 +2141,22 @@ body.dream-mode .ghazal-title {
   color: #ffe382;
 }
 
+body.dream-mode .ghazal-decor-star {
+  color: #ffe382;
+}
+
+body.dream-mode .ghazal-decor-rosette {
+  color: #fcfbfa;
+}
+
+body.dream-mode .ghazal-decor-line {
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.4) 0 4px,
+    transparent 4px 8px
+  );
+}
+
 body.dream-mode .mesra {
   color: #fcfbfa !important;
 }
@@ -2153,6 +2231,25 @@ body.dream-mode .inspector-actions .text-button:hover {
     border-top: var(--border);
   }
 
+  .header-container {
+    gap: 10px;
+  }
+
+  .header-actions {
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .nav-btn {
+    padding: 0 10px;
+    font-size: 0.82rem;
+    gap: 5px;
+  }
+
+  .brand-title {
+    font-size: 1.05rem;
+  }
+
   .workspace {
     grid-template-columns: 1fr;
   }
@@ -2164,6 +2261,17 @@ body.dream-mode .inspector-actions .text-button:hover {
 
   .result-banner-copy {
     flex: 1 1 300px;
+  }
+
+  .result-banner-actions {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .btn-banner-try-again {
+    width: 100% !important;
+    justify-content: center;
+    min-height: 44px;
   }
 
   .result-banner-visual {
@@ -2192,16 +2300,9 @@ body.dream-mode .inspector-actions .text-button:hover {
 
 @media (max-width: 860px) {
   .brand-sub {
-    display: none;
+    display: none !important;
   }
 
-  .nav-btn {
-    padding: 0 10px;
-    font-size: 0.82rem;
-  }
-}
-
-@media (max-width: 740px) {
   .nav-btn .nav-btn-text {
     display: none !important;
   }
@@ -2215,6 +2316,15 @@ body.dream-mode .inspector-actions .text-button:hover {
     flex: 0 0 38px;
     justify-content: center;
     gap: 0;
+  }
+
+  .result-banner-actions {
+    width: 100% !important;
+  }
+
+  .btn-banner-try-again {
+    width: 100% !important;
+    justify-content: center;
   }
 }
 
@@ -2331,9 +2441,15 @@ body.dream-mode .inspector-actions .text-button:hover {
     width: 100%;
     min-width: 0;
     gap: 8px;
-    padding-left: 60px; /* Space for the top-left corner emblem */
+    padding-left: 0 !important;
     flex: 0 0 auto !important;
     height: auto !important;
+  }
+
+  .result-badge-wrap,
+  .result-title,
+  .result-sub {
+    padding-left: 56px;
   }
 
   .result-badge-wrap {
@@ -2365,14 +2481,15 @@ body.dream-mode .inspector-actions .text-button:hover {
   }
 
   .result-banner-actions {
-    margin-top: 4px;
-    width: 100%;
+    margin-top: 10px;
+    width: 100% !important;
+    padding-left: 0 !important;
   }
 
   .btn-banner-try-again {
-    width: 100%;
-    min-height: 40px;
-    font-size: 0.88rem;
+    width: 100% !important;
+    min-height: 44px;
+    font-size: 0.92rem;
     padding: 0 16px;
     justify-content: center;
   }
@@ -2446,8 +2563,25 @@ body.dream-mode .inspector-actions .text-button:hover {
     padding-bottom: 12px;
   }
 
+  .ghazal-title-wrap {
+    gap: 8px;
+  }
+
   .ghazal-title {
-    font-size: clamp(1.6rem, 6.5vw, 2.3rem);
+    font-size: clamp(1.4rem, 5.8vw, 2.1rem);
+  }
+
+  .ghazal-decor {
+    max-width: 60px;
+    gap: 4px;
+  }
+
+  .ghazal-decor-star {
+    font-size: 0.85rem;
+  }
+
+  .ghazal-decor-rosette {
+    font-size: 0.95rem;
   }
 
   .inspector {
@@ -2554,9 +2688,15 @@ body.dream-mode .inspector-actions .text-button:hover {
   }
 
   .result-banner-copy {
-    padding-left: 48px;
+    padding-left: 0 !important;
     flex: 0 0 auto !important;
     height: auto !important;
+  }
+
+  .result-badge-wrap,
+  .result-title,
+  .result-sub {
+    padding-left: 44px;
   }
 
   .result-banner-visual {
