@@ -2210,7 +2210,8 @@ body.dream-mode .inspector-actions .text-button:hover {
     align-items: stretch;
     padding: 16px 14px 14px;
     margin-bottom: 18px;
-    gap: 10px;
+    gap: 8px;
+    height: auto !important;
     overflow: hidden;
   }
 
@@ -2223,6 +2224,8 @@ body.dream-mode .inspector-actions .text-button:hover {
     min-width: 0;
     gap: 8px;
     padding-left: 64px; /* Space for the top-left corner medallion */
+    flex: 0 0 auto !important;
+    height: auto !important;
   }
 
   .result-badge-wrap {
@@ -2413,6 +2416,8 @@ body.dream-mode .inspector-actions .text-button:hover {
 @media (max-width: 380px) {
   .result-banner-copy {
     padding-left: 50px;
+    flex: 0 0 auto !important;
+    height: auto !important;
   }
 
   .result-banner-visual {
