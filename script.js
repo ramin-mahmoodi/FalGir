@@ -78,8 +78,6 @@
     book3D: document.getElementById('book3D'),
     bookFrontCover: document.getElementById('bookFrontCover'),
     btnDivinate: document.getElementById('btnDivinate'),
-    ritualStatus: document.getElementById('ritualStatus'),
-    ritualMsg: document.getElementById('ritualMsg'),
     
     // Revealed Page inside 3D Book
     bookRevealedTitle: document.getElementById('bookRevealedTitle'),
@@ -415,16 +413,6 @@
 
     // وضعیت UI
     DOM.btnDivinate.disabled = true;
-    DOM.ritualStatus.classList.add('active');
-    DOM.ritualMsg.textContent = 'در حال نیت و تفأل به دیوان لسان‌الغیب...';
-
-    const auditFill = document.getElementById('auditFill');
-    const auditPercent = document.getElementById('auditPercent');
-    const auditGrade = document.getElementById('auditGrade');
-
-    if (auditFill) auditFill.style.width = '25%';
-    if (auditPercent) auditPercent.textContent = '۲۵٪';
-    if (auditGrade) auditGrade.textContent = '؟';
 
     // فاز ۱: اوج‌گیری دیوان و نوای کاسه تبتی
     DOM.bookScene.classList.add('is-divinating');
@@ -432,13 +420,8 @@
 
     // فاز ۲: جلد کتاب ۱۸۰ درجه باز میشود و برگها یکی پس از دیگری کامل ورق میخورند
     setTimeout(() => {
-      DOM.ritualMsg.textContent = 'دیوان گشوده شد... در حال ورق زدن به سوی فال شما';
       DOM.bookScene.classList.remove('is-divinating');
       DOM.bookScene.classList.add('is-opening');
-
-      if (auditFill) auditFill.style.width = '70%';
-      if (auditPercent) auditPercent.textContent = '۷۰٪';
-      if (auditGrade) auditGrade.textContent = '⟳';
 
       // صدای باز شدن جلد و سپس صدای ورق خوردن هر برگ
       sound.playPageTurn();
@@ -449,10 +432,6 @@
 
     // فاز ۳: ورود به کتیبه غزل (پس از پایان کامل تورق: ۴۵۰ + ۲۴۰۰ میلیثانیه)
     setTimeout(() => {
-      if (auditFill) auditFill.style.width = '100%';
-      if (auditPercent) auditPercent.textContent = '۱۰۰٪';
-      if (auditGrade) auditGrade.textContent = '✓';
-
       renderGhazalResult(STATE.currentFaal, STATE.currentFaalIndex);
       DOM.niyyatStage.classList.remove('active');
       DOM.resultStage.classList.add('active');
@@ -463,7 +442,6 @@
 
       // ریست کلاس‌ها
       DOM.bookScene.classList.remove('is-opening');
-      DOM.ritualStatus.classList.remove('active');
       DOM.btnDivinate.disabled = false;
       STATE.isDivinating = false;
     }, 2850);
@@ -520,15 +498,6 @@
   function tryAgain() {
     DOM.resultStage.classList.remove('active');
     DOM.niyyatStage.classList.add('active');
-
-    const auditFill = document.getElementById('auditFill');
-    const auditPercent = document.getElementById('auditPercent');
-    const auditGrade = document.getElementById('auditGrade');
-
-    if (auditFill) auditFill.style.width = '100%';
-    if (auditPercent) auditPercent.textContent = 'آماده تفأل';
-    if (auditGrade) auditGrade.textContent = '✦';
-    if (DOM.ritualMsg) DOM.ritualMsg.textContent = 'دیوان در انتظار نیت شماست. نیت قلبی کنید و دکمه تفأل را بزنید.';
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
     sound.playSingingBowl(380, 0.8);

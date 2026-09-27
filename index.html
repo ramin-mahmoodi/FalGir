@@ -306,7 +306,7 @@
         </div>
       </header>
 
-      <!-- STATS BENTO GRID -->
+      <!-- STATS BENTO GRID (۳ مشخصه دیوان) -->
       <section class="stats-grid" aria-label="مشخصات دیوان حافظ">
         <article class="stat-card bento-card stat-yellow">
           <p class="stat-label">تعداد غزل‌ها</p>
@@ -322,40 +322,12 @@
 
         <article class="stat-card bento-card stat-pink">
           <p class="stat-label">هنر خوشنویسی</p>
-          <strong style="font-size: clamp(2.4rem, 4.2vw, 3.8rem); font-family: var(--font-poetry);">نستعلیق</strong>
+          <strong style="margin-top: auto; font-family: var(--font-base); font-size: clamp(2.2rem, 3.6vw, 3rem); font-weight: 900;">نستعلیق</strong>
           <span>قلم اصیل و موزون ایرانی</span>
         </article>
-
-        <article class="stat-card bento-card stat-green">
-          <p class="stat-label">معماری نرم‌افزار</p>
-          <strong>۱۰۰٪</strong>
-          <span>وب مستقل، پرسرعت و آفلاین</span>
-        </article>
       </section>
 
-      <!-- RITUAL STATUS BENTO CARD -->
-      <section class="audit-card bento-card" id="ritualStatus">
-        <div class="audit-heading">
-          <div>
-            <p class="eyebrow">آیین تفأل</p>
-            <h2>گشودن دیوان و انتخاب غزل</h2>
-          </div>
-          <strong class="audit-grade" id="auditGrade">✦</strong>
-        </div>
-
-        <div class="audit-meter" id="auditMeter" role="progressbar" aria-label="پیشرفت آیین تفأل">
-          <span id="auditFill"></span>
-        </div>
-
-        <div class="audit-result">
-          <p id="ritualMsg">
-            دیوان در انتظار نیت شماست. نیت قلبی کنید و دکمه تفأل را بزنید.
-          </p>
-          <span id="auditPercent">آماده تفأل</span>
-        </div>
-      </section>
-
-      <!-- REMEDIATION / WISDOM GRID -->
+      <!-- WISDOM GRID (آداب و حکمت تفأل) -->
       <section class="remediation-grid" aria-label="آداب و حکمت تفأل">
         <article class="remediation-card bento-card">
           <span class="remediation-number">۰۱</span>
@@ -417,29 +389,17 @@
           </div>
         </article>
 
-        <!-- INSPECTOR / INTERPRETATION BENTO CARD -->
+        <!-- INTERPRETATION BENTO CARD -->
         <aside class="inspector bento-card" id="interpretationCard" aria-live="polite">
-          <div class="inspector-topline">
+          <div class="inspector-header">
             <span class="severity-badge" style="background: var(--yellow);">تعبیر لسان‌الغیب</span>
-            <span class="incident-number">پاسخ خواجه شیراز</span>
+            <h3 class="interpretation-title">پیام و مقصود نیت</h3>
           </div>
 
-          <p class="detail-category">پیام و حکمت فال</p>
-          <h3>تعبیر و مقصود نیت</h3>
-
-          <div class="detail-block">
-            <span>تفسیر کلام حافظ</span>
+          <div class="interpretation-body">
             <p id="interpText">
               در حال بارگذاری تعبیر...
             </p>
-          </div>
-
-          <div class="recommendation-box">
-            <div>
-              <span>توصیه لسان‌الغیب</span>
-              <strong>صبر، توکل و تدبیر در کارها</strong>
-            </div>
-            <span class="system-icon" aria-hidden="true">📜</span>
           </div>
 
           <div class="inspector-actions">
