@@ -249,6 +249,7 @@
       if (Array.isArray(data) && data.length > 0) {
         STATE.faals = data;
         STATE.isLoading = false;
+        populateFlippingLeaves(0);
         return;
       }
       throw new Error('Data empty');
@@ -256,8 +257,10 @@
       console.warn('[FalGir] falnama.json fetch fallback:', err);
       STATE.faals = FALLBACK_FAALS;
       STATE.isLoading = false;
+      populateFlippingLeaves(0);
     }
   }
+
 
   // =========================================================================
   // 5. HELPER UTILITIES
@@ -300,6 +303,18 @@
     return couplets;
   }
 
+  // فرمت‌بندی دو مصرع در هر سطر برای نمایش کامل و آراسته شعر در صفحات دیوان سه‌بعدی
+  function formatLeafPoem(poemText) {
+    if (!poemText) return '';
+    const couplets = parsePoemLines(poemText);
+    return couplets.map(c => `
+      <div class="leaf-bayt">
+        <span class="leaf-mesra leaf-mesra--1">${c.first}</span>
+        ${c.second ? `<span class="leaf-divider">✦</span><span class="leaf-mesra leaf-mesra--2">${c.second}</span>` : ''}
+      </div>
+    `).join('');
+  }
+
   // بروزرسانی برگه‌های متحرک و همچنین صفحه ثابت زیرین کتاب با غزل نهایی
   function populateFlippingLeaves(finalIndex) {
     if (!STATE.faals || STATE.faals.length === 0) return;
@@ -311,13 +326,7 @@
       DOM.bookRevealedTitle.textContent = `غزل ${toPersianDigits(finalIndex + 1)}`;
     }
     if (DOM.bookRevealedBody && chosenFaal) {
-      const chosenLines = chosenFaal.poem
-        .split(/\r?\n/)
-        .map(l => l.trim())
-        .filter(l => l.length > 0);
-      DOM.bookRevealedBody.innerHTML = chosenLines
-        .map(line => `<p class="leaf-verse">${line}</p>`)
-        .join('');
+      DOM.bookRevealedBody.innerHTML = formatLeafPoem(chosenFaal.poem);
     }
 
     // ۲. برگه‌های متحرک ورق‌زن (۵ برگ): شماره‌گذاری دقیق و متوالی طبق واقعیت کتاب
@@ -348,11 +357,7 @@
         if (hFront) hFront.textContent = `غزل ${toPersianDigits(frontIdx + 1)}`;
         const bFront = frontFace.querySelector('.leaf-body');
         if (bFront && faalFront) {
-          const lines = faalFront.poem
-            .split(/\r?\n/)
-            .map(l => l.trim())
-            .filter(l => l.length > 0);
-          bFront.innerHTML = lines.map(line => `<p class="leaf-verse">${line}</p>`).join('');
+          bFront.innerHTML = formatLeafPoem(faalFront.poem);
         }
       }
 
@@ -363,15 +368,12 @@
         if (hBack) hBack.textContent = `غزل ${toPersianDigits(backIdx + 1)}`;
         const bBack = backFace.querySelector('.leaf-body');
         if (bBack && faalBack) {
-          const lines = faalBack.poem
-            .split(/\r?\n/)
-            .map(l => l.trim())
-            .filter(l => l.length > 0);
-          bBack.innerHTML = lines.map(line => `<p class="leaf-verse">${line}</p>`).join('');
+          bBack.innerHTML = formatLeafPoem(faalBack.poem);
         }
       }
     });
   }
+
 
   // =========================================================================
   // 6. HIGH-PERFORMANCE 3D DIVINATION SEQUENCE

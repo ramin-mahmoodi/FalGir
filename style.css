@@ -432,17 +432,18 @@ button,
 .hero h1 {
   max-width: 760px;
   margin: 0;
-  font-family: var(--font-base);
-  font-size: clamp(3.2rem, 7.5vw, 6.8rem);
-  font-weight: 900;
+  font-family: var(--font-poetry) !important;
+  font-size: clamp(3.6rem, 7.5vw, 6.6rem);
+  font-weight: normal;
   letter-spacing: 0;
-  line-height: 1.28;
+  line-height: 1.35;
   color: var(--ink);
 }
 
 .hero h1 span {
   display: block;
-  margin-top: 10px;
+  margin-top: 8px;
+  margin-right: clamp(35px, 6vw, 75px);
   color: var(--terracotta);
   text-shadow: 4px 4px 0 var(--ink), 6px 6px 0 var(--yellow);
 }
@@ -948,13 +949,13 @@ button,
 .leaf-front { transform: rotateY(0deg) translateZ(0.5px); }
 .leaf-back { transform: rotateY(180deg) translateZ(0.5px); }
 
-/* طرح دست‌نویس داخل صفحات */
+/* طرح دست‌نویس داخل صفحات دیوان */
 .leaf-manuscript {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 10px 6px;
+  padding: 4px 6px;
   text-align: center;
   height: 100%;
   box-sizing: border-box;
@@ -963,22 +964,23 @@ button,
 
 .leaf-header {
   font-family: var(--font-base);
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   font-weight: 800;
   color: var(--ink);
   background: var(--yellow);
   border: 1.5px solid var(--ink);
   border-radius: 0 !important;
   box-shadow: none !important;
-  padding: 2px 10px;
+  padding: 1px 8px;
+  margin: 0;
   flex-shrink: 0;
 }
 
 .leaf-tazhib-line {
-  width: 82%;
-  height: 2px;
+  width: 84%;
+  height: 1px;
   border-top: 1.5px dashed var(--ink);
-  margin: 5px 0 6px;
+  margin: 2px 0 3px;
   flex-shrink: 0;
 }
 
@@ -989,9 +991,9 @@ button,
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 3px;
+  gap: 0;
   margin: 0;
-  padding: 0 4px 6px;
+  padding: 0 4px;
   overflow-y: auto;
   scrollbar-width: none;
 }
@@ -1000,16 +1002,65 @@ button,
   display: none;
 }
 
+/* ساختار دو مصرع در هر سطر برای نمایش کامل و آراسته غزل */
+.leaf-bayt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2.5px 0;
+  border-bottom: 1px dashed rgba(23, 23, 23, 0.12);
+  box-sizing: border-box;
+}
+
+.leaf-bayt:last-child {
+  border-bottom: none;
+}
+
+.leaf-mesra {
+  display: inline-block;
+  font-family: var(--font-poetry) !important;
+  font-size: 0.48rem;
+  line-height: 1.25;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 47%;
+}
+
+.leaf-mesra--1 {
+  text-align: right;
+  padding-right: 1px;
+}
+
+.leaf-mesra--2 {
+  text-align: left;
+  padding-left: 1px;
+}
+
+.leaf-divider {
+  font-size: 0.35rem;
+  color: var(--terracotta);
+  opacity: 0.75;
+  flex-shrink: 0;
+  padding: 0 1px;
+  line-height: 1;
+  user-select: none;
+}
+
+/* سازگاری با کلاس قدیمی */
 .leaf-verse {
   position: static !important;
   margin: 0 !important;
   font-family: var(--font-poetry) !important;
-  font-size: 0.78rem !important;
-  line-height: 1.65 !important;
+  font-size: 0.50rem !important;
+  line-height: 1.3 !important;
   color: var(--ink) !important;
   letter-spacing: 0 !important;
-  white-space: normal;
-  word-break: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: center;
   width: 100%;
 }
@@ -1017,6 +1068,7 @@ button,
 .leaf-footer {
   display: none !important;
 }
+
 
 /* ==========================================================================
    WISDOM BENTO GRID (آداب و حکمت تفأل)
@@ -2507,14 +2559,16 @@ body.dream-mode .inspector-actions .text-button:hover {
   }
 
   .hero h1 {
-    font-size: 3.2rem;
-    line-height: 1.25;
+    font-size: 3.4rem;
+    line-height: 1.3;
   }
 
   .hero h1 span {
     margin-top: 8px;
+    margin-right: 32px;
     text-shadow: 3px 3px 0 var(--ink), 4.5px 4.5px 0 var(--yellow);
   }
+
 
   .book-scene {
     width: 180px;
@@ -2854,9 +2908,14 @@ body.dream-mode .inspector-actions .text-button:hover {
   }
 
   .hero h1 {
-    font-size: 2.7rem;
-    line-height: 1.22;
+    font-size: 2.8rem;
+    line-height: 1.25;
   }
+
+  .hero h1 span {
+    margin-right: 24px;
+  }
+
 
   .book-scene {
     width: 155px;
