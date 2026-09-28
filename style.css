@@ -436,15 +436,15 @@ button,
   font-size: clamp(3.2rem, 7.5vw, 6.8rem);
   font-weight: 900;
   letter-spacing: 0;
-  line-height: 1.05;
+  line-height: 1.28;
   color: var(--ink);
 }
 
 .hero h1 span {
   display: block;
+  margin-top: 10px;
   color: var(--terracotta);
-  -webkit-text-stroke: 2.5px var(--ink);
-  text-shadow: 4px 4px 0 var(--yellow);
+  text-shadow: 4px 4px 0 var(--ink), 6px 6px 0 var(--yellow);
 }
 
 .hero-description {
@@ -470,7 +470,7 @@ button,
   z-index: 2;
   display: grid;
   place-items: center;
-  padding: 34px;
+  padding: clamp(20px, 4vw, 34px);
   border-right: var(--border);
   background: var(--blue);
   overflow: hidden;
@@ -491,11 +491,17 @@ button,
 }
 
 .sun-ring {
+  --ring-size: min(340px, 80vw);
   position: relative;
-  display: grid;
-  width: min(340px, 90%);
-  aspect-ratio: 1;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ring-size);
+  height: var(--ring-size);
+  min-height: 0 !important;
+  max-width: var(--ring-size);
+  max-height: var(--ring-size);
+  aspect-ratio: 1 / 1;
   border: var(--border);
   border-radius: 50%;
   background: repeating-conic-gradient(
@@ -504,11 +510,13 @@ button,
     transparent 8deg 16deg
   );
   animation: rotate-sun 32s linear infinite;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .sun-ring::after {
   position: absolute;
-  inset: 28px;
+  inset: clamp(18px, 6vw, 28px);
   border: var(--border);
   border-radius: 50%;
   background: var(--orange);
@@ -2499,7 +2507,23 @@ body.dream-mode .inspector-actions .text-button:hover {
   }
 
   .hero h1 {
-    font-size: 3.4rem;
+    font-size: 3.2rem;
+    line-height: 1.25;
+  }
+
+  .hero h1 span {
+    margin-top: 8px;
+    text-shadow: 3px 3px 0 var(--ink), 4.5px 4.5px 0 var(--yellow);
+  }
+
+  .book-scene {
+    width: 180px;
+    height: 250px;
+  }
+
+  .book-3d {
+    transform: rotateY(-22deg) rotateX(10deg) scale(0.85);
+    transform-origin: center center;
   }
 
   /* Compact, sleek, responsive result banner on mobile */
@@ -2827,6 +2851,21 @@ body.dream-mode .inspector-actions .text-button:hover {
   .mesra {
     font-size: clamp(0.72rem, 3.8vw, 1.05rem) !important;
     white-space: nowrap !important;
+  }
+
+  .hero h1 {
+    font-size: 2.7rem;
+    line-height: 1.22;
+  }
+
+  .book-scene {
+    width: 155px;
+    height: 215px;
+  }
+
+  .book-3d {
+    transform: rotateY(-22deg) rotateX(10deg) scale(0.74);
+    transform-origin: center center;
   }
 }
 
