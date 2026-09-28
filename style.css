@@ -563,6 +563,7 @@ button,
   position: relative;
   width: 200px;
   height: 280px;
+  flex: 0 0 200px;
   transform-style: preserve-3d;
   cursor: pointer;
   transform: rotateY(-22deg) rotateX(10deg);
@@ -587,7 +588,10 @@ button,
 .hardcover_front,
 .hardcover_back {
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 280px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -598,13 +602,13 @@ button,
 
 .hardcover_front {
   transform-origin: right center;
-  transform: translateZ(20px) rotateY(0deg);
+  transform: translateZ(18px) rotateY(0deg);
   transition: transform 0.95s cubic-bezier(0.25, 0.1, 0.25, 1);
   z-index: 10;
 }
 
 .book-scene.is-opening .hardcover_front {
-  transform: translateZ(20px) rotateY(180deg);
+  transform: translateZ(18px) rotateY(180deg);
 }
 
 .hardcover_front > li,
@@ -621,7 +625,8 @@ button,
 .hardcover_front > li:last-child { transform: rotateY(180deg) translateZ(1px); }
 
 .hardcover_back {
-  transform: translateZ(-2px) rotateY(0deg);
+  transform-origin: right center;
+  transform: translateZ(-18px) rotateY(0deg);
 }
 
 .hardcover_back > li:first-child { transform: rotateY(180deg) translateZ(1px); }
@@ -775,9 +780,9 @@ button,
 /* عطف کتاب */
 .book-spine {
   position: absolute;
-  left: 178px;
+  left: 182px;
   top: 0;
-  width: 44px;
+  width: 36px;
   height: 280px;
   transform-origin: center center;
   transform: rotateY(90deg);
@@ -818,9 +823,9 @@ button,
 /* لبه‌های کاغذ */
 .book-pages-left {
   position: absolute;
-  left: -20px;
+  left: -18px;
   top: 3px;
-  width: 40px;
+  width: 36px;
   height: 274px;
   transform-origin: center center;
   transform: rotateY(-90deg);
@@ -836,10 +841,10 @@ button,
 
 .book-pages-bottom {
   position: absolute;
-  left: 3px;
-  bottom: -20px;
-  width: 194px;
-  height: 40px;
+  left: 2px;
+  bottom: -18px;
+  width: 196px;
+  height: 36px;
   transform-origin: center center;
   transform: rotateX(-90deg);
   background: repeating-linear-gradient(
@@ -866,11 +871,11 @@ button,
 /* برگه نهایی داخل کتاب - بدون گردی و بدون سایه */
 .book-first-page {
   position: absolute;
-  left: 3px;
+  left: 4px;
   top: 4px;
   width: 194px;
   height: 272px;
-  transform: translateZ(15.5px);
+  transform: translateZ(10px);
   background: var(--white);
   border: 2px solid var(--ink);
   border-radius: 0 !important;
@@ -880,13 +885,13 @@ button,
 }
 
 .book-scene.is-opening .book-first-page {
-  transform: translateZ(20px);
+  transform: translateZ(18px);
 }
 
 /* اوراق متحرک کتاب */
 .page {
   position: absolute;
-  left: 3px;
+  left: 4px;
   top: 4px;
   width: 194px;
   height: 272px;
@@ -897,40 +902,55 @@ button,
   pointer-events: none;
 }
 
+/* پنهان‌سازی قطعی صفحات شعر داخلی در حالت بسته بودن کتاب */
+.book-scene:not(.is-opening) .page,
+.book-scene:not(.is-opening) .book-first-page {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.book-scene.is-opening .page,
+.book-scene.is-opening .book-first-page {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: opacity 0.15s ease;
+}
+
 .page > li.leaf {
   position: absolute;
   inset: 0;
   list-style: none;
   transform-origin: right center;
   transform-style: preserve-3d;
-  transform: translateZ(calc(19.6px - var(--leaf-index, 0) * 0.8px)) rotateY(0deg);
+  transform: translateZ(calc(17px - var(--leaf-index, 0) * 1.2px)) rotateY(0deg);
   transition: transform 0.6s cubic-bezier(0.28, 0.08, 0.25, 1);
   border-radius: 0 !important;
   box-shadow: none !important;
 }
 
 .book-scene.is-opening .page > li.leaf:nth-child(1) {
-  transform: translateZ(20.5px) rotateY(180deg);
+  transform: translateZ(18.2px) rotateY(180deg);
   transition-duration: 0.95s;
   transition-delay: 0.40s;
 }
 .book-scene.is-opening .page > li.leaf:nth-child(2) {
-  transform: translateZ(21px) rotateY(180deg);
+  transform: translateZ(18.4px) rotateY(180deg);
   transition-duration: 1.05s;
   transition-delay: 0.58s;
 }
 .book-scene.is-opening .page > li.leaf:nth-child(3) {
-  transform: translateZ(21.5px) rotateY(180deg);
+  transform: translateZ(18.6px) rotateY(180deg);
   transition-duration: 1.15s;
   transition-delay: 0.76s;
 }
 .book-scene.is-opening .page > li.leaf:nth-child(4) {
-  transform: translateZ(22px) rotateY(180deg);
+  transform: translateZ(18.8px) rotateY(180deg);
   transition-duration: 1.25s;
   transition-delay: 0.94s;
 }
 .book-scene.is-opening .page > li.leaf:nth-child(5) {
-  transform: translateZ(22.5px) rotateY(180deg);
+  transform: translateZ(19.0px) rotateY(180deg);
   transition-duration: 1.35s;
   transition-delay: 1.12s;
 }
@@ -2581,8 +2601,8 @@ body.dream-mode .inspector-actions .text-button:hover {
   }
 
   .book-scene {
-    width: 170px;
-    height: 235px;
+    width: 200px;
+    height: 250px;
   }
 
   .book-3d {
@@ -2933,8 +2953,8 @@ body.dream-mode .inspector-actions .text-button:hover {
   }
 
   .book-scene {
-    width: 150px;
-    height: 210px;
+    width: 200px;
+    height: 230px;
   }
 
   .book-3d {
