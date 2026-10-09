@@ -428,46 +428,59 @@
             </div>
           </div>
 
-          <!-- ۳. شنیدن غزل (Gold/Amber Header with Audio Player) -->
-          <div class="result-card bento-card card-audio" id="audioCard">
-            <div class="result-card-header header-audio">
-              <h3 class="result-card-title title-audio">شنیدن غزل</h3>
-            </div>
-            <div class="result-card-body audio-player-body">
-              <div class="audio-track-info">
-                <span class="audio-track-badge" id="audioTrackBadge">غزل شماره ۱</span>
-                <span class="audio-status-label" id="audioStatusText">آماده پخش</span>
-              </div>
-              
-              <div class="audio-controls-row">
-                <button class="audio-play-btn" id="btnPlayAudio" type="button" aria-label="پخش یا توقف صوت غزل">
-                  <svg class="audio-icon audio-icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-                    <polygon points="6 4 20 12 6 20 6 4"></polygon>
+          <!-- ۳. شنیدن غزل (Neo-Brutalist Dark Audio Player Card) -->
+          <div class="result-card bento-card card-audio dark-audio-card" id="audioCard">
+            <div class="dark-audio-body">
+              <div class="dark-audio-header-row">
+                <!-- ۱. دکمه زرد رنگ (در راست‌ترین موقعیت) -->
+                <button class="dark-play-btn" id="btnPlayAudio" type="button" aria-label="پخش یا توقف صوت غزل">
+                  <svg class="dark-play-icon dark-icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                    <polygon points="7 4 19 12 7 20 7 4"></polygon>
                   </svg>
-                  <svg class="audio-icon audio-icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;">
+                  <svg class="dark-play-icon dark-icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;">
                     <rect x="6" y="4" width="4" height="16"></rect>
                     <rect x="14" y="4" width="4" height="16"></rect>
                   </svg>
                 </button>
 
-                <div class="audio-timeline-wrap">
-                  <div class="audio-time-row">
-                    <span class="audio-time" id="audioCurrentTime">۰۰:۰۰</span>
-                    <span class="audio-time" id="audioDuration">۰۰:۰۰</span>
+                <!-- ۲. عنوان و دکلمه (سمت چپ دکمه) -->
+                <div class="dark-audio-meta">
+                  <div class="dark-audio-title-wrap">
+                    <h3 class="dark-audio-title">شنیدن غزل</h3>
+                    <div class="audio-equalizer" id="cardEqualizer" aria-hidden="true">
+                      <span class="eq-bar eq-bar-1"></span>
+                      <span class="eq-bar eq-bar-2"></span>
+                      <span class="eq-bar eq-bar-3"></span>
+                      <span class="eq-bar eq-bar-4"></span>
+                    </div>
                   </div>
-                  <div class="audio-slider-container">
-                    <input type="range" class="audio-slider" id="audioSeeker" min="0" max="100" value="0" step="0.1" aria-label="موقعیت پخش صوت">
-                    <div class="audio-progress-bar" id="audioProgress"></div>
-                  </div>
+                  <span class="dark-audio-sub" id="audioTrackBadge">غزل شماره ۱ • دکلمه صوتی</span>
                 </div>
 
-                <button class="audio-mute-btn" id="btnMuteAudio" type="button" aria-label="قطع یا وصل صدای قرائت">
+                <!-- ۳. دکمه بی‌صدا کردن (گوشه چپ) -->
+                <button class="dark-mute-btn" id="btnMuteAudio" type="button" aria-label="قطع یا وصل صدای قرائت">
                   <svg class="audio-icon audio-icon-volume" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                     <path class="volume-waves" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
                     <path class="volume-waves" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
                   </svg>
                 </button>
+              </div>
+
+              <!-- نوار لغزنده راه‌راه با دستگیره مکعبی صورتی -->
+              <div class="dark-progress-wrap">
+                <div class="audio-track-timeline" id="cardTimeline">
+                  <div class="audio-striped-track" id="cardStripedTrack">
+                    <div class="audio-track-thumb" id="audioProgressThumb"></div>
+                  </div>
+                  <input type="range" class="audio-range-slider" id="audioSeeker" min="0" max="100" value="0" step="0.1" aria-label="موقعیت پخش صوت">
+                </div>
+
+                <!-- زمان‌ها: راست زمان سپری‌شده، چپ مدت کل -->
+                <div class="dark-time-row">
+                  <span class="dark-time" id="audioDuration">۰۰:۰۰</span>
+                  <span class="dark-time" id="audioCurrentTime">۰۰:۰۰</span>
+                </div>
               </div>
 
               <!-- Native Audio Element -->
@@ -693,6 +706,69 @@
       </div>
     </div>
   </div>
+
+  <!-- =========================================================================
+       FIXED BOTTOM AUDIO PLAYER BAR (نوار پخش صوتی پایین صفحه)
+       ========================================================================= -->
+  <aside class="bottom-audio-bar" id="bottomAudioBar" aria-label="نوار پخش صوتی غزل" aria-hidden="true">
+    <div class="bottom-bar-container">
+      <!-- بخش راست: دکمه پخش، عنوان و اکولایزر صوتی -->
+      <div class="bottom-bar-track-wrap">
+        <button class="bottom-play-btn" id="btnBottomPlay" type="button" aria-label="پخش یا توقف دکلمه">
+          <svg class="dark-play-icon bottom-icon-play" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <polygon points="7 4 19 12 7 20 7 4"></polygon>
+          </svg>
+          <svg class="dark-play-icon bottom-icon-pause" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display: none;">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+        </button>
+
+        <div class="bottom-bar-meta">
+          <span class="bottom-bar-title" id="bottomBarTitle">شنیدن غزل</span>
+          <span class="bottom-bar-sub" id="bottomBarSub">غزل شماره ۱ • دکلمه صوتی</span>
+        </div>
+
+        <div class="audio-equalizer" id="bottomBarEqualizer" aria-hidden="true">
+          <span class="eq-bar eq-bar-1"></span>
+          <span class="eq-bar eq-bar-2"></span>
+          <span class="eq-bar eq-bar-3"></span>
+          <span class="eq-bar eq-bar-4"></span>
+        </div>
+      </div>
+
+      <!-- بخش میانی: نوار لغزنده راه‌راه و زمان‌سنج فارسی -->
+      <div class="bottom-bar-progress-section">
+        <span class="bottom-bar-time" id="bottomDuration">۰۰:۰۰</span>
+
+        <div class="audio-track-timeline bottom-timeline">
+          <div class="audio-striped-track">
+            <div class="audio-track-thumb" id="bottomTrackThumb"></div>
+          </div>
+          <input type="range" class="audio-range-slider" id="bottomAudioSeeker" min="0" max="100" value="0" step="0.1" aria-label="پیمایش زمان دکلمه">
+        </div>
+
+        <span class="bottom-bar-time" id="bottomCurrentTime">۰۰:۰۰</span>
+      </div>
+
+      <!-- بخش چپ: دکمه‌های کنترل حجم و بستن نوار -->
+      <div class="bottom-bar-actions">
+        <button class="bottom-mute-btn" id="btnBottomMute" type="button" aria-label="قطع یا وصل صدا">
+          <svg class="audio-icon audio-icon-volume" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path class="volume-waves" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path class="volume-waves" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+        </button>
+        <button class="bottom-close-btn" id="btnBottomClose" type="button" aria-label="بستن نوار پخش">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </aside>
 
   <!-- Script -->
   <script src="script.js?v=3.0.0"></script>

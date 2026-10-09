@@ -112,15 +112,30 @@
     audioCard: document.getElementById('audioCard'),
     ghazalAudioPlayer: document.getElementById('ghazalAudioPlayer'),
     btnPlayAudio: document.getElementById('btnPlayAudio'),
-    iconAudioPlay: document.querySelector('.audio-icon-play'),
-    iconAudioPause: document.querySelector('.audio-icon-pause'),
+    iconCardPlay: document.querySelector('#btnPlayAudio .dark-icon-play'),
+    iconCardPause: document.querySelector('#btnPlayAudio .dark-icon-pause'),
     audioSeeker: document.getElementById('audioSeeker'),
-    audioProgress: document.getElementById('audioProgress'),
+    audioProgressThumb: document.getElementById('audioProgressThumb'),
     audioCurrentTime: document.getElementById('audioCurrentTime'),
     audioDuration: document.getElementById('audioDuration'),
     audioTrackBadge: document.getElementById('audioTrackBadge'),
-    audioStatusText: document.getElementById('audioStatusText'),
     btnMuteAudio: document.getElementById('btnMuteAudio'),
+    cardEqualizer: document.getElementById('cardEqualizer'),
+
+    // Bottom Fixed Audio Bar Elements
+    bottomAudioBar: document.getElementById('bottomAudioBar'),
+    btnBottomPlay: document.getElementById('btnBottomPlay'),
+    iconBottomPlay: document.querySelector('#btnBottomPlay .bottom-icon-play'),
+    iconBottomPause: document.querySelector('#btnBottomPlay .bottom-icon-pause'),
+    bottomBarTitle: document.getElementById('bottomBarTitle'),
+    bottomBarSub: document.getElementById('bottomBarSub'),
+    bottomBarEqualizer: document.getElementById('bottomBarEqualizer'),
+    bottomAudioSeeker: document.getElementById('bottomAudioSeeker'),
+    bottomTrackThumb: document.getElementById('bottomTrackThumb'),
+    bottomCurrentTime: document.getElementById('bottomCurrentTime'),
+    bottomDuration: document.getElementById('bottomDuration'),
+    btnBottomMute: document.getElementById('btnBottomMute'),
+    btnBottomClose: document.getElementById('btnBottomClose'),
     
     // Actions
     btnTryAgain: document.getElementById('btnTryAgain'),
@@ -539,7 +554,7 @@
   }
 
   // =========================================================================
-  // 8. AUDIO PLAYER CONTROLLER (Client-Side Neobrutalist Audio)
+  // 8. AUDIO PLAYER CONTROLLER (Client-Side Neobrutalist Audio & Bottom Bar)
   // =========================================================================
   function setupAudioPlayer(ghazalNumber) {
     const audio = DOM.ghazalAudioPlayer;
@@ -549,27 +564,54 @@
     audio.currentTime = 0;
     updateAudioPlayUI(false);
 
-    if (DOM.audioProgress) DOM.audioProgress.style.width = '0%';
+    const zeroTime = toPersianDigits('۰۰:۰۰');
+    if (DOM.audioProgressThumb) DOM.audioProgressThumb.style.left = '0%';
     if (DOM.audioSeeker) DOM.audioSeeker.value = 0;
-    if (DOM.audioCurrentTime) DOM.audioCurrentTime.textContent = toPersianDigits('00:00');
-    if (DOM.audioDuration) DOM.audioDuration.textContent = toPersianDigits('00:00');
-    if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'آماده پخش';
+    if (DOM.audioCurrentTime) DOM.audioCurrentTime.textContent = zeroTime;
+    if (DOM.audioDuration) DOM.audioDuration.textContent = zeroTime;
 
-    if (DOM.audioTrackBadge) {
-      DOM.audioTrackBadge.textContent = `غزل شماره ${toPersianDigits(ghazalNumber)}`;
-    }
+    if (DOM.bottomTrackThumb) DOM.bottomTrackThumb.style.left = '0%';
+    if (DOM.bottomAudioSeeker) DOM.bottomAudioSeeker.value = 0;
+    if (DOM.bottomCurrentTime) DOM.bottomCurrentTime.textContent = zeroTime;
+    if (DOM.bottomDuration) DOM.bottomDuration.textContent = zeroTime;
+
+    const badgeText = `غزل شماره ${toPersianDigits(ghazalNumber)} • دکلمه صوتی`;
+    if (DOM.audioTrackBadge) DOM.audioTrackBadge.textContent = badgeText;
+    if (DOM.bottomBarSub) DOM.bottomBarSub.textContent = badgeText;
 
     audio.src = `audio/${ghazalNumber}.mp3`;
     audio.load();
   }
 
   function updateAudioPlayUI(isPlaying) {
-    if (DOM.iconAudioPlay && DOM.iconAudioPause) {
-      DOM.iconAudioPlay.style.display = isPlaying ? 'none' : 'block';
-      DOM.iconAudioPause.style.display = isPlaying ? 'block' : 'none';
+    // In-card player icons
+    if (DOM.iconCardPlay && DOM.iconCardPause) {
+      DOM.iconCardPlay.style.display = isPlaying ? 'none' : 'block';
+      DOM.iconCardPause.style.display = isPlaying ? 'block' : 'none';
     }
+    // Bottom bar player icons
+    if (DOM.iconBottomPlay && DOM.iconBottomPause) {
+      DOM.iconBottomPlay.style.display = isPlaying ? 'none' : 'block';
+      DOM.iconBottomPause.style.display = isPlaying ? 'block' : 'none';
+    }
+
     if (DOM.btnPlayAudio) {
       DOM.btnPlayAudio.setAttribute('aria-label', isPlaying ? 'توقف صوت غزل' : 'پخش صوت غزل');
+    }
+    if (DOM.btnBottomPlay) {
+      DOM.btnBottomPlay.setAttribute('aria-label', isPlaying ? 'توقف دکلمه' : 'پخش دکلمه');
+    }
+
+    // Toggle animated equalizers
+    if (DOM.audioCard) {
+      DOM.audioCard.classList.toggle('is-playing', isPlaying);
+    }
+    if (DOM.bottomAudioBar) {
+      DOM.bottomAudioBar.classList.toggle('is-playing', isPlaying);
+      if (isPlaying) {
+        DOM.bottomAudioBar.classList.add('is-visible');
+        DOM.bottomAudioBar.setAttribute('aria-hidden', 'false');
+      }
     }
   }
 
@@ -580,15 +622,12 @@
     if (audio.paused) {
       audio.play().then(() => {
         updateAudioPlayUI(true);
-        if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'در حال پخش';
       }).catch(err => {
         console.warn('[FalGir] Playback error:', err);
-        if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'خطا در پخش';
       });
     } else {
       audio.pause();
       updateAudioPlayUI(false);
-      if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'متوقف شد';
     }
   }
 
@@ -600,6 +639,37 @@
       DOM.btnMuteAudio.classList.toggle('is-muted', audio.muted);
       DOM.btnMuteAudio.setAttribute('aria-label', audio.muted ? 'وصل صدا' : 'قطع صدا');
     }
+    if (DOM.btnBottomMute) {
+      DOM.btnBottomMute.classList.toggle('is-muted', audio.muted);
+      DOM.btnBottomMute.setAttribute('aria-label', audio.muted ? 'وصل صدا' : 'قطع صدا');
+    }
+  }
+
+  function syncAudioProgress(audio) {
+    if (!audio || !audio.duration || isNaN(audio.duration)) return;
+    const pct = Math.min(100, Math.max(0, (audio.currentTime / audio.duration) * 100));
+
+    if (DOM.audioProgressThumb) DOM.audioProgressThumb.style.left = `${pct}%`;
+    if (DOM.audioSeeker && document.activeElement !== DOM.audioSeeker) {
+      DOM.audioSeeker.value = pct;
+    }
+    if (DOM.audioCurrentTime) {
+      DOM.audioCurrentTime.textContent = formatAudioTime(audio.currentTime);
+    }
+    if (DOM.audioDuration) {
+      DOM.audioDuration.textContent = formatAudioTime(audio.duration);
+    }
+
+    if (DOM.bottomTrackThumb) DOM.bottomTrackThumb.style.left = `${pct}%`;
+    if (DOM.bottomAudioSeeker && document.activeElement !== DOM.bottomAudioSeeker) {
+      DOM.bottomAudioSeeker.value = pct;
+    }
+    if (DOM.bottomCurrentTime) {
+      DOM.bottomCurrentTime.textContent = formatAudioTime(audio.currentTime);
+    }
+    if (DOM.bottomDuration) {
+      DOM.bottomDuration.textContent = formatAudioTime(audio.duration);
+    }
   }
 
   // =========================================================================
@@ -610,6 +680,10 @@
       DOM.ghazalAudioPlayer.pause();
       DOM.ghazalAudioPlayer.currentTime = 0;
       updateAudioPlayUI(false);
+    }
+    if (DOM.bottomAudioBar) {
+      DOM.bottomAudioBar.classList.remove('is-visible');
+      DOM.bottomAudioBar.setAttribute('aria-hidden', 'true');
     }
 
     DOM.resultStage.classList.remove('active');
@@ -801,12 +875,26 @@ https://ramin-mahmoodi.github.io/FalGir/`;
     DOM.btnShareFal.addEventListener('click', shareFal);
     DOM.btnPrintFal.addEventListener('click', () => window.print());
 
-    // کنترل‌های پخش صوت غزل (Audio Player)
+    // کنترل‌های پخش صوت غزل (Audio Player & Bottom Bar)
     if (DOM.btnPlayAudio) {
       DOM.btnPlayAudio.addEventListener('click', toggleAudioPlay);
     }
+    if (DOM.btnBottomPlay) {
+      DOM.btnBottomPlay.addEventListener('click', toggleAudioPlay);
+    }
     if (DOM.btnMuteAudio) {
       DOM.btnMuteAudio.addEventListener('click', toggleAudioMute);
+    }
+    if (DOM.btnBottomMute) {
+      DOM.btnBottomMute.addEventListener('click', toggleAudioMute);
+    }
+    if (DOM.btnBottomClose) {
+      DOM.btnBottomClose.addEventListener('click', () => {
+        if (DOM.bottomAudioBar) {
+          DOM.bottomAudioBar.classList.remove('is-visible');
+          DOM.bottomAudioBar.setAttribute('aria-hidden', 'true');
+        }
+      });
     }
 
     if (DOM.ghazalAudioPlayer) {
@@ -814,50 +902,57 @@ https://ramin-mahmoodi.github.io/FalGir/`;
       
       audio.addEventListener('play', () => {
         updateAudioPlayUI(true);
-        if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'در حال پخش';
       });
 
       audio.addEventListener('pause', () => {
         updateAudioPlayUI(false);
-        if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'متوقف شد';
       });
 
       audio.addEventListener('timeupdate', () => {
-        if (!audio.duration || isNaN(audio.duration)) return;
-        const pct = (audio.currentTime / audio.duration) * 100;
-        if (DOM.audioProgress) DOM.audioProgress.style.width = `${pct}%`;
-        if (DOM.audioSeeker && document.activeElement !== DOM.audioSeeker) {
-          DOM.audioSeeker.value = pct;
-        }
-        if (DOM.audioCurrentTime) {
-          DOM.audioCurrentTime.textContent = formatAudioTime(audio.currentTime);
-        }
+        syncAudioProgress(audio);
       });
 
       audio.addEventListener('loadedmetadata', () => {
-        if (DOM.audioDuration && !isNaN(audio.duration)) {
-          DOM.audioDuration.textContent = formatAudioTime(audio.duration);
+        if (audio.duration && !isNaN(audio.duration)) {
+          const durStr = formatAudioTime(audio.duration);
+          if (DOM.audioDuration) DOM.audioDuration.textContent = durStr;
+          if (DOM.bottomDuration) DOM.bottomDuration.textContent = durStr;
         }
       });
 
       audio.addEventListener('ended', () => {
         updateAudioPlayUI(false);
         audio.currentTime = 0;
-        if (DOM.audioProgress) DOM.audioProgress.style.width = '0%';
+        const zeroTime = toPersianDigits('۰۰:۰۰');
+        if (DOM.audioProgressThumb) DOM.audioProgressThumb.style.left = '0%';
         if (DOM.audioSeeker) DOM.audioSeeker.value = 0;
-        if (DOM.audioCurrentTime) DOM.audioCurrentTime.textContent = toPersianDigits('00:00');
-        if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'پایان قرائت';
+        if (DOM.audioCurrentTime) DOM.audioCurrentTime.textContent = zeroTime;
+        if (DOM.bottomTrackThumb) DOM.bottomTrackThumb.style.left = '0%';
+        if (DOM.bottomAudioSeeker) DOM.bottomAudioSeeker.value = 0;
+        if (DOM.bottomCurrentTime) DOM.bottomCurrentTime.textContent = zeroTime;
+        if (DOM.bottomAudioBar) {
+          DOM.bottomAudioBar.classList.remove('is-visible');
+          DOM.bottomAudioBar.setAttribute('aria-hidden', 'true');
+        }
       });
     }
 
+    const handleSeekInput = (e) => {
+      const audio = DOM.ghazalAudioPlayer;
+      if (!audio || !audio.duration || isNaN(audio.duration)) return;
+      const pct = parseFloat(e.target.value);
+      audio.currentTime = (pct / 100) * audio.duration;
+      if (DOM.audioProgressThumb) DOM.audioProgressThumb.style.left = `${pct}%`;
+      if (DOM.bottomTrackThumb) DOM.bottomTrackThumb.style.left = `${pct}%`;
+      if (DOM.audioCurrentTime) DOM.audioCurrentTime.textContent = formatAudioTime(audio.currentTime);
+      if (DOM.bottomCurrentTime) DOM.bottomCurrentTime.textContent = formatAudioTime(audio.currentTime);
+    };
+
     if (DOM.audioSeeker) {
-      DOM.audioSeeker.addEventListener('input', (e) => {
-        const audio = DOM.ghazalAudioPlayer;
-        if (!audio || !audio.duration || isNaN(audio.duration)) return;
-        const pct = parseFloat(e.target.value);
-        audio.currentTime = (pct / 100) * audio.duration;
-        if (DOM.audioProgress) DOM.audioProgress.style.width = `${pct}%`;
-      });
+      DOM.audioSeeker.addEventListener('input', handleSeekInput);
+    }
+    if (DOM.bottomAudioSeeker) {
+      DOM.bottomAudioSeeker.addEventListener('input', handleSeekInput);
     }
 
 
