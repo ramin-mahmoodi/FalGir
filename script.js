@@ -103,8 +103,24 @@
     manuscriptCard: document.getElementById('manuscriptCard'),
     ghazalTitle: document.getElementById('ghazalTitle'),
     poemContainer: document.getElementById('poemContainer'),
-    interpretationCard: document.getElementById('interpretationCard'),
-    interpText: document.getElementById('interpText'),
+    
+    // Result Cards & Audio Elements
+    tabeerCard: document.getElementById('tabeerCard'),
+    tabeerText: document.getElementById('tabeerText'),
+    natijeCard: document.getElementById('natijeCard'),
+    natijeText: document.getElementById('natijeText'),
+    audioCard: document.getElementById('audioCard'),
+    ghazalAudioPlayer: document.getElementById('ghazalAudioPlayer'),
+    btnPlayAudio: document.getElementById('btnPlayAudio'),
+    iconAudioPlay: document.querySelector('.audio-icon-play'),
+    iconAudioPause: document.querySelector('.audio-icon-pause'),
+    audioSeeker: document.getElementById('audioSeeker'),
+    audioProgress: document.getElementById('audioProgress'),
+    audioCurrentTime: document.getElementById('audioCurrentTime'),
+    audioDuration: document.getElementById('audioDuration'),
+    audioTrackBadge: document.getElementById('audioTrackBadge'),
+    audioStatusText: document.getElementById('audioStatusText'),
+    btnMuteAudio: document.getElementById('btnMuteAudio'),
     
     // Actions
     btnTryAgain: document.getElementById('btnTryAgain'),
@@ -243,22 +259,54 @@
   // =========================================================================
   async function loadFaalsDatabase() {
     try {
-      const response = await fetch('falnama.json');
+      let response = await fetch('hafez.json');
+      if (!response.ok) {
+        response = await fetch('falnama.json');
+      }
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       if (Array.isArray(data) && data.length > 0) {
-        STATE.faals = data;
+        STATE.faals = data.map((item, idx) => ({
+          number: item.number || idx + 1,
+          title: item.title || `غزل شماره ${toPersianDigits(idx + 1)}`,
+          beyts: item.beyts || [],
+          poem: item.poem_text || item.poem || '',
+          poem_text: item.poem_text || item.poem || '',
+          tabeer: item.tabeer || item.interpretation || '',
+          natije: item.natije || '',
+          audio: item.audio_local || `audio/${item.number || idx + 1}.mp3`,
+          interpretation: item.tabeer || item.interpretation || ''
+        }));
         STATE.isLoading = false;
         populateFlippingLeaves(0);
         return;
       }
       throw new Error('Data empty');
     } catch (err) {
-      console.warn('[FalGir] falnama.json fetch fallback:', err);
-      STATE.faals = FALLBACK_FAALS;
+      console.warn('[FalGir] Database fetch fallback:', err);
+      STATE.faals = FALLBACK_FAALS.map((item, idx) => ({
+        number: idx + 1,
+        title: `غزل شماره ${toPersianDigits(idx + 1)}`,
+        beyts: [],
+        poem: item.poem,
+        poem_text: item.poem,
+        tabeer: item.interpretation,
+        natije: item.interpretation,
+        audio: `audio/${idx + 1}.mp3`,
+        interpretation: item.interpretation
+      }));
       STATE.isLoading = false;
       populateFlippingLeaves(0);
     }
+  }
+
+  function formatAudioTime(sec) {
+    if (isNaN(sec) || !isFinite(sec) || sec < 0) return toPersianDigits('00:00');
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    const mStr = m < 10 ? '0' + m : '' + m;
+    const sStr = s < 10 ? '0' + s : '' + s;
+    return toPersianDigits(`${mStr}:${sStr}`);
   }
 
 
@@ -461,14 +509,109 @@
 
     DOM.poemContainer.appendChild(fragment);
 
-    // متن تعبیر
-    DOM.interpText.textContent = faal.interpretation || 'در این کار نیت خود را با درایت و امیدواری به پیش ببرید.';
+    // ۱. تعبیر فال شما
+    if (DOM.tabeerText) {
+      DOM.tabeerText.textContent = faal.tabeer || faal.interpretation || 'در این کار نیت خود را با درایت و امیدواری به پیش ببرید.';
+    }
+
+    // ۲. نتیجه تفال
+    if (DOM.natijeText) {
+      DOM.natijeText.innerHTML = '';
+      const rawNatije = faal.natije || '';
+      const lines = rawNatije.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      if (lines.length > 0) {
+        lines.forEach(line => {
+          const p = document.createElement('p');
+          p.className = 'natije-item';
+          p.textContent = line;
+          DOM.natijeText.appendChild(p);
+        });
+      } else {
+        const p = document.createElement('p');
+        p.className = 'natije-item';
+        p.textContent = faal.tabeer || 'نیت شما فرجام نیکی دارد، با توکل به پروردگار گام بردارید.';
+        DOM.natijeText.appendChild(p);
+      }
+    }
+
+    // ۳. شنیدن غزل
+    setupAudioPlayer(ghazalNumber);
   }
 
   // =========================================================================
-  // 8. ACTIONS (TRY AGAIN, COPY, SHARE)
+  // 8. AUDIO PLAYER CONTROLLER (Client-Side Neobrutalist Audio)
+  // =========================================================================
+  function setupAudioPlayer(ghazalNumber) {
+    const audio = DOM.ghazalAudioPlayer;
+    if (!audio) return;
+
+    audio.pause();
+    audio.currentTime = 0;
+    updateAudioPlayUI(false);
+
+    if (DOM.audioProgress) DOM.audioProgress.style.width = '0%';
+    if (DOM.audioSeeker) DOM.audioSeeker.value = 0;
+    if (DOM.audioCurrentTime) DOM.audioCurrentTime.textContent = toPersianDigits('00:00');
+    if (DOM.audioDuration) DOM.audioDuration.textContent = toPersianDigits('00:00');
+    if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'آماده پخش';
+
+    if (DOM.audioTrackBadge) {
+      DOM.audioTrackBadge.textContent = `غزل شماره ${toPersianDigits(ghazalNumber)}`;
+    }
+
+    audio.src = `audio/${ghazalNumber}.mp3`;
+    audio.load();
+  }
+
+  function updateAudioPlayUI(isPlaying) {
+    if (DOM.iconAudioPlay && DOM.iconAudioPause) {
+      DOM.iconAudioPlay.style.display = isPlaying ? 'none' : 'block';
+      DOM.iconAudioPause.style.display = isPlaying ? 'block' : 'none';
+    }
+    if (DOM.btnPlayAudio) {
+      DOM.btnPlayAudio.setAttribute('aria-label', isPlaying ? 'توقف صوت غزل' : 'پخش صوت غزل');
+    }
+  }
+
+  function toggleAudioPlay() {
+    const audio = DOM.ghazalAudioPlayer;
+    if (!audio || !audio.src) return;
+
+    if (audio.paused) {
+      audio.play().then(() => {
+        updateAudioPlayUI(true);
+        if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'در حال پخش';
+      }).catch(err => {
+        console.warn('[FalGir] Playback error:', err);
+        if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'خطا در پخش';
+      });
+    } else {
+      audio.pause();
+      updateAudioPlayUI(false);
+      if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'متوقف شد';
+    }
+  }
+
+  function toggleAudioMute() {
+    const audio = DOM.ghazalAudioPlayer;
+    if (!audio) return;
+    audio.muted = !audio.muted;
+    if (DOM.btnMuteAudio) {
+      DOM.btnMuteAudio.classList.toggle('is-muted', audio.muted);
+      DOM.btnMuteAudio.setAttribute('aria-label', audio.muted ? 'وصل صدا' : 'قطع صدا');
+    }
+  }
+
+  // =========================================================================
+  // 9. ACTIONS (TRY AGAIN, COPY, SHARE)
   // =========================================================================
   function tryAgain() {
+    if (DOM.ghazalAudioPlayer) {
+      DOM.ghazalAudioPlayer.pause();
+      DOM.ghazalAudioPlayer.currentTime = 0;
+      updateAudioPlayUI(false);
+    }
+
     DOM.resultStage.classList.remove('active');
     DOM.niyyatStage.classList.add('active');
 
@@ -480,16 +623,18 @@
     if (!STATE.currentFaal) return;
 
     const ghazalNum = STATE.currentFaalIndex !== null ? STATE.currentFaalIndex + 1 : '';
+    const tabeerText = STATE.currentFaal.tabeer || STATE.currentFaal.interpretation || '';
+    const natijeText = STATE.currentFaal.natije ? `\n\nنتیجه تفال:\n${STATE.currentFaal.natije}` : '';
     const formattedText = 
 `«فال‌گیر - دیوان حافظ شیرازی»
 غزل شماره ${toPersianDigits(ghazalNum)}:
 
 ${STATE.currentFaal.poem}
 
-تعبیر فال:
-${STATE.currentFaal.interpretation}
+تعبیر فال شما:
+${tabeerText}${natijeText}
 
-تفأل آنلاین در فال‌گیر:
+تفأل آنلاین و شنیدن صوت غزل در فال‌گیر:
 https://ramin-mahmoodi.github.io/FalGir/`;
 
     try {
@@ -505,7 +650,7 @@ https://ramin-mahmoodi.github.io/FalGir/`;
         document.execCommand('copy');
         document.body.removeChild(textarea);
       }
-      showToast('متن فال و تعبیر با موفقیت کپی شد', 'check');
+      showToast('متن فال، تعبیر و نتیجه کپی شد', 'check');
       sound.playSingingBowl(580, 0.4);
     } catch (err) {
       showToast('خطا در کپی متن!', 'alert');
@@ -519,7 +664,7 @@ https://ramin-mahmoodi.github.io/FalGir/`;
     const shareTitle = `فال حافظ - غزل شماره ${toPersianDigits(ghazalNum)}`;
     const couplets = parsePoemLines(STATE.currentFaal.poem);
     const firstBayt = couplets.length > 0 ? `${couplets[0].first} / ${couplets[0].second}` : '';
-    const shareText = `فال حافظ:\n«${firstBayt}»\n\nتعبیر: ${STATE.currentFaal.interpretation.slice(0, 100)}...`;
+    const shareText = `فال حافظ:\n«${firstBayt}»\n\nتعبیر: ${(STATE.currentFaal.tabeer || STATE.currentFaal.interpretation || '').slice(0, 100)}...`;
 
     if (navigator.share) {
       try {
@@ -655,6 +800,65 @@ https://ramin-mahmoodi.github.io/FalGir/`;
     DOM.btnCopyFal.addEventListener('click', copyFalText);
     DOM.btnShareFal.addEventListener('click', shareFal);
     DOM.btnPrintFal.addEventListener('click', () => window.print());
+
+    // کنترل‌های پخش صوت غزل (Audio Player)
+    if (DOM.btnPlayAudio) {
+      DOM.btnPlayAudio.addEventListener('click', toggleAudioPlay);
+    }
+    if (DOM.btnMuteAudio) {
+      DOM.btnMuteAudio.addEventListener('click', toggleAudioMute);
+    }
+
+    if (DOM.ghazalAudioPlayer) {
+      const audio = DOM.ghazalAudioPlayer;
+      
+      audio.addEventListener('play', () => {
+        updateAudioPlayUI(true);
+        if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'در حال پخش';
+      });
+
+      audio.addEventListener('pause', () => {
+        updateAudioPlayUI(false);
+        if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'متوقف شد';
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        if (!audio.duration || isNaN(audio.duration)) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        if (DOM.audioProgress) DOM.audioProgress.style.width = `${pct}%`;
+        if (DOM.audioSeeker && document.activeElement !== DOM.audioSeeker) {
+          DOM.audioSeeker.value = pct;
+        }
+        if (DOM.audioCurrentTime) {
+          DOM.audioCurrentTime.textContent = formatAudioTime(audio.currentTime);
+        }
+      });
+
+      audio.addEventListener('loadedmetadata', () => {
+        if (DOM.audioDuration && !isNaN(audio.duration)) {
+          DOM.audioDuration.textContent = formatAudioTime(audio.duration);
+        }
+      });
+
+      audio.addEventListener('ended', () => {
+        updateAudioPlayUI(false);
+        audio.currentTime = 0;
+        if (DOM.audioProgress) DOM.audioProgress.style.width = '0%';
+        if (DOM.audioSeeker) DOM.audioSeeker.value = 0;
+        if (DOM.audioCurrentTime) DOM.audioCurrentTime.textContent = toPersianDigits('00:00');
+        if (DOM.audioStatusText) DOM.audioStatusText.textContent = 'پایان قرائت';
+      });
+    }
+
+    if (DOM.audioSeeker) {
+      DOM.audioSeeker.addEventListener('input', (e) => {
+        const audio = DOM.ghazalAudioPlayer;
+        if (!audio || !audio.duration || isNaN(audio.duration)) return;
+        const pct = parseFloat(e.target.value);
+        audio.currentTime = (pct / 100) * audio.duration;
+        if (DOM.audioProgress) DOM.audioProgress.style.width = `${pct}%`;
+      });
+    }
 
 
     // دکمه صدا

@@ -403,64 +403,123 @@
           <div class="poem-body" id="poemContainer" aria-label="متن غزل حافظ"></div>
         </article>
 
-        <!-- INTERPRETATION BENTO CARD (Light Theme, No Stickers, Crisp SVG Icons) -->
-        <aside class="inspector bento-card" id="interpretationCard" aria-live="polite">
-          <div class="inspector-header">
-            <div class="interpretation-title-wrap">
-              <span class="interpretation-decor-star" aria-hidden="true">✦</span>
-              <h3 class="interpretation-title">تعبیر و مقصود فال</h3>
+        <!-- SIDEBAR INSPECTOR (Neobrutalist Cards with Colored Headers) -->
+        <aside class="inspector" id="inspectorSidebar" aria-live="polite">
+          
+          <!-- ۱. تعبیر فال شما (Green Header) -->
+          <div class="result-card bento-card card-tabeer" id="tabeerCard">
+            <div class="result-card-header header-tabeer">
+              <h3 class="result-card-title title-tabeer">تعبیر فال شما</h3>
+            </div>
+            <div class="result-card-body">
+              <p id="tabeerText">
+                در حال بارگذاری تعبیر...
+              </p>
             </div>
           </div>
 
-          <div class="interpretation-body">
-            <p id="interpText">
-              در حال بارگذاری تعبیر...
-            </p>
+          <!-- ۲. نتیجه تفال (Pink Header) -->
+          <div class="result-card bento-card card-natije" id="natijeCard">
+            <div class="result-card-header header-natije">
+              <h3 class="result-card-title title-natije">نتیجه تفال</h3>
+            </div>
+            <div class="result-card-body" id="natijeText">
+              در حال بارگذاری نتیجه تفأل...
+            </div>
           </div>
 
-          <div class="inspector-divider"></div>
+          <!-- ۳. شنیدن غزل (Gold/Amber Header with Audio Player) -->
+          <div class="result-card bento-card card-audio" id="audioCard">
+            <div class="result-card-header header-audio">
+              <h3 class="result-card-title title-audio">شنیدن غزل</h3>
+            </div>
+            <div class="result-card-body audio-player-body">
+              <div class="audio-track-info">
+                <span class="audio-track-badge" id="audioTrackBadge">غزل شماره ۱</span>
+                <span class="audio-status-label" id="audioStatusText">آماده پخش</span>
+              </div>
+              
+              <div class="audio-controls-row">
+                <button class="audio-play-btn" id="btnPlayAudio" type="button" aria-label="پخش یا توقف صوت غزل">
+                  <svg class="audio-icon audio-icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                    <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                  </svg>
+                  <svg class="audio-icon audio-icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                  </svg>
+                </button>
 
-          <div class="inspector-actions">
-            <!-- تفأل مجدد -->
-            <button class="primary-button hero-cta-btn" id="btnTryAgain" type="button">
-              <span>نیت مجدد؛ تفأل دیگر</span>
-              <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </button>
+                <div class="audio-timeline-wrap">
+                  <div class="audio-time-row">
+                    <span class="audio-time" id="audioCurrentTime">۰۰:۰۰</span>
+                    <span class="audio-time" id="audioDuration">۰۰:۰۰</span>
+                  </div>
+                  <div class="audio-slider-container">
+                    <input type="range" class="audio-slider" id="audioSeeker" min="0" max="100" value="0" step="0.1" aria-label="موقعیت پخش صوت">
+                    <div class="audio-progress-bar" id="audioProgress"></div>
+                  </div>
+                </div>
 
-            <!-- کپی -->
-            <button class="secondary-button" id="btnCopyFal" type="button">
-              <span>کپی متن فال و تعبیر</span>
-              <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="9" y="9" width="13" height="13"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-            </button>
+                <button class="audio-mute-btn" id="btnMuteAudio" type="button" aria-label="قطع یا وصل صدای قرائت">
+                  <svg class="audio-icon audio-icon-volume" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path class="volume-waves" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    <path class="volume-waves" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                  </svg>
+                </button>
+              </div>
 
-            <!-- اشتراک -->
-            <button class="secondary-button" id="btnShareFal" type="button">
-              <span>اشتراک‌گذاری فال</span>
-              <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="18" cy="5" r="3"></circle>
-                <circle cx="6" cy="12" r="3"></circle>
-                <circle cx="18" cy="19" r="3"></circle>
-                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-              </svg>
-            </button>
-
-            <!-- چاپ -->
-            <button class="secondary-button" id="btnPrintFal" type="button">
-              <span>چاپ نسخهٔ خطی غزل</span>
-              <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="6 9 6 2 18 2 18 9"></polyline>
-                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-                <rect x="6" y="14" width="12" height="8"></rect>
-              </svg>
-            </button>
+              <!-- Native Audio Element -->
+              <audio id="ghazalAudioPlayer" preload="metadata"></audio>
+            </div>
           </div>
+
+          <!-- ۴. دکمه‌های عملیاتی (Actions Card) -->
+          <div class="result-card bento-card card-actions">
+            <div class="inspector-actions">
+              <!-- تفأل مجدد -->
+              <button class="primary-button hero-cta-btn" id="btnTryAgain" type="button">
+                <span>نیت مجدد؛ تفأل دیگر</span>
+                <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </button>
+
+              <!-- کپی -->
+              <button class="secondary-button" id="btnCopyFal" type="button">
+                <span>کپی متن فال، تعبیر و نتیجه</span>
+                <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+
+              <!-- اشتراک -->
+              <button class="secondary-button" id="btnShareFal" type="button">
+                <span>اشتراک‌گذاری فال</span>
+                <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="18" cy="5" r="3"></circle>
+                  <circle cx="6" cy="12" r="3"></circle>
+                  <circle cx="18" cy="19" r="3"></circle>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                </svg>
+              </button>
+
+              <!-- چاپ -->
+              <button class="secondary-button" id="btnPrintFal" type="button">
+                <span>چاپ نسخهٔ خطی غزل</span>
+                <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                  <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>
+
         </aside>
 
       </div>
