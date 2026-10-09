@@ -1648,7 +1648,7 @@ button,
 }
 
 .title-tabeer {
-  color: #ffffff;
+  color: var(--ink);
   text-shadow: none !important;
 }
 
